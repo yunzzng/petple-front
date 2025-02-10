@@ -1,0 +1,15 @@
+build-deploy:
+  stage: build
+  tags:
+    - frontend
+  only:
+    - main
+    - develop
+  before_script:
+    - whoami
+  script: # mode shell
+    - echo $CI_PIPELINE_ID
+    - docker build -t petple-front-image:$CI_PIPELINE_ID . # docker image 생성(build,nginx)
+    - docker stop petple-front || true
+    - docker rm petple-front && echo "success to remove [prev petple-front container]" # docker ps petple-front 이전 컨테이너 지운후 echo.
+    - docker run -d -p 80:80 --name petple-front petple-front-image:$CI_PIPELINE_ID # docker container run
