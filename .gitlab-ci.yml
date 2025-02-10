@@ -3,7 +3,6 @@ build-deploy:
   tags:
     - frontend-cicd
   only:
-    - main
     - develop
   before_script:
     - whoami
