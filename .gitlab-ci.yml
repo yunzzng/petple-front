@@ -1,7 +1,7 @@
 build-deploy:
   stage: build
   tags:
-    - frontend
+    - frontend-cicd
   only:
     - main
     - develop
