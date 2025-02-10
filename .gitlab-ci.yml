@@ -1,7 +1,7 @@
 build-deploy:
   stage: build
   tags:
-    - frontend-cicd
+    - frontend
   only:
     - develop
   before_script:
