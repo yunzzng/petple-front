@@ -13,15 +13,6 @@ const Header = () => {
           </a>
         </div>
         <ul>
-          <li>
-            <a onClick={() => navigate("/")}>펫톡</a>
-          </li>
-          <li>
-            <a onClick={() => navigate("/")}>펫메디</a>
-          </li>
-          <li>
-            <a onClick={() => navigate("/")}>펫플레이스</a>
-          </li>
           <li className={style.login}>
             <a onClick={() => navigate("/login")}>LOGIN</a>
           </li>

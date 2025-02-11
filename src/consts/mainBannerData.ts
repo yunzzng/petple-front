@@ -1,6 +1,7 @@
 import banner1 from "/images/banner1.png";
 import banner2 from "/images/banner2.png";
 import banner3 from "/images/banner3.png";
+import banner4 from "/images/banner4.png";
 
 const carouselData = [
   {
@@ -30,11 +31,22 @@ const carouselData = [
     highlight: "펫플레이스 ",
     title: "반려동물과 함께할 수 있는 모든 곳",
     description:
-      "반려동물과 함께 여행하고 싶다면?\n펫플레이스에서 애견 동반 가능한 관광지, 축제, 숙박, 식당, 레저, 쇼핑 정보를 지도에서 쉽게 찾아보세요.\n\n특별한 순간을 만들고 잊지 못할 추억을 쌓아보세요!",
+      "반려동물과 함께 여행하고 싶다면?\n펫플레이스에서 애견 동반 가능한 관광지, 축제, 숙박, 식당, 레저, 쇼핑 \n정보를 지도에서 쉽게 찾아보세요.\n\n특별한 순간을 만들고 잊지 못할 추억을 쌓아보세요!",
     image: banner3,
     link: "/petplace",
     linkText: "반려동물 핫플 둘러보기",
     backgroundColor: "#DFE9F3", 
+  },
+  {
+    id: 3,
+    highlight: "펫퓨너럴",
+    title: "반려동물과의 아름다운 이별을 준비하세요.",
+    description:
+      "무지개 다리를 건너는 반려동물을 위한 마지막 배웅. \n 펫 장례 절차부터 신뢰할 수 있는 장례업체까지, 필요한 모든 정보를 제공합니다.",
+    image: banner4,
+    link: "/petfuneral",
+    linkText: "펫 장례 서비스 찾기",
+    backgroundColor: "#FFEFD5", 
   },
 ];
 
