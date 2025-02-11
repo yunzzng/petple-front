@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 
 /* Base Type */
 interface BaseProps extends PropsWithChildren {
@@ -18,6 +18,7 @@ export interface RootProps extends BaseProps {}
 /* Input Component */
 export interface InputProps extends BaseProps {
   placeholder?: string;
+  onChange?: (value: Array<string>) => void;
 }
 
 /* ItemList Component */

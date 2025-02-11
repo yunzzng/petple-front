@@ -5,11 +5,10 @@ import { InputProps } from "../types";
 const Input: FC<InputProps> = ({
   className,
   placeholder = "#태그 작성후 Enter를 눌러주세요.",
+  onChange,
 }) => {
   const [value, setValue] = useState<string>("");
-
-  const { addItem } = useChipContext();
-
+  const { addItem, items } = useChipContext();
   const hanldeChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setValue(value);
@@ -20,6 +19,7 @@ const Input: FC<InputProps> = ({
     if (e.key === "Enter") {
       e.preventDefault();
       addItem(value);
+      onChange?.([...items, value]);
       setValue("");
     }
   };
