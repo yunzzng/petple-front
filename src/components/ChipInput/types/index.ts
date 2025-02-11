@@ -8,12 +8,17 @@ interface BaseProps extends PropsWithChildren {
 /* Context Component */
 export interface ChipContextProps {
   items: Array<string>;
+  maxItemLength: number;
+  maxItemsCount: number;
   addItem: (item: string) => void;
   removeItem: (item: string) => void;
 }
 
 /* Root Component */
-export interface RootProps extends BaseProps {}
+export interface RootProps extends BaseProps {
+  maxItemLength?: number;
+  maxItemsCount?: number;
+}
 
 /* Input Component */
 export interface InputProps extends BaseProps {

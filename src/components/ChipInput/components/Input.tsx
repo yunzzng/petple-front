@@ -8,9 +8,12 @@ const Input: FC<InputProps> = ({
   onChange,
 }) => {
   const [value, setValue] = useState<string>("");
-  const { addItem, items } = useChipContext();
+  const { items, maxItemLength, maxItemsCount, addItem } = useChipContext();
   const hanldeChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
+    if (maxItemLength < value.length || maxItemsCount === items.length) {
+      return;
+    }
     setValue(value);
   };
 
@@ -18,6 +21,9 @@ const Input: FC<InputProps> = ({
     if (!value || e.key !== "Enter") return;
     if (e.key === "Enter") {
       e.preventDefault();
+      if (maxItemLength < value.length || maxItemsCount === items.length) {
+        return;
+      }
       addItem(value);
       onChange?.([...items, value]);
       setValue("");

@@ -13,7 +13,11 @@ export const useChipContext = () => {
   return context;
 };
 
-const Root: FC<RootProps> = ({ children }) => {
+const Root: FC<RootProps> = ({
+  children,
+  maxItemLength = 10,
+  maxItemsCount = 10,
+}) => {
   const [items, setItems] = useState<Array<string>>([]);
   const addItem = (item: string) => setItems((prev) => [...prev, item]);
   const removeItem = (item: string) =>
@@ -23,6 +27,8 @@ const Root: FC<RootProps> = ({ children }) => {
     <ChipContext.Provider
       value={{
         items,
+        maxItemLength,
+        maxItemsCount,
         addItem,
         removeItem,
       }}
