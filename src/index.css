@@ -3,6 +3,13 @@
    License: none (public domain)
 */
 
+@font-face {
+	font-family: 'SpoqaHanSansNeo-Regular';
+	src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -28,8 +35,10 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
 body {
 	line-height: 1;
+	font-family: 'SpoqaHanSansNeo-Regular', sans-serif;
 }
 ol, ul {
 	list-style: none;
