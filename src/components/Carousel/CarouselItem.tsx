@@ -1,6 +1,6 @@
 import { FC, ReactNode, useContext } from "react";
 import { CarouselContext } from ".";
-import styles from "./Carousel.module.css"; // CSS 모듈 임포트
+import styles from "./Carousel.module.css";
 
 interface CarouselItemProps {
   index: number;
