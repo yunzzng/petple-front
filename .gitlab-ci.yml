@@ -3,7 +3,6 @@ build-deploy:
   tags:
     - frontend
   only:
-    - main
     - develop
   before_script:
     - whoami
