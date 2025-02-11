@@ -17,11 +17,19 @@ const Root: FC<RootProps> = ({
   children,
   maxItemLength = 10,
   maxItemsCount = 10,
+  onChange,
 }) => {
   const [items, setItems] = useState<Array<string>>([]);
-  const addItem = (item: string) => setItems((prev) => [...prev, item]);
-  const removeItem = (item: string) =>
-    setItems((prev) => prev.filter((title) => title !== item));
+  const addItem = (item: string) => {
+    const updatedItems = [...items, item];
+    setItems(updatedItems);
+    onChange?.(updatedItems);
+  };
+  const removeItem = (item: string) => {
+    const filterdItems = items.filter((title) => title !== item);
+    setItems(filterdItems);
+    onChange?.(filterdItems);
+  };
 
   return (
     <ChipContext.Provider

@@ -5,7 +5,6 @@ import { InputProps } from "../types";
 const Input: FC<InputProps> = ({
   className,
   placeholder = "#태그 작성후 Enter를 눌러주세요.",
-  onChange,
 }) => {
   const [value, setValue] = useState<string>("");
   const { items, maxItemLength, maxItemsCount, addItem } = useChipContext();
@@ -18,14 +17,12 @@ const Input: FC<InputProps> = ({
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (!value || e.key !== "Enter") return;
     if (e.key === "Enter") {
       e.preventDefault();
-      if (maxItemLength < value.length || maxItemsCount === items.length) {
-        return;
-      }
+      if (!value.trim()) return;
+      if (value.length > maxItemLength || items.length >= maxItemsCount) return;
+
       addItem(value);
-      onChange?.([...items, value]);
       setValue("");
     }
   };

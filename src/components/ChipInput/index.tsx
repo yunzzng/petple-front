@@ -10,8 +10,8 @@ interface ChipInputProps {
 const ChipInput: FC<ChipInputProps> = ({ onChange }) => {
   return (
     <>
-      <Chip.Root>
-        <Chip.Input className={styles.input} onChange={onChange} />
+      <Chip.Root onChange={onChange}>
+        <Chip.Input className={styles.input} />
         <p className={styles.info}>* 태그는 10가지만 추가 가능합니다.</p>
         <Chip.ItemsList className={styles.itemList} />
       </Chip.Root>
