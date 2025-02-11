@@ -1,0 +1,51 @@
+@font-face {
+  font-family: "HakgyoansimDunggeunmisoTTF-B";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimDunggeunmisoTTF-B.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+.container {
+  padding: 20px;
+  margin-top: 100px;
+}
+
+.tabContainer {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tabButton {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  background-color: #EAEAEA;
+  color: rgb(0, 0, 0);
+  width: 715px;
+}
+
+.tabButton:hover {
+  background-color: #93C9FF;
+  color: white;
+}
+
+.active {
+  background-color: #002DAA;
+  color: white;
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+.title {
+  font-size: 24px;
+  font-family: "HakgyoansimDunggeunmisoTTF-B";
+}
+

@@ -1,5 +1,5 @@
-import Header from "@/components/Header/Header";
-import style from "./css/signup.module.css";
+import Header from "@/components/Header";
+import style from "./signup.module.css";
 import google from "/images/google.png";
 import { useForm } from "react-hook-form";
 import { ChangeEvent } from "react";
