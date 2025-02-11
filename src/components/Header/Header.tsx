@@ -8,17 +8,25 @@ const Header = () => {
     <div className={style.total_wrap}>
       <div className={style.content}>
         <div>
-          <img src={logo} className={style.img} />
+          <a onClick={() => navigate("/")}>
+            <img src={logo} className={style.img} />
+          </a>
         </div>
         <ul>
-          <li onClick={() => navigate("/")}>펫톡</li>
-          <li onClick={() => navigate("/")}>펫메디</li>
-          <li onClick={() => navigate("/")}>펫플레이스</li>
-          <li onClick={() => navigate("/")} className={style.login}>
-            LOGIN
+          <li>
+            <a onClick={() => navigate("/")}>펫톡</a>
           </li>
-          <li onClick={() => navigate("/")} className={style.login}>
-            SIGNUP
+          <li>
+            <a onClick={() => navigate("/")}>펫메디</a>
+          </li>
+          <li>
+            <a onClick={() => navigate("/")}>펫플레이스</a>
+          </li>
+          <li className={style.login}>
+            <a onClick={() => navigate("/login")}>LOGIN</a>
+          </li>
+          <li className={style.login}>
+            <a onClick={() => navigate("/signup")}>SIGNUP</a>
           </li>
         </ul>
       </div>

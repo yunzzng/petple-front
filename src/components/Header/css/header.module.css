@@ -22,6 +22,10 @@
   align-items: center;
 }
 
+.content a {
+  cursor: pointer;
+}
+
 .img {
   width: 150px;
 }

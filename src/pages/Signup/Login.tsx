@@ -2,58 +2,39 @@ import Header from "@/components/Header/Header";
 import style from "./css/signup.module.css";
 import google from "/images/google.png";
 import { useForm } from "react-hook-form";
-import { ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
 type SignupFields = {
   email: string;
-  name: string;
   password: string;
-  passwordConfirm: string;
 };
 
 const defaultLoginFormValues = {
   email: "",
   password: "",
-  name: "",
-  passwordConfirm: "",
 };
 
-const Signup = () => {
+const Login = () => {
   const {
     register,
     handleSubmit,
-    watch,
-    setValue,
     formState: { errors },
-    setError,
-    clearErrors,
   } = useForm<SignupFields>({
     defaultValues: defaultLoginFormValues,
   });
   const navigate = useNavigate();
 
   const onSubmit = (data: SignupFields) => {
-    if (data.password !== data.passwordConfirm) {
-      alert("비밀번호가 일치하지 않습니다!");
+    if (!data.email) {
+      alert("이메일을 입력해주세요");
       return;
     }
-    alert("회원가입 성공!");
-  };
 
-  const handleChangePasswordConfirm = (e: ChangeEvent<HTMLInputElement>) => {
-    const password = watch("password");
-    setValue("passwordConfirm", e.target.value);
-
-    if (e.target.value !== password) {
-      setError("passwordConfirm", { message: "비밀번호가 일치하지 않습니다!" });
-    } else {
-      clearErrors("passwordConfirm");
+    if (!data.password) {
+      alert("비밀번호를 입력해주세요");
     }
-  };
 
-  const handleSubmitError = (errors: any) => {
-    console.log("유효성 검사 실패", errors);
+    alert("회원가입 성공!");
   };
 
   return (
@@ -61,19 +42,8 @@ const Signup = () => {
       <Header />
       <div className={style.content}>
         <ul>
-          <h1>회원가입</h1>
-          <form
-            className={style.form}
-            onSubmit={handleSubmit(onSubmit, handleSubmitError)}
-          >
-            <li>
-              <input
-                placeholder="이름"
-                {...register("name", {
-                  required: true,
-                })}
-              />
-            </li>
+          <h1>로그인</h1>
+          <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
             <li>
               <input
                 placeholder="이메일"
@@ -103,21 +73,9 @@ const Signup = () => {
               />
               {errors.password && <p>{errors.password.message}</p>}
             </li>
-            <li>
-              <input
-                type="password"
-                placeholder="비밀번호 확인"
-                value={watch("passwordConfirm")}
-                onChange={handleChangePasswordConfirm}
-              />
-              {errors.passwordConfirm && (
-                <p>{errors.passwordConfirm.message}</p>
-              )}
-            </li>
-
-            <button className={style.signupBtn}>회원가입</button>
-            <p onClick={() => navigate("/login")} className={style.navigate}>
-              이미 계정이 있으신가요?
+            <button className={style.signupBtn}>로그인</button>
+            <p onClick={() => navigate("/signup")} className={style.navigate}>
+              계정이 없으신가요?
             </p>
           </form>
           <div className={style.oauth}>
@@ -132,4 +90,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;
