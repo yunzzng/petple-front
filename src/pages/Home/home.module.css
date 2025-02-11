@@ -11,7 +11,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 80px 200px;
-  border-radius: 20px;
+  border-radius: 30px;
 }
 
 .bannerLeft {
@@ -53,13 +53,14 @@
   font-weight: bold;
 }
 
-.bannerText p, .postSection p {
+.bannerText p {
   font-size: 20px;
   color: #555;
   margin-top: 10px;
   line-height: 1.8rem;
   margin: 40px 0;
   white-space: pre-line;
+
 }
 
 .postSection {
@@ -67,6 +68,20 @@
   text-align: left;
   display: flex;
   flex-direction: column;
+  width: 100%;
+}
+
+.postText {
+  background-size: 100% auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 30px; 
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 450px;
   width: 100%;
 }
 
@@ -80,15 +95,11 @@
   width: 100%;
   background-color: antiquewhite;
   border-radius: 10px;
-  height: 1500px;
+  height: 1000px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 10px;
-}
-
-.postsContainer {
-  width: 100%;
 }
 
 .noPosts {
