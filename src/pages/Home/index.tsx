@@ -5,6 +5,9 @@ import carouselData from "@/consts/mainBannerData";
 import Button from "@/components/Button";
 import Carousel from "@/components/Carousel";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header/Header";
+import menuList, { MenuItem } from "@/consts/menuList";
+import backgroundImg from "/images/Group 493.png"; 
 
 interface Post {}
 
@@ -16,6 +19,7 @@ const Home = () => {
 
   return (
     <>
+      <Header />
       <div className={styles.container}>
         <Carousel>
           <Carousel.ItemList>
@@ -55,20 +59,32 @@ const Home = () => {
           <Carousel.Indicator />
         </Carousel>
 
-        {/* <div className={styles.postSection}>
-        <h2>
-          반려인들의 커뮤니티, <span className={styles.highlight}>펫톡!</span>
-        </h2>
-        {posts?.length ? (
-          <div></div>
-        ) : (
-          <p className={styles.noPosts}>게시글이 없습니다.</p>
-        )}
-        <Button
-          label="펫톡 이야기 보러 가기"
-          onClick={() => navigate("/community")}
-        />
-      </div> */}
+        <div className={styles.petMenuSection}>
+          <div className={styles.menuContainer}>
+            {menuList.map((item: MenuItem) => (
+              <a key={item.id} href={item.link} className={styles.menuItem}>
+                <img src={item.image} alt={item.label} />
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <div className={styles.postSection}>
+          <div
+            className={styles.postText}
+            style={{ backgroundImage: `url(${backgroundImg})` }}
+          >
+          </div>
+          <div className={styles.postsWrapper}>
+            <div className={styles.postsContainer}>{/* 게시글 부분 */}</div>
+          </div>
+          <div className={styles.postsButton}>
+            <Button
+              label="펫톡 이야기 보러 가기"
+              onClick={() => navigate("/community")}
+            />
+          </div>
+        </div>
       </div>
       <Footer />
     </>

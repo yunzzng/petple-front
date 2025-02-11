@@ -37,6 +37,10 @@ const Login = () => {
     alert("회원가입 성공!");
   };
 
+  const handleGoogleLogin = () => {
+    window.location.href = "/api/oauth/google";
+  };
+
   return (
     <div className={style.total_wrap}>
       <Header />
@@ -81,7 +85,7 @@ const Login = () => {
           <div className={style.oauth}>
             <p>sns로 로그인하기</p>
           </div>
-          <button className={style.googleBtn}>
+          <button className={style.googleBtn} onClick={handleGoogleLogin}>
             <img src={google} />
           </button>
         </ul>

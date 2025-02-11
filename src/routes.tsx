@@ -1,16 +1,16 @@
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "@/components/Layout";
 import { Home, PostCreatePage, ErrorPage, Signup, Login } from "@/pages";
+import BaseLayout from "@/components/Layout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <BaseLayout />,
     errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <Home />
       },
       {
         path: "/community/post/create",
