@@ -1,8 +1,9 @@
 .carouselContainer {
-  width: 100%;
-  min-width: 800px;
-  position: absolute;
+  position: relative; 
+  width: 100vw;
+  max-width: 100%; 
   left: 0;
+  top: 100px; 
 }
 
 .carouselNavigator {

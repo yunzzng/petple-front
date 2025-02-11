@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import '../index.css';
 
-const Layout = () => {
+const BaseLayout = () => {
   return (
     <>
       <div className="wrapper">
@@ -13,4 +13,4 @@ const Layout = () => {
   );
 };
 
-export default Layout;
+export default BaseLayout;
