@@ -1,3 +1,66 @@
-.text{
-  font-size: 10px;
+@font-face {
+  font-family: "HakgyoansimDunggeunmisoTTF-B";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimDunggeunmisoTTF-B.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+.banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 80px 200px;
+}
+
+.bannerLeft {
+  flex-direction: row;
+}
+
+.bannerRight {
+  flex-direction: row-reverse;
+}
+
+.bannerText {
+  flex: 1;
+  text-align: left;
+  min-width: 300px;
+}
+
+.bannerLeft .bannerText,
+.bannerRight .bannerText {
+  margin-left: 100px;
+}
+
+.bannerImage {
+  max-width: 300px;
+}
+
+.bannerLeft .bannerImage {
+  margin-left: 100px;
+}
+
+.bannerRight .bannerImage {
+  margin-right: 100px;
+}
+
+.highlight {
+  font-size: 34px;
+  line-height: 1.3;
+  color: #222;
+  white-space: pre-line;
+  font-family: "HakgyoansimDunggeunmisoTTF-B";
+}
+
+.banner h2 {
+  font-size: 20px;
+}
+
+.bannerText p {
+  font-size: 16px;
+  color: #555;
+  margin-top: 10px;
+  line-height: 1.3rem;
+  margin-bottom: 40px;
+  white-space: pre-line;
 }

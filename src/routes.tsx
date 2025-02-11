@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "@/components/Layout";
-import { Home, PostCreatePage, ErrorPage } from "@/pages";
+import { Home, PostCreatePage, ErrorPage, Signup, Login } from "@/pages";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +15,14 @@ const router = createBrowserRouter([
       {
         path: "/community/post/create",
         element: <PostCreatePage />,
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
     ],
   },

@@ -39,7 +39,7 @@ const Input: FC<InputProps> & InputCompoundProps = (props: InputProps) => {
       title={title}
       required={required}
       disabled={disabled}
-      className={styles.input} // 클래스 적용
+      className={styles.input}
     />
   );
 };
