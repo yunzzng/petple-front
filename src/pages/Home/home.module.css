@@ -11,6 +11,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 80px 200px;
+  border-radius: 20px;
 }
 
 .bannerLeft {
@@ -27,27 +28,25 @@
   min-width: 300px;
 }
 
-.bannerLeft .bannerText,
+.bannerLeft .bannerText {
+  margin-left: 200px;
+}
+
 .bannerRight .bannerText {
   margin-left: 100px;
 }
-
 .bannerImage {
   max-width: 300px;
 }
 
-.bannerLeft .bannerImage {
+.bannerLeft .bannerImage, .bannerRight .bannerImage  {
   margin-left: 100px;
-}
-
-.bannerRight .bannerImage {
-  margin-right: 100px;
 }
 
 .highlight {
   font-size: 34px;
   line-height: 1.3;
-  color: #222;
+  color: #002DAA;
   white-space: pre-line;
   font-family: "HakgyoansimDunggeunmisoTTF-B";
 }
@@ -63,4 +62,44 @@
   line-height: 1.3rem;
   margin-bottom: 40px;
   white-space: pre-line;
+}
+
+.postSection {
+  margin-top: 200px; /* 캐러셀과의 간격 조정 */
+  padding-bottom: 300px;
+  text-align: center; /* 텍스트 가운데 정렬 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f8f9fa; /* 배경색 추가 */
+  border-radius: 16px; /* 둥근 모서리 */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05); /* 부드러운 그림자 효과 */
+
+}
+
+.postSection h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.noPosts {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.viewMoreButton {
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.viewMoreButton:hover {
+  background-color: #0056b3;
 }

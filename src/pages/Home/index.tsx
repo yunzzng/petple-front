@@ -5,6 +5,7 @@ import carouselData from "@/consts/mainBannerData";
 import Button from "@/components/Button";
 import Carousel from "@/components/Carousel";
 import Footer from "@/components/Footer";
+import Header from "@/components/Header/Header";
 
 interface Post {}
 
@@ -16,6 +17,7 @@ const Home = () => {
 
   return (
     <>
+    <Header />
       <div className={styles.container}>
         <Carousel>
           <Carousel.ItemList>
@@ -55,7 +57,7 @@ const Home = () => {
           <Carousel.Indicator />
         </Carousel>
 
-        {/* <div className={styles.postSection}>
+        <div className={styles.postSection}>
         <h2>
           반려인들의 커뮤니티, <span className={styles.highlight}>펫톡!</span>
         </h2>
@@ -68,7 +70,7 @@ const Home = () => {
           label="펫톡 이야기 보러 가기"
           onClick={() => navigate("/community")}
         />
-      </div> */}
+      </div>
       </div>
       <Footer />
     </>
