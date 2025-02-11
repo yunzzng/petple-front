@@ -11,6 +11,7 @@ const Home = () => {
       <h1 className={styles.text}>cicd test5</h1>
       <Button label="펫톡 이야기 보러 가기" />
       <Button label="펫톡 이야기 보러 가기" />
+      <Button label="펫톡 이야기 보러 가기" />
       <Input.Box>
       <Input.Label htmlFor="username">사용자 이름</Input.Label>
       <Input
