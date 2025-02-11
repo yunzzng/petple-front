@@ -1,0 +1,49 @@
+.carouselContainer {
+  width: 100%;
+  min-width: 800px;
+  position: absolute;
+  left: 0;
+}
+
+.carouselNavigator {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navButton {
+  color: #93C9FF;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0 100px;
+}
+
+.navButton:hover {
+  color: #002DAA;
+}
+
+.carouselIndicator {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  display: flex;
+  gap: 8px;
+}
+
+.carouselIndicator button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #93C9FF;
+  border: none;
+  cursor: pointer;
+}
+
+.carouselIndicator button.active {
+  background-color: #002DAA;
+}
