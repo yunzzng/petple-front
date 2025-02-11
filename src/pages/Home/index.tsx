@@ -5,9 +5,9 @@ import carouselData from "@/consts/mainBannerData";
 import Button from "@/components/Button";
 import Carousel from "@/components/Carousel";
 import Footer from "@/components/Footer";
-import Header from "@/components/Header/Header";
+import Header from "@/components/Header";
 import menuList, { MenuItem } from "@/consts/menuList";
-import backgroundImg from "/images/Group 493.png"; 
+import pettalkBanner from "/images/pettalkBanner.png";
 
 interface Post {}
 
@@ -72,9 +72,8 @@ const Home = () => {
         <div className={styles.postSection}>
           <div
             className={styles.postText}
-            style={{ backgroundImage: `url(${backgroundImg})` }}
-          >
-          </div>
+            style={{ backgroundImage: `url(${pettalkBanner})` }}
+          ></div>
           <div className={styles.postsWrapper}>
             <div className={styles.postsContainer}>{/* 게시글 부분 */}</div>
           </div>
