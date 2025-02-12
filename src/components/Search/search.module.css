@@ -22,7 +22,7 @@
 }
 
 .input {
-  width: 300px;
+  width: 230px;
   border: 2px solid #93C9FF;
   border-radius: 10px;
   font-size: 16px;
@@ -30,12 +30,13 @@
 
 .input::placeholder {
   color: #aaa;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .button {
   width: 100%;
-  max-width: 120px;
+  max-width: 100px;
   height: 40px;
   align-self: flex-end;
+  font-size: 13px;
 }

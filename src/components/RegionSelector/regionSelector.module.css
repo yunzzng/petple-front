@@ -6,7 +6,7 @@
 }
 
 .regionButton {
-  font-size: 16px;
+  font-size: 12px;
   font-weight: bold;
   padding: 10px;
   border-radius: 5px;
@@ -14,6 +14,7 @@
   background-color: transparent;
   border: none;
   color: #002DAA;
+  padding: 0;
 }
 
 .regionButton:hover {
@@ -22,9 +23,9 @@
 
 .regionDropdown {
   position: absolute;
-  top: 50px;
-  left: 0;
-  width: 300px;
+  top: 25px;
+  left: -25px;
+  width: 160px;
   background: white;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -39,11 +40,12 @@
 }
 
 .regionItem {
-  padding: 8px;
+  padding: 3px;
   cursor: pointer;
   text-align: center;
   border: 1px solid #ddd;
   border-radius: 5px;
+  font-size: 10px;
 }
 
 .regionItem:hover {

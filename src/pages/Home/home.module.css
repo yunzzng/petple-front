@@ -6,42 +6,30 @@
   font-style: normal;
 }
 
+.homewrapper {
+  background-color: #F3F3F6;
+}
+
 .banner {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 80px 200px;
-  border-radius: 30px;
-}
-
-.bannerLeft {
-  flex-direction: row;
-}
-
-.bannerRight {
-  flex-direction: row-reverse;
+  padding: 20px 40px 50px;
+  text-align: center;
 }
 
 .bannerText {
   flex: 1;
   text-align: left;
-  min-width: 300px;
-}
-
-.bannerLeft .bannerText {
-  margin-left: 100px;
+  min-width: 150px;
+  text-align: center;
 }
 
 .bannerImage {
-  max-width: 300px;
-}
-
-.bannerLeft .bannerImage {
-  margin-left: 50px;
+  max-width: 150px;
+  margin-bottom: 20px;
 }
 
 .highlight {
-  font-size: 34px;
+  font-size: 20px;
   line-height: 1.3;
   color: #002daa;
   white-space: pre-line;
@@ -50,21 +38,20 @@
 
 .banner h2,
 .postSection h2 {
-  font-size: 22px;
+  font-size: 12px;
   font-weight: bold;
 }
 
 .bannerText p {
-  font-size: 20px;
+  font-size: 12px;
   color: #555;
   margin-top: 10px;
-  line-height: 1.8rem;
-  margin: 40px 0;
+  line-height: 1rem;
+  margin: 10px 0;
   white-space: pre-line;
 }
 
 .postSection {
-  margin-top: 100px;
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -72,21 +59,16 @@
 }
 
 .postText {
-  background-size: 100% auto;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 30px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 400px;
-  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 100px;
+  margin: 10px;
 }
 
 .title {
-  font-size: 22px;
+  font-size: 14px;
   font-weight: bold;
   margin-bottom: 20px;
 }
@@ -95,11 +77,10 @@
   width: 100%;
   background-color: antiquewhite;
   border-radius: 10px;
-  height: 1000px;
+  height: 800px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
 }
 
 .noPosts {
@@ -110,10 +91,4 @@
 
 .petMenuSection {
   text-align: center;
-}
-
-.postsButton {
-  display: flex;
-  justify-content: center;
-  margin-top: 50px;
 }

@@ -19,7 +19,7 @@ const Home = () => {
   useEffect(() => {}, []);
 
   return (
-    <>
+    <div className={styles.homewrapper}>
       <Header />
       <div className={styles.container}>
         <Carousel>
@@ -38,17 +38,15 @@ const Home = () => {
                     className={styles.bannerImage}
                   />
                   <div className={styles.bannerText}>
-                    <h2>
-                      <span className={styles.highlight}>
-                        {banner.highlight}
-                      </span>
-                      {banner.title}
-                    </h2>
+                    <span className={styles.highlight}>{banner.highlight}</span>
+                    <h2>{banner.title}</h2>
+
                     <p>{banner.description}</p>
                     {index !== 0 && (
                       <Button
                         label={banner.linkText}
                         onClick={() => navigate(banner.link)}
+                        className={styles.linkBtn}
                       />
                     )}
                   </div>
@@ -60,26 +58,21 @@ const Home = () => {
           <Carousel.Indicator />
         </Carousel>
 
-        <Menu menuList={menuList} />             
+        <Menu menuList={menuList} className={styles.homeMenu}/>
 
         <div className={styles.postSection}>
           <div
             className={styles.postText}
             style={{ backgroundImage: `url(${pettalkBanner})` }}
+            onClick={()=> navigate('/comunity')}
           ></div>
           <div className={styles.postsWrapper}>
             <div className={styles.postsContainer}>{/* 게시글 부분 */}</div>
           </div>
-          <div className={styles.postsButton}>
-            <Button
-              label="펫톡 이야기 보러 가기"
-              onClick={() => navigate("/community")}
-            />
-          </div>
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
