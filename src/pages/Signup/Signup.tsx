@@ -4,6 +4,7 @@ import google from "/images/google.png";
 import { useForm } from "react-hook-form";
 import { ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import axios, { AxiosError } from "axios";
 
 type SignupFields = {
   email: string;
@@ -33,12 +34,32 @@ const Signup = () => {
   });
   const navigate = useNavigate();
 
-  const onSubmit = (data: SignupFields) => {
+  const onSubmit = async (data: SignupFields) => {
     if (data.password !== data.passwordConfirm) {
       alert("비밀번호가 일치하지 않습니다!");
       return;
     }
-    alert("회원가입 성공!");
+
+    try {
+      const response = await axios.post("/api/user/signup", {
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      });
+
+      if (response.status === 201) {
+        alert("회원가입 성공");
+        navigate("/login");
+      }
+    } catch (error: any) {
+      if (error.response.status === 409) {
+        alert("이미 가입된 이메일입니다.");
+        navigate("/login");
+      } else {
+        alert("회원가입 실패");
+        console.error("회원가입 실패", error);
+      }
+    }
   };
 
   const handleChangePasswordConfirm = (e: ChangeEvent<HTMLInputElement>) => {
