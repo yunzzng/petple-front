@@ -1,0 +1,30 @@
+/* default.module.css */
+.chip {
+  width: fit-content;
+  min-width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #002daa;
+  background-color: #ffffff;
+  border-radius: 12px;
+  cursor: pointer;
+  gap: 2px;
+}
+
+.closeIcon {
+  width: 14px;
+  height: 14px;
+  opacity: 0;
+  transition: 0.2s ease-in-out;
+}
+
+.chip:hover .closeIcon {
+  opacity: 1;
+  fill: #002daa;
+  filter: invert(18%) sepia(95%) saturate(2231%) hue-rotate(217deg)
+    brightness(91%) contrast(89%);
+}
