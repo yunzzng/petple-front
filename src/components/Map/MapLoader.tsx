@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import config from "@/consts/env.config";
 
 declare global {
@@ -7,32 +7,32 @@ declare global {
   }
 }
 
-const MapLoader = ({ onLoad }: { onLoad: () => void }) => {
-  const [isScriptLoaded, setIsScriptLoaded] = useState(false);
-
-  useEffect(() => {
-    if (isScriptLoaded || (window.kakao && window.kakao.maps)) {
-      onLoad();
+const loadKakaoMap = (): Promise<boolean> => {
+  return new Promise((resolve, reject) => {
+    if (window.kakao && window.kakao.maps) {
+      resolve(true);
       return;
     }
 
-    // 카카오 지도 API 스크립트
     const script = document.createElement("script");
     script.src = `${config.map.KAKAO_API_URL}${config.map.KAKAO_API_KEY}&autoload=false`;
     script.async = true;
 
     script.onload = () => {
-      window.kakao.maps.load(() => {
-        setIsScriptLoaded(true);
-        onLoad();
-      });
+      window.kakao.maps.load(() => resolve(true));
     };
 
-
+    script.onerror = () => reject(new Error("Kakao Maps API 로드 실패"));
     document.head.appendChild(script);
-  }, [onLoad]);
-
-  return null;
+  });
 };
 
-export default MapLoader;
+const useKakaoLoader = () => {
+  return useQuery<boolean, Error>({
+    queryKey: ["kakaoMap"],
+    queryFn: loadKakaoMap,
+    staleTime: 7 * 24 * 60 * 60 * 1000,
+  });
+};
+
+export default useKakaoLoader;

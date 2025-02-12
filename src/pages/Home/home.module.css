@@ -43,12 +43,13 @@
 .highlight {
   font-size: 34px;
   line-height: 1.3;
-  color: #002DAA;
+  color: #002daa;
   white-space: pre-line;
   font-family: "HakgyoansimDunggeunmisoTTF-B";
 }
 
-.banner h2, .postSection h2 {
+.banner h2,
+.postSection h2 {
   font-size: 22px;
   font-weight: bold;
 }
@@ -60,7 +61,6 @@
   line-height: 1.8rem;
   margin: 40px 0;
   white-space: pre-line;
-
 }
 
 .postSection {
@@ -75,7 +75,7 @@
   background-size: 100% auto;
   background-position: center;
   background-repeat: no-repeat;
-  border-radius: 30px; 
+  border-radius: 30px;
   color: white;
   display: flex;
   flex-direction: column;
@@ -110,22 +110,6 @@
 
 .petMenuSection {
   text-align: center;
-}
-
-.menuContainer {
-  display: flex;
-  gap: 100px; 
-  margin-top: 200px;
-}
-
-
-.menuItem img {
-  width: 40%;
-  height: auto;
-}
-
-.menuItem:hover img {
-  transform: scale(1.1);
 }
 
 .postsButton {
