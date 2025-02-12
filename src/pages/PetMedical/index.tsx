@@ -4,6 +4,7 @@ import styles from "./petMedical.module.css";
 import Button from "@/components/Button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import Map from "@/components/Map";
 
 const PetMedical = () => {
   const [selectedTab, setSelectedTab] = useState("hospital");
@@ -35,6 +36,7 @@ const PetMedical = () => {
           </h2>
           <RegionSelector />
         </div>
+        <Map />
       </div>
       <Footer />
     </>
