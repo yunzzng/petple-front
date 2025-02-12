@@ -5,3 +5,8 @@ export const getBaseCls = (suffix: string) => {
 
 // Button Component
 export const buttonBaseCls= getBaseCls("button");
+
+// Iput Component
+export const inputBaseCls= getBaseCls("input");
+export const inputBoxBaseCls = getBaseCls("input-box");
+export const inputLabelBaseCls = getBaseCls("input-label");
