@@ -1,5 +1,6 @@
 import { CSSProperties, FC, MouseEventHandler, useMemo } from "react";
 import { buttonBaseCls } from "@/consts/className";
+import styles from "./button.module.css";
 
 interface ButtonsProps {
   label: string;
@@ -19,14 +20,14 @@ const Buttons: FC<ButtonsProps> = ({
   disabled,
 }) => {
   const buttonCls = useMemo(() => {
-    return className ? `${className} ${buttonBaseCls}` : buttonBaseCls;
+    return `${styles.button} ${buttonBaseCls} ${className || ""}`.trim();
   }, [className]);
 
   return (
     <button
       onClick={onClick}
       type={type}
-      className={buttonCls}
+      className={buttonCls || styles.button}
       style={style}
       disabled={disabled}
     >
