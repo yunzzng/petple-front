@@ -7,7 +7,7 @@
 }
 
 .total_wrap {
-  width: 1440px;
+  width: 360px;
   position: fixed;
   top: 0;
   background-color: #fff;
@@ -26,30 +26,21 @@
 }
 
 .img {
-  width: 150px;
+  width: 70px;
 }
 
 .total_wrap ul {
   display: flex;
-  gap: 35px;
+  gap: 10px;
   align-items: center;
   flex-wrap: wrap;
   justify-content: flex-end;
 }
 
 .total_wrap ul li {
-  font-size: 17px;
+  font-size: 10px;
   align-items: center;
   display: flex;
-}
-
-.foot {
-  width: 20px;
-  align-items: center;
-}
-
-.place {
-  width: 25px;
 }
 
 .login {

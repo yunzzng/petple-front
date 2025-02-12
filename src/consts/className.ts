@@ -13,3 +13,6 @@ export const inputLabelBaseCls = getBaseCls("input-label");
 
 // Search Component
 export const searchBaseCls= getBaseCls("search");
+
+// Menu Component
+export const menuBaseCls= getBaseCls("menu");

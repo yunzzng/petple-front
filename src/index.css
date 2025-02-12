@@ -117,6 +117,7 @@ section {
 body {
   line-height: 1;
   font-family: "SpoqaHanSansNeo-Regular", sans-serif;
+
 }
 ol,
 ul {
@@ -145,6 +146,7 @@ table {
 }
 
 .content {
+  flex: 1;
   width: 100%;
   max-width: 360px;
   box-sizing: border-box;
