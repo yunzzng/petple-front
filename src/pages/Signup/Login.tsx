@@ -3,6 +3,7 @@ import style from "./signup.module.css";
 import google from "/images/google.png";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 type SignupFields = {
   email: string;
@@ -24,17 +25,22 @@ const Login = () => {
   });
   const navigate = useNavigate();
 
-  const onSubmit = (data: SignupFields) => {
-    if (!data.email) {
-      alert("이메일을 입력해주세요");
-      return;
-    }
+  const onSubmit = async (data: SignupFields) => {
+    try {
+      const response = await axios.post("/api/user/login", {
+        email: data.email,
+        password: data.password,
+      });
 
-    if (!data.password) {
-      alert("비밀번호를 입력해주세요");
+      if (response.status === 200) {
+        alert("로그인 성공");
+        console.log(response.data.user);
+        navigate("/");
+      }
+    } catch (error) {
+      alert("로그인 실패, 다시 시도해주세요.");
+      console.error("로그인 실패");
     }
-
-    alert("회원가입 성공!");
   };
 
   const handleGoogleLogin = () => {
