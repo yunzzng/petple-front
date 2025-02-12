@@ -1,25 +1,34 @@
-import { FC, MouseEventHandler } from "react";
+import { CSSProperties, FC, MouseEventHandler, useMemo } from "react";
+import { buttonBaseCls } from "@/consts/className";
 import styles from "./button.module.css";
 
 interface ButtonsProps {
   label: string;
   type?: "button" | "submit" | "reset";
   onClick?: (() => void) | MouseEventHandler<HTMLButtonElement>;
+  className?: string;
+  style?: CSSProperties;
   disabled?: boolean;
 }
 
-const Button: FC<ButtonsProps> = ({
+const Buttons: FC<ButtonsProps> = ({
   label,
   type,
   onClick,
+  className,
+  style,
   disabled,
 }) => {
+  const buttonCls = useMemo(() => {
+    return `${styles.button} ${buttonBaseCls} ${className || ""}`.trim();
+  }, [className]);
 
   return (
     <button
       onClick={onClick}
       type={type}
-      className={styles.button}
+      className={buttonCls || styles.button}
+      style={style}
       disabled={disabled}
     >
       {label}
@@ -27,4 +36,4 @@ const Button: FC<ButtonsProps> = ({
   );
 };
 
-export default Button;
+export default Buttons;
