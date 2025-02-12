@@ -10,3 +10,6 @@ export const buttonBaseCls= getBaseCls("button");
 export const inputBaseCls= getBaseCls("input");
 export const inputBoxBaseCls = getBaseCls("input-box");
 export const inputLabelBaseCls = getBaseCls("input-label");
+
+// Search Component
+export const searchBaseCls= getBaseCls("search");

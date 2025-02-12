@@ -1,0 +1,15 @@
+.menuContainer {
+  display: flex;
+  gap: 100px; 
+  margin-top: 200px;
+}
+
+
+.menuItem img {
+  width: 60%;
+  height: auto;
+}
+
+.menuItem:hover img {
+  transform: scale(1.1);
+}

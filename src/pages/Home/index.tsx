@@ -6,8 +6,9 @@ import Button from "@/components/Button";
 import Carousel from "@/components/Carousel";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import menuList, { MenuItem } from "@/consts/menuList";
+import menuList from "@/consts/menuList";
 import pettalkBanner from "/images/pettalkBanner.png";
+import Menu from "@/components/Menu";
 
 interface Post {}
 
@@ -59,15 +60,7 @@ const Home = () => {
           <Carousel.Indicator />
         </Carousel>
 
-        <div className={styles.petMenuSection}>
-          <div className={styles.menuContainer}>
-            {menuList.map((item: MenuItem) => (
-              <a key={item.id} href={item.link} className={styles.menuItem}>
-                <img src={item.image} alt={item.label} />
-              </a>
-            ))}
-          </div>
-        </div>
+        <Menu menuList={menuList} />             
 
         <div className={styles.postSection}>
           <div
