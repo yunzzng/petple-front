@@ -108,6 +108,7 @@ const PostCreatePage = () => {
             type="submit"
             label="등록 하기"
             onClick={handleSubmit(onSubmit)}
+            className={styles.post_button}
           />
         </header>
         <form className={styles.form}>
