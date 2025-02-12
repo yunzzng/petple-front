@@ -9,7 +9,7 @@ const getPresignedUrl = async ({
 }) => {
   try {
     const response = await baseInstance.get(
-      `/image/s3/presigned-url?fileName=${fileName}&fileType=${fileType}`
+      `/images/s3/presigned-url?fileName=${fileName}&fileType=${fileType}`
     );
     if (response.data.isError) {
       throw new Error(response.data.message);
