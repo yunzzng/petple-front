@@ -2,6 +2,7 @@
   position: relative;
   display: inline-block;
   text-align: center;
+  z-index: 1000;
 }
 
 .regionButton {

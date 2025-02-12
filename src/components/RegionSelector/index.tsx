@@ -3,9 +3,13 @@ import regions from "@/consts/regionData";
 import styles from "./regionSelector.module.css";
 import { Button } from "..";
 
-const RegionSelector = () => {
+interface RegionSelectorProps {
+  selectedRegion: string | null;
+  onRegionChange: (region: string | null) => void;
+}
+
+const RegionSelector = ({ selectedRegion, onRegionChange }: RegionSelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedRegion, setSelectedRegion] = useState<string>("지역선택");
 
   const handleClickSelect = (region: { id: string; name: string }) => {
     if (region.name !== "경기") {
@@ -13,14 +17,17 @@ const RegionSelector = () => {
       setIsOpen(false);
       return;
     }
-    setSelectedRegion(region.name);
+    onRegionChange(region.name);
     setIsOpen(false);
   };
 
   return (
     <div className={styles.regionContainer}>
-
-      <Button label={`${selectedRegion} 🔻`} onClick={() => setIsOpen(!isOpen)} className={styles.regionButton} />
+      <Button 
+        label={`${selectedRegion || "지역선택"} 🔻`} 
+        onClick={() => setIsOpen(!isOpen)} 
+        className={styles.regionButton} 
+      />
 
       {isOpen && (
         <div className={styles.regionDropdown}>

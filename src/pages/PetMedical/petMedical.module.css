@@ -49,3 +49,21 @@
   font-family: "HakgyoansimDunggeunmisoTTF-B";
 }
 
+.contentWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+}
+
+.mapContainer {
+  flex: 1;
+  max-width: 50%;
+}
+
+.dataContainer {
+  flex: 1;
+  max-width: 50%;
+  display: flex;
+}
