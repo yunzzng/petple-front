@@ -5,6 +5,7 @@ import {
   ErrorPage,
   Signup,
   Login,
+  Profile,
   PostUpdatePage,
 } from "@/pages";
 import BaseLayout from "@/components/Layout";
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "/petfood",
         element: <PetFood />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },
