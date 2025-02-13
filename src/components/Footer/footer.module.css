@@ -1,19 +1,21 @@
 .footer {
   width: 360px;
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  padding: 10px 0;
-  transform: translateX(-50%);
-  text-align: center;
-}
-.logo {
-  width: 60px;
-  height: auto;
-  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fefefe;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
-.text {
-  font-size: 8px;
-  color: #333;
+.footer a {
+  cursor: pointer;
+}
+
+.home {
+  width: 30px;
+}
+
+.img {
+  width: 25px;
 }
