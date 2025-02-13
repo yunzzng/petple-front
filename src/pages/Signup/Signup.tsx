@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Button, Input } from "@/components";
+import { Button } from "@/components";
 
 type SignupFields = {
   email: string;
@@ -89,7 +89,7 @@ const Signup = () => {
             onSubmit={handleSubmit(onSubmit, handleSubmitError)}
           >
             <li>
-              <Input
+              <input
                 placeholder="이름"
                 {...register("name", {
                   required: true,
@@ -97,7 +97,7 @@ const Signup = () => {
               />
             </li>
             <li>
-              <Input
+              <input
                 placeholder="이메일"
                 {...register("email", {
                   required: true,
@@ -110,7 +110,7 @@ const Signup = () => {
               {errors.email && <p>{errors.email.message}</p>}
             </li>
             <li>
-              <Input
+              <input
                 type="password"
                 placeholder="비밀번호"
                 {...register("password", {
@@ -126,7 +126,7 @@ const Signup = () => {
               {errors.password && <p>{errors.password.message}</p>}
             </li>
             <li>
-              <Input
+              <input
                 type="password"
                 placeholder="비밀번호 확인"
                 value={watch("passwordConfirm")}
