@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Search } from "@/components";
-import Header from "@/components/Header";
 import Map from "@/components/Map";
 import RegionSelector from "@/components/RegionSelector";
 import styles from "../PetMedical/petMedical.module.css";
@@ -45,7 +44,6 @@ const PetFuneral = () => {
 
   return (
     <>
-      <Header />
       <div className={styles.container}>
         <div className={styles.titleContainer}>
           <h2 className={styles.title}>반려동물 장례 서비스 찾기</h2>

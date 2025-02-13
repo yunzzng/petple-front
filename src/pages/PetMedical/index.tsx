@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import RegionSelector from "@/components/RegionSelector";
 import styles from "./petMedical.module.css";
 import Button from "@/components/Button";
-import Header from "@/components/Header";
 import Map from "@/components/Map";
 import { Search } from "@/components";
 import { fetchHospitalData, fetchPharmacyData } from "../../apis/medical.api";
@@ -56,7 +55,6 @@ const PetMedical = () => {
 
   return (
     <>
-      <Header />
       <div className={styles.container}>
         <div className={styles.tabContainer}>
           <Button
