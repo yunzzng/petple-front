@@ -36,7 +36,7 @@ const PostForm = ({ requestType, onSubmit, post }: PostFormProps) => {
     handleSubmit,
     setError,
     setValue,
-    formState: { errors },
+    formState: { errors, isDirty },
   } = useForm<PostFormFields>({
     defaultValues: {
       tags: post?.tags ?? [],
@@ -76,9 +76,16 @@ const PostForm = ({ requestType, onSubmit, post }: PostFormProps) => {
     e.target.style.height = "auto";
     e.target.style.height = `${e.target.scrollHeight}px`;
   };
+
   return (
     <>
-      <FormHeader onClick={handleSubmit(onSubmit)} reqeustType={requestType} />
+      <FormHeader
+        onClick={handleSubmit((data) => {
+          if (!isDirty) return;
+          onSubmit(data);
+        })}
+        reqeustType={requestType}
+      />
       <form className={styles.form}>
         <Controller
           name="tags"
