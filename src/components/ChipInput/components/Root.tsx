@@ -18,8 +18,9 @@ const Root: FC<RootProps> = ({
   maxItemLength = 10,
   maxItemsCount = 10,
   onChange,
+  defaultItems = [],
 }) => {
-  const [items, setItems] = useState<Array<string>>([]);
+  const [items, setItems] = useState<Array<string>>(defaultItems);
   const addItem = (item: string) => {
     const updatedItems = [...items, item];
     setItems(updatedItems);

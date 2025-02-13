@@ -46,3 +46,8 @@
 .login {
   font-family: "HakgyoansimDunggeunmisoTTF-B";
 }
+
+.profileImage {
+  width: 20px;
+  cursor: pointer;
+}

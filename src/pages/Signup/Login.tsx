@@ -4,6 +4,8 @@ import google from "/images/google.png";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Buttons from "@/components/Button";
+import userAuthStore from "@/zustand/userAuth";
 
 type SignupFields = {
   email: string;
@@ -34,8 +36,16 @@ const Login = () => {
 
       if (response.status === 200) {
         alert("로그인 성공");
+
+        userAuthStore.setState({
+          isLoggedIn: true,
+          userId: response.data.user.id,
+          userEmail: response.data.user.email,
+        });
         console.log(response.data.user);
+        console.log(response.data.user.id);
         navigate("/");
+        console.log("로그인 상태:", userAuthStore.getState());
       }
     } catch (error) {
       alert("로그인 실패, 다시 시도해주세요.");
@@ -91,9 +101,9 @@ const Login = () => {
           <div className={style.oauth}>
             <p>sns로 로그인하기</p>
           </div>
-          <button className={style.googleBtn} onClick={handleGoogleLogin}>
+          <Buttons className={style.googleBtn} onClick={handleGoogleLogin}>
             <img src={google} />
-          </button>
+          </Buttons>
         </ul>
       </div>
     </div>

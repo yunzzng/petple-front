@@ -4,7 +4,8 @@ import google from "/images/google.png";
 import { useForm } from "react-hook-form";
 import { ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
+import { Button } from "@/components";
 
 type SignupFields = {
   email: string;
@@ -136,7 +137,7 @@ const Signup = () => {
               )}
             </li>
 
-            <button className={style.signupBtn}>회원가입</button>
+            <Button className={style.signupBtn} label="회원가입"></Button>
             <p onClick={() => navigate("/login")} className={style.navigate}>
               이미 계정이 있으신가요?
             </p>
@@ -144,9 +145,9 @@ const Signup = () => {
           <div className={style.oauth}>
             <p>sns로 로그인하기</p>
           </div>
-          <button className={style.googleBtn}>
+          <Button className={style.googleBtn}>
             <img src={google} />
-          </button>
+          </Button>
         </ul>
       </div>
     </div>
