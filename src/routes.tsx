@@ -1,10 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Home, PostCreatePage, ErrorPage, Signup, Login } from "@/pages";
+import {
+  Home,
+  PostCreatePage,
+  ErrorPage,
+  Signup,
+  Login,
+  PostUpdatePage,
+} from "@/pages";
 import BaseLayout from "@/components/Layout";
 import PetMedical from "./pages/PetMedical";
 import PetPlace from "./pages/PetPlace";
 import PetFood from "./pages/PetFood";
 import PetFuneral from "./pages/PetFuneral";
+import { Suspense } from "react";
 
 const router = createBrowserRouter([
   {
@@ -14,11 +22,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />
+        element: <Home />,
       },
       {
-        path: "/community/post/create",
+        path: "/community/create/post",
         element: <PostCreatePage />,
+      },
+      {
+        path: "/community/update/post/:id",
+        element: (
+          <Suspense fallback={<p>...Loading</p>}>
+            <PostUpdatePage />
+          </Suspense>
+        ),
       },
       {
         path: "/signup",
@@ -34,7 +50,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/petplace",
-        element: <PetPlace  />,
+        element: <PetPlace />,
       },
       {
         path: "/petfuneral",
