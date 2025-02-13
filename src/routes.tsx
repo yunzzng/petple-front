@@ -12,6 +12,7 @@ import PetMedical from "./pages/PetMedical";
 import PetPlace from "./pages/PetPlace";
 import PetFood from "./pages/PetFood";
 import PetFuneral from "./pages/PetFuneral";
+import { Suspense } from "react";
 
 const router = createBrowserRouter([
   {
@@ -24,12 +25,16 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/community/post/create",
+        path: "/community/create/post",
         element: <PostCreatePage />,
       },
       {
-        path: "/community/post/update/:id",
-        element: <PostUpdatePage />,
+        path: "/community/update/post/:id",
+        element: (
+          <Suspense fallback={<p>...Loading</p>}>
+            <PostUpdatePage />
+          </Suspense>
+        ),
       },
       {
         path: "/signup",
