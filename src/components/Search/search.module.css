@@ -13,7 +13,7 @@
 }
 
 .label {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   color: #0033cc;
   align-self: flex-start;
@@ -25,7 +25,7 @@
   width: 230px;
   border: 2px solid #93C9FF;
   border-radius: 10px;
-  font-size: 16px;
+  font-size: 12px;
 }
 
 .input::placeholder {
