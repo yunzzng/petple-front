@@ -6,13 +6,14 @@ import * as z from "zod";
 import uploadIcon from "/images/icons/upload.svg";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormHeader from "./components/FormHeader";
+import { Post } from "@/types/post.type";
 
 const PostFormSchema = z.object({
   tags: z
     .array(z.string())
     .min(1, "최소 1개 이상의 태그를 입력하세요.")
     .max(10, "최대 10개의 태그만 추가할 수 있습니다."),
-  images: z.array(z.instanceof(File)),
+  images: z.array(z.union([z.string(), z.instanceof(File)])),
   description: z.string().trim().min(1, "내용을 입력해주세요."),
 });
 
@@ -20,12 +21,14 @@ export type PostFormFields = z.infer<typeof PostFormSchema>;
 interface PostFormProps {
   requestType: "create" | "update";
   onSubmit: (data: PostFormFields) => void;
-  post?: PostFormFields;
+  post?: Post;
 }
 
 const PostForm = ({ requestType, onSubmit, post }: PostFormProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [previewImages, setPreviewImages] = useState<string[]>([]);
+  const [previewImages, setPreviewImages] = useState<string[]>(
+    post?.images ?? []
+  );
   const {
     register,
     watch,
@@ -35,30 +38,30 @@ const PostForm = ({ requestType, onSubmit, post }: PostFormProps) => {
     setValue,
     formState: { errors },
   } = useForm<PostFormFields>({
-    defaultValues: post ?? {
-      tags: [],
-      images: [],
-      description: "",
+    defaultValues: {
+      tags: post?.tags ?? [],
+      images: post?.images ?? [],
+      description: post?.description ?? "",
     },
     resolver: zodResolver(PostFormSchema),
     mode: "onSubmit",
   });
 
-  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeFileInput = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
     const files = Array.from(e.target.files);
-
     const currentImages = watch("images") || [];
-    const totalImages = [...currentImages, ...files];
+    const totalImages: Array<File | string> = [...currentImages, ...files];
     if (totalImages.length > 10) {
       setError("images", { message: "최대 10장까지 등록할 수 있습니다." });
       return;
     }
 
     setValue("images", totalImages);
-    const previewImages = totalImages.map((file) => URL.createObjectURL(file));
-
-    setPreviewImages(previewImages);
+    const filterdFileImages = totalImages
+      .filter((image) => image instanceof File)
+      .map((file) => URL.createObjectURL(file));
+    setPreviewImages((prev) => [...prev, ...filterdFileImages]);
   };
 
   const handleClickDeleteImage = (index: number) => {
@@ -73,7 +76,6 @@ const PostForm = ({ requestType, onSubmit, post }: PostFormProps) => {
     e.target.style.height = "auto";
     e.target.style.height = `${e.target.scrollHeight}px`;
   };
-
   return (
     <>
       <FormHeader onClick={handleSubmit(onSubmit)} reqeustType={requestType} />
@@ -84,7 +86,7 @@ const PostForm = ({ requestType, onSubmit, post }: PostFormProps) => {
           defaultValue={[]}
           render={({ field }) => (
             <>
-              <ChipInput {...field} />
+              <ChipInput {...field} values={post?.tags} />
               {errors.tags && (
                 <p className={styles.error}>{errors.tags.message}</p>
               )}
@@ -103,7 +105,7 @@ const PostForm = ({ requestType, onSubmit, post }: PostFormProps) => {
             register("images").ref(e);
             fileInputRef.current = e;
           }}
-          onChange={handleChangeInput}
+          onChange={handleChangeFileInput}
           className={styles.hiddenFileInput}
         />
         <ul className={styles.fileUpload_container}>
