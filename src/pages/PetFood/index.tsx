@@ -1,11 +1,9 @@
-import Header from "@/components/Header";
 import styles from "./food.module.css";
 import petFoodBanner from "/images/foodBanner.png";
 
 const PetFood = () => {
   return (
     <>
-      <Header />
       <div className={styles.container}>
         <div className={styles.banner}>
           <img src={petFoodBanner} alt="펫푸드 배너" className={styles.bannerImage} />
