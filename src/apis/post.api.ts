@@ -1,3 +1,4 @@
+import { Post } from "@/types/post.type";
 import baseInstance from "./axios";
 
 const addPost = async (data: {
@@ -27,4 +28,15 @@ const getPostById = async (id: string) => {
   }
 };
 
-export { addPost, getPostById };
+const updatePostById = async ({ post, id }: { post: Post; id: string }) => {
+  try {
+    const response = await baseInstance.put(`/posts/${id}`, post);
+    if (!response.data.success) {
+      throw new Error(response.data.message);
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { addPost, getPostById, updatePostById };
