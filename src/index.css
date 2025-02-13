@@ -141,8 +141,9 @@ table {
 .wrapper {
   display: flex;
   width: 100%;
-  justify-content: center;
   height: 100vh;
+  align-items: center;
+  flex-direction: column;
 }
 
 
