@@ -16,3 +16,6 @@ export const searchBaseCls= getBaseCls("search");
 
 // Menu Component
 export const menuBaseCls= getBaseCls("menu");
+
+// Region Component
+export const regionBaseCls= getBaseCls("region");

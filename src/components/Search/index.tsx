@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { ChangeEvent, useMemo } from "react";
 import styles from "./search.module.css";
 import { Button, Input } from "..";
 import { searchBaseCls } from "@/consts/className";
@@ -6,14 +6,15 @@ import { searchBaseCls } from "@/consts/className";
 interface SearchProps {
   onSearch?: (region: string) => void;
   className?: string;
+  placeholder?: string;
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Search = ({ onSearch, className }: SearchProps) => {
-  const [searchTerm, setSearchTerm] = useState("");
-
+const Search = ({ onSearch, className, placeholder, value, onChange }: SearchProps) => {
   const handleSearch = () => {
     if (onSearch) {
-      onSearch(searchTerm.trim());
+      onSearch(value.trim());
     }
   };
 
@@ -27,9 +28,9 @@ const Search = ({ onSearch, className }: SearchProps) => {
         <Input.Label className={styles.label}>도시명을 입력하세요</Input.Label>
         <Input
           type="text"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="도시명을 입력하세요 (예: 부천, 수원)"
+          value={value}
+          onChange={onChange}
+          placeholder={placeholder || "도시명을 입력하세요 (예: 부천, 수원)"}
           className={styles.input}
         />
       </Input.Box>

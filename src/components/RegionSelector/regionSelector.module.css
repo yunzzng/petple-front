@@ -8,7 +8,6 @@
 .regionButton {
   font-size: 12px;
   font-weight: bold;
-  padding: 10px;
   border-radius: 5px;
   cursor: pointer;
   background-color: transparent;
@@ -24,7 +23,7 @@
 .regionDropdown {
   position: absolute;
   top: 25px;
-  left: -25px;
+  left: -5px;
   width: 160px;
   background: white;
   border: 1px solid #ccc;

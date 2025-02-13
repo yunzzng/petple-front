@@ -9,6 +9,7 @@ interface ButtonsProps {
   className?: string;
   style?: CSSProperties;
   disabled?: boolean;
+  children?: string;
 }
 
 const Buttons: FC<ButtonsProps> = ({
@@ -18,6 +19,7 @@ const Buttons: FC<ButtonsProps> = ({
   className,
   style,
   disabled,
+  children
 }) => {
   const buttonCls = useMemo(() => {
     return `${styles.button} ${buttonBaseCls} ${className || ""}`.trim();
@@ -31,7 +33,7 @@ const Buttons: FC<ButtonsProps> = ({
       style={style}
       disabled={disabled}
     >
-      {label}
+      {label || children}
     </button>
   );
 };
