@@ -30,7 +30,7 @@ const PostCreatePage = () => {
     description,
   }) => {
     try {
-      const uploadedImages = await uploadImages(images);
+      const uploadedImages = await uploadImages(images as File[]);
       await submitForm({ tags, images: uploadedImages, description });
     } catch (error) {
       console.error(error);
