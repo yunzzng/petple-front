@@ -1,14 +1,21 @@
-import { CSSProperties, FC, MouseEventHandler, useMemo } from "react";
+import {
+  CSSProperties,
+  FC,
+  MouseEventHandler,
+  ReactNode,
+  useMemo,
+} from "react";
 import { buttonBaseCls } from "@/consts/className";
 import styles from "./button.module.css";
 
 interface ButtonsProps {
-  label: string;
+  label?: string;
   type?: "button" | "submit" | "reset";
   onClick?: (() => void) | MouseEventHandler<HTMLButtonElement>;
   className?: string;
   style?: CSSProperties;
   disabled?: boolean;
+  children?: ReactNode;
 }
 
 const Buttons: FC<ButtonsProps> = ({
@@ -18,6 +25,7 @@ const Buttons: FC<ButtonsProps> = ({
   className,
   style,
   disabled,
+  children,
 }) => {
   const buttonCls = useMemo(() => {
     return `${styles.button} ${buttonBaseCls} ${className || ""}`.trim();
@@ -31,7 +39,7 @@ const Buttons: FC<ButtonsProps> = ({
       style={style}
       disabled={disabled}
     >
-      {label}
+      {label || children}
     </button>
   );
 };

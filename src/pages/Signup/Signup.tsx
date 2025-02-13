@@ -4,7 +4,8 @@ import google from "/images/google.png";
 import { useForm } from "react-hook-form";
 import { ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
+import { Button, Input } from "@/components";
 
 type SignupFields = {
   email: string;
@@ -88,7 +89,7 @@ const Signup = () => {
             onSubmit={handleSubmit(onSubmit, handleSubmitError)}
           >
             <li>
-              <input
+              <Input
                 placeholder="이름"
                 {...register("name", {
                   required: true,
@@ -96,7 +97,7 @@ const Signup = () => {
               />
             </li>
             <li>
-              <input
+              <Input
                 placeholder="이메일"
                 {...register("email", {
                   required: true,
@@ -109,7 +110,7 @@ const Signup = () => {
               {errors.email && <p>{errors.email.message}</p>}
             </li>
             <li>
-              <input
+              <Input
                 type="password"
                 placeholder="비밀번호"
                 {...register("password", {
@@ -125,7 +126,7 @@ const Signup = () => {
               {errors.password && <p>{errors.password.message}</p>}
             </li>
             <li>
-              <input
+              <Input
                 type="password"
                 placeholder="비밀번호 확인"
                 value={watch("passwordConfirm")}
@@ -136,7 +137,7 @@ const Signup = () => {
               )}
             </li>
 
-            <button className={style.signupBtn}>회원가입</button>
+            <Button className={style.signupBtn} label="회원가입"></Button>
             <p onClick={() => navigate("/login")} className={style.navigate}>
               이미 계정이 있으신가요?
             </p>
@@ -144,9 +145,9 @@ const Signup = () => {
           <div className={style.oauth}>
             <p>sns로 로그인하기</p>
           </div>
-          <button className={style.googleBtn}>
+          <Button className={style.googleBtn}>
             <img src={google} />
-          </button>
+          </Button>
         </ul>
       </div>
     </div>
