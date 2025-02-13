@@ -22,9 +22,15 @@ interface PostFormProps {
   requestType: "create" | "update";
   onSubmit: (data: PostFormFields) => void;
   post?: Post;
+  onClickDelete?: () => void;
 }
 
-const PostForm = ({ requestType, onSubmit, post }: PostFormProps) => {
+const PostForm = ({
+  requestType,
+  post,
+  onSubmit,
+  onClickDelete,
+}: PostFormProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [previewImages, setPreviewImages] = useState<string[]>(
     post?.images ?? []
@@ -80,10 +86,11 @@ const PostForm = ({ requestType, onSubmit, post }: PostFormProps) => {
   return (
     <>
       <FormHeader
-        onClick={handleSubmit((data) => {
+        onClickSubmit={handleSubmit((data) => {
           if (!isDirty) return;
           onSubmit(data);
         })}
+        onClickDelete={onClickDelete}
         reqeustType={requestType}
       />
       <form className={styles.form}>
