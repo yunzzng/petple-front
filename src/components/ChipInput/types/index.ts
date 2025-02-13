@@ -19,6 +19,7 @@ export interface RootProps extends BaseProps {
   maxItemLength?: number;
   maxItemsCount?: number;
   onChange?: (value: Array<string>) => void;
+  defaultItems?: Array<string>;
 }
 
 /* Input Component */

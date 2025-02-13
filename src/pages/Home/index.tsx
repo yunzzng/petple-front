@@ -4,7 +4,6 @@ import styles from "./home.module.css";
 import carouselData from "@/consts/mainBannerData";
 import Button from "@/components/Button";
 import Carousel from "@/components/Carousel";
-import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import menuList from "@/consts/menuList";
 import pettalkBanner from "/images/pettalkBanner.png";
@@ -64,14 +63,13 @@ const Home = () => {
           <div
             className={styles.postText}
             style={{ backgroundImage: `url(${pettalkBanner})` }}
-            onClick={()=> navigate('/comunity')}
+            onClick={()=> navigate('/community')}
           ></div>
           <div className={styles.postsWrapper}>
             <div className={styles.postsContainer}>{/* 게시글 부분 */}</div>
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

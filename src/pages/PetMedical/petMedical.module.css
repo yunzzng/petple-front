@@ -9,6 +9,9 @@
 .container {
   padding: 20px;
   margin-top: 50px;
+  height: auto;
+  background-color: white;
+  height: 100%;
 }
 
 .tabContainer {
@@ -45,7 +48,7 @@
 }
 
 .title {
-  font-size: 20px;
+  font-size: 18px;
   font-family: "HakgyoansimDunggeunmisoTTF-B";
 }
 
@@ -59,11 +62,55 @@
 }
 
 .mapContainer {
-  flex: 1;
   max-width: 50%;
 }
 
 .mapContainer, .dataContainer {
   width: 100%;
   max-width: 360px;
+}
+
+.dataItem {
+  padding: 10px;
+  margin: 10px 0;
+  border-bottom: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.dataName {
+  padding-bottom: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "HakgyoansimDunggeunmisoTTF-B";
+}
+
+.dataLicenseDate,
+.dataBusinessState,
+.dataCloseDate,
+.dataPhone,
+.dataZipCode,
+.dataRoadAddress,
+.dataLotAddress,
+.loadingText {
+  font-size: 12px;
+  color: #555;
+  display: block;
+  margin-top: 5px;
+}
+
+.dataValue {
+  font-weight: bold;
+  color: #000;
+}
+
+.noDataText{
+  font-size: 12px;
+  color: #555;
+  background-color: #e8eeff;
+  margin: 10px;
+  border-radius: 5px;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
