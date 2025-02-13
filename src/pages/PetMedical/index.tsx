@@ -97,7 +97,6 @@ const PetMedical = () => {
           <div className={styles.dataContainer}>
             <Search
               className={styles.searchContainer}
-              placeholder="도시명을 입력하세요"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />

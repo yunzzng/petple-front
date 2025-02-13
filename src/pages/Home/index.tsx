@@ -4,7 +4,6 @@ import styles from "./home.module.css";
 import carouselData from "@/consts/mainBannerData";
 import Button from "@/components/Button";
 import Carousel from "@/components/Carousel";
-import Header from "@/components/Header";
 import menuList from "@/consts/menuList";
 import pettalkBanner from "/images/pettalkBanner.png";
 import Menu from "@/components/Menu";
@@ -19,7 +18,6 @@ const Home = () => {
 
   return (
     <div className={styles.homewrapper}>
-      <Header />
       <div className={styles.container}>
         <Carousel>
           <Carousel.ItemList>
