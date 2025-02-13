@@ -15,4 +15,16 @@ const addPost = async (data: {
   }
 };
 
-export { addPost };
+const getPostById = async (id: string) => {
+  try {
+    const response = await baseInstance.get(`/posts/${id}`);
+    if (!response.data.success) {
+      throw new Error(response.data.message);
+    }
+    return response.data.post;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { addPost, getPostById };
