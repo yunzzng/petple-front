@@ -2,9 +2,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import styles from "./postupdate.module.css";
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { multipleImageUpload } from "@/utils/imageUpload";
-import { addPost, getPostById } from "@/apis/post.api";
+import { deletePostById, getPostById, updatePostById } from "@/apis/post.api";
 import PostForm, { PostFormFields } from "@/components/PostForm";
 import { SubmitHandler } from "react-hook-form";
+import { useEffect } from "react";
 
 const PostUpdatePage = () => {
   const navigate = useNavigate();
@@ -16,33 +17,52 @@ const PostUpdatePage = () => {
 
   const { mutateAsync: uploadImages } = useMutation({
     mutationFn: multipleImageUpload,
-    onError: () => {
-      // toast 추가 고려
-    },
   });
 
   const { mutateAsync: submitForm } = useMutation({
-    mutationFn: addPost, //updatePost api만들기
-    onSuccess: () => {
-      navigate("/community");
-    },
+    mutationFn: updatePostById,
+    onSuccess: () => navigate(`/community/detail/post/${id}`),
   });
 
-  const handleSubmit: SubmitHandler<PostFormFields> = async ({
+  const { mutateAsync: deletePost } = useMutation({
+    mutationFn: deletePostById,
+    onSuccess: () => navigate("/community"),
+  });
+
+  const handleUpdatePost: SubmitHandler<PostFormFields> = async ({
     tags,
     images,
     description,
   }) => {
+    if (!id) return;
+    const convertedImage = images.filter((image) => typeof image === "string");
+    const filterdFile = images.filter((image) => image instanceof File);
     try {
-      const uploadedImages = await uploadImages(images);
-      await submitForm({ tags, images: uploadedImages, description });
+      const uploadedImages = await uploadImages(filterdFile);
+      const updatedImages = [...convertedImage, ...uploadedImages];
+      await submitForm({
+        post: { tags, images: updatedImages, description },
+        id,
+      });
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
+
+  const handleDeletePost = () => id && deletePost(id);
+
+  useEffect(() => {
+    if (post === null) return navigate("/404", { replace: true });
+  }, [post]);
+
   return (
     <div className={styles.wrapper}>
-      <PostForm requestType="update" onSubmit={handleSubmit} post={post} />
+      <PostForm
+        requestType="update"
+        onSubmit={handleUpdatePost}
+        onClickDelete={handleDeletePost}
+        post={post}
+      />
     </div>
   );
 };
