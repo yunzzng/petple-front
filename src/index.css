@@ -145,10 +145,16 @@ table {
   height: 100vh;
 }
 
+
 .content {
   flex-grow: 1;
   width: 100%;
   max-width: 360px;
   box-sizing: border-box;
   display: flex;
+  overflow-y: scroll;
+}
+
+.content::-webkit-scrollbar{
+  display: none;
 }
