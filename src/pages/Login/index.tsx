@@ -1,11 +1,11 @@
 import Header from "@/components/Header";
-import style from "./signup.module.css";
+import style from "../Signup/signup.module.css";
 import google from "/images/google.png";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Buttons from "@/components/Button";
 import userAuthStore from "@/zustand/userAuth";
+import { Button } from "@/components";
 
 type SignupFields = {
   email: string;
@@ -93,7 +93,7 @@ const Login = () => {
               />
               {errors.password && <p>{errors.password.message}</p>}
             </li>
-            <button className={style.signupBtn}>로그인</button>
+            <Button className={style.signupBtn}>로그인</Button>
             <p onClick={() => navigate("/signup")} className={style.navigate}>
               계정이 없으신가요?
             </p>
@@ -101,9 +101,9 @@ const Login = () => {
           <div className={style.oauth}>
             <p>sns로 로그인하기</p>
           </div>
-          <Buttons className={style.googleBtn} onClick={handleGoogleLogin}>
-            <img src={google} />
-          </Buttons>
+          <a onClick={handleGoogleLogin} className={style.googleBtn}>
+            <img src={google} className={style.img} />
+          </a>
         </ul>
       </div>
     </div>
