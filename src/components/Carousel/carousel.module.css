@@ -3,7 +3,7 @@
   width: 100vw;
   max-width: 100%; 
   left: 0;
-  top: 100px; 
+  top: 40px; 
 }
 
 .carouselNavigator {
@@ -21,7 +21,7 @@
   font-size: 24px;
   font-weight: bold;
   cursor: pointer;
-  padding: 0 100px;
+  padding: 0 20px;
 }
 
 .navButton:hover {
@@ -30,13 +30,14 @@
 
 .carouselIndicator {
   position: absolute;
-  bottom: 15px;
-  left: 50%;
+  bottom: 20px;
+  left: 43%;
   display: flex;
   gap: 8px;
 }
 
 .carouselIndicator button {
+  padding: 0;
   width: 10px;
   height: 10px;
   border-radius: 50%;

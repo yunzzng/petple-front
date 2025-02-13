@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import styles from "./menu.module.css";
 
 interface MenuItem {
@@ -9,12 +10,17 @@ interface MenuItem {
 
 interface MenuProps {
   menuList: MenuItem[];
+  className?: string;
 }
 
-const Menu = ({ menuList }: MenuProps) => {
+const Menu = ({ menuList, className }: MenuProps) => {
+  const menuCls = useMemo(() => {
+    return `${styles.menuContainer} ${className || ""}`.trim();
+  }, [className]);
+
   return (
-    <div className={styles.petMenuSection}>
-      <div className={styles.menuContainer}>
+    <div className={`${styles.petMenuSection} ${className || ""}`}>
+      <div className={menuCls}>
         {menuList.map((item: MenuItem) => (
           <a key={item.id} href={item.link} className={styles.menuItem}>
             <img src={item.image} alt={item.label} />

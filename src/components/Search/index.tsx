@@ -17,7 +17,7 @@ const Search = ({ onSearch, className }: SearchProps) => {
     }
   };
 
-  const _searchCls = useMemo(() => {
+  const searchCls = useMemo(() => {
     return `${styles.button} ${searchBaseCls || ""} ${className || ""}`.trim();
   }, [className]);
 
@@ -33,7 +33,7 @@ const Search = ({ onSearch, className }: SearchProps) => {
           className={styles.input}
         />
       </Input.Box>
-      <Button label="검색" onClick={handleSearch} className={_searchCls} />
+      <Button label="검색" onClick={handleSearch} className={searchCls} />
     </div>
   );
 };
