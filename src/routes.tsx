@@ -1,5 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Home, PostCreatePage, ErrorPage, Signup, Login } from "@/pages";
+import {
+  Home,
+  PostCreatePage,
+  ErrorPage,
+  Signup,
+  Login,
+  Profile,
+} from "@/pages";
 import BaseLayout from "@/components/Layout";
 import PetMedical from "./pages/PetMedical";
 import PetPlace from "./pages/PetPlace";
@@ -14,7 +21,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />
+        element: <Home />,
       },
       {
         path: "/community/post/create",
@@ -34,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/petplace",
-        element: <PetPlace  />,
+        element: <PetPlace />,
       },
       {
         path: "/petfuneral",
@@ -43,6 +50,10 @@ const router = createBrowserRouter([
       {
         path: "/petfood",
         element: <PetFood />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },
