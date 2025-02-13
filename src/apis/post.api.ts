@@ -39,4 +39,15 @@ const updatePostById = async ({ post, id }: { post: Post; id: string }) => {
   }
 };
 
-export { addPost, getPostById, updatePostById };
+const deletePostById = async (id: string) => {
+  try {
+    const response = await baseInstance.delete(`/posts/${id}`);
+    if (!response.data.success) {
+      throw new Error(response.data.message);
+    }
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { addPost, getPostById, updatePostById, deletePostById };
