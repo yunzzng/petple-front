@@ -3,18 +3,27 @@ import logo from "/images/logo.png";
 import style from "./header.module.css";
 import userAuthStore from "@/zustand/userAuth";
 import profile from "/images/profile.png";
+import axios from "axios";
 
 const Header = () => {
   const navigate = useNavigate();
   const { isLoggedIn } = userAuthStore();
 
-  const handleLogout = () => {
-    userAuthStore.setState({
-      isLoggedIn: false,
-      userId: null,
-      userEmail: null,
-    });
-    navigate("/login");
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post("/api/user/logout");
+
+      if (response.status === 200) {
+        userAuthStore.setState({
+          isLoggedIn: false,
+          userId: null,
+          userEmail: null,
+        });
+        navigate("/login");
+      }
+    } catch (error) {
+      console.error("로그아웃 실패", error);
+    }
   };
 
   return (

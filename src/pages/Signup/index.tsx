@@ -78,6 +78,10 @@ const Signup = () => {
     console.log("유효성 검사 실패", errors);
   };
 
+  const handleGoogleLogin = () => {
+    window.location.href = "/api/oauth/google";
+  };
+
   return (
     <div className={style.total_wrap}>
       <Header />
@@ -145,9 +149,10 @@ const Signup = () => {
           <div className={style.oauth}>
             <p>sns로 로그인하기</p>
           </div>
-          <Button className={style.googleBtn}>
-            <img src={google} />
-          </Button>
+
+          <a onClick={handleGoogleLogin} className={style.googleBtn}>
+            <img src={google} className={style.img} />
+          </a>
         </ul>
       </div>
     </div>

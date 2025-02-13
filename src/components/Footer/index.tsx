@@ -1,11 +1,20 @@
 import styles from "./footer.module.css";
-import logo from "/images/logo.png";
+import chat from "/images/chat.png";
+import menubar from "/images/menubar.png";
+import home from "/images/home.png";
 
 const Footer = () => {
   return (
     <footer className={styles.footer}>
-      <img src={logo} alt="PETPLE Logo" className={styles.logo} />
-      <p className={styles.text}>petple @ 2025. All rights reserved.</p>
+      <a>
+        <img src={home} className={styles.home} />
+      </a>
+      <a>
+        <img src={chat} className={styles.img} />
+      </a>
+      <a>
+        <img src={menubar} className={styles.img} />
+      </a>
     </footer>
   );
 };

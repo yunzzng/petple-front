@@ -1,21 +1,23 @@
 .footer {
   width: 360px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background-color: white;
+  justify-content: space-between;
+  background-color: #fefefe;
+  position: fixed;
   bottom: 0;
-  height: 80px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
-.logo {
-  width: 60px;
-  height: auto;
-  margin-bottom: 5px;
+.footer a {
+  cursor: pointer;
 }
 
-.text {
-  font-size: 8px;
-  color: #333;
+.home {
+  width: 30px;
+}
+
+.img {
+  width: 25px;
 }
