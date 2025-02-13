@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import regions from "@/consts/regionData";
 import styles from "./regionSelector.module.css";
 import { Button } from "..";
@@ -6,9 +6,11 @@ import { Button } from "..";
 interface RegionSelectorProps {
   selectedRegion: string | null;
   onRegionChange: (region: string | null) => void;
+  className?: string;
+  selectedTab?: string; 
 }
 
-const RegionSelector = ({ selectedRegion, onRegionChange }: RegionSelectorProps) => {
+const RegionSelector = ({ selectedRegion, onRegionChange, className, selectedTab  }: RegionSelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClickSelect = (region: { id: string; name: string }) => {
@@ -21,6 +23,14 @@ const RegionSelector = ({ selectedRegion, onRegionChange }: RegionSelectorProps)
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    setIsOpen(false);
+  }, [selectedTab]);
+
+  const regionCls = useMemo(() => {
+    return `${styles.regionDropdown} ${className || ""}`.trim();
+  }, [className]);
+
   return (
     <div className={styles.regionContainer}>
       <Button 
@@ -30,7 +40,7 @@ const RegionSelector = ({ selectedRegion, onRegionChange }: RegionSelectorProps)
       />
 
       {isOpen && (
-        <div className={styles.regionDropdown}>
+        <div className={regionCls}>
           <div className={styles.gridContainer}>
             {regions.map((region: { id: string; name: string }) => (
               <div
