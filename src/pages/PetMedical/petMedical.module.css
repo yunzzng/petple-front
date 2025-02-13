@@ -10,6 +10,8 @@
   padding: 20px;
   margin-top: 50px;
   height: auto;
+  background-color: white;
+  height: 100%;
 }
 
 .tabContainer {
@@ -70,9 +72,8 @@
 
 .dataItem {
   padding: 10px;
-  margin: 10px;
+  margin: 10px 0;
   border-bottom: 1px solid #ddd;
-  background-color: #e8eeff;
   border-radius: 5px;
 }
 
