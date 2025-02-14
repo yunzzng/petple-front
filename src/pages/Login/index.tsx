@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import style from "../Signup/signup.module.css";
 import google from "/images/google.png";
 import { useForm } from "react-hook-form";
@@ -39,13 +38,10 @@ const Login = () => {
 
         userAuthStore.setState({
           isLoggedIn: true,
-          userId: response.data.user.id,
-          userEmail: response.data.user.email,
+          // userId: response.data.user.id,
+          // userEmail: response.data.user.email,
         });
-        console.log(response.data.user);
-        console.log(response.data.user.id);
         navigate("/");
-        console.log("로그인 상태:", userAuthStore.getState());
       }
     } catch (error) {
       alert("로그인 실패, 다시 시도해주세요.");
@@ -59,7 +55,6 @@ const Login = () => {
 
   return (
     <div className={style.total_wrap}>
-      <Header />
       <div className={style.content}>
         <ul>
           <h1>로그인</h1>

@@ -1,17 +1,19 @@
 import { Outlet } from "react-router-dom";
 import "../index.css";
 import Header from "./Header";
-import Footer from "./Footer";
+import MenuBar from "./MenuBar";
 
 const BaseLayout = () => {
   return (
-    <div className="wrraper">
-      <Header />
-      <main className="content">
-        <Outlet />
-      </main>
-      <Footer />
-    </div>
+    <>
+      <div className="wrapper">
+        <Header />
+        <div className="content">
+          <Outlet />
+        </div>
+        <MenuBar />
+      </div>
+    </>
   );
 };
 
