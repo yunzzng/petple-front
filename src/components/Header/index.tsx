@@ -75,7 +75,7 @@ const Header = () => {
   };
 
   return (
-    <div className={style.total_wrap}>
+    <header className={style.total_wrap}>
       <div className={style.content}>
         <div>
           <a onClick={() => navigate("/")}>
@@ -106,7 +106,7 @@ const Header = () => {
           )}
         </ul>
       </div>
-    </div>
+    </header>
   );
 };
 

@@ -1,14 +1,19 @@
 .footer {
-  width: 360px;
+  width: 100%;
+  max-width: 360px;
+  height: 52px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   background-color: #fefefe;
+  padding: 10px;
+  box-sizing: border-box;
+
   position: fixed;
   bottom: 0;
-  padding: 0px 40px;
-  height: 40px;
-  box-sizing: border-box;
+  z-index: 100;
 }
 
 .footer a {

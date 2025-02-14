@@ -7,10 +7,13 @@
 }
 
 .total_wrap {
-  width: 360px;
+  width: 100%;
+  max-width: 360px;
+  height: 52px;
+  background-color: #fff;
+
   position: fixed;
   top: 0;
-  background-color: #fff;
   z-index: 1000;
 }
 
