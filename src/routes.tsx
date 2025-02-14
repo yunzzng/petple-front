@@ -7,6 +7,7 @@ import {
   Login,
   Profile,
   PostUpdatePage,
+  CommunityPage,
 } from "@/pages";
 import BaseLayout from "@/components/Layout";
 import PetMedical from "./pages/PetMedical";
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home />,
+      },
+      {
+        path: "/community",
+        element: <CommunityPage />,
       },
       {
         path: "/community/create/post",
