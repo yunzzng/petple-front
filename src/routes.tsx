@@ -31,11 +31,11 @@ const router = createBrowserRouter([
         element: <CommunityPage />,
       },
       {
-        path: "/community/create/post",
+        path: "/community/create",
         element: <PostCreatePage />,
       },
       {
-        path: "/community/update/post/:id",
+        path: "/community/update/:id",
         element: (
           <Suspense fallback={<p>...Loading</p>}>
             <PostUpdatePage />
