@@ -1,4 +1,4 @@
-import styles from "./post.module.css";
+import styles from "./communitypost.module.css";
 import { Carousel } from "@/components";
 import ClockIcon from "/images/icons/clock.svg";
 import profileIcon from "/images/profile.png";
@@ -11,7 +11,7 @@ interface PostProps {
   post: PostItem;
 }
 
-const Post = ({ post }: PostProps) => {
+const CommunityPost = ({ post }: PostProps) => {
   const { creator, images, tags, description, createdAt, _id } = post;
   const navigate = useNavigate();
   return (
@@ -46,7 +46,7 @@ const Post = ({ post }: PostProps) => {
   );
 };
 
-export default Post;
+export default CommunityPost;
 
 const PostHeader = (data: Pick<PostItem, "creator" | "createdAt" | "tags">) => {
   const { creator, tags, createdAt } = data;

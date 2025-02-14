@@ -3,7 +3,7 @@ import styles from "./community.module.css";
 import { useEffect, useRef } from "react";
 import { getPosts } from "@/apis/post.api";
 import { PostItem } from "@/types/post.type";
-import Post from "./components/Post";
+import CommunityPost from "@/components/CommunityPost";
 
 const CommunityPage = () => {
   const postContainerRef = useRef<HTMLUListElement>(null);
@@ -40,7 +40,7 @@ const CommunityPage = () => {
     <section className={styles.wrapper}>
       <ul className={styles.post_container} ref={postContainerRef}>
         {posts?.map((post: PostItem) => (
-          <Post post={post} />
+          <CommunityPost post={post} key={post._id} />
         ))}
         <div ref={targetRef}></div>
       </ul>
