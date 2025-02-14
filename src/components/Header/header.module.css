@@ -17,8 +17,9 @@
 .content {
   display: flex;
   justify-content: space-between;
-  padding: 15px;
   align-items: center;
+  height: 50px;
+  padding: 0 15px;
 }
 
 .content a {

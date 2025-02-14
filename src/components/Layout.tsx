@@ -1,6 +1,7 @@
-import { Outlet } from 'react-router-dom';
-import '../index.css';
-import Header from './Header';
+import { Outlet } from "react-router-dom";
+import "../index.css";
+import Header from "./Header";
+import MenuBar from "./MenuBar";
 
 const BaseLayout = () => {
   return (
@@ -10,6 +11,7 @@ const BaseLayout = () => {
         <div className="content">
           <Outlet />
         </div>
+        <MenuBar />
       </div>
     </>
   );

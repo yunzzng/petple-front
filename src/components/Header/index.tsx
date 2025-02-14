@@ -4,10 +4,57 @@ import style from "./header.module.css";
 import userAuthStore from "@/zustand/userAuth";
 import profile from "/images/profile.png";
 import axios from "axios";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect } from "react";
+
+const getUserInfo = async () => {
+  try {
+    const response = await axios.get("/api/user/info");
+
+    if (response.status === 200) {
+      const user = response.data.user;
+      return user;
+    }
+  } catch (error) {
+    console.error("유저 정보 가져오기 실패", error);
+  }
+};
+
+// interface User {
+//   id: string;
+//   email: string;
+//   nickName: string;
+//   image?: string
+// }
 
 const Header = () => {
   const navigate = useNavigate();
   const { isLoggedIn } = userAuthStore();
+  const queryClient = useQueryClient();
+
+  const loginStatus = Boolean(document.cookie.split("=")[1]);
+
+  const query = useQuery({
+    queryKey: ["userInfo"],
+    queryFn: getUserInfo,
+    enabled: loginStatus,
+    // onSuccess: () => {},
+    // onError: () => {},
+  });
+
+  useEffect(() => {
+    queryClient.invalidateQueries({ queryKey: ["userInfo"] });
+
+    if (query.data) {
+      userAuthStore.setState({
+        isLoggedIn: true,
+        userId: query.data.id,
+        userEmail: query.data.email,
+        userNickName: query.data.nickName,
+        userImage: query.data.image,
+      });
+    }
+  }, [query.data]);
 
   const handleLogout = async () => {
     try {
@@ -19,6 +66,7 @@ const Header = () => {
           userId: null,
           userEmail: null,
         });
+        queryClient.removeQueries({ queryKey: ["userInfo"] });
         navigate("/login");
       }
     } catch (error) {
