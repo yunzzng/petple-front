@@ -1,0 +1,13 @@
+.post_container {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.post_container::-webkit-scrollbar {
+  scrollbar-width: none;
+}
+
+.post_item {
+  height: 500px;
+  border: 1px solid black;
+}
