@@ -2,7 +2,8 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import styles from "./community.module.css";
 import { useEffect, useRef } from "react";
 import { getPosts } from "@/apis/post.api";
-import { Post } from "@/types/post.type";
+import { PostItem } from "@/types/post.type";
+import Post from "./components/Post";
 
 const CommunityPage = () => {
   const postContainerRef = useRef<HTMLUListElement>(null);
@@ -38,12 +39,8 @@ const CommunityPage = () => {
   return (
     <section className={styles.wrapper}>
       <ul className={styles.post_container} ref={postContainerRef}>
-        {posts?.map((post: Post) => (
-          <li key={`post-item-${post._id}`}>
-            {post.images.map((src, index) => (
-              <img src={src} alt="게시글 이미지" key={index} />
-            ))}
-          </li>
+        {posts?.map((post: PostItem) => (
+          <Post post={post} />
         ))}
         <div ref={targetRef}></div>
       </ul>
