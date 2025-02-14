@@ -6,7 +6,7 @@ import * as z from "zod";
 import uploadIcon from "/images/icons/upload.svg";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormHeader from "./components/FormHeader";
-import { Post } from "@/types/post.type";
+import { PostFormData } from "@/types/post.type";
 
 const PostFormSchema = z.object({
   tags: z
@@ -21,7 +21,7 @@ export type PostFormFields = z.infer<typeof PostFormSchema>;
 interface PostFormProps {
   requestType: "create" | "update";
   onSubmit: (data: PostFormFields) => void;
-  post?: Post;
+  post?: PostFormData;
   onClickDelete?: () => void;
 }
 

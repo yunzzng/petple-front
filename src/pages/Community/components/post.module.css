@@ -1,0 +1,95 @@
+.post {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 4px;
+  background-color: #ffffff;
+}
+
+.post_header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.post_header_top {
+  display: flex;
+  gap: 8px;
+}
+
+.post_header_userinfo_right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.icons_list {
+  display: flex;
+  gap: 8px;
+}
+
+.icons_list > .createdAt {
+  display: flex;
+  align-items: center;
+  font-size: 11px;
+  color: #4a4a4a;
+}
+
+.icons_list > .createdAt > img {
+  width: 12px;
+  height: 12px;
+  margin-right: 4px;
+  color: #4a4a4a;
+}
+
+.creator_image {
+  width: 36px;
+  height: 36px;
+}
+
+.post_image_container {
+  width: 100%;
+  height: 450px;
+  border-top: 0.1px solid #ccc;
+  border-bottom: 0.1px solid #ccc;
+}
+
+.post_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.username {
+  font-size: 16px;
+}
+
+.nickname {
+  font-size: 12px;
+  padding-left: 8px;
+  color: #4a4a4a;
+}
+
+.tags_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  color: #002daa;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.description {
+  max-width: 360px;
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  line-height: 22px;
+  cursor: pointer;
+}
