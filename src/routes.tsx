@@ -15,6 +15,7 @@ import PetPlace from "./pages/PetPlace";
 import PetFood from "./pages/PetFood";
 import PetFuneral from "./pages/PetFuneral";
 import { Suspense } from "react";
+import PostDetailPage from "./pages/PostDetail";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
             <PostUpdatePage />
           </Suspense>
         ),
+      },
+      {
+        path: "/community/post/:id",
+        element: <PostDetailPage />,
       },
       {
         path: "/signup",

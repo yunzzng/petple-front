@@ -5,6 +5,7 @@ import profileIcon from "/images/profile.png";
 import commentIcon from "/images/icons/comment.svg";
 import likeIcon from "/images/icons/like.svg";
 import { PostItem } from "@/types/post.type";
+import { useNavigate } from "react-router-dom";
 
 interface PostProps {
   post: PostItem;
@@ -12,6 +13,7 @@ interface PostProps {
 
 const Post = ({ post }: PostProps) => {
   const { creator, images, tags, description, createdAt, _id } = post;
+  const navigate = useNavigate();
   return (
     <>
       <li key={`post-item-${_id}`} className={styles.post}>
@@ -33,7 +35,12 @@ const Post = ({ post }: PostProps) => {
           </Carousel.ItemList>
           <Carousel.Indicator />
         </Carousel>
-        <div className={styles.description}>{description}</div>
+        <div
+          className={styles.description}
+          onClick={() => navigate(`/community/post/${_id}`)}
+        >
+          {description}
+        </div>
       </li>
     </>
   );
