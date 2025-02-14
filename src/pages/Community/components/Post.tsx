@@ -2,6 +2,8 @@ import styles from "./post.module.css";
 import { Carousel } from "@/components";
 import ClockIcon from "/images/icons/clock.svg";
 import profileIcon from "/images/profile.png";
+import commentIcon from "/images/icons/comment.svg";
+import likeIcon from "/images/icons/like.svg";
 import { PostItem } from "@/types/post.type";
 
 interface PostProps {
@@ -54,9 +56,19 @@ const PostHeader = (data: Pick<PostItem, "creator" | "createdAt" | "tags">) => {
             {creator.name}
             <span className={styles.nickname}>{creator.nickName}</span>
           </p>
-          <div className={styles.createdAt}>
-            <img src={ClockIcon} alt="시계 이미지" />
-            {new Date(createdAt).toLocaleDateString()}
+          <div className={styles.icons_list}>
+            <div className={styles.createdAt}>
+              <img src={ClockIcon} alt="시계 이미지" />
+              {new Date(createdAt).toLocaleDateString()}
+            </div>
+            <div className={styles.createdAt}>
+              <img src={commentIcon} alt="시계 이미지" />
+              <span>3</span>
+            </div>
+            <div className={styles.createdAt}>
+              <img src={likeIcon} alt="시계 이미지" />
+              <span>22</span>
+            </div>
           </div>
         </div>
       </div>

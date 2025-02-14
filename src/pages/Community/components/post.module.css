@@ -23,14 +23,19 @@
   gap: 8px;
 }
 
-.post_header_userinfo_right > .createdAt {
+.icons_list {
+  display: flex;
+  gap: 8px;
+}
+
+.icons_list > .createdAt {
   display: flex;
   align-items: center;
   font-size: 11px;
   color: #4a4a4a;
 }
 
-.post_header_userinfo_right > .createdAt > img {
+.icons_list > .createdAt > img {
   width: 12px;
   height: 12px;
   margin-right: 4px;
