@@ -78,13 +78,12 @@ const Signup = () => {
     console.log("유효성 검사 실패", errors);
   };
 
-  const handleGoogleLogin = () => {
+  const handleGoogleLogin = async () => {
     window.location.href = "/api/oauth/google";
   };
 
   return (
     <div className={style.total_wrap}>
-      <Header />
       <div className={style.content}>
         <ul>
           <h1>회원가입</h1>

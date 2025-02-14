@@ -3,7 +3,7 @@ import chat from "/images/chat.png";
 import menubar from "/images/menubar.png";
 import home from "/images/home.png";
 
-const Footer = () => {
+const MenuBar = () => {
   return (
     <footer className={styles.footer}>
       <a>
@@ -19,4 +19,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default MenuBar;
