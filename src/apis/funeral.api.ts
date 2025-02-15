@@ -7,7 +7,6 @@ interface FuneralService {
   BIZPLC_NM: string;
   REFINE_WGS84_LAT: string;
   REFINE_WGS84_LOGT: string;
-  REPRSNTV_NM?: string;
   TELNO?: string;
   REFINE_ZIP_CD?: string;
   REFINE_ROADNM_ADDR?: string;
@@ -20,7 +19,6 @@ const fetchFuneralData = async () => {
       KEY: API_KEY,
       Type: "json",
       pIndex: 1,
-      pSize: 5,
     },
   });
 
@@ -30,7 +28,6 @@ const fetchFuneralData = async () => {
     name: item.BIZPLC_NM,
     lat: parseFloat(item.REFINE_WGS84_LAT),
     lng: parseFloat(item.REFINE_WGS84_LOGT),
-    representativeName: item.REPRSNTV_NM,
     phone: item.TELNO,
     zipCode: item.REFINE_ZIP_CD,
     roadAddress: item.REFINE_ROADNM_ADDR,

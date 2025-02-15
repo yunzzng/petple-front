@@ -9,63 +9,78 @@ interface MapProps {
 
 const Map: FC<MapProps> = ({ locations = [] }) => {
   const container = useRef<HTMLDivElement | null>(null);
-  const { isSuccess } = useKakaoLoader();
+  const { isSuccess, cleanup } = useKakaoLoader();
+
+  // 마커, 인포윈도우
+  const createMarker = (
+    kakao: any,
+    map: any,
+    location: { lat: number; lng: number; name: string },
+    bounds: any
+  ) => {
+    const markerPosition = new kakao.maps.LatLng(location.lat, location.lng);
+    const markerImage = new kakao.maps.MarkerImage(
+      markerImg,
+      new kakao.maps.Size(24, 35)
+    );
+
+    const marker = new kakao.maps.Marker({
+      position: markerPosition,
+      image: markerImage,
+    });
+
+    marker.setMap(map);
+    bounds.extend(markerPosition);
+
+    const infoWindow = new kakao.maps.InfoWindow({
+      content: `
+        <div style="
+          padding: 5px;
+          font-size: 12px;
+          font-weight: bold;
+          color: #333;
+        ">
+          ${location.name}
+        </div>`,
+      removable: true,
+    });
+
+    kakao.maps.event.addListener(marker, "click", () => {
+      infoWindow.open(map, marker);
+    });
+  };
+
+  // 지도 초기화
+  const initializeMap = (kakao: any) => {
+    if (!container.current) return;
+
+    const defaultPosition = new kakao.maps.LatLng(36.35, 127.384);
+    const zoomLevel = locations.length > 0 ? 5 : 14;
+    const options = { center: defaultPosition, level: zoomLevel };
+    const map = new kakao.maps.Map(container.current, options);
+
+    const bounds = new kakao.maps.LatLngBounds();
+
+    locations.forEach((location) => {
+      createMarker(kakao, map, location, bounds);
+    });
+
+    if (locations.length > 0) {
+      map.setBounds(bounds); // 모든 마커가 화면에 다 보이게 지도 크기 조정
+    }
+  };
 
   useEffect(() => {
-    if (!isSuccess || !window.kakao || !window.kakao.maps || !container.current)
-      return;
+    if (!isSuccess || typeof window === "undefined") return;
 
-    // 기본 설정 위치
-    const defaultPosition = new window.kakao.maps.LatLng(36.35, 127.384);
+    const { kakao } = window;
+    if (!kakao?.maps) return;
 
-    const zoomLevel = locations.length > 0 ? 5 : 14;
+    initializeMap(kakao);
 
-    const options = { center: defaultPosition, level: zoomLevel };
-    const map = new window.kakao.maps.Map(container.current, options);
-
-    // 마커 이미지 설정
-    const imageSize = new window.kakao.maps.Size(24, 35);
-    const markerImage = new window.kakao.maps.MarkerImage(markerImg, imageSize);
-
-    // 사용자 마커 추가
-    if (locations.length > 0) {
-      const bounds = new window.kakao.maps.LatLngBounds();
-
-      locations.forEach((location) => {
-        const markerPosition = new window.kakao.maps.LatLng(
-          location.lat,
-          location.lng
-        );
-        const marker = new window.kakao.maps.Marker({
-          position: markerPosition,
-          image: markerImage,
-        });
-
-        marker.setMap(map);
-        bounds.extend(markerPosition);
-
-        // 인포윈도우 설정
-        const infoWindow = new window.kakao.maps.InfoWindow({
-          content: `
-            <div style="
-              padding: 5px 5px;
-              font-size: 12px;
-              font-weight: bold;
-              color: #333;
-            ">
-              ${location.name}
-            </div>`,
-          removable: true,
-        });
-
-        // 마커 클릭 시 인포윈도우 열기
-        window.kakao.maps.event.addListener(marker, "click", () => {
-          infoWindow.open(map, marker);
-        });
-      });
-
-      map.setBounds(bounds);
-    }
+    return () => {
+      cleanup();
+    };
   }, [isSuccess, locations]);
 
   return <div id="map" className={styles.mapContainer} ref={container}></div>;
