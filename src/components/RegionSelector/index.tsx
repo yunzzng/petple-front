@@ -14,7 +14,7 @@ const RegionSelector = ({ selectedRegion, onRegionChange, className, selectedTab
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClickSelect = (region: { id: string; name: string }) => {
-    if (region.name !== "경기") {
+    if (region.name !== "경기" && region.name !== "서울") {
       alert("준비중입니다.");
       setIsOpen(false);
       return;
