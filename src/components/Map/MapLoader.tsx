@@ -1,29 +1,40 @@
 import { useQuery } from "@tanstack/react-query";
-import config from "@/consts/env.config";
+import baseInstance from "@/apis/axios";
 
 const KAKAO_MAP_SCRIPT_ID = "kakao-map-script";
 
-const loadKakaoMap = (): Promise<boolean> => {
-  return new Promise((resolve, reject) => {
-    // 지도 API가 로드된 상태
-    if (window.kakao && window.kakao.maps) {
-      resolve(true);
-      return;
-    }
+const fetchKakaoMapScriptUrl = async (): Promise<string> => {
+  const response = await baseInstance.get("/public/kakao/map-script");
+  return response.data.scriptUrl;
+};
 
-    const script = document.createElement("script");
-    script.id = KAKAO_MAP_SCRIPT_ID;
-    script.src = `${config.map.KAKAO_API_URL}${config.map.KAKAO_API_KEY}&autoload=false`;
-    script.async = true;
+const loadKakaoMap = async (): Promise<boolean> => {
+  try {
+    const scriptUrl = await fetchKakaoMapScriptUrl();
 
-    script.onload = () => {
-      window.kakao.maps.load(() => resolve(true));
-    };
+    return new Promise((resolve, reject) => {
+      if (window.kakao && window.kakao.maps) {
+        resolve(true);
+        return;
+      }
 
-    script.onerror = () => reject(new Error("Kakao Maps API 로드 실패"));
+      const script = document.createElement("script");
+      script.id = KAKAO_MAP_SCRIPT_ID;
+      script.src = scriptUrl;
+      script.async = true;
 
-    document.head.appendChild(script);
-  });
+      script.onload = () => {
+        window.kakao.maps.load(() => resolve(true));
+      };
+
+      script.onerror = () => reject(new Error("Kakao Maps API 로드 실패"));
+
+      document.head.appendChild(script);
+    });
+  } catch (error) {
+    console.error("카카오 지도 API 스크립트 URL 요청 실패:", error);
+    return false;
+  }
 };
 
 // 클린업 추가
@@ -38,7 +49,7 @@ const useKakaoLoader = () => {
   const query = useQuery<boolean, Error>({
     queryKey: ["kakaoMap"],
     queryFn: loadKakaoMap,
-    staleTime: 7 * 24 * 60 * 60 * 1000, // 7일 동안 캐싱 유지
+    staleTime: 7 * 24 * 60 * 60 * 1000,
   });
 
   return { ...query, cleanup: cleanupKakaoScript };

@@ -4,12 +4,9 @@ import RegionSelector from "@/components/RegionSelector";
 import styles from "./petMedical.module.css";
 import Map from "@/components/Map";
 import {  Button, Search } from "@/components";
-
 import usePagination from "@/hooks/usePagination";
-import { fetchHospitalData, fetchPharmacyData } from "@/apis/medical";
 import { MedicalFacility } from "@/types/medical.type";
-
-
+import { fetchMedicalData } from "@/apis/public.api";
 
 const PetMedical = () => {
   const [selectedTab, setSelectedTab] = useState<"hospital" | "pharmacy">("hospital");
@@ -26,9 +23,7 @@ const PetMedical = () => {
     queryKey: ["medicalData", selectedTab, selectedRegion],
     queryFn: async () => {
       if (!selectedRegion) return [];
-      return selectedTab === "hospital"
-        ? await fetchHospitalData(selectedRegion)
-        : await fetchPharmacyData(selectedRegion);
+      return await fetchMedicalData(selectedRegion, selectedTab);
     },
     staleTime: 7 * 24 * 60 * 60 * 1000,
     enabled: !!selectedRegion,
