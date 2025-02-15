@@ -9,9 +9,9 @@ type AuthStore = {
   setUserId: (userId: string) => void;
   userEmail: string | null;
   setUserEmail: (userEmail: string) => void;
-  userNickName?: String | null;
+  userNickName?: string | null;
   setUserNickName?: (nickName: string) => void;
-  userImage?: String | null;
+  userImage?: string | null;
   setUserImage?: (image: string) => void;
 };
 

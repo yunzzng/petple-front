@@ -1,19 +1,25 @@
-import styles from "./footer.module.css";
-import chat from "/images/chat.png";
-import menubar from "/images/menubar.png";
-import home from "/images/home.png";
+import { useNavigate } from "react-router-dom";
+import styles from "./menubar.module.css";
+import community2 from "/images/community2.png";
+import menubar3 from "/images/menubar3.png";
+import menuHome from "/images/menuHome.png";
 
 const MenuBar = () => {
+  const navigate = useNavigate();
   return (
     <footer className={styles.footer}>
       <a>
-        <img src={home} className={styles.home} />
+        <img
+          src={menuHome}
+          className={styles.home}
+          onClick={() => navigate("/")}
+        />
       </a>
       <a>
-        <img src={chat} className={styles.img} />
+        <img src={community2} className={styles.community} />
       </a>
       <a>
-        <img src={menubar} className={styles.img} />
+        <img src={menubar3} className={styles.menu} />
       </a>
     </footer>
   );
