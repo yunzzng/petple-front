@@ -14,6 +14,12 @@ export default defineConfig({
         secure: false,
         ws: true,
       },
+      "/kakao": {
+        target: "https://dapi.kakao.com",
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/kakao/, ""),
+      },
     },
   },
   resolve: {
