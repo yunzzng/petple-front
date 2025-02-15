@@ -45,7 +45,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/community/post/:id",
-        element: <PostDetailPage />,
+        element: (
+          <Suspense fallback={<p>...Loading</p>}>
+            <PostDetailPage />
+          </Suspense>
+        ),
       },
       {
         path: "/signup",
