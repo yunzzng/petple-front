@@ -1,4 +1,4 @@
-import { CommentType } from "@/types/post.type";
+import { CommentType, ReplyType } from "@/types/post.type";
 import { useState } from "react";
 
 interface CommentProps {
@@ -6,6 +6,7 @@ interface CommentProps {
   signinedUserId: string | null;
   handleReply: (comment: CommentType) => void;
   handleDeleteReply: (commentId: string, replyId: string) => void;
+  handleUpdateReply: (targetReply: ReplyType) => void;
 }
 
 const Comment = ({
@@ -13,6 +14,7 @@ const Comment = ({
   signinedUserId,
   handleReply,
   handleDeleteReply,
+  handleUpdateReply,
 }: CommentProps) => {
   console.log(comments);
   const [isOpen, setIsOpen] = useState(false);
@@ -39,13 +41,23 @@ const Comment = ({
                   <li>
                     <p>{reply.description}</p>
                     {reply.creatorId === signinedUserId && (
-                      <button
-                        onClick={() =>
-                          handleDeleteReply(comment._id, reply._id)
-                        }
-                      >
-                        삭제
-                      </button>
+                      <div>
+                        <button
+                          onClick={() => {
+                            handleReply(comment);
+                            handleUpdateReply(reply);
+                          }}
+                        >
+                          수정
+                        </button>
+                        <button
+                          onClick={() =>
+                            handleDeleteReply(comment._id, reply._id)
+                          }
+                        >
+                          삭제
+                        </button>
+                      </div>
                     )}
                   </li>
                 ))}

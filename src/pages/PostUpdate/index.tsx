@@ -40,10 +40,7 @@ const PostUpdatePage = () => {
     try {
       const uploadedImages = await uploadImages(filterdFile);
       const updatedImages = [...convertedImage, ...uploadedImages];
-      await submitForm({
-        post: { tags, images: updatedImages, description },
-        id,
-      });
+      await submitForm({ _id: id, tags, images: updatedImages, description });
     } catch (error) {
       console.log(error);
     }

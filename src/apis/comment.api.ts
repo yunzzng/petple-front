@@ -37,4 +37,19 @@ const deleteReply = async (data: { commentId: string; replyId: string }) => {
   }
 };
 
-export { addComment, addReply, deleteReply };
+const updateReply = async (data: {
+  description: string;
+  commentId: string;
+  replyId: string;
+}) => {
+  try {
+    await baseInstance.patch(
+      `/comments/${data.commentId}/replies/${data.replyId}`,
+      { description: data.description }
+    );
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { addComment, addReply, deleteReply, updateReply };
