@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import style from "./signup.module.css";
 import google from "/images/google.png";
 import { useForm } from "react-hook-form";

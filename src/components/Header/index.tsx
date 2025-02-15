@@ -20,13 +20,6 @@ const getUserInfo = async () => {
   }
 };
 
-// interface User {
-//   id: string;
-//   email: string;
-//   nickName: string;
-//   image?: string
-// }
-
 const Header = () => {
   const navigate = useNavigate();
   const { isLoggedIn } = userAuthStore();
@@ -38,8 +31,6 @@ const Header = () => {
     queryKey: ["userInfo"],
     queryFn: getUserInfo,
     enabled: loginStatus,
-    // onSuccess: () => {},
-    // onError: () => {},
   });
 
   useEffect(() => {

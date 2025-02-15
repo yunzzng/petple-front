@@ -8,7 +8,7 @@ import {
 import { buttonBaseCls } from "@/consts/className";
 import styles from "./button.module.css";
 
-interface ButtonsProps {
+interface ButtonProps {
   label?: string;
   type?: "button" | "submit" | "reset";
   onClick?: (() => void) | MouseEventHandler<HTMLButtonElement>;
@@ -18,7 +18,7 @@ interface ButtonsProps {
   children?: ReactNode;
 }
 
-const Buttons: FC<ButtonsProps> = ({
+const Button: FC<ButtonProps> = ({
   label,
   type,
   onClick,
@@ -44,4 +44,4 @@ const Buttons: FC<ButtonsProps> = ({
   );
 };
 
-export default Buttons;
+export default Button;
