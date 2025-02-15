@@ -2,13 +2,13 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import RegionSelector from "@/components/RegionSelector";
 import styles from "./petMedical.module.css";
-import Button from "@/components/Button";
 import Map from "@/components/Map";
-import { Search } from "@/components";
+import {  Button, Search } from "@/components";
 
 import usePagination from "@/hooks/usePagination";
 import { fetchHospitalData, fetchPharmacyData } from "@/apis/medical";
 import { MedicalFacility } from "@/types/medical.type";
+
 
 
 const PetMedical = () => {

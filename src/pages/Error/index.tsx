@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./error.module.css";
 import logo from "/images/logo.png";
+import { Button } from "@/components";
 
 const ErrorPage = () => {
   const navigate = useNavigate();
@@ -21,9 +22,9 @@ const ErrorPage = () => {
           존재하지 않는 주소를 입력하셨거나, 요청하신 페이지의 주소가 변경,
           삭제되어 찾을 수 없습니다.
         </p>
-        <button className={styles.homeButton} onClick={handleHomeClick}>
+        <Button className={styles.homeButton} onClick={handleHomeClick}>
           홈으로
-        </button>
+        </Button>
       </div>
     </div>
   );
