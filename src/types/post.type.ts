@@ -1,4 +1,15 @@
 /* Post comment type */
+export type ReplyType = {
+  creatorId: string;
+  name: string;
+  profileImage: string;
+  email: string;
+  description: string;
+  tag: string;
+  hasParent: boolean;
+  _id: string;
+  createdAt: Date;
+};
 
 export type CommentType = {
   _id: string;
@@ -11,7 +22,7 @@ export type CommentType = {
   };
   post: PostItem;
   description: string;
-  reply: [];
+  replies: ReplyType[];
   hasParent: boolean;
 };
 

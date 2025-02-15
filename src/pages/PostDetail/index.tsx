@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { addComment, addReply } from "@/apis/comment.api";
+import { addComment, addReply, deleteReply } from "@/apis/comment.api";
 import { useState } from "react";
 import { CommentType } from "@/types/post.type";
 import userAuthStore from "@/zustand/userAuth";
@@ -41,29 +41,38 @@ const PostDetailPage = () => {
   const { mutate: replyMutate } = useMutation({
     mutationFn: addReply,
   });
+  const { mutate: deleteReplyMutate } = useMutation({
+    mutationFn: deleteReply,
+  });
 
   const onSubmitComment = ({ description }: CommentFormFields) => {
-    console.log("submit");
-    console.log(user);
     if (!postId) return;
     // 최상위 댓글 추가 / 대댓글 분기
     if (targetComment) {
       replyMutate({
         targetCommentId: targetComment._id,
         description,
-        tag: targetComment.creator.nickName,
+        tag: targetComment.creator._id,
       });
     } else {
       commentMutate({ description, postId, hasParent: false });
     }
   };
 
+  const handleDeleteReply = (commentId: string, replyId: string) =>
+    deleteReplyMutate({ commentId, replyId });
+
   const handleReply = (targetComment: CommentType) =>
     setTargetComment(targetComment);
   return (
     <div>
       <CommunityPost post={post} />
-      <Comment comments={post.comments} handleReply={handleReply} />
+      <Comment
+        comments={post.comments}
+        handleReply={handleReply}
+        signinedUserId={user.userId}
+        handleDeleteReply={handleDeleteReply}
+      />
       <form>
         <div>
           {targetComment && <p>{targetComment.creator.nickName}</p>}

@@ -21,10 +21,20 @@ const addReply = async (data: {
   tag: string;
 }) => {
   try {
-    const response = await baseInstance.post("/comments/reply", data);
+    await baseInstance.post("/comments/reply", data);
   } catch (error) {
     throw error;
   }
 };
 
-export { addComment, addReply };
+const deleteReply = async (data: { commentId: string; replyId: string }) => {
+  try {
+    await baseInstance.delete(
+      `/comments/${data.commentId}/replies/${data.replyId}`
+    );
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { addComment, addReply, deleteReply };
