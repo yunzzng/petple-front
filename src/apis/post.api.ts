@@ -40,15 +40,9 @@ const addPost = async (data: {
   }
 };
 
-const updatePostById = async ({
-  post,
-  id,
-}: {
-  post: PostFormData;
-  id: string;
-}) => {
+const updatePostById = async (data: PostFormData) => {
   try {
-    const response = await baseInstance.put(`/posts/post/${id}`, post);
+    const response = await baseInstance.put(`/posts/post/${data._id}`, data);
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
