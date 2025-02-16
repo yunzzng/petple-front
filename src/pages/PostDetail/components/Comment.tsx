@@ -9,7 +9,7 @@ interface CommentProps {
   handleDeleteReply: (commentId: string, replyId: string) => void;
   handleUpdateReply: (targetReply: ReplyType) => void;
   handleDeleteComment: (id: string) => void;
-  handleUpdateComment: (id: string) => void;
+  handleUpdateComment: (targetComment: CommentType) => void;
 }
 
 const Comment = ({
@@ -75,7 +75,7 @@ const Comment = ({
           <p>{comment.description}</p>
           {signinedUserId === comment.creator._id && (
             <div>
-              <button onClick={() => handleUpdateComment(comment._id)}>
+              <button onClick={() => handleUpdateComment(comment)}>
                 댓글수정
               </button>
               <button onClick={() => handleDeleteComment(comment._id)}>

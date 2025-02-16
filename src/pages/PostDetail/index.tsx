@@ -12,6 +12,7 @@ import {
   addReply,
   deleteComment,
   deleteReply,
+  updateComment,
   updateReply,
 } from "@/apis/comment.api";
 import { useState } from "react";
@@ -53,6 +54,9 @@ const PostDetailPage = () => {
   const { mutate: deleteCommentMutate } = useMutation({
     mutationFn: deleteComment,
   });
+  const { mutate: updateCommentMutate } = useMutation({
+    mutationFn: updateComment,
+  });
   const { mutate: addReplyMutate } = useMutation({
     mutationFn: addReply,
   });
@@ -65,21 +69,11 @@ const PostDetailPage = () => {
 
   const onSubmit = ({ description }: CommentFormFields) => {
     if (!postId) return;
-    // 최상위 댓글 추가 / 대댓글 분기
-    // if (targetComment) {
-    //   addReplyMutate({
-    //     targetCommentId: targetComment._id,
-    //     description,
-    //     tag: targetComment.creator._id,
-    //   });
-    // } else {
-    // addCommentMutate({ description, postId, hasParent: false });
-    // }
-    console.log(submitType);
     if (submitType === "ADD_COMMENT") {
       addCommentMutate({ description, postId, hasParent: false });
     }
-    if (submitType === "UPDATE_COMMENT") {
+    if (submitType === "UPDATE_COMMENT" && targetComment?._id) {
+      updateCommentMutate({ _id: targetComment?._id, description });
     }
     if (submitType === "ADD_REPLY" && targetComment) {
       addReplyMutate({
@@ -113,7 +107,12 @@ const PostDetailPage = () => {
     setValue("description", targetReply.description);
   };
 
-  const handleUpdateComment = (id: string) => {};
+  const handleUpdateComment = (targetComment: CommentType) => {
+    setSubmitType("UPDATE_COMMENT");
+    setTargetComment(targetComment);
+    setValue("description", targetComment?.description);
+  };
+
   const handleDeleteComment = (id: string) => deleteCommentMutate(id);
 
   const handleReply = (targetComment: CommentType) => {
