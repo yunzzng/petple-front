@@ -18,6 +18,7 @@ import {
 import { useState } from "react";
 import { CommentType, ReplyType } from "@/types/post.type";
 import userAuthStore from "@/zustand/userAuth";
+import LikeButton from "./components/LikeButton";
 
 const CommentSchema = z.object({
   description: z.string().trim().min(1, "내용을 입력해주세요."),
@@ -124,6 +125,7 @@ const PostDetailPage = () => {
   return (
     <div>
       <CommunityPost post={post} />
+      <LikeButton postId={postId} userId={user.userId} likes={post.likes} />
       <Comment
         comments={post.comments}
         handleReply={handleReply}
