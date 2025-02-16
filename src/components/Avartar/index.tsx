@@ -1,13 +1,13 @@
 import userAuthStore from "@/zustand/userAuth";
 import profile from "/images/profile.png";
-import style from "./profileImage.module.css";
+import style from "./avartar.module.css";
 import { FC } from "react";
 
-interface ProfileImageProps {
+interface AvartarProps {
   onClick?: () => void;
 }
 
-const ProfileImage: FC<ProfileImageProps> = (props) => {
+const Avartar: FC<AvartarProps> = (props) => {
   const { onClick } = props;
   const { userImage } = userAuthStore();
 
@@ -20,4 +20,4 @@ const ProfileImage: FC<ProfileImageProps> = (props) => {
   );
 };
 
-export default ProfileImage;
+export default Avartar;

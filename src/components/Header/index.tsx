@@ -5,7 +5,7 @@ import userAuthStore from "@/zustand/userAuth";
 import axios from "axios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
-import ProfileImage from "../ProfileImage";
+import Avartar from "../Avartar";
 
 const getUserInfo = async () => {
   try {
@@ -80,7 +80,7 @@ const Header = () => {
                 <a onClick={handleLogout}>LOGOUT</a>
               </li>
               <li>
-                <ProfileImage onClick={() => navigate("/profile")} />
+                <Avartar onClick={() => navigate("/profile")} />
               </li>
             </>
           ) : (
