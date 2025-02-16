@@ -1,17 +1,19 @@
-import styles from "./post.module.css";
+import styles from "./communitypost.module.css";
 import { Carousel } from "@/components";
 import ClockIcon from "/images/icons/clock.svg";
 import profileIcon from "/images/profile.png";
 import commentIcon from "/images/icons/comment.svg";
 import likeIcon from "/images/icons/like.svg";
 import { PostItem } from "@/types/post.type";
+import { useNavigate } from "react-router-dom";
 
 interface PostProps {
   post: PostItem;
 }
 
-const Post = ({ post }: PostProps) => {
+const CommunityPost = ({ post }: PostProps) => {
   const { creator, images, tags, description, createdAt, _id } = post;
+  const navigate = useNavigate();
   return (
     <>
       <li key={`post-item-${_id}`} className={styles.post}>
@@ -33,13 +35,18 @@ const Post = ({ post }: PostProps) => {
           </Carousel.ItemList>
           <Carousel.Indicator />
         </Carousel>
-        <div className={styles.description}>{description}</div>
+        <div
+          className={styles.description}
+          onClick={() => navigate(`/community/post/${_id}`)}
+        >
+          {description}
+        </div>
       </li>
     </>
   );
 };
 
-export default Post;
+export default CommunityPost;
 
 const PostHeader = (data: Pick<PostItem, "creator" | "createdAt" | "tags">) => {
   const { creator, tags, createdAt } = data;

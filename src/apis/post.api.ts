@@ -1,4 +1,4 @@
-import { Post } from "@/types/post.type";
+import { PostFormData } from "@/types/post.type";
 import baseInstance from "./axios";
 
 const getPosts = async (pageParam: number) => {
@@ -40,9 +40,9 @@ const addPost = async (data: {
   }
 };
 
-const updatePostById = async ({ post, id }: { post: Post; id: string }) => {
+const updatePostById = async (data: PostFormData) => {
   try {
-    const response = await baseInstance.put(`/posts/post/${id}`, post);
+    const response = await baseInstance.put(`/posts/post/${data._id}`, data);
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
