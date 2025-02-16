@@ -1,1 +1,0 @@
-import baseInstance from "./axios";

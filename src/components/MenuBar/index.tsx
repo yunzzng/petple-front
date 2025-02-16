@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./menubar.module.css";
 import community2 from "/images/community2.png";
 import menubar3 from "/images/menubar3.png";
-import menuHome from "/images/menuHome.png";
+import menuHome from "/images/menuHome2.png";
 
 const MenuBar = () => {
   const navigate = useNavigate();

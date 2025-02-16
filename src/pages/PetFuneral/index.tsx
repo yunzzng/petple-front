@@ -5,8 +5,8 @@ import Map from "@/components/Map";
 import RegionSelector from "@/components/RegionSelector";
 import styles from "../PetMedical/petMedical.module.css";
 import stylesFuneral from "./funeral.module.css";
-import { fetchFuneralData } from "@/apis/funeral.api";
 import usePagination from "@/hooks/usePagination";
+import { fetchFuneralData } from "@/apis/public.api";
 
 interface FuneralService {
   name: string;
