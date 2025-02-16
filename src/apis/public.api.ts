@@ -16,4 +16,4 @@ const fetchMedicalData = async (
 };
 
 
-export { fetchFuneralData, fetchMedicalData  };
+export { fetchFuneralData, fetchMedicalData };

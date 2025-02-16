@@ -167,3 +167,8 @@
   color: white;
   font-weight: bold;
 }
+
+.activePage:hover{
+  background-color: #002DAA;
+  border-color: #ffffff;
+}
