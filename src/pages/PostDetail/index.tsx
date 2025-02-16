@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   addComment,
   addReply,
+  deleteComment,
   deleteReply,
   updateReply,
 } from "@/apis/comment.api";
@@ -48,6 +49,9 @@ const PostDetailPage = () => {
 
   const { mutate: addCommentMutate } = useMutation({
     mutationFn: addComment,
+  });
+  const { mutate: deleteCommentMutate } = useMutation({
+    mutationFn: deleteComment,
   });
   const { mutate: addReplyMutate } = useMutation({
     mutationFn: addReply,
@@ -109,6 +113,9 @@ const PostDetailPage = () => {
     setValue("description", targetReply.description);
   };
 
+  const handleUpdateComment = (id: string) => {};
+  const handleDeleteComment = (id: string) => deleteCommentMutate(id);
+
   const handleReply = (targetComment: CommentType) => {
     setSubmitType("ADD_REPLY");
     setTargetComment(targetComment);
@@ -123,6 +130,8 @@ const PostDetailPage = () => {
         signinedUserId={user.userId}
         handleDeleteReply={handleDeleteReply}
         handleUpdateReply={handleUpdateReply}
+        handleUpdateComment={handleUpdateComment}
+        handleDeleteComment={handleDeleteComment}
       />
       <form>
         <div>

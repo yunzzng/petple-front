@@ -15,6 +15,14 @@ const addComment = async (data: {
   }
 };
 
+const deleteComment = async (id: string) => {
+  try {
+    await baseInstance.delete(`/comments/${id}`);
+  } catch (error) {
+    throw error;
+  }
+};
+
 const addReply = async (data: {
   targetCommentId: string;
   description: string;
@@ -52,4 +60,4 @@ const updateReply = async (data: {
   }
 };
 
-export { addComment, addReply, deleteReply, updateReply };
+export { addComment, deleteComment, addReply, deleteReply, updateReply };

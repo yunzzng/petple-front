@@ -1,5 +1,6 @@
 import { CommentType, ReplyType } from "@/types/post.type";
 import { useState } from "react";
+import defaultUserImage from "/images/profile.png";
 
 interface CommentProps {
   comments: CommentType[];
@@ -7,6 +8,8 @@ interface CommentProps {
   handleReply: (comment: CommentType) => void;
   handleDeleteReply: (commentId: string, replyId: string) => void;
   handleUpdateReply: (targetReply: ReplyType) => void;
+  handleDeleteComment: (id: string) => void;
+  handleUpdateComment: (id: string) => void;
 }
 
 const Comment = ({
@@ -15,6 +18,8 @@ const Comment = ({
   handleReply,
   handleDeleteReply,
   handleUpdateReply,
+  handleDeleteComment,
+  handleUpdateComment,
 }: CommentProps) => {
   console.log(comments);
   const [isOpen, setIsOpen] = useState(false);
@@ -24,7 +29,10 @@ const Comment = ({
         <li key={`post-comment-${comment._id}`}>
           <div>
             <div>
-              <img src={comment.creator.image} alt="댓글 작성자 이미지" />
+              <img
+                src={comment.creator.image || defaultUserImage}
+                alt="댓글 작성자 이미지"
+              />
               <p>
                 {comment.creator.name}
                 <span>{comment.creator.nickName}</span>
@@ -65,6 +73,16 @@ const Comment = ({
             </div>
           </div>
           <p>{comment.description}</p>
+          {signinedUserId === comment.creator._id && (
+            <div>
+              <button onClick={() => handleUpdateComment(comment._id)}>
+                댓글수정
+              </button>
+              <button onClick={() => handleDeleteComment(comment._id)}>
+                댓글삭제
+              </button>
+            </div>
+          )}
           <button onClick={() => handleReply(comment)}>답글</button>
         </li>
       ))}
