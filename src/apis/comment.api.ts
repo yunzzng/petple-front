@@ -15,9 +15,11 @@ const addComment = async (data: {
   }
 };
 
-const deleteComment = async (id: string) => {
+const deleteComment = async (data: { postId: string; commentId: string }) => {
   try {
-    await baseInstance.delete(`/comments/${id}`);
+    await baseInstance.delete(
+      `/posts/${data.postId}/comments/${data.commentId}`
+    );
   } catch (error) {
     throw error;
   }

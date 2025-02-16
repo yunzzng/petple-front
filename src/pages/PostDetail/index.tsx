@@ -113,7 +113,8 @@ const PostDetailPage = () => {
     setValue("description", targetComment?.description);
   };
 
-  const handleDeleteComment = (id: string) => deleteCommentMutate(id);
+  const handleDeleteComment = (commentId: string) =>
+    postId && deleteCommentMutate({ postId, commentId });
 
   const handleReply = (targetComment: CommentType) => {
     setSubmitType("ADD_REPLY");
