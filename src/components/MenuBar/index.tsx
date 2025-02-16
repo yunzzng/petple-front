@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./menubar.module.css";
-import community2 from "/images/community2.png";
-import menubar3 from "/images/menubar3.png";
-import menuHome from "/images/menuHome2.png";
+import community from "/images/community3.png";
+import menubar from "/images/menubar5.png";
+import menuHome from "/images/menuHome3.png";
 
 const MenuBar = () => {
   const navigate = useNavigate();
@@ -16,10 +16,10 @@ const MenuBar = () => {
         />
       </a>
       <a>
-        <img src={community2} className={styles.community} />
+        <img src={community} className={styles.community} />
       </a>
       <a>
-        <img src={menubar3} className={styles.menu} />
+        <img src={menubar} className={styles.menu} />
       </a>
     </footer>
   );

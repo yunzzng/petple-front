@@ -2,10 +2,10 @@ import { useNavigate } from "react-router-dom";
 import logo from "/images/logo.png";
 import style from "./header.module.css";
 import userAuthStore from "@/zustand/userAuth";
-import profile from "/images/profile.png";
 import axios from "axios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
+import ProfileImage from "../ProfileImage";
 
 const getUserInfo = async () => {
   try {
@@ -80,9 +80,7 @@ const Header = () => {
                 <a onClick={handleLogout}>LOGOUT</a>
               </li>
               <li>
-                <a onClick={() => navigate("/profile")}>
-                  <img src={profile} className={style.profileImage} />
-                </a>
+                <ProfileImage onClick={() => navigate("/profile")} />
               </li>
             </>
           ) : (

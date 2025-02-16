@@ -9,7 +9,7 @@ interface MapProps {
 
 const Map: FC<MapProps> = ({ locations = [] }) => {
   const container = useRef<HTMLDivElement | null>(null);
-  const { isSuccess, cleanup } = useKakaoLoader();
+  const { isSuccess } = useKakaoLoader();
 
   // 마커, 인포윈도우
   const createMarker = (
@@ -77,10 +77,6 @@ const Map: FC<MapProps> = ({ locations = [] }) => {
     if (!kakao?.maps) return;
 
     initializeMap(kakao);
-
-    return () => {
-      cleanup();
-    };
   }, [isSuccess, locations]);
 
   return <div id="map" className={styles.mapContainer} ref={container}></div>;
