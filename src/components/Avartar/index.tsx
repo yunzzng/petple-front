@@ -4,16 +4,17 @@ import { FC } from "react";
 
 interface AvartarProps {
   onClick?: () => void;
-  image?: string;
+  image?: string | null;
+  className?: string | null;
 }
 
 const Avartar: FC<AvartarProps> = (props) => {
-  const { onClick, image } = props;
+  const { onClick, image, className } = props;
 
   return (
     <>
       <a onClick={onClick} className={style.a}>
-        <img src={image || profile} className={style.image} />
+        <img src={image || profile} className={className || style.image} />
       </a>
     </>
   );
