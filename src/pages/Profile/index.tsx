@@ -149,22 +149,6 @@ const Profile = () => {
             <p>나의 반려동물 프로필</p>
             <img src={plus} className={style.plus} />
           </div>
-          {/* <form>
-            <ul className={style.pet_ul}>
-              <li>
-                <input className={style.input} placeholder="이름" />
-              </li>
-              <li>
-                <input className={style.input} placeholder="나이" />
-              </li>
-              <li>
-                <input className={style.input} placeholder="품종" />
-              </li>
-              <li>
-                <input className={style.input} placeholder="성별" />
-              </li>
-            </ul>
-          </form> */}
         </div>
       </form>
     </>
