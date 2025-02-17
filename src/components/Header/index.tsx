@@ -22,7 +22,7 @@ const getUserInfo = async () => {
 
 const Header = () => {
   const navigate = useNavigate();
-  const { isLoggedIn } = userAuthStore();
+  const { isLoggedIn, userImage } = userAuthStore();
   const queryClient = useQueryClient();
 
   const loginStatus = Boolean(document.cookie.split("=")[1]);
@@ -80,7 +80,11 @@ const Header = () => {
                 <a onClick={handleLogout}>LOGOUT</a>
               </li>
               <li>
-                <Avartar onClick={() => navigate("/profile")} />
+                <Avartar
+                  onClick={() => navigate("/profile")}
+                  image={userImage}
+                  className={style.avartar}
+                />
               </li>
             </>
           ) : (
