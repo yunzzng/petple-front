@@ -1,3 +1,4 @@
+import styles from "./postdetail.module.css";
 import { getPostById } from "@/apis/post.api";
 import CommunityPost from "@/components/CommunityPost";
 import {
@@ -137,14 +138,17 @@ const PostDetailPage = () => {
   };
 
   return (
-    <div>
+    <div className={styles.wrraper}>
       <CommunityPost post={post} />
-      <LikeButton
-        postId={postId}
-        userId={user.userId}
-        likes={post.likes}
-        inValidateQuery={inValidateQuery}
-      />
+      <div className={styles.likeButton_wrapper}>
+        <LikeButton
+          postId={postId}
+          userId={user.userId}
+          likes={post.likes}
+          inValidateQuery={inValidateQuery}
+        />
+      </div>
+
       <Comment
         comments={post.comments}
         handleReply={handleReply}
