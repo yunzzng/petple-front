@@ -7,15 +7,22 @@ interface LikeButtonProps {
   postId?: string;
   userId: string | null;
   likes: string[];
+  inValidateQuery: () => void;
 }
 
-const LikeButton = ({ postId, userId, likes }: LikeButtonProps) => {
+const LikeButton = ({
+  postId,
+  userId,
+  likes,
+  inValidateQuery,
+}: LikeButtonProps) => {
   const currentLikeStatus = useMemo(
     () => !!userId && likes.includes(userId),
     [likes, userId]
   );
   const { mutate: updateLikesMutate } = useMutation({
     mutationFn: updateLikes,
+    onSuccess: () => inValidateQuery(),
   });
   const handleClickLike = () => {
     if (!postId) return;

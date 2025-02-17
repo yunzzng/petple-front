@@ -21,7 +21,6 @@ const Comment = ({
   handleDeleteComment,
   handleUpdateComment,
 }: CommentProps) => {
-  console.log(comments);
   const [isOpen, setIsOpen] = useState(false);
   return (
     <ul>

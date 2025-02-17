@@ -1,6 +1,10 @@
 import { getPostById } from "@/apis/post.api";
 import CommunityPost from "@/components/CommunityPost";
-import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import Comment from "./components/Comment";
 import { useForm } from "react-hook-form";
@@ -34,12 +38,16 @@ const PostDetailPage = () => {
   const [targetComment, setTargetComment] = useState<CommentType | null>(null);
   const [targetReply, setTargetReply] = useState<ReplyType | null>(null);
   const [submitType, setSubmitType] = useState<SubmitType>("ADD_COMMENT");
+  const qc = useQueryClient();
   const user = userAuthStore();
   const { id: postId } = useParams();
   const { data: post } = useSuspenseQuery({
     queryKey: ["Post", postId],
     queryFn: () => postId && getPostById(postId),
   });
+
+  const inValidateQuery = () =>
+    qc.invalidateQueries({ queryKey: ["Post", postId] });
 
   const { register, handleSubmit, setValue } = useForm<CommentFormFields>({
     defaultValues: {
@@ -51,21 +59,27 @@ const PostDetailPage = () => {
 
   const { mutate: addCommentMutate } = useMutation({
     mutationFn: addComment,
+    onSuccess: () => inValidateQuery(),
   });
   const { mutate: deleteCommentMutate } = useMutation({
     mutationFn: deleteComment,
+    onSuccess: () => inValidateQuery(),
   });
   const { mutate: updateCommentMutate } = useMutation({
     mutationFn: updateComment,
+    onSuccess: () => inValidateQuery(),
   });
   const { mutate: addReplyMutate } = useMutation({
     mutationFn: addReply,
+    onSuccess: () => inValidateQuery(),
   });
   const { mutate: deleteReplyMutate } = useMutation({
     mutationFn: deleteReply,
+    onSuccess: () => inValidateQuery(),
   });
   const { mutate: updateReplyMutate } = useMutation({
     mutationFn: updateReply,
+    onSuccess: () => inValidateQuery(),
   });
 
   const onSubmit = ({ description }: CommentFormFields) => {
@@ -125,7 +139,12 @@ const PostDetailPage = () => {
   return (
     <div>
       <CommunityPost post={post} />
-      <LikeButton postId={postId} userId={user.userId} likes={post.likes} />
+      <LikeButton
+        postId={postId}
+        userId={user.userId}
+        likes={post.likes}
+        inValidateQuery={inValidateQuery}
+      />
       <Comment
         comments={post.comments}
         handleReply={handleReply}
