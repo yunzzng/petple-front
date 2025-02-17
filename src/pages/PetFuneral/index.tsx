@@ -126,13 +126,15 @@ const PetFuneral = () => {
                   ))}
                 </ul>
 
-                <Pagination
-                  page={page}
-                  totalPages={totalPages}
-                  startPage={startPage}
-                  endPage={endPage}
-                  setPage={setPage}
-                />
+                {totalPages > 1 && (
+                  <Pagination
+                    page={page}
+                    totalPages={totalPages}
+                    startPage={startPage}
+                    endPage={endPage}
+                    setPage={setPage}
+                  />
+                )}
               </>
             )}
           </div>

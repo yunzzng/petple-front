@@ -76,38 +76,42 @@ const Place = () => {
         ) : paginatedData.length === 0 ? (
           <p className={styles.messageText}>검색 결과가 없습니다.</p>
         ) : (
-          paginatedData.map((place) => (
-            <div
-              key={place.id}
-              className={styles.placeItem}
-              onClick={() => navigate(`/place/${place.id}`)}
-            >
-              <img
-                src={place.imageUrl || defaultImg}
-                alt={place.title}
-                className={styles.placeImage}
-              />
-              <div>
-                <h3>{place.title}</h3>
-                <p>
-                  <strong>주소:</strong> {place.address}
-                </p>
-                <p>
-                  <strong>전화번호:</strong> {place.tel}
-                </p>
+          <>
+            {paginatedData.map((place) => (
+              <div
+                key={place.id}
+                className={styles.placeItem}
+                onClick={() => navigate(`/place/${place.id}`)}
+              >
+                <img
+                  src={place.imageUrl || defaultImg}
+                  alt={place.title}
+                  className={styles.placeImage}
+                />
+                <div>
+                  <h3>{place.title}</h3>
+                  <p>
+                    <strong>주소:</strong> {place.address}
+                  </p>
+                  <p>
+                    <strong>전화번호:</strong> {place.tel}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))
+            ))}
+
+            {totalPages > 1 && (
+              <Pagination
+                page={page}
+                totalPages={totalPages}
+                startPage={startPage}
+                endPage={endPage}
+                setPage={setPage}
+              />
+            )}
+          </>
         )}
       </div>
-
-      <Pagination
-        page={page}
-        totalPages={totalPages}
-        startPage={startPage}
-        endPage={endPage}
-        setPage={setPage}
-      />
     </div>
   );
 };
