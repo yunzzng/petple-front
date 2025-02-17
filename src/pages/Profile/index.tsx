@@ -53,7 +53,7 @@ const Profile = () => {
     let imageUrl = userImage;
 
     if (file) {
-      const imageUrl = await imageUpload(file);
+      imageUrl = await imageUpload(file);
     }
 
     // 수정 전 닉네임, 이메일과 같으면 api요청 x
@@ -149,7 +149,7 @@ const Profile = () => {
             <p>나의 반려동물 프로필</p>
             <img src={plus} className={style.plus} />
           </div>
-          <form>
+          {/* <form>
             <ul className={style.pet_ul}>
               <li>
                 <input className={style.input} placeholder="이름" />
@@ -164,7 +164,7 @@ const Profile = () => {
                 <input className={style.input} placeholder="성별" />
               </li>
             </ul>
-          </form>
+          </form> */}
         </div>
       </form>
     </>
