@@ -1,0 +1,90 @@
+.form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.userUl {
+  padding: 30px;
+  border-bottom: 1px solid #cacaca;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.img_wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.img {
+  cursor: pointer;
+  width: 55px;
+  height: 55px;
+  border-radius: 100px;
+}
+
+.file {
+  display: none;
+}
+
+.nickname_wrap {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.nickName_div {
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+}
+
+.input {
+  width: 110px;
+  padding: 10px;
+  font-size: 13px;
+  border: 1px solid #93c9ff;
+  border-radius: 5px;
+}
+
+.input:focus {
+  border-color: #002daa;
+  outline: none;
+}
+
+.button {
+  padding: 6px 16px;
+}
+
+.error {
+  font-size: 12px;
+  color: red;
+}
+
+.pet_wrap {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0px;
+  width: 260px;
+  gap: 20px;
+}
+
+.pet_div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.plus {
+  width: 20px;
+}
+
+.pet_ul {
+  background-color: #f5f5f5;
+  padding: 20px 10px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

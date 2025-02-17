@@ -163,6 +163,7 @@ html {
   box-sizing: border-box;
   display: flex;
   padding: 52px 0px;
+  justify-content: center;
 }
 
 html::-webkit-scrollbar {
