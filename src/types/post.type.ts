@@ -24,6 +24,7 @@ export type CommentType = {
   description: string;
   replies: ReplyType[];
   hasParent: boolean;
+  createdAt: string;
 };
 
 export type PostFormData = {
