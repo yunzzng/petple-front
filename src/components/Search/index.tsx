@@ -8,10 +8,19 @@ interface SearchProps {
   className?: string;
   placeholder?: string;
   value: string;
+  placeholderText?: string;
+  labelText?: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Search = ({ onSearch, className, placeholder, value, onChange }: SearchProps) => {
+const Search = ({
+  onSearch,
+  className,
+  value,
+  onChange,
+  labelText = "도시명을 입력하세요",
+  placeholderText = "도시명을 입력하세요 (예: 부천, 수원)",
+}: SearchProps) => {
   const handleSearch = () => {
     if (onSearch) {
       onSearch(value.trim());
@@ -25,12 +34,12 @@ const Search = ({ onSearch, className, placeholder, value, onChange }: SearchPro
   return (
     <div className={styles.searchContainer}>
       <Input.Box>
-        <Input.Label className={styles.label}>도시명을 입력하세요</Input.Label>
+        <Input.Label className={styles.label}>{labelText}</Input.Label>
         <Input
           type="text"
           value={value}
           onChange={onChange}
-          placeholder={placeholder || "도시명을 입력하세요 (예: 부천, 수원)"}
+          placeholder={placeholderText}
           className={styles.input}
         />
       </Input.Box>

@@ -16,6 +16,7 @@ import PetFood from "./pages/PetFood";
 import PetFuneral from "./pages/PetFuneral";
 import { Suspense } from "react";
 import PostDetailPage from "./pages/PostDetail";
+import PetPlaceDetail from "./pages/PetPlaceDetail";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
       {
         path: "/petplace",
         element: <PetPlace />,
+      },
+      {
+        path: "/petplace:id",
+        element: <PetPlaceDetail />,
       },
       {
         path: "/petfuneral",

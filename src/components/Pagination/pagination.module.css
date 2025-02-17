@@ -1,0 +1,45 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.pageButton {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.pageButton:hover {
+  background-color: #f0f0f0;
+}
+
+.pageNumber {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  font-size: 11px;
+  transition: all 0.3s ease;
+}
+
+.pageNumber:hover {
+  background-color: #f0f0f0;
+}
+
+.activePage {
+  background-color: #93c9ff;
+  border-color: #93c9ff;
+  color: white;
+  font-weight: bold;
+}
+
+.activePage:hover {
+  background-color: #002daa;
+  border-color: #ffffff;
+}

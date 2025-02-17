@@ -1,4 +1,4 @@
-import { createContext, FC,useState, Dispatch, SetStateAction, ReactNode } from "react";
+import { createContext, FC, useState, Dispatch, SetStateAction, ReactNode, useMemo } from "react";
 import CarouselItemList from "./CarouselItemList";
 import CarouselItem from "./CarouselItem";
 import CarouselNavigator from "./CarouselNavigator";
@@ -7,6 +7,7 @@ import styles from "./Carousel.module.css";
 
 interface CarouselProps {
     children?: ReactNode;
+    className?: string;
 }
 
 interface CarouselCompoundProps {
@@ -25,8 +26,7 @@ interface CarouselContextProps {
 
 const CarouselContext = createContext<CarouselContextProps | null>(null);
 
-
-const Carousel: FC<CarouselProps> & CarouselCompoundProps = ({ children  }) => {
+const Carousel: FC<CarouselProps> & CarouselCompoundProps = ({ children, className }) => {
     const [carouselIndex, setCarouselIndex] = useState<number>(0);
     const [itemLength, setItemLength] = useState<number>(0);
 
@@ -37,14 +37,18 @@ const Carousel: FC<CarouselProps> & CarouselCompoundProps = ({ children  }) => {
         setItemLength,
     };
 
+    const carouselCls = useMemo(() => {
+        return `${styles.carouselContainer} ${className || ""}`.trim();
+    }, [className]);
+
     return (
         <CarouselContext.Provider value={contextValue}>
-            <div className={styles.carouselContainer}>
+            <div className={carouselCls}>
                 {children}
             </div>
         </CarouselContext.Provider>
     );
-}
+};
 
 Carousel.ItemList = CarouselItemList;
 Carousel.Item = CarouselItem;
@@ -53,5 +57,3 @@ Carousel.Indicator = CarouselIndicator;
 
 export default Carousel;
 export { CarouselContext };
-
-
