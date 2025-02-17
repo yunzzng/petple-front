@@ -12,12 +12,27 @@ interface PostProps {
 }
 
 const CommunityPost = ({ post }: PostProps) => {
-  const { creator, images, tags, description, createdAt, _id } = post;
+  const {
+    creator,
+    images,
+    tags,
+    description,
+    createdAt,
+    _id,
+    comments,
+    likes,
+  } = post;
   const navigate = useNavigate();
   return (
     <>
       <li key={`post-item-${_id}`} className={styles.post}>
-        <PostHeader creator={creator} tags={tags} createdAt={createdAt} />
+        <PostHeader
+          creator={creator}
+          tags={tags}
+          createdAt={createdAt}
+          commentsCount={comments.length}
+          likesCount={likes.length}
+        />
         <Carousel>
           <Carousel.ItemList>
             {images.map((src, index) => (
@@ -34,6 +49,7 @@ const CommunityPost = ({ post }: PostProps) => {
             ))}
           </Carousel.ItemList>
           <Carousel.Indicator />
+          <Carousel.Navigator />
         </Carousel>
         <div
           className={styles.description}
@@ -48,8 +64,13 @@ const CommunityPost = ({ post }: PostProps) => {
 
 export default CommunityPost;
 
-const PostHeader = (data: Pick<PostItem, "creator" | "createdAt" | "tags">) => {
-  const { creator, tags, createdAt } = data;
+const PostHeader = (
+  data: Pick<PostItem, "creator" | "createdAt" | "tags"> & {
+    commentsCount: number;
+    likesCount: number;
+  }
+) => {
+  const { creator, tags, createdAt, commentsCount, likesCount } = data;
   return (
     <div className={styles.post_header}>
       <div className={styles.post_header_top}>
@@ -69,12 +90,12 @@ const PostHeader = (data: Pick<PostItem, "creator" | "createdAt" | "tags">) => {
               {new Date(createdAt).toLocaleDateString()}
             </div>
             <div className={styles.createdAt}>
-              <img src={commentIcon} alt="시계 이미지" />
-              <span>3</span>
+              <img src={commentIcon} alt="댓글 이미지" />
+              <span>{commentsCount}</span>
             </div>
             <div className={styles.createdAt}>
-              <img src={likeIcon} alt="시계 이미지" />
-              <span>22</span>
+              <img src={likeIcon} alt="따봉 이미지" />
+              <span>{likesCount}</span>
             </div>
           </div>
         </div>

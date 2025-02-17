@@ -31,13 +31,15 @@ const LikeButton = ({
     updateLikesMutate({ postId, likeStatus: !currentLikeStatus });
   };
   return (
-    <div onClick={handleClickLike} className={styles.wrraper}>
-      {currentLikeStatus ? (
-        <img src={likeActiveIcon} alt="좋아요 활성화 버튼 이미지" />
-      ) : (
-        <img src={likeIcon} alt="좋아요 비활성화 버튼 이미지" />
-      )}
-      <span>{likes.length}명이 게시글을 좋아합니다.</span>
+    <div className={styles.like_button_wrraper}>
+      <div onClick={handleClickLike} className={styles.like_button}>
+        {currentLikeStatus ? (
+          <img src={likeActiveIcon} alt="좋아요 활성화 버튼 이미지" />
+        ) : (
+          <img src={likeIcon} alt="좋아요 비활성화 버튼 이미지" />
+        )}
+        <span>{likes.length}명이 게시글을 좋아합니다.</span>
+      </div>
     </div>
   );
 };

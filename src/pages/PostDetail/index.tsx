@@ -144,14 +144,12 @@ const PostDetailPage = () => {
     <div className={styles.wrraper}>
       <Header />
       <CommunityPost post={post} />
-      <div className={styles.likeButton_wrapper}>
-        <LikeButton
-          postId={postId}
-          userId={user.userId}
-          likes={post.likes}
-          inValidateQuery={inValidateQuery}
-        />
-      </div>
+      <LikeButton
+        postId={postId}
+        userId={user.userId}
+        likes={post.likes}
+        inValidateQuery={inValidateQuery}
+      />
       <Comment
         comments={post.comments}
         handleReply={handleReply}
