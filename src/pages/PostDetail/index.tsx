@@ -25,6 +25,7 @@ import { CommentType, ReplyType } from "@/types/post.type";
 import userAuthStore from "@/zustand/userAuth";
 import LikeButton from "./components/LikeButton";
 import Header from "@/components/Header";
+import { AxiosError } from "axios";
 
 const CommentSchema = z.object({
   description: z.string().trim().min(1, "내용을 입력해주세요."),
@@ -63,30 +64,52 @@ const PostDetailPage = () => {
   const { mutate: addCommentMutate } = useMutation({
     mutationFn: addComment,
     onSuccess: () => inValidateQuery(),
+    onError: (error: AxiosError) => {
+      if (error.status === 401) window.alert("로그인인 필요합니다.");
+    },
   });
   const { mutate: deleteCommentMutate } = useMutation({
     mutationFn: deleteComment,
     onSuccess: () => inValidateQuery(),
+    onError: (error: AxiosError) => {
+      if (error.status === 401) window.alert("로그인인 필요합니다.");
+    },
   });
   const { mutate: updateCommentMutate } = useMutation({
     mutationFn: updateComment,
     onSuccess: () => inValidateQuery(),
+    onError: (error: AxiosError) => {
+      if (error.status === 401) window.alert("로그인인 필요합니다.");
+    },
   });
   const { mutate: addReplyMutate } = useMutation({
     mutationFn: addReply,
     onSuccess: () => inValidateQuery(),
+    onError: (error: AxiosError) => {
+      if (error.status === 401) window.alert("로그인인 필요합니다.");
+    },
   });
   const { mutate: deleteReplyMutate } = useMutation({
     mutationFn: deleteReply,
     onSuccess: () => inValidateQuery(),
+    onError: (error: AxiosError) => {
+      if (error.status === 401) window.alert("로그인인 필요합니다.");
+    },
   });
   const { mutate: updateReplyMutate } = useMutation({
     mutationFn: updateReply,
     onSuccess: () => inValidateQuery(),
+    onError: (error: AxiosError) => {
+      if (error.status === 401) window.alert("로그인인 필요합니다.");
+    },
   });
 
   const onSubmit = ({ description }: CommentFormFields) => {
     if (!postId) return;
+    if (!user) {
+      window.alert("로그인이 필요합니다.");
+      return;
+    }
     if (submitType === "ADD_COMMENT") {
       addCommentMutate({ description, postId, hasParent: false });
     }

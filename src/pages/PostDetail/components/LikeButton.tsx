@@ -4,6 +4,7 @@ import likeIcon from "/images/icons/like.svg";
 import likeActiveIcon from "/images/icons/like_active.svg";
 import { useMemo } from "react";
 import { updateLikes } from "@/apis/like.api";
+import { AxiosError } from "axios";
 
 interface LikeButtonProps {
   postId?: string;
@@ -25,6 +26,9 @@ const LikeButton = ({
   const { mutate: updateLikesMutate } = useMutation({
     mutationFn: updateLikes,
     onSuccess: () => inValidateQuery(),
+    onError: (error: AxiosError) => {
+      if (error.status === 401) window.alert("로그인인 필요합니다.");
+    },
   });
   const handleClickLike = () => {
     if (!postId) return;

@@ -1,4 +1,6 @@
 .like_button_wrraper {
+  display: flex;
+  justify-content: center;
   padding: 20px 0px;
 }
 

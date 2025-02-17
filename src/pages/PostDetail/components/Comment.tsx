@@ -25,6 +25,7 @@ const Comment = ({
   handleDeleteComment,
   handleUpdateComment,
 }: CommentProps) => {
+  console.log(signinedUserId);
   return (
     <ul className={styles.comments_wrapper}>
       {comments.map((comment) => (
