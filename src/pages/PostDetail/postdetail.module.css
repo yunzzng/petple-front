@@ -31,3 +31,8 @@
   outline: none;
   font-size: medium;
 }
+
+.description {
+  white-space: pre-line;
+  line-height: 22px;
+}

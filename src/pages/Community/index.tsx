@@ -4,10 +4,13 @@ import { useEffect, useRef } from "react";
 import { getPosts } from "@/apis/post.api";
 import { PostItem } from "@/types/post.type";
 import CommunityPost from "@/components/CommunityPost";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CommunityPage = () => {
   const postContainerRef = useRef<HTMLUListElement>(null);
   const targetRef = useRef<HTMLDivElement>(null);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   const { data: posts, fetchNextPage } = useInfiniteQuery({
     queryKey: ["posts"],
@@ -40,7 +43,18 @@ const CommunityPage = () => {
     <section className={styles.wrapper}>
       <ul className={styles.post_container} ref={postContainerRef}>
         {posts?.map((post: PostItem) => (
-          <CommunityPost post={post} key={post._id} />
+          <li>
+            <CommunityPost post={post} key={post._id} />
+            <div
+              className={styles.description}
+              onClick={() =>
+                pathname === "/community" &&
+                navigate(`/community/post/${post._id}`)
+              }
+            >
+              {post.description}
+            </div>
+          </li>
         ))}
         <div ref={targetRef}></div>
       </ul>

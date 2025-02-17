@@ -92,4 +92,5 @@
   word-break: break-word;
   line-height: 22px;
   cursor: pointer;
+  white-space: pre-line;
 }
