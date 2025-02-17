@@ -1,7 +1,8 @@
 .comments_wrapper {
+  padding: 0 16px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 24px;
 }
 
 .comment_body {
@@ -81,5 +82,5 @@
 .replies_list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 24px;
 }

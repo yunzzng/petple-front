@@ -24,6 +24,7 @@ import { useState } from "react";
 import { CommentType, ReplyType } from "@/types/post.type";
 import userAuthStore from "@/zustand/userAuth";
 import LikeButton from "./components/LikeButton";
+import Header from "@/components/Header";
 
 const CommentSchema = z.object({
   description: z.string().trim().min(1, "내용을 입력해주세요."),
@@ -50,13 +51,14 @@ const PostDetailPage = () => {
   const inValidateQuery = () =>
     qc.invalidateQueries({ queryKey: ["Post", postId] });
 
-  const { register, handleSubmit, setValue } = useForm<CommentFormFields>({
-    defaultValues: {
-      description: "",
-    },
-    resolver: zodResolver(CommentSchema),
-    mode: "onSubmit",
-  });
+  const { register, handleSubmit, setValue, resetField } =
+    useForm<CommentFormFields>({
+      defaultValues: {
+        description: "",
+      },
+      resolver: zodResolver(CommentSchema),
+      mode: "onSubmit",
+    });
 
   const { mutate: addCommentMutate } = useMutation({
     mutationFn: addComment,
@@ -112,6 +114,7 @@ const PostDetailPage = () => {
     setTargetComment(null);
     setTargetReply(null);
     setSubmitType("ADD_COMMENT");
+    resetField("description");
   };
 
   const handleDeleteReply = (commentId: string, replyId: string) =>
@@ -139,6 +142,7 @@ const PostDetailPage = () => {
 
   return (
     <div className={styles.wrraper}>
+      <Header />
       <CommunityPost post={post} />
       <div className={styles.likeButton_wrapper}>
         <LikeButton
@@ -148,7 +152,6 @@ const PostDetailPage = () => {
           inValidateQuery={inValidateQuery}
         />
       </div>
-
       <Comment
         comments={post.comments}
         handleReply={handleReply}
@@ -158,10 +161,18 @@ const PostDetailPage = () => {
         handleUpdateComment={handleUpdateComment}
         handleDeleteComment={handleDeleteComment}
       />
-      <form>
-        <div>
-          {targetComment && <p>{targetComment.creator.nickName}</p>}
-          <input type="text" {...register("description")} />
+      <form className={styles.comment_submit_form}>
+        {targetComment && (
+          <p className={styles.target_comment}>
+            @{targetComment.creator.nickName}
+          </p>
+        )}
+        <div className={styles.comment_input}>
+          <input
+            type="text"
+            {...register("description")}
+            placeholder="댓글을 작성해보세요."
+          />
           <Button label="댓글" onClick={handleSubmit(onSubmit)} />
         </div>
       </form>

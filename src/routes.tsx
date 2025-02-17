@@ -43,14 +43,7 @@ const router = createBrowserRouter([
           </Suspense>
         ),
       },
-      {
-        path: "/community/post/:id",
-        element: (
-          <Suspense fallback={<p>...Loading</p>}>
-            <PostDetailPage />
-          </Suspense>
-        ),
-      },
+
       {
         path: "/signup",
         element: <Signup />,
@@ -80,6 +73,14 @@ const router = createBrowserRouter([
         element: <Profile />,
       },
     ],
+  },
+  {
+    path: "/community/post/:id",
+    element: (
+      <Suspense fallback={<p>...Loading</p>}>
+        <PostDetailPage />
+      </Suspense>
+    ),
   },
   {
     path: "*",
