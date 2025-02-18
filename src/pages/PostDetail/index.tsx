@@ -20,12 +20,13 @@ import {
   updateComment,
   updateReply,
 } from "@/apis/comment.api";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { CommentType, ReplyType } from "@/types/post.type";
 import userAuthStore from "@/zustand/userAuth";
 import LikeButton from "./components/LikeButton";
 import Header from "@/components/Header";
 import { AxiosError } from "axios";
+import { updateLikes } from "@/apis/like.api";
 
 const CommentSchema = z.object({
   description: z.string().trim().min(1, "내용을 입력해주세요."),
@@ -48,6 +49,10 @@ const PostDetailPage = () => {
     queryKey: ["Post", postId],
     queryFn: () => postId && getPostById(postId),
   });
+  const currentLikeStatus = useMemo(
+    () => !!user.userId && post.likes.includes(user.userId),
+    [post.likes, user.userId]
+  );
 
   const inValidateQuery = () =>
     qc.invalidateQueries({ queryKey: ["Post", postId] });
@@ -163,22 +168,38 @@ const PostDetailPage = () => {
     setTargetComment(targetComment);
   };
 
+  const { mutate: updateLikesMutate } = useMutation({
+    mutationFn: updateLikes,
+    onSuccess: () => {
+      inValidateQuery();
+    },
+    onError: (error: AxiosError) => {
+      if (error.status === 401) window.alert("로그인인 필요합니다.");
+    },
+  });
+  const handleClickLike = () => {
+    if (!postId) return;
+    if (!user.userId) {
+      window.alert("로그인이 필요합니다.");
+      return;
+    }
+    updateLikesMutate({ postId, likeStatus: !currentLikeStatus });
+  };
+
   return (
     <div className={styles.wrraper}>
       <Header />
       <CommunityPost post={post} />
       <div className={styles.description}>{post.description}</div>
       <LikeButton
-        postId={postId}
-        userId={user.userId}
         likes={post.likes}
-        inValidateQuery={inValidateQuery}
+        currentLikeStatus={currentLikeStatus}
+        handleClickLike={handleClickLike}
       />
-
       <Comment
         comments={post.comments}
-        handleReply={handleReply}
         signinedUserId={user.userId}
+        handleReply={handleReply}
         handleDeleteReply={handleDeleteReply}
         handleUpdateReply={handleUpdateReply}
         handleUpdateComment={handleUpdateComment}
