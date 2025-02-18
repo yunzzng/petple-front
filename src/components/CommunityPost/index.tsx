@@ -5,6 +5,10 @@ import profileIcon from "/images/profile.png";
 import commentIcon from "/images/icons/comment.svg";
 import likeIcon from "/images/icons/like.svg";
 import { PostItem } from "@/types/post.type";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useMemo } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { deletePostById } from "@/apis/post.api";
 
 interface PostProps {
   post: PostItem;
@@ -22,6 +26,7 @@ const CommunityPost = ({ post }: PostProps) => {
           createdAt={createdAt}
           commentsCount={comments.length}
           likesCount={likes.length}
+          postId={_id}
         />
         <Carousel>
           <Carousel.ItemList>
@@ -52,9 +57,22 @@ const PostHeader = (
   data: Pick<PostItem, "creator" | "createdAt" | "tags"> & {
     commentsCount: number;
     likesCount: number;
+    postId: string;
   }
 ) => {
-  const { creator, tags, createdAt, commentsCount, likesCount } = data;
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { creator, tags, createdAt, commentsCount, likesCount, postId } = data;
+  const isDetaildPage = useMemo(
+    () => location.pathname.includes("post"),
+    [location]
+  );
+  const { mutate: deletePostMutate } = useMutation({
+    mutationFn: deletePostById,
+    onSuccess: () => {
+      navigate("/community");
+    },
+  });
   return (
     <div className={styles.post_header}>
       <div className={styles.post_header_top}>
@@ -83,6 +101,12 @@ const PostHeader = (
             </div>
           </div>
         </div>
+        {isDetaildPage && (
+          <div className={styles.action_menu_wrapper}>
+            <p onClick={() => navigate(`/community/update/${postId}`)}>수정</p>
+            <p onClick={() => deletePostMutate(postId)}>삭제</p>
+          </div>
+        )}
       </div>
       <ul className={styles.tags_container}>
         {tags.map((tag, key) => (

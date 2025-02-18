@@ -8,6 +8,7 @@ import {
   Profile,
   PostUpdatePage,
   CommunityPage,
+  PostDetailPage,
 } from "@/pages";
 import BaseLayout from "@/components/Layout";
 import PetMedical from "./pages/PetMedical";
@@ -15,7 +16,6 @@ import PetPlace from "./pages/PetPlace";
 import PetFood from "./pages/PetFood";
 import PetFuneral from "./pages/PetFuneral";
 import { Suspense } from "react";
-import PostDetailPage from "./pages/PostDetail";
 
 const router = createBrowserRouter([
   {
