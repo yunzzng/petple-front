@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useMemo } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { deletePostById } from "@/apis/post.api";
+import userAuthStore from "@/zustand/userAuth";
 
 interface PostProps {
   post: PostItem;
@@ -62,9 +63,10 @@ const PostHeader = (
 ) => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { userId } = userAuthStore();
   const { creator, tags, createdAt, commentsCount, likesCount, postId } = data;
-  const isDetaildPage = useMemo(
-    () => location.pathname.includes("post"),
+  const isEditablePost = useMemo(
+    () => location.pathname.includes("post") && creator._id === userId,
     [location]
   );
   const { mutate: deletePostMutate } = useMutation({
@@ -101,7 +103,7 @@ const PostHeader = (
             </div>
           </div>
         </div>
-        {isDetaildPage && (
+        {isEditablePost && (
           <div className={styles.action_menu_wrapper}>
             <p onClick={() => navigate(`/community/update/${postId}`)}>수정</p>
             <p onClick={() => deletePostMutate(postId)}>삭제</p>

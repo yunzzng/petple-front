@@ -67,7 +67,7 @@ const Post = ({ post }: PostProps) => {
   return (
     <>
       <li>
-        <CommunityPost post={post} key={post._id} />
+        <CommunityPost post={post} />
         <div
           className={styles.description}
           onClick={() =>
