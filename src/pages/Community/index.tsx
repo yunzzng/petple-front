@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { getPosts } from "@/apis/post.api";
 import { PostItem } from "@/types/post.type";
 import Post from "./components/Post";
+import FloatingButton from "./components/FloatingButton";
 
 const CommunityPage = () => {
   const postContainerRef = useRef<HTMLUListElement>(null);
@@ -44,6 +45,7 @@ const CommunityPage = () => {
         ))}
         <div ref={targetRef}></div>
       </ul>
+      <FloatingButton />
     </section>
   );
 };
