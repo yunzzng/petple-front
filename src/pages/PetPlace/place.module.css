@@ -19,39 +19,6 @@
   margin-bottom: 20px;
 }
 
-.categoryButtons {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-  margin-bottom: 30px;
-}
-
-.categoryButton {
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 8px 12px;
-  font-size: 13px;
-  cursor: pointer;
-  color: black;
-}
-
-.activeCategory {
-  background-color: #93c9ff;
-  border-color: #93c9ff;
-  color: white;
-  font-weight: bold;
-}
-
-.activeCategory:hover {
-  background-color: #002daa;
-  border-color: #ffffff;
-}
-
-.categoryButton:not(.activeCategory):hover {
-  background-color: #f0f0f0;
-}
-
 .placeList {
   display: flex;
   flex-direction: column;
@@ -97,6 +64,11 @@
   color: #555;
   display: block;
   margin-top: 5px;
+}
+
+.dataName{
+  color: #002DAA;
+  font-weight: bold;
 }
 
 .messageText {

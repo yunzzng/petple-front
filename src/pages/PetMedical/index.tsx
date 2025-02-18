@@ -5,9 +5,9 @@ import styles from "./petMedical.module.css";
 import Map from "@/components/Map";
 import { Button, Search } from "@/components";
 import usePagination from "@/hooks/usePagination";
-import { fetchMedicalData } from "@/apis/public.api";
 import Pagination from "@/components/Pagination";
 import { MedicalService } from "@/types/petApi.type";
+import { getMedicalData } from "@/apis/public.api";
 
 const PetMedical = () => {
   const [selectedTab, setSelectedTab] = useState<"hospital" | "pharmacy">(
@@ -30,16 +30,14 @@ const PetMedical = () => {
     queryKey: ["medicalData", selectedTab, selectedRegion],
     queryFn: async () => {
       if (!selectedRegion) return [];
-      return await fetchMedicalData(selectedRegion, selectedTab);
+      return await getMedicalData(selectedRegion, selectedTab);
     },
     staleTime: 7 * 24 * 60 * 60 * 1000,
     enabled: !!selectedRegion,
   });
 
   // 검색 필터 적용
-  const filteredData = data.filter((item) =>
-    searchTerm ? item.name.includes(searchTerm) : true
-  );
+  const filteredData = data.filter((item) => item.name.includes(searchTerm));
 
   // 페이지네이션 훅
   const { page, setPage, paginatedData, totalPages, startPage, endPage } =
@@ -121,7 +119,7 @@ const PetMedical = () => {
                         <p className={styles.dataName}>{item.name}</p>
                         {item.businessState && (
                           <p className={styles.dataBusinessState}>
-                            상태:{" "}
+                            상태:
                             <span className={styles.dataValue}>
                               {item.businessState}
                             </span>
@@ -129,7 +127,7 @@ const PetMedical = () => {
                         )}
                         {item.phone && (
                           <p className={styles.dataPhone}>
-                            전화번호:{" "}
+                            전화번호:
                             <span className={styles.dataValue}>
                               {item.phone}
                             </span>
@@ -137,7 +135,7 @@ const PetMedical = () => {
                         )}
                         {item.roadAddress && (
                           <p className={styles.dataRoadAddress}>
-                            도로명 주소:{" "}
+                            도로명 주소:
                             <span className={styles.dataValue}>
                               {item.roadAddress}
                             </span>
@@ -145,7 +143,7 @@ const PetMedical = () => {
                         )}
                         {item.lotAddress && (
                           <p className={styles.dataLotAddress}>
-                            지번 주소:{" "}
+                            지번 주소:
                             <span className={styles.dataValue}>
                               {item.lotAddress}
                             </span>

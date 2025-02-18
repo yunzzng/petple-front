@@ -4,16 +4,18 @@ import categories from "@/consts/placeCategories";
 import { useNavigate } from "react-router-dom";
 import styles from "./place.module.css";
 import { PlaceInfo } from "@/types/petApi.type";
-import { Button, Search } from "@/components";
+import { Search } from "@/components";
 import defaultImg from "/images/titleLogo.png";
 import usePagination from "@/hooks/usePagination";
-import { fetchPlacesData } from "@/apis/public.api";
 import Pagination from "@/components/Pagination";
+import { getPlacesData } from "@/apis/public.api";
+import CategoryButtons from "@/components/PlaceCategoryButtons";
 
 const Place = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>(
-    categories[0].id
-  );
+  const [selectedCategory, setSelectedCategory] = useState<string>(() => {
+    // 세션스토리지에 저장된 카테고리가 있으면 그 카테고리를 보여줌
+    return sessionStorage.getItem("selectedCategory") || categories[0].id;
+  });
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
@@ -23,7 +25,7 @@ const Place = () => {
     isError,
   } = useQuery<PlaceInfo[]>({
     queryKey: ["placesData", selectedCategory],
-    queryFn: () => fetchPlacesData(selectedCategory),
+    queryFn: () => getPlacesData(selectedCategory),
     staleTime: 7 * 24 * 60 * 60 * 1000,
   });
 
@@ -38,22 +40,15 @@ const Place = () => {
     <div className={styles.container}>
       <h2 className={styles.title}>전국 반려동물 동반 장소 찾기</h2>
 
-      <div className={styles.categoryButtons}>
-        {categories.map((cat) => (
-          <Button
-            key={cat.id}
-            className={`${styles.categoryButton} ${
-              selectedCategory === cat.id ? styles.activeCategory : ""
-            }`}
-            onClick={() => {
-              setSelectedCategory(cat.id);
-              setPage(1);
-            }}
-          >
-            {cat.name}
-          </Button>
-        ))}
-      </div>
+      <CategoryButtons
+        categories={categories}
+        selectedCategory={selectedCategory}
+        onSelectCategory={(id) => {
+          setSelectedCategory(id);
+          sessionStorage.setItem("selectedCategory", id);
+          setPage(1);
+        }}
+      />
 
       <Search
         className={styles.searchContainer}
@@ -81,7 +76,20 @@ const Place = () => {
               <div
                 key={place.id}
                 className={styles.placeItem}
-                onClick={() => navigate(`/place/${place.id}`)}
+                onClick={() =>
+                  navigate(`/petplace/${place.id}`, {
+                    state: {
+                      id: place.id,
+                      name: place.title,
+                      address: place.address,
+                      lotAddress: place.lotAddress ?? "정보 없음",
+                      lat: place.lat ?? null,
+                      lng: place.lng ?? null,
+                      imageUrl: place.imageUrl ?? defaultImg,
+                      category: selectedCategory,
+                    },
+                  })
+                }
               >
                 <img
                   src={place.imageUrl || defaultImg}
@@ -91,10 +99,12 @@ const Place = () => {
                 <div>
                   <h3>{place.title}</h3>
                   <p>
-                    <strong>주소:</strong> {place.address}
+                    <strong className={styles.dataName}>주소:</strong>
+                    {place.address}
                   </p>
                   <p>
-                    <strong>전화번호:</strong> {place.tel}
+                    <strong className={styles.dataName}>전화번호:</strong>
+                    {place.tel}
                   </p>
                 </div>
               </div>

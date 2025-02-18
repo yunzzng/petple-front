@@ -1,7 +1,7 @@
 import baseInstance from "./axios";
 import { PlaceInfo, FuneralService, MedicalService } from "@/types/petApi.type";
 
-const fetchFuneralData = async (): Promise<FuneralService[]> => {
+const getFuneralData = async (): Promise<FuneralService[]> => {
   try {
     const response = await baseInstance.get("/public/funeral");
     return response.data.funeralData;
@@ -10,7 +10,7 @@ const fetchFuneralData = async (): Promise<FuneralService[]> => {
   }
 };
 
-const fetchMedicalData = async (
+const getMedicalData = async (
   region: string,
   type: "hospital" | "pharmacy"
 ): Promise<MedicalService[]> => {
@@ -24,7 +24,7 @@ const fetchMedicalData = async (
   }
 };
 
-const fetchPlacesData = async (category: string): Promise<PlaceInfo[]> => {
+const getPlacesData = async (category: string): Promise<PlaceInfo[]> => {
   try {
     const response = await baseInstance.get("/public/place", {
       params: { category, page: 1, numOfRows: 100 },
@@ -35,4 +35,13 @@ const fetchPlacesData = async (category: string): Promise<PlaceInfo[]> => {
   }
 };
 
-export { fetchFuneralData, fetchMedicalData, fetchPlacesData };
+const getPlaceDetail = async (id: string) => {
+  try {
+    const response = await baseInstance.get(`/public/place/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export { getFuneralData, getMedicalData, getPlacesData, getPlaceDetail };

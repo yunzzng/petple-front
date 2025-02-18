@@ -6,9 +6,10 @@ import RegionSelector from "@/components/RegionSelector";
 import styles from "../PetMedical/petMedical.module.css";
 import stylesFuneral from "./funeral.module.css";
 import usePagination from "@/hooks/usePagination";
-import { fetchFuneralData } from "@/apis/public.api";
+
 import { FuneralService } from "@/types/petApi.type";
 import Pagination from "@/components/Pagination";
+import { getFuneralData } from "@/apis/public.api";
 
 const PetFuneral = () => {
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
@@ -22,7 +23,7 @@ const PetFuneral = () => {
     queryKey: ["funeralData", selectedRegion],
     queryFn: async () => {
       if (!selectedRegion) return [];
-      return await fetchFuneralData();
+      return await getFuneralData();
     },
     staleTime: 7 * 24 * 60 * 60 * 1000,
     enabled: !!selectedRegion,
@@ -91,7 +92,7 @@ const PetFuneral = () => {
                         <br />
                         {item.phone && (
                           <p className={styles.dataPhone}>
-                            전화번호:{" "}
+                            전화번호:
                             <span className={styles.dataValue}>
                               {item.phone}
                             </span>
@@ -99,7 +100,7 @@ const PetFuneral = () => {
                         )}
                         {item.zipCode && (
                           <p className={styles.dataZipCode}>
-                            우편번호:{" "}
+                            우편번호:
                             <span className={styles.dataValue}>
                               {item.zipCode}
                             </span>
@@ -107,7 +108,7 @@ const PetFuneral = () => {
                         )}
                         {item.roadAddress && (
                           <p className={styles.dataRoadAddress}>
-                            도로명 주소:{" "}
+                            도로명 주소:
                             <span className={styles.dataValue}>
                               {item.roadAddress}
                             </span>
@@ -115,7 +116,7 @@ const PetFuneral = () => {
                         )}
                         {item.lotAddress && (
                           <p className={styles.dataLotAddress}>
-                            지번 주소:{" "}
+                            지번 주소:
                             <span className={styles.dataValue}>
                               {item.lotAddress}
                             </span>

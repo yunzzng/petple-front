@@ -8,15 +8,15 @@ import {
   Profile,
   PostUpdatePage,
   CommunityPage,
+  PetMedical,
+  PetPlace,
+  PetPlaceDetail,
+  PetFuneral,
+  PetFood,
 } from "@/pages";
 import BaseLayout from "@/components/Layout";
-import PetMedical from "./pages/PetMedical";
-import PetPlace from "./pages/PetPlace";
-import PetFood from "./pages/PetFood";
-import PetFuneral from "./pages/PetFuneral";
 import { Suspense } from "react";
 import PostDetailPage from "./pages/PostDetail";
-import PetPlaceDetail from "./pages/PetPlaceDetail";
 
 const router = createBrowserRouter([
   {
@@ -69,7 +69,7 @@ const router = createBrowserRouter([
         element: <PetPlace />,
       },
       {
-        path: "/petplace:id",
+        path: "/petplace/:id",
         element: <PetPlaceDetail />,
       },
       {

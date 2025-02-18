@@ -22,6 +22,9 @@ export interface PlaceInfo {
   id: string;
   title: string;
   address: string;
-  tel: string;
-  imageUrl: string;
+  lotAddress?: string;
+  lat?: number;
+  lng?: number;
+  imageUrl?: string;
+  tel?: string;
 }
