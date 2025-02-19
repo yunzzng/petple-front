@@ -25,10 +25,15 @@ const deleteComment = async (data: { postId: string; commentId: string }) => {
   }
 };
 
-const updateComment = async (data: { _id: string; description: string }) => {
+const updateComment = async (data: {
+  _id: string;
+  description: string;
+  postId: string;
+}) => {
   try {
     await baseInstance.patch(`/comments/${data._id}`, {
       description: data.description,
+      postId: data.postId,
     });
   } catch (error) {
     throw error;
@@ -41,7 +46,7 @@ const addReply = async (data: {
   tag: string;
 }) => {
   try {
-    await baseInstance.post("/comments/reply", data);
+    await baseInstance.post("/comments/replies", data);
   } catch (error) {
     throw error;
   }

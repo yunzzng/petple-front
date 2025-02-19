@@ -119,7 +119,7 @@ const PostDetailPage = () => {
       addCommentMutate({ description, postId, hasParent: false });
     }
     if (submitType === "UPDATE_COMMENT" && targetComment?._id) {
-      updateCommentMutate({ _id: targetComment?._id, description });
+      updateCommentMutate({ _id: targetComment?._id, description, postId });
     }
     if (submitType === "ADD_REPLY" && targetComment) {
       addReplyMutate({
