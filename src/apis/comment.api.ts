@@ -3,7 +3,7 @@ import baseInstance from "./axios";
 const addComment = async (data: {
   postId: string;
   description: string;
-  hasParent: false;
+  hasParent: boolean;
 }) => {
   try {
     const response = await baseInstance.post("/comments", data);
