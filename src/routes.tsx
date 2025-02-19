@@ -1,21 +1,20 @@
 import { createBrowserRouter } from "react-router-dom";
-import {
-  Home,
-  PostCreatePage,
-  ErrorPage,
-  Signup,
-  Login,
-  Profile,
-  PostUpdatePage,
-  CommunityPage,
-  PostDetailPage,
-} from "@/pages";
+import { lazy, Suspense } from "react";
 import BaseLayout from "@/components/Layout";
-import PetMedical from "./pages/PetMedical";
-import PetPlace from "./pages/PetPlace";
-import PetFood from "./pages/PetFood";
-import PetFuneral from "./pages/PetFuneral";
-import { Suspense } from "react";
+
+const ErrorPage = lazy(() => import("@/pages/Error"));
+const HomePage = lazy(() => import("@/pages/Home"));
+const PetMedicalPage = lazy(() => import("@/pages/PetMedical"));
+const PetPlacePage = lazy(() => import("@/pages/PetPlace"));
+const PetFoodPage = lazy(() => import("@/pages/PetFood"));
+const PetFuneralPage = lazy(() => import("@/pages/PetFuneral"));
+const PostCreatePage = lazy(() => import("@/pages/PostCreate"));
+const PostDetailPage = lazy(() => import("@/pages/PostDetail"));
+const PostUpdatePage = lazy(() => import("@/pages/PostUpdate"));
+const CommunityPage = lazy(() => import("@/pages/Community"));
+const LoginPage = lazy(() => import("@/pages/Login"));
+const SignupPage = lazy(() => import("@/pages/Signup"));
+const ProfilePage = lazy(() => import("@/pages/Profile"));
 
 const router = createBrowserRouter([
   {
@@ -25,15 +24,27 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: (
+          <Suspense fallback={<p>...loading</p>}>
+            <HomePage />
+          </Suspense>
+        ),
       },
       {
         path: "/community",
-        element: <CommunityPage />,
+        element: (
+          <Suspense fallback={<p>...loading</p>}>
+            <CommunityPage />
+          </Suspense>
+        ),
       },
       {
         path: "/community/create",
-        element: <PostCreatePage />,
+        element: (
+          <Suspense fallback={<p>...loading</p>}>
+            <PostCreatePage />
+          </Suspense>
+        ),
       },
       {
         path: "/community/update/:id",
@@ -46,31 +57,59 @@ const router = createBrowserRouter([
 
       {
         path: "/signup",
-        element: <Signup />,
+        element: (
+          <Suspense fallback={<p>...loading</p>}>
+            <SignupPage />
+          </Suspense>
+        ),
       },
       {
         path: "/login",
-        element: <Login />,
+        element: (
+          <Suspense fallback={<p>...loading</p>}>
+            <LoginPage />
+          </Suspense>
+        ),
       },
       {
         path: "/petmedi",
-        element: <PetMedical />,
+        element: (
+          <Suspense fallback={<p>...loading</p>}>
+            <PetMedicalPage />
+          </Suspense>
+        ),
       },
       {
         path: "/petplace",
-        element: <PetPlace />,
+        element: (
+          <Suspense fallback={<p>...loading</p>}>
+            <PetPlacePage />
+          </Suspense>
+        ),
       },
       {
         path: "/petfuneral",
-        element: <PetFuneral />,
+        element: (
+          <Suspense fallback={<p>...loading</p>}>
+            <PetFuneralPage />
+          </Suspense>
+        ),
       },
       {
         path: "/petfood",
-        element: <PetFood />,
+        element: (
+          <Suspense fallback={<p>...loading</p>}>
+            <PetFoodPage />
+          </Suspense>
+        ),
       },
       {
         path: "/profile",
-        element: <Profile />,
+        element: (
+          <Suspense fallback={<p>...loading</p>}>
+            <ProfilePage />
+          </Suspense>
+        ),
       },
     ],
   },
