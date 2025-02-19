@@ -28,18 +28,17 @@
   border-radius: 5px;
   border: none;
   cursor: pointer;
-  background-color: #EAEAEA;
+  background-color: #eaeaea;
   color: rgb(0, 0, 0);
-
 }
 
 .tabButton:hover {
-  background-color: #93C9FF;
+  background-color: #93c9ff;
   color: white;
 }
 
 .active {
-  background-color: #002DAA;
+  background-color: #002daa;
   color: white;
 }
 
@@ -57,7 +56,7 @@
 
 .contentWrapper {
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: flex-start;
   gap: 10px;
   width: 100%;
@@ -67,7 +66,8 @@
   max-width: 50%;
 }
 
-.mapContainer, .dataContainer {
+.mapContainer,
+.dataContainer {
   width: 100%;
   max-width: 360px;
 }
@@ -105,7 +105,7 @@
   color: #000;
 }
 
-.noDataText{
+.messageText {
   font-size: 12px;
   color: #555;
   border-bottom: 1px solid #ddd;
@@ -115,60 +115,4 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-/* 페이지네이션 */
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-  margin-top: 15px;
-  width: 100%;
-}
-
-.pageButton {
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 8px 8px;
-  font-size: 11px;
-  cursor: pointer;
-}
-
-.pageButton:hover {
-  background-color: #f0f0f0;
-}
-
-.pageButton:disabled {
-  background-color: #e0e0e0;
-  cursor: not-allowed;
-  border-color: #ccc;
-  color: #aaa;
-}
-
-.pageNumber {
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 8px 12px;
-  font-size: 11px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.pageNumber:hover {
-  background-color: #f0f0f0;
-}
-
-.activePage {
-  background-color: #93C9FF;
-  border-color: #93C9FF;
-  color: white;
-  font-weight: bold;
-}
-
-.activePage:hover{
-  background-color: #002DAA;
-  border-color: #ffffff;
 }
