@@ -8,6 +8,7 @@ import {
   Profile,
   PostUpdatePage,
   CommunityPage,
+  CreatePetProfile,
 } from "@/pages";
 import BaseLayout from "@/components/Layout";
 import PetMedical from "./pages/PetMedical";
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/createpetprofile",
+        element: <CreatePetProfile />,
       },
     ],
   },

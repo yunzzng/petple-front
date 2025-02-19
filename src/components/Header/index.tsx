@@ -6,15 +6,16 @@ import axios from "axios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import Avartar from "../Avartar";
+import { recieveUserInfo } from "@/apis/profile.api";
 
 const getUserInfo = async () => {
   try {
-    const response = await axios.get("/api/user/info");
-
-    if (response.status === 200) {
-      const user = response.data.user;
+    const response = await recieveUserInfo();
+    if (response) {
+      const user = response;
       return user;
     }
+    console.log("response", response);
   } catch (error) {
     console.error("유저 정보 가져오기 실패", error);
   }
@@ -22,27 +23,25 @@ const getUserInfo = async () => {
 
 const Header = () => {
   const navigate = useNavigate();
-  const { isLoggedIn, userImage } = userAuthStore();
+  const { userImage } = userAuthStore();
   const queryClient = useQueryClient();
 
-  const loginStatus = Boolean(document.cookie.split("=")[1]);
+  const loginStatus = Boolean(document.cookie.split("=")[1]); //예외처리 추가
 
-  const query = useQuery({
+  const query = useQuery<any>({
     queryKey: ["userInfo"],
     queryFn: getUserInfo,
     enabled: loginStatus,
   });
 
   useEffect(() => {
-    queryClient.invalidateQueries({ queryKey: ["userInfo"] });
-
     if (query.data) {
       userAuthStore.setState({
-        isLoggedIn: true,
         userId: query.data.id,
         userEmail: query.data.email,
         userNickName: query.data.nickName,
         userImage: query.data.image,
+        userPet: query.data.pet,
       });
     }
   }, [query.data]);
@@ -53,9 +52,11 @@ const Header = () => {
 
       if (response.status === 200) {
         userAuthStore.setState({
-          isLoggedIn: false,
           userId: null,
           userEmail: null,
+          userNickName: null,
+          userImage: null,
+          userPet: null,
         });
         queryClient.removeQueries({ queryKey: ["userInfo"] });
         navigate("/login");
@@ -74,7 +75,7 @@ const Header = () => {
           </a>
         </div>
         <ul>
-          {isLoggedIn ? (
+          {loginStatus ? (
             <>
               <li className={style.login}>
                 <a onClick={handleLogout}>LOGOUT</a>
