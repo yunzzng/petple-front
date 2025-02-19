@@ -74,7 +74,7 @@ const PetPlaceDetail = () => {
                     {
                       lat: placeData.lat,
                       lng: placeData.lng,
-                      name: placeData.name ?? "정보 없음",
+                      name: placeData.title ?? "정보 없음",
                     },
                   ]}
                 />
@@ -98,16 +98,28 @@ const PetPlaceDetail = () => {
               )}
               <div className={styles.testBox}>
                 <h3 className={styles.placeName}>
-                  {placeData.name ?? "정보 없음"}
+                  {placeData.title ?? "정보 없음"}
                 </h3>
                 <p className={styles.infoText}>
                   <strong className={styles.dataName}>주소:</strong>
                   {placeData.address ?? "정보 없음"}
                 </p>
                 <p className={styles.infoText}>
-                  <strong className={styles.dataName}>지번 주소:</strong>
-                  {placeData.lotAddress ?? "정보 없음"}
+                  <strong className={styles.dataName}>전화번호:</strong>
+                  {placeData.tel ?? ""}
                 </p>
+                {placeData.homepage && (
+                  <p>
+                    <strong className={styles.dataName}>홈페이지:</strong>
+                    <a
+                      href={placeData.homepage}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {placeData.homepage}
+                    </a>
+                  </p>
+                )}
 
                 <div className={styles.infoBox}>
                   <h4 className={styles.infoTitle}>반려동물 관련 정보</h4>

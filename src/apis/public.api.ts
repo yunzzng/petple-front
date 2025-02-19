@@ -1,5 +1,5 @@
 import baseInstance from "./axios";
-import { PlaceInfo, FuneralService, MedicalService } from "@/types/petApi.type";
+import { PlaceInfo, FuneralService, MedicalService, FoodService } from "@/types/petApi.type";
 
 const getFuneralData = async (): Promise<FuneralService[]> => {
   try {
@@ -44,4 +44,19 @@ const getPlaceDetail = async (id: string) => {
   }
 }
 
-export { getFuneralData, getMedicalData, getPlacesData, getPlaceDetail };
+const getPetFood = async (search?: string, category?: string): Promise<FoodService[]> => {
+  try {
+    const params: Record<string, string> = {};
+
+    if (search) params.search = search;
+    if (category && category !== "all") params.category = category;
+
+    const response = await baseInstance.get("/public/food", { params });
+
+    return response.data.data || [];
+  } catch (error) {
+    return [];
+  }
+};
+
+export { getFuneralData, getMedicalData, getPlacesData, getPlaceDetail, getPetFood };

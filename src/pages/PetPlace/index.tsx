@@ -78,16 +78,7 @@ const Place = () => {
                 className={styles.placeItem}
                 onClick={() =>
                   navigate(`/petplace/${place.id}`, {
-                    state: {
-                      id: place.id,
-                      name: place.title,
-                      address: place.address,
-                      lotAddress: place.lotAddress ?? "정보 없음",
-                      lat: place.lat ?? null,
-                      lng: place.lng ?? null,
-                      imageUrl: place.imageUrl ?? defaultImg,
-                      category: selectedCategory,
-                    },
+                    state: { ...place, category: selectedCategory },
                   })
                 }
               >
