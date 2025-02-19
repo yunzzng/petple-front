@@ -13,6 +13,15 @@ const getPosts = async (pageParam: number) => {
   }
 };
 
+const getPopularPost = async () => {
+  try {
+    const response = await baseInstance.get("/posts/popular");
+    return response.data.posts;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const getPostById = async (id: string) => {
   try {
     const response = await baseInstance.get(`/posts/post/${id}`);
@@ -62,4 +71,11 @@ const deletePostById = async (id: string) => {
   }
 };
 
-export { addPost, getPostById, updatePostById, deletePostById, getPosts };
+export {
+  addPost,
+  getPostById,
+  updatePostById,
+  deletePostById,
+  getPosts,
+  getPopularPost,
+};
