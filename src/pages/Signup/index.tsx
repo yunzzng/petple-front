@@ -5,13 +5,8 @@ import { ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button } from "@/components";
-
-type SignupFields = {
-  email: string;
-  name: string;
-  password: string;
-  passwordConfirm: string;
-};
+import { SignupFields } from "@/types/user.type";
+import { passwordPattern, emailPattern } from "@/consts/regex";
 
 const defaultLoginFormValues = {
   email: "",
@@ -74,7 +69,7 @@ const Signup = () => {
   };
 
   const handleSubmitError = (errors: any) => {
-    console.log("유효성 검사 실패", errors);
+    console.error("유효성 검사 실패", errors);
   };
 
   const handleGoogleLogin = async () => {
@@ -104,7 +99,7 @@ const Signup = () => {
                 {...register("email", {
                   required: true,
                   pattern: {
-                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    value: emailPattern,
                     message: "올바른 이메일 형식을 입력해주세요!",
                   },
                 })}
@@ -118,8 +113,7 @@ const Signup = () => {
                 {...register("password", {
                   required: true,
                   pattern: {
-                    value:
-                      /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@&!%*?&])[A-Za-z\d@&!%*?&]{8,}$/,
+                    value: passwordPattern,
                     message:
                       " 비밀번호는 영문,숫자,특수문자 포함 8자 이상이어야 합니다!",
                   },
