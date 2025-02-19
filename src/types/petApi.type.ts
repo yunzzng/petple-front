@@ -1,3 +1,5 @@
+export type MedicalType = "hospital" | "pharmacy";
+
 export interface MedicalService {
   name: string;
   lat: number | null;

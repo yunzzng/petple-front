@@ -1,9 +1,9 @@
 import baseInstance from "./axios";
 import { PlaceInfo, FuneralService, MedicalService, FoodService } from "@/types/petApi.type";
 
-const getFuneralData = async (): Promise<FuneralService[]> => {
+const getFuneralData = async (region: string): Promise<FuneralService[]> => {
   try {
-    const response = await baseInstance.get("/public/funeral");
+    const response = await baseInstance.get(`/public/funeral?region=${region}`);
     return response.data.funeralData;
   } catch (error) {
     return [];
