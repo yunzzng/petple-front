@@ -6,10 +6,7 @@ const addComment = async (data: {
   hasParent: boolean;
 }) => {
   try {
-    const response = await baseInstance.post("/comments", data);
-    if (!response.data.success) {
-      throw new Error(response.data.message);
-    }
+    await baseInstance.post("/comments", data);
   } catch (error) {
     throw error;
   }

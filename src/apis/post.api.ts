@@ -4,9 +4,6 @@ import baseInstance from "./axios";
 const getPosts = async (pageParam: number) => {
   try {
     const response = await baseInstance.get(`/posts?page=${pageParam}`);
-    if (!response.data.success) {
-      throw new Error(response.data.message);
-    }
     return response.data;
   } catch (error) {
     throw error;
@@ -25,9 +22,6 @@ const getPopularPost = async () => {
 const getPostById = async (id: string) => {
   try {
     const response = await baseInstance.get(`/posts/post/${id}`);
-    if (!response.data.success) {
-      throw new Error(response.data.message);
-    }
     return response.data.post;
   } catch (error) {
     throw error;
@@ -40,10 +34,7 @@ const addPost = async (data: {
   description: string;
 }) => {
   try {
-    const response = await baseInstance.post("/posts/post", data);
-    if (!response.data.success) {
-      throw new Error(response.data.message);
-    }
+    await baseInstance.post("/posts/post", data);
   } catch (error) {
     throw error;
   }
@@ -51,10 +42,7 @@ const addPost = async (data: {
 
 const updatePostById = async (data: PostFormData) => {
   try {
-    const response = await baseInstance.put(`/posts/post/${data._id}`, data);
-    if (!response.data.success) {
-      throw new Error(response.data.message);
-    }
+    await baseInstance.put(`/posts/post/${data._id}`, data);
   } catch (error) {
     throw error;
   }
@@ -62,10 +50,7 @@ const updatePostById = async (data: PostFormData) => {
 
 const deletePostById = async (id: string) => {
   try {
-    const response = await baseInstance.delete(`/posts/post/${id}`);
-    if (!response.data.success) {
-      throw new Error(response.data.message);
-    }
+    await baseInstance.delete(`/posts/post/${id}`);
   } catch (error) {
     throw error;
   }
