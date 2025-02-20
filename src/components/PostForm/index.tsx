@@ -157,7 +157,6 @@ const PostForm = ({
           placeholder="내용을 입력해주세요"
           className={styles.description}
           onInput={handleResizeHeight}
-          rows={1}
           {...register("description")}
         ></textarea>
         {errors.description && (
