@@ -15,6 +15,7 @@ const CommunityPage = lazy(() => import("@/pages/Community"));
 const LoginPage = lazy(() => import("@/pages/Login"));
 const SignupPage = lazy(() => import("@/pages/Signup"));
 const ProfilePage = lazy(() => import("@/pages/Profile"));
+const CreatePetProfile = lazy(() => import("@/pages/CreatePetProfile"));
 
 const router = createBrowserRouter([
   {
@@ -112,6 +113,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<p>...loading</p>}>
             <ProfilePage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/createpet",
+        element: (
+          <Suspense fallback={<p>...loading</p>}>
+            <CreatePetProfile />
           </Suspense>
         ),
       },

@@ -104,6 +104,7 @@
   flex-direction: column;
   padding: 40px 0px;
   gap: 20px;
+  width: 280px;
 }
 
 .pet_div {
@@ -140,10 +141,15 @@
   padding: 10px 5px;
   border-bottom: solid 1px;
   margin-top: 50px;
+  display: flex;
+  gap: 10px;
 }
 
 .post_div p {
   font-weight: bold;
+  color: #787878;
+  font-size: 13px;
+  cursor: pointer;
 }
 
 .post_ul li {

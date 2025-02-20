@@ -141,7 +141,7 @@ const Profile = () => {
 
   // petForm 추가
   const handleAddPetProfile = () => {
-    navigate("/createpetprofile");
+    navigate("/createpet");
   };
 
   return (
@@ -230,6 +230,8 @@ const Profile = () => {
       </div>
       <div className={style.post_div}>
         <p>내가 작성한 게시물</p>
+        <span>|</span>
+        <p>좋아요 누른 게시물</p>
       </div>
       <ul className={style.post_ul}>
         <li>
