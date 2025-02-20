@@ -1,0 +1,106 @@
+@font-face {
+  font-family: "HakgyoansimDunggeunmisoTTF-B";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimDunggeunmisoTTF-B.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+.container {
+  padding: 20px;
+  height: auto;
+  background-color: white;
+  flex-grow: 1;
+}
+
+.title {
+  font-size: 18px;
+  font-family: "HakgyoansimDunggeunmisoTTF-B";
+  margin-bottom: 20px;
+}
+
+.messageText {
+  font-size: 16px;
+  color: #666;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.mapContainer {
+  width: 100%;
+}
+
+.noMapText {
+  font-size: 14px;
+  color: #888;
+}
+
+.backButton {
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  font-size: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.backButton:hover {
+  background-color: #e55353;
+}
+
+.testBox{
+  text-align: left;
+  margin: 0 10px;
+}
+
+.placeItem {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.placeImage {
+  width: 80%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.placeName {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-family: "HakgyoansimDunggeunmisoTTF-B";
+  color: #002daa;
+}
+
+.infoBox{
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.infoText {
+  font-size: 10px;
+  color: #888;
+  margin-bottom: 6px;
+  line-height: 1.4;
+}
+
+.infoTitle {
+  font-size: 15px;
+  margin-bottom: 10px;
+  font-family: "HakgyoansimDunggeunmisoTTF-B";
+}
+
+.dataName {
+  font-weight: bold;
+  color: #333;
+  font-size: 12px;
+}

@@ -8,14 +8,10 @@ const MenuBar = () => {
   const navigate = useNavigate();
   return (
     <footer className={styles.footer}>
-      <a>
-        <img
-          src={menuHome}
-          className={styles.home}
-          onClick={() => navigate("/")}
-        />
+      <a onClick={() => navigate("/")}>
+        <img src={menuHome} className={styles.home} />
       </a>
-      <a>
+      <a onClick={() => navigate("/community")}>
         <img src={community} className={styles.community} />
       </a>
       <a>

@@ -88,6 +88,10 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/petplace/:id",
+        element: <PetPlaceDetail />,
+      },
+      {
         path: "/petfuneral",
         element: (
           <Suspense fallback={<p>...loading</p>}>

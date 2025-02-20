@@ -1,8 +1,12 @@
-import { FC, useContext } from "react";
+import { FC, useContext, useMemo } from "react";
 import { CarouselContext } from ".";
 import styles from "./Carousel.module.css";
 
-const CarouselIndicator: FC = () => {
+interface CarouselIndicatorProps {
+  className?: string;
+}
+
+const CarouselIndicator: FC<CarouselIndicatorProps> = ({ className }) => {
   const carouselContext = useContext(CarouselContext) ?? {
     carouselIndex: 0,
     setCarouselIndex: () => {},
@@ -10,11 +14,14 @@ const CarouselIndicator: FC = () => {
   };
 
   const { carouselIndex, setCarouselIndex, itemLength } = carouselContext;
-
   const indexes = Array.from({ length: itemLength }, (_, index) => index);
 
+  const carouselIndicatorCls = useMemo(() => {
+    return `${styles.carouselIndicator} ${className || ""}`.trim();
+  }, [className]);
+
   return (
-    <div className={styles.carouselIndicator}>
+    <div className={carouselIndicatorCls}>
       {indexes.map((index) => (
         <button
           key={index}

@@ -3,13 +3,8 @@ import google from "/images/google.png";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import userAuthStore from "@/zustand/userAuth";
 import { Button } from "@/components";
-
-type SignupFields = {
-  email: string;
-  password: string;
-};
+import { LoginFields } from "@/types/user.type";
 
 const defaultLoginFormValues = {
   email: "",
@@ -21,12 +16,12 @@ const Login = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<SignupFields>({
+  } = useForm<LoginFields>({
     defaultValues: defaultLoginFormValues,
   });
   const navigate = useNavigate();
 
-  const onSubmit = async (data: SignupFields) => {
+  const onSubmit = async (data: LoginFields) => {
     try {
       const response = await axios.post("/api/user/login", {
         email: data.email,
@@ -35,12 +30,6 @@ const Login = () => {
 
       if (response.status === 200) {
         alert("로그인 성공");
-
-        userAuthStore.setState({
-          isLoggedIn: true,
-          // userId: response.data.user.id,
-          // userEmail: response.data.user.email,
-        });
         navigate("/");
       }
     } catch (error) {
