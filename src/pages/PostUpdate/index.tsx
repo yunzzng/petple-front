@@ -23,7 +23,7 @@ const PostUpdatePage = () => {
 
   const { mutateAsync: submitForm } = useMutation({
     mutationFn: updatePostById,
-    onSuccess: () => navigate(`/community/detail/post/${id}`),
+    onSuccess: () => navigate(`/community/post/${id}`, { replace: true }),
   });
 
   const { mutateAsync: deletePost } = useMutation({
