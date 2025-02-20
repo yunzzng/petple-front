@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./home.module.css";
 import carouselData from "@/consts/mainBannerData";
@@ -7,6 +7,7 @@ import Carousel from "@/components/Carousel";
 import menuList from "@/consts/menuList";
 import pettalkBanner from "/images/pettalkBanner.png";
 import Menu from "@/components/Menu";
+import PopularPosts from "./components/PopularPosts";
 
 interface Post {}
 
@@ -55,16 +56,20 @@ const Home = () => {
           <Carousel.Indicator />
         </Carousel>
 
-        <Menu menuList={menuList} className={styles.homeMenu}/>
+        <Menu menuList={menuList} className={styles.homeMenu} />
 
         <div className={styles.postSection}>
           <div
             className={styles.postText}
             style={{ backgroundImage: `url(${pettalkBanner})` }}
-            onClick={()=> navigate('/community')}
+            onClick={() => navigate("/community")}
           ></div>
           <div className={styles.postsWrapper}>
-            <div className={styles.postsContainer}>{/* 게시글 부분 */}</div>
+            <div className={styles.postsContainer}>
+              <Suspense fallback={<p>Loading...</p>}>
+                <PopularPosts />
+              </Suspense>
+            </div>
           </div>
         </div>
       </div>

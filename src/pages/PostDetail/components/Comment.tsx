@@ -1,6 +1,10 @@
+import styles from "./comment.module.css";
+import arrowDown from "/images/icons/arrow_drop_down.svg";
+import arrowUp from "/images/icons/arrow_drop_up.svg";
 import { CommentType, ReplyType } from "@/types/post.type";
+import Avartar from "@/components/Avartar";
+import Accordion from "@/components/Accordion";
 import { useState } from "react";
-import defaultUserImage from "/images/profile.png";
 
 interface CommentProps {
   comments: CommentType[];
@@ -21,69 +25,30 @@ const Comment = ({
   handleDeleteComment,
   handleUpdateComment,
 }: CommentProps) => {
-  console.log(comments);
-  const [isOpen, setIsOpen] = useState(false);
   return (
-    <ul>
+    <ul className={styles.comments_wrapper}>
       {comments.map((comment) => (
         <li key={`post-comment-${comment._id}`}>
-          <div>
-            <div>
-              <img
-                src={comment.creator.image || defaultUserImage}
-                alt="댓글 작성자 이미지"
+          <div className={styles.comment_body}>
+            <Avartar image={comment.creator.image} className={styles.avatar} />
+            <Main comment={comment} handleReply={handleReply} />
+            {signinedUserId === comment.creator._id && (
+              <ActionMenu
+                handleUpdateComment={handleUpdateComment}
+                handleDeleteComment={handleDeleteComment}
+                comment={comment}
               />
-              <p>
-                {comment.creator.name}
-                <span>{comment.creator.nickName}</span>
-              </p>
-            </div>
-            <div>
-              {comment.replies.length > 0 && (
-                <p onClick={() => setIsOpen(true)}>
-                  {comment.replies.length}개의 답글
-                </p>
-              )}
-              <ul>
-                {comment.replies.map((reply) => (
-                  <li>
-                    <p>{reply.description}</p>
-                    {reply.creatorId === signinedUserId && (
-                      <div>
-                        <button
-                          onClick={() => {
-                            handleReply(comment);
-                            handleUpdateReply(reply);
-                          }}
-                        >
-                          수정
-                        </button>
-                        <button
-                          onClick={() =>
-                            handleDeleteReply(comment._id, reply._id)
-                          }
-                        >
-                          삭제
-                        </button>
-                      </div>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </div>
+            )}
           </div>
-          <p>{comment.description}</p>
-          {signinedUserId === comment.creator._id && (
-            <div>
-              <button onClick={() => handleUpdateComment(comment)}>
-                댓글수정
-              </button>
-              <button onClick={() => handleDeleteComment(comment._id)}>
-                댓글삭제
-              </button>
-            </div>
+          {!!comment.replies.length && (
+            <Replies
+              comment={comment}
+              signinedUserId={signinedUserId}
+              handleReply={handleReply}
+              handleUpdateReply={handleUpdateReply}
+              handleDeleteReply={handleDeleteReply}
+            />
           )}
-          <button onClick={() => handleReply(comment)}>답글</button>
         </li>
       ))}
     </ul>
@@ -91,3 +56,124 @@ const Comment = ({
 };
 
 export default Comment;
+
+function Main({
+  comment,
+  handleReply,
+}: {
+  comment: CommentType;
+  handleReply: (comment: CommentType) => void;
+}) {
+  const { creator, createdAt } = comment;
+  return (
+    <div className={styles.main_wrapper}>
+      <p>
+        {creator.nickName}{" "}
+        <span className={styles.comment_createdAt}>
+          {new Date(createdAt).toLocaleDateString()}
+        </span>
+      </p>
+      <p className={styles.description}>{comment.description}</p>
+      <p onClick={() => handleReply(comment)} className={styles.reply}>
+        답글
+      </p>
+    </div>
+  );
+}
+
+function ActionMenu({
+  handleUpdateComment,
+  handleDeleteComment,
+  comment,
+}: {
+  handleUpdateComment: (comment: CommentType) => void;
+  handleDeleteComment: (commentId: string) => void;
+  comment: CommentType;
+}) {
+  return (
+    <div className={styles.actionmenu_wrapper}>
+      <p onClick={() => handleUpdateComment(comment)}>수정</p>
+      <p onClick={() => handleDeleteComment(comment._id)}>삭제</p>
+    </div>
+  );
+}
+
+function Replies({
+  comment,
+  signinedUserId,
+  handleReply,
+  handleUpdateReply,
+  handleDeleteReply,
+}: {
+  comment: CommentType;
+  signinedUserId: string | null;
+  handleReply: (comment: CommentType) => void;
+  handleUpdateReply: (reply: ReplyType) => void;
+  handleDeleteReply: (commentId: string, replyId: string) => void;
+}) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const handleChangeOpen = (isOpen: boolean) => {
+    setIsOpen(isOpen);
+  };
+
+  return (
+    <Accordion.Root
+      className={styles.replies_wrapper}
+      onChange={handleChangeOpen}
+      defaultOpenStatus={isOpen}
+    >
+      <Accordion.Title>
+        <Accordion.Button className={styles.replies_button}>
+          <div className={styles.replies_title}>
+            {isOpen ? (
+              <img
+                src={arrowUp}
+                alt="위쪽 화살표 이미지"
+                className={styles.arrow_up_img}
+              />
+            ) : (
+              <img
+                src={arrowDown}
+                alt="아래쪽 화살표 이미지"
+                className={styles.arrow_down_img}
+              />
+            )}
+            {comment.replies.length}개의 답글 보기
+          </div>
+        </Accordion.Button>
+      </Accordion.Title>
+      <Accordion.Content>
+        <ul className={styles.replies_list}>
+          {comment.replies.map((reply) => (
+            <li key={`post-comment-${reply._id}`}>
+              <div className={styles.comment_body}>
+                <Avartar image={reply.profileImage} className={styles.avatar} />
+                <div className={styles.main_wrapper}>
+                  <p>
+                    {reply.name}{" "}
+                    <span className={styles.comment_createdAt}>
+                      {new Date(reply.createdAt).toLocaleDateString()}
+                    </span>
+                  </p>
+                  <p className={styles.description}>{reply.description}</p>
+                </div>
+                {signinedUserId === comment.creator._id && (
+                  <ActionMenu
+                    handleUpdateComment={() => {
+                      handleReply(comment);
+                      handleUpdateReply(reply);
+                    }}
+                    handleDeleteComment={() =>
+                      handleDeleteReply(comment._id, reply._id)
+                    }
+                    comment={comment}
+                  />
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </Accordion.Content>
+    </Accordion.Root>
+  );
+}

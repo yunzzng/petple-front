@@ -5,19 +5,30 @@ import profileIcon from "/images/profile.png";
 import commentIcon from "/images/icons/comment.svg";
 import likeIcon from "/images/icons/like.svg";
 import { PostItem } from "@/types/post.type";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useMemo } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { deletePostById } from "@/apis/post.api";
+import userAuthStore from "@/zustand/userAuth";
 
 interface PostProps {
   post: PostItem;
 }
 
 const CommunityPost = ({ post }: PostProps) => {
-  const { creator, images, tags, description, createdAt, _id } = post;
-  const navigate = useNavigate();
+  const { creator, images, tags, createdAt, _id, comments, likes } = post;
+
   return (
     <>
-      <li key={`post-item-${_id}`} className={styles.post}>
-        <PostHeader creator={creator} tags={tags} createdAt={createdAt} />
+      <div key={`post-item-${_id}`} className={styles.post}>
+        <PostHeader
+          creator={creator}
+          tags={tags}
+          createdAt={createdAt}
+          commentsCount={comments.length}
+          likesCount={likes.length}
+          postId={_id}
+        />
         <Carousel>
           <Carousel.ItemList>
             {images.map((src, index) => (
@@ -34,22 +45,36 @@ const CommunityPost = ({ post }: PostProps) => {
             ))}
           </Carousel.ItemList>
           <Carousel.Indicator />
+          <Carousel.Navigator />
         </Carousel>
-        <div
-          className={styles.description}
-          onClick={() => navigate(`/community/post/${_id}`)}
-        >
-          {description}
-        </div>
-      </li>
+      </div>
     </>
   );
 };
 
 export default CommunityPost;
 
-const PostHeader = (data: Pick<PostItem, "creator" | "createdAt" | "tags">) => {
-  const { creator, tags, createdAt } = data;
+const PostHeader = (
+  data: Pick<PostItem, "creator" | "createdAt" | "tags"> & {
+    commentsCount: number;
+    likesCount: number;
+    postId: string;
+  }
+) => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { userId } = userAuthStore();
+  const { creator, tags, createdAt, commentsCount, likesCount, postId } = data;
+  const isEditablePost = useMemo(
+    () => location.pathname.includes("post") && creator._id === userId,
+    [location]
+  );
+  const { mutate: deletePostMutate } = useMutation({
+    mutationFn: deletePostById,
+    onSuccess: () => {
+      navigate("/community");
+    },
+  });
   return (
     <div className={styles.post_header}>
       <div className={styles.post_header_top}>
@@ -69,15 +94,21 @@ const PostHeader = (data: Pick<PostItem, "creator" | "createdAt" | "tags">) => {
               {new Date(createdAt).toLocaleDateString()}
             </div>
             <div className={styles.createdAt}>
-              <img src={commentIcon} alt="시계 이미지" />
-              <span>3</span>
+              <img src={commentIcon} alt="댓글 이미지" />
+              <span>{commentsCount}</span>
             </div>
             <div className={styles.createdAt}>
-              <img src={likeIcon} alt="시계 이미지" />
-              <span>22</span>
+              <img src={likeIcon} alt="따봉 이미지" />
+              <span>{likesCount}</span>
             </div>
           </div>
         </div>
+        {isEditablePost && (
+          <div className={styles.action_menu_wrapper}>
+            <p onClick={() => navigate(`/community/update/${postId}`)}>수정</p>
+            <p onClick={() => deletePostMutate(postId)}>삭제</p>
+          </div>
+        )}
       </div>
       <ul className={styles.tags_container}>
         {tags.map((tag, key) => (

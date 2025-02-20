@@ -24,6 +24,7 @@ export type CommentType = {
   description: string;
   replies: ReplyType[];
   hasParent: boolean;
+  createdAt: string;
 };
 
 export type PostFormData = {
@@ -41,7 +42,7 @@ export type PostItem = PostFormData & {
     nickName: string;
     image: string;
   };
-  comments: [];
-  likes: [];
+  comments: string[];
+  likes: string[];
   createdAt: Date;
 };

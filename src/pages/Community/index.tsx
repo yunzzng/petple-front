@@ -3,7 +3,8 @@ import styles from "./community.module.css";
 import { useEffect, useRef } from "react";
 import { getPosts } from "@/apis/post.api";
 import { PostItem } from "@/types/post.type";
-import CommunityPost from "@/components/CommunityPost";
+import Post from "./components/Post";
+import FloatingButton from "./components/FloatingButton";
 
 const CommunityPage = () => {
   const postContainerRef = useRef<HTMLUListElement>(null);
@@ -40,10 +41,11 @@ const CommunityPage = () => {
     <section className={styles.wrapper}>
       <ul className={styles.post_container} ref={postContainerRef}>
         {posts?.map((post: PostItem) => (
-          <CommunityPost post={post} key={post._id} />
+          <Post post={post} key={`community-post-${post._id}`} />
         ))}
         <div ref={targetRef}></div>
       </ul>
+      <FloatingButton />
     </section>
   );
 };

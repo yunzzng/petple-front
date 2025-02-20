@@ -6,9 +6,11 @@ import { deletePostById, getPostById, updatePostById } from "@/apis/post.api";
 import PostForm, { PostFormFields } from "@/components/PostForm";
 import { SubmitHandler } from "react-hook-form";
 import { useEffect } from "react";
+import userAuthStore from "@/zustand/userAuth";
 
 const PostUpdatePage = () => {
   const navigate = useNavigate();
+  const { userId } = userAuthStore();
   const { id } = useParams();
   const { data: post } = useSuspenseQuery({
     queryKey: ["post", id],
@@ -49,7 +51,9 @@ const PostUpdatePage = () => {
   const handleDeletePost = () => id && deletePost(id);
 
   useEffect(() => {
-    if (post === null) return navigate("/404", { replace: true });
+    if (post === null) navigate("/404", { replace: true });
+    if (post.creator._id !== userId)
+      throw new Error("게시글 수정 권한이 없습니다.");
   }, [post]);
 
   return (

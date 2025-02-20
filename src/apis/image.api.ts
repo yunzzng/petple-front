@@ -11,9 +11,6 @@ const getPresignedUrl = async ({
     const response = await baseInstance.get(
       `/images/s3/presigned-url?fileName=${fileName}&fileType=${fileType}`
     );
-    if (response.data.isError) {
-      throw new Error(response.data.message);
-    }
     return response.data.presignedUrl;
   } catch (error) {
     throw error;

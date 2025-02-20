@@ -150,12 +150,12 @@ html {
   margin: 0 auto;
 }
 
-.wrraper {
+.wrapper {
   max-width: 360px;
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
   position: relative;
+  height: 100%;
 }
 
 .content {
