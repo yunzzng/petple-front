@@ -89,7 +89,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/petplace/:id",
-        element: <PetPlaceDetail />,
+        element: <PostDetailPage />,
       },
       {
         path: "/petfuneral",
