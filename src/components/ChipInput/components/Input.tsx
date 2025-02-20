@@ -19,10 +19,19 @@ const Input: FC<InputProps> = ({
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      if (!value.trim()) return;
-      if (value.length > maxItemLength || items.length >= maxItemsCount) return;
+      const validatedValue = value.trim().replace(/#+/g, "#");
 
-      addItem(value);
+      if (!validatedValue) return;
+      if (
+        validatedValue.length > maxItemLength ||
+        items.length >= maxItemsCount
+      )
+        return;
+      if (items.includes(validatedValue)) {
+        setValue("");
+        return;
+      }
+      addItem(validatedValue);
       setValue("");
     }
   };

@@ -12,7 +12,7 @@ const ChipInput: FC<ChipInputProps> = ({ onChange, values }) => {
     <>
       <Chip.Root onChange={onChange} defaultItems={values}>
         <Chip.Input className={styles.input} />
-        <p className={styles.info}>* 태그는 10가지만 추가 가능합니다.</p>
+        <p className={styles.info}>* 태그는 최대 10개까지 추가 가능합니다.</p>
         <Chip.ItemsList className={styles.itemList} />
       </Chip.Root>
     </>

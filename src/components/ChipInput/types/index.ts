@@ -18,8 +18,8 @@ export interface ChipContextProps {
 export interface RootProps extends BaseProps {
   maxItemLength?: number;
   maxItemsCount?: number;
-  onChange?: (value: Array<string>) => void;
   defaultItems?: Array<string>;
+  onChange?: (value: Array<string>) => void;
 }
 
 /* Input Component */

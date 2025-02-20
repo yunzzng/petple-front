@@ -19,9 +19,9 @@ const PostFormSchema = z.object({
 
 export type PostFormFields = z.infer<typeof PostFormSchema>;
 interface PostFormProps {
+  post?: PostFormData;
   requestType: "create" | "update";
   onSubmit: (data: PostFormFields) => void;
-  post?: PostFormData;
   onClickDelete?: () => void;
 }
 
@@ -36,9 +36,9 @@ const PostForm = ({
     post?.images ?? []
   );
   const {
+    control,
     register,
     watch,
-    control,
     handleSubmit,
     setError,
     setValue,
