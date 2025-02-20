@@ -7,10 +7,12 @@ export const imageUpload = async (file: File) => {
       fileName: `${file.name}-${Date.now()}`,
       fileType: file.type,
     });
-    await axios.put(presignedUrl, file, {
+    const response = await axios.put(presignedUrl, file, {
       headers: { "Content-Type": file.type },
     });
-    return presignedUrl.split("?")[0];
+    if (response.status === 200) {
+      return presignedUrl.split("?")[0];
+    }
   } catch (error) {
     throw error;
   }
