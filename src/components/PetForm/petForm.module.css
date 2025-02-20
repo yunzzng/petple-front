@@ -50,7 +50,7 @@
 .pet_ul {
   display: flex;
   align-items: center;
-
+  justify-content: left;
   gap: 20px;
 }
 
@@ -64,9 +64,16 @@
   justify-content: center;
 }
 
-.edit_pet_ul li {
+.list {
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+.list_div {
+  display: flex;
   gap: 10px;
   align-items: center;
 }
@@ -85,4 +92,11 @@
 
 .file {
   display: none;
+}
+
+.errors {
+  font-size: 12px;
+  color: rgb(251, 77, 77);
+  display: flex;
+  justify-content: center;
 }

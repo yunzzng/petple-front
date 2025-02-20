@@ -1,12 +1,13 @@
 import { useForm } from "react-hook-form";
 import style from "./petForm.module.css";
 import Button from "../Button";
-import axios from "axios";
 import userAuthStore from "@/zustand/userAuth";
 import { ChangeEvent, FC, useEffect, useRef, useState } from "react";
 import { imageUpload } from "@/utils/imageUpload";
 import { Pet } from "@/types/user.type";
 import { deletePet, updatePetInfo } from "@/apis/profile.api";
+import { petSchema } from "@/consts/zodSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const defaultValuesPetForm = {
   name: "",
@@ -32,7 +33,12 @@ const PetForm: FC<petInfoProps> = (props) => {
     register,
     formState: { errors },
     setValue,
-  } = useForm<Pet>({ defaultValues: defaultValuesPetForm });
+    reset,
+  } = useForm<Pet>({
+    defaultValues: defaultValuesPetForm,
+    resolver: zodResolver(petSchema),
+    mode: "onBlur",
+  });
   const { userId, setUserPet, userPet } = userAuthStore();
   const [previewImg, setPreviewImg] = useState<string>(image || "");
   const [file, setFile] = useState<File | null>(null);
@@ -61,6 +67,18 @@ const PetForm: FC<petInfoProps> = (props) => {
   };
 
   const onSubmit = async (petData: Pet) => {
+    console.log("petData", petData);
+    console.log(age, name, image, breed);
+    if (
+      name === petData.name &&
+      age === petData.age &&
+      image === petData.image &&
+      breed === petData.breed
+    ) {
+      setEdit(false);
+      return;
+    }
+
     let imageUrl = previewImg;
     if (file) {
       imageUrl = await imageUpload(file);
@@ -102,6 +120,18 @@ const PetForm: FC<petInfoProps> = (props) => {
     }
   };
 
+  const handleClose = () => {
+    setEdit(false);
+    reset({
+      name: name || "",
+      age: age || "",
+      breed: breed || "",
+      _id: _id || "",
+      image: image || "",
+    });
+    setPreviewImg(image || "");
+  };
+
   return (
     <div className={style.petForm_total_wrap}>
       <form onSubmit={handleSubmit(onSubmit)} className={style.form}>
@@ -111,21 +141,13 @@ const PetForm: FC<petInfoProps> = (props) => {
               <Button type="submit" className={style.button}>
                 저장
               </Button>
-              {/* <Button
-                  type="button"
-                  onClick={deletePetInfo}
-                  className={style.button}
-                >
-                  삭제
-                </Button> */}
-
-              <Button className={style.button} onClick={() => setEdit(false)}>
+              <Button className={style.button} onClick={handleClose}>
                 닫기
               </Button>
             </div>
             <ul className={style.edit_pet_ul}>
               <div className={style.edit_pet_ul_div}>
-                <li>
+                <li className={style.list}>
                   <img
                     onClick={handleClickFile}
                     src={previewImg}
@@ -138,29 +160,50 @@ const PetForm: FC<petInfoProps> = (props) => {
                     className={style.file}
                   />
                 </li>
-                <li>
-                  <label>이름</label>
-                  <input
-                    className={style.input}
-                    placeholder="이름"
-                    {...register("name", { required: true })}
-                  />
+                <li className={style.list}>
+                  <div className={style.list_div}>
+                    <label>이름:</label>
+                    <input
+                      className={style.input}
+                      placeholder="이름"
+                      {...register("name", { required: true })}
+                    />
+                  </div>
+                  <div>
+                    {errors.name && (
+                      <p className={style.errors}>{errors.name.message}</p>
+                    )}
+                  </div>
+                </li>
+                <li className={style.list}>
+                  <div className={style.list_div}>
+                    <label>나이:</label>
+                    <input
+                      className={style.input}
+                      placeholder="나이"
+                      {...register("age", { required: true })}
+                    />
+                  </div>
+                  <div>
+                    {errors.age && (
+                      <p className={style.errors}>{errors.age.message}</p>
+                    )}
+                  </div>
                 </li>
                 <li>
-                  <label>나이</label>
-                  <input
-                    className={style.input}
-                    placeholder="나이"
-                    {...register("age", { required: true })}
-                  />
-                </li>
-                <li>
-                  <label>품종</label>
-                  <input
-                    className={style.input}
-                    placeholder="품종"
-                    {...register("breed", { required: true })}
-                  />
+                  <div className={style.list_div}>
+                    <label>품종:</label>
+                    <input
+                      className={style.input}
+                      placeholder="품종"
+                      {...register("breed", { required: true })}
+                    />
+                  </div>
+                  <div>
+                    {errors.breed && (
+                      <p className={style.errors}>{errors.breed.message}</p>
+                    )}
+                  </div>
                 </li>
               </div>
 
