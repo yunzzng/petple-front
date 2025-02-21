@@ -1,6 +1,6 @@
-import { FC, useContext, useEffect, Children, ReactNode, useMemo } from "react";
-import { CarouselContext } from ".";
+import { FC, useEffect, Children, ReactNode, useMemo } from "react";
 import styles from "./Carousel.module.css";
+import useCarouselContext from "./hooks/useCarouselContext";
 
 interface CarouselItemListProps {
   children: ReactNode;
@@ -8,16 +8,14 @@ interface CarouselItemListProps {
 }
 
 const CarouselItemList: FC<CarouselItemListProps> = ({ children, className }) => {
-  const carouselContext = useContext(CarouselContext) ?? { setItemLength: () => {} };
-  const { setItemLength } = carouselContext;
+  const { setItemLength } = useCarouselContext();
 
   const carouselItemListCls = useMemo(() => {
     return `${styles.carouselItemList} ${className || ""}`.trim();
   }, [className]);
 
   useEffect(() => {
-    const totalItems = Children.count(children);
-    setItemLength(totalItems);
+    setItemLength(Children.count(children));
   }, [children, setItemLength]);
 
   return <div className={carouselItemListCls}>{children}</div>;

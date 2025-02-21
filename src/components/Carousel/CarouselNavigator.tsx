@@ -1,18 +1,13 @@
-import { FC, useContext, useMemo } from "react";
-import { CarouselContext } from ".";
+import { FC, useMemo } from "react";
 import styles from "./Carousel.module.css";
+import useCarouselContext from "./hooks/useCarouselContext";
 
 interface CarouselNavigatorProps {
   className?: string;
 }
 
 const CarouselNavigator: FC<CarouselNavigatorProps> = ({ className }) => {
-  const carouselContext = useContext(CarouselContext) ?? {
-    setCarouselIndex: () => {},
-    itemLength: 0,
-  };
-
-  const { setCarouselIndex, itemLength } = carouselContext;
+  const { setCarouselIndex, itemLength } = useCarouselContext();
 
   const handleNavigation = (direction: "previous" | "next") => {
     setCarouselIndex((prevIndex) =>
@@ -32,16 +27,10 @@ const CarouselNavigator: FC<CarouselNavigatorProps> = ({ className }) => {
 
   return (
     <div className={carouselNavigatorCls}>
-      <button
-        className={styles.navButton}
-        onClick={() => handleNavigation("previous")}
-      >
+      <button className={styles.navButton} onClick={() => handleNavigation("previous")}>
         {"<"}
       </button>
-      <button
-        className={styles.navButton}
-        onClick={() => handleNavigation("next")}
-      >
+      <button className={styles.navButton} onClick={() => handleNavigation("next")}>
         {">"}
       </button>
     </div>
