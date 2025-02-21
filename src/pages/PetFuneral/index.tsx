@@ -30,7 +30,7 @@ const PetFuneral = () => {
   });
 
   // 검색 필터 적용
-  const filteredData = data.filter((item) => item.name.includes(searchTerm));
+  const filteredData = data.filter((item) => item.title.includes(searchTerm));
 
   // 페이지네이션 훅
   const { page, setPage, paginatedData, totalPages, startPage, endPage } =
@@ -57,7 +57,7 @@ const PetFuneral = () => {
               locations={paginatedData.map((item) => ({
                 lat: item.lat,
                 lng: item.lng,
-                name: item.name,
+                name: item.title,
               }))}
             />
           </div>
@@ -88,7 +88,7 @@ const PetFuneral = () => {
                   {paginatedData.map((item, index) => (
                     <li key={index} className={styles.listItem}>
                       <div className={styles.dataItem}>
-                        <strong className={styles.dataName}>{item.name}</strong>
+                        <strong className={styles.dataName}>{item.title}</strong>
                         <br />
                         {item.phone && (
                           <p className={styles.dataPhone}>
