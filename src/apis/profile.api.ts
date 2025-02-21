@@ -78,7 +78,6 @@ const updatePetInfo = async (
       petImage: imageUrl,
     });
 
-    console.log(response.data);
     if (response.data.success) {
       return response.data.pet;
     }

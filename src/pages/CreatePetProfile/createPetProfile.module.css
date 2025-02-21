@@ -10,24 +10,16 @@
   width: 280px;
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  align-items: center;
 }
 
 .pet_wrap {
   display: flex;
   flex-direction: column;
-  gap: 20px;
   padding: 20px;
   border-radius: 20px;
   background-color: #f5f5f5;
-}
-
-.pet_wrap div {
-  border-top: solid 1px #bababa;
-  padding: 20px 0px;
-  display: flex;
-  max-width: 260px;
-  gap: 20px;
+  width: 260px;
 }
 
 .petProfile_wrap_div p {
@@ -37,7 +29,6 @@
 
 .pet_wrap div li {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 10px;
@@ -51,7 +42,7 @@
 .pet_wrap div li input {
   border: none;
   border-bottom: solid 1px #f5f5f5;
-  width: 70px;
+  width: 150px;
   height: 30px;
   border-radius: 5px;
 }
@@ -81,7 +72,7 @@
 
 .petProfile_wrap_div {
   padding: 10px 5px;
-  border-bottom: solid 1px;
+
   margin-top: 50px;
   display: flex;
 }
@@ -97,4 +88,33 @@
   width: 100%;
   display: flex;
   justify-content: right;
+}
+
+.error {
+  font-size: 12px;
+  color: rgb(251, 77, 77);
+  display: flex;
+  justify-content: center;
+}
+
+.list_box {
+  padding: 20px 0px;
+  display: flex;
+  max-width: 260px;
+  gap: 20px;
+  flex-direction: column;
+}
+
+.list {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+}
+
+.list div {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }

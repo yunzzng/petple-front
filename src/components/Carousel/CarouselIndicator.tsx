@@ -1,20 +1,15 @@
-import { FC, useContext, useMemo } from "react";
-import { CarouselContext } from ".";
+import { FC, useMemo } from "react";
 import styles from "./Carousel.module.css";
+import useCarouselContext from "./hooks/useCarouselContext";
 
 interface CarouselIndicatorProps {
   className?: string;
 }
 
 const CarouselIndicator: FC<CarouselIndicatorProps> = ({ className }) => {
-  const carouselContext = useContext(CarouselContext) ?? {
-    carouselIndex: 0,
-    setCarouselIndex: () => {},
-    itemLength: 0,
-  };
+  const { carouselIndex, setCarouselIndex, itemLength } = useCarouselContext();
 
-  const { carouselIndex, setCarouselIndex, itemLength } = carouselContext;
-  const indexes = Array.from({ length: itemLength }, (_, index) => index);
+  const indexes = useMemo(() => Array.from({ length: itemLength }, (_, index) => index), [itemLength]);
 
   const carouselIndicatorCls = useMemo(() => {
     return `${styles.carouselIndicator} ${className || ""}`.trim();

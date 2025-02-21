@@ -30,6 +30,7 @@ const CreatePetProfile = () => {
   } = useForm({
     defaultValues: petDefaultValues,
     resolver: zodResolver(petSchema),
+    mode: "onBlur",
   });
 
   const handleClickFile = () => {
@@ -84,7 +85,7 @@ const CreatePetProfile = () => {
   return (
     <div className={style.petProfile_wrap}>
       <div className={style.petProfile_wrap_div}>
-        <p>반려동물 프로필 만들기</p>
+        <p>반려동물 프로필 만들기🐾</p>
       </div>
       <form className={style.form} onSubmit={handleSubmit(onSubmit)}>
         <ul className={style.pet_wrap}>
@@ -101,35 +102,47 @@ const CreatePetProfile = () => {
               className={style.file}
             />
           </li>
-          <div>
-            <li>
-              <label>이름</label>
-              <input type="text" {...register("name", { required: true })} />
-              {errors.name && (
-                <p className={style.error}>{errors.name.message}</p>
-              )}
+          <div className={style.list_box}>
+            <li className={style.list}>
+              <div>
+                <label>이름:</label>
+                <input type="text" {...register("name", { required: true })} />
+              </div>
+              <div>
+                {errors.name && (
+                  <p className={style.error}>{errors.name.message}</p>
+                )}
+              </div>
             </li>
-            <li>
-              <label>나이</label>
-              <input type="text" {...register("age", { required: true })} />
-              {errors.age && (
-                <p className={style.error}>{errors.age.message}</p>
-              )}
+            <li className={style.list}>
+              <div>
+                <label>나이:</label>
+                <input type="text" {...register("age", { required: true })} />
+              </div>
+              <div>
+                {errors.age && (
+                  <p className={style.error}>{errors.age.message}</p>
+                )}
+              </div>
             </li>
-            <li>
-              <label>품종</label>
-              <input type="text" {...register("breed", { required: true })} />
-              {errors.breed && (
-                <p className={style.error}>{errors.breed.message}</p>
-              )}
+            <li className={style.list}>
+              <div>
+                <label>품종:</label>
+                <input type="text" {...register("breed", { required: true })} />
+              </div>
+              <div>
+                {errors.breed && (
+                  <p className={style.error}>{errors.breed.message}</p>
+                )}
+              </div>
             </li>
           </div>
+          <div className={style.button_wrap}>
+            <Button type="submit" className={style.button}>
+              저장
+            </Button>
+          </div>
         </ul>
-        <div className={style.button_wrap}>
-          <Button type="submit" className={style.button}>
-            저장
-          </Button>
-        </div>
       </form>
     </div>
   );

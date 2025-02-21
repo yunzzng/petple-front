@@ -24,7 +24,7 @@ interface CarouselContextProps {
     setItemLength: Dispatch<SetStateAction<number>>;
 }
 
-const CarouselContext = createContext<CarouselContextProps | null>(null);
+export const CarouselContext = createContext<CarouselContextProps | null>(null);
 
 const Carousel: FC<CarouselProps> & CarouselCompoundProps = ({ children, className }) => {
     const [carouselIndex, setCarouselIndex] = useState<number>(0);
@@ -56,4 +56,3 @@ Carousel.Navigator = CarouselNavigator;
 Carousel.Indicator = CarouselIndicator;
 
 export default Carousel;
-export { CarouselContext };

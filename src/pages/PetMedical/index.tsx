@@ -6,17 +6,15 @@ import Map from "@/components/Map";
 import { Button, Search } from "@/components";
 import usePagination from "@/hooks/usePagination";
 import Pagination from "@/components/Pagination";
-import { MedicalService } from "@/types/petApi.type";
+import { MedicalService, MedicalType } from "@/types/petApi.type";
 import { getMedicalData } from "@/apis/public.api";
 
 const PetMedical = () => {
-  const [selectedTab, setSelectedTab] = useState<"hospital" | "pharmacy">(
-    "hospital"
-  );
+  const [selectedTab, setSelectedTab] = useState<MedicalType>("hospital");
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const handleTabChange = (tab: "hospital" | "pharmacy") => {
+  const handleTabChange = (tab: MedicalType) => {
     setSelectedTab(tab);
     setSelectedRegion(null);
     setSearchTerm("");

@@ -15,7 +15,6 @@ const getUserInfo = async () => {
       const user = response;
       return user;
     }
-    console.log("response", response);
   } catch (error) {
     console.error("유저 정보 가져오기 실패", error);
   }

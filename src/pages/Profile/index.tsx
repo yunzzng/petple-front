@@ -71,6 +71,7 @@ const Profile = () => {
     if (nickName === userNickName) {
       setIsNickNameConfirm(true);
       setUpdating(false);
+      alert("회원정보 수정 완료");
       return;
     }
 
@@ -104,8 +105,19 @@ const Profile = () => {
   const nickNameConfirm = async () => {
     const nickName = getValues("nickName");
 
+    if (nickName === userNickName) {
+      setIsNickNameConfirm(true);
+      setConfirmedNickName(nickName);
+    }
+
     if (!nickName) {
       alert("닉네임을 입력해주세요.");
+      return;
+    }
+
+    console.log(nickName.length);
+    if (nickName.length > 10) {
+      alert("닉네임은 10글자 이하로 입력해주세요.");
       return;
     }
 
@@ -129,7 +141,7 @@ const Profile = () => {
 
   // petForm 추가
   const handleAddPetProfile = () => {
-    navigate("/createpetprofile");
+    navigate("/createpet");
   };
 
   return (
@@ -160,6 +172,7 @@ const Profile = () => {
                 <input
                   className={style.input}
                   value={watch("nickName")}
+                  placeholder="닉네임은 1글자 이상, 10글자 이하입니다"
                   onChange={handleChangeNickName}
                 />
                 <Button
@@ -170,7 +183,6 @@ const Profile = () => {
                   중복확인
                 </Button>
               </div>
-              {errors.nickName && <p>{errors.nickName.message}</p>}
             </li>
             <Button type="submit" className={style.button}>
               회원정보 수정
@@ -179,7 +191,7 @@ const Profile = () => {
         ) : (
           <ul className={style.userUl}>
             <div className={style.userUl_div}>
-              <img src={userImage || ""} className={style.img} />
+              <img src={userImage || ""} className={style.basic_img} />
               <div className={style.userName_box}>
                 <p>{userNickName}</p>
                 <img
@@ -218,6 +230,8 @@ const Profile = () => {
       </div>
       <div className={style.post_div}>
         <p>내가 작성한 게시물</p>
+        <span>|</span>
+        <p>좋아요 누른 게시물</p>
       </div>
       <ul className={style.post_ul}>
         <li>

@@ -1,6 +1,6 @@
-import { FC, ReactNode, useContext, useMemo } from "react";
-import { CarouselContext } from ".";
+import { FC, ReactNode, useMemo } from "react";
 import styles from "./Carousel.module.css";
+import useCarouselContext from "./hooks/useCarouselContext";
 
 interface CarouselItemProps {
   index: number;
@@ -9,8 +9,7 @@ interface CarouselItemProps {
 }
 
 const CarouselItem: FC<CarouselItemProps> = ({ children, index, className }) => {
-  const carouselContext = useContext(CarouselContext) ?? { carouselIndex: 0 };
-  const { carouselIndex } = carouselContext;
+  const { carouselIndex } = useCarouselContext();
 
   const carouselItemCls = useMemo(() => {
     return `${styles.carouselItem} ${className || ""}`.trim();

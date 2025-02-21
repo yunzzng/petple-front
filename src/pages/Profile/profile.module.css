@@ -6,12 +6,12 @@
 }
 
 .userUl {
-  padding: 30px;
+  padding: 20px;
   /* border-top: 1px solid; */
   display: flex;
   flex-direction: column;
   gap: 20px;
-  width: 260px;
+  width: 100%;
 }
 
 .userUl_div {
@@ -27,6 +27,12 @@
 .img_wrap {
   display: flex;
   justify-content: center;
+}
+
+.basic_img {
+  width: 70px;
+  height: 70px;
+  border-radius: 100px;
 }
 
 .img {
@@ -67,7 +73,7 @@
 }
 
 .input {
-  width: 60%;
+  width: 70%;
   padding: 10px;
   font-size: 13px;
   border: none;
@@ -80,7 +86,7 @@
 }
 
 .button {
-  padding: 6px 16px;
+  padding: 5px;
 }
 
 .notice {
@@ -98,6 +104,7 @@
   flex-direction: column;
   padding: 40px 0px;
   gap: 20px;
+  width: 280px;
 }
 
 .pet_div {
@@ -134,10 +141,15 @@
   padding: 10px 5px;
   border-bottom: solid 1px;
   margin-top: 50px;
+  display: flex;
+  gap: 10px;
 }
 
 .post_div p {
   font-weight: bold;
+  color: #787878;
+  font-size: 13px;
+  cursor: pointer;
 }
 
 .post_ul li {
@@ -150,4 +162,9 @@
 
 .post_ul li p {
   padding: 10px;
+}
+
+.errors {
+  font-size: 12px;
+  color: #002daa;
 }

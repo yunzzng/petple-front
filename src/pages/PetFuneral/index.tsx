@@ -23,7 +23,7 @@ const PetFuneral = () => {
     queryKey: ["funeralData", selectedRegion],
     queryFn: async () => {
       if (!selectedRegion) return [];
-      return await getFuneralData();
+      return await getFuneralData(selectedRegion);
     },
     staleTime: 7 * 24 * 60 * 60 * 1000,
     enabled: !!selectedRegion,
