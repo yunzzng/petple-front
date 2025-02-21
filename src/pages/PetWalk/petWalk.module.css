@@ -1,0 +1,25 @@
+@font-face {
+  font-family: "HakgyoansimDunggeunmisoTTF-B";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimDunggeunmisoTTF-B.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 16px;
+  font-family: "HakgyoansimDunggeunmisoTTF-B";
+  margin: 50px 0 10px 0;
+}
+
+.description {
+  font-size: 12px;
+  line-height: 1.2rem;
+  color: #444;
+  white-space: pre-line;
+}
