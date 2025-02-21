@@ -2,10 +2,11 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import removeConsole from "vite-plugin-remove-console";
+import optimizeImagePlugin from "vite-plugin-optimize-image";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), removeConsole()],
+  plugins: [react(), removeConsole(), optimizeImagePlugin()],
   server: {
     proxy: {
       "/api": {
