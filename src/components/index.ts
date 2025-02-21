@@ -4,3 +4,4 @@ export { default as Input } from "./Input";
 export { default as Search } from "./Search";
 export { default as ChipInput } from "./ChipInput";
 export { default as PostForm } from "./PostForm";
+export { default as Tabs } from "./Tabs";

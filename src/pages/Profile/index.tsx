@@ -1,7 +1,7 @@
 import profileImg from "/images/profile.png";
 import { useForm } from "react-hook-form";
 import userAuthStore from "@/zustand/userAuth";
-import { Button } from "@/components";
+import { Button, Tabs } from "@/components";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import style from "./profile.module.css";
 import { imageUpload } from "@/utils/imageUpload";
@@ -228,17 +228,20 @@ const Profile = () => {
         ))}
         {/* <PetProfile petList={petList} setPetList={setPetList} /> */}
       </div>
-      <div className={style.post_div}>
-        <p>내가 작성한 게시물</p>
-        <span>|</span>
-        <p>좋아요 누른 게시물</p>
-      </div>
-      <ul className={style.post_ul}>
-        <li>
-          <p>제목</p>
-          <p>날짜</p>
-        </li>
-      </ul>
+      <Tabs.Root>
+        <Tabs.MenuList>
+          <Tabs.Menu index={1}>
+            <p>내가 작성한 게시물</p>
+          </Tabs.Menu>
+          <Tabs.Menu index={2}>
+            <p>좋아요 누른 게시물</p>
+          </Tabs.Menu>
+        </Tabs.MenuList>
+        <Tabs.MenuList>
+          <Tabs.Pannel index={1}></Tabs.Pannel>
+          <Tabs.Pannel index={2}></Tabs.Pannel>
+        </Tabs.MenuList>
+      </Tabs.Root>
     </div>
   );
 };
