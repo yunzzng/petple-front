@@ -45,6 +45,12 @@ const Header = () => {
     }
   }, [query.data]);
 
+  useEffect(() => {
+    if (!loginStatus) {
+      navigate("/login");
+    }
+  }, [loginStatus]);
+
   const handleLogout = async () => {
     try {
       const response = await axios.post("/api/user/logout");
