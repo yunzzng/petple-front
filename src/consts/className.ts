@@ -32,3 +32,10 @@ export const tabsBaseCls = getBaseCls("tabs");
 export const tabsMenuListBaseCls = getBaseCls("tabs-menu-list");
 export const tabsMenuBaseCls = getBaseCls("tabs-menu");
 export const tabsPannelBaseCls = getBaseCls("tabs-pannel");
+
+/* Modal */
+export const ModalBaseCls = getBaseCls("modal");
+export const ModalBackdropBaseCls = getBaseCls("modal-backdrop");
+export const ModalContentBaseCls = getBaseCls("modal-content");
+export const ModalTriggerBaseCls = getBaseCls("modal-trigger");
+export const ModalCloseBaseCls = getBaseCls("modal-close");

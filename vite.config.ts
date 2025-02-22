@@ -3,11 +3,11 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import removeConsole from "vite-plugin-remove-console";
 import optimizeImagePlugin from "vite-plugin-optimize-image";
-import mkcert from 'vite-plugin-mkcert';
+import mkcert from "vite-plugin-mkcert";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), removeConsole(), optimizeImagePlugin(), mkcert({ certFileName: './localhost.pem', keyFileName: './localhost-key.pem'}) ],
+  // plugins: [react(), removeConsole(), optimizeImagePlugin(), mkcert({ certFileName: './localhost.pem', keyFileName: './localhost-key.pem'}) ],
   server: {
     proxy: {
       "/api": {

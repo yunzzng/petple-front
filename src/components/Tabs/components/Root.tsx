@@ -18,9 +18,7 @@ export const TabsContext = createContext<TabsContextProps>({
 export const useTabContext = () => {
   const context = useContext(TabsContext);
   if (!context) {
-    throw new Error(
-      "Accordion Context should be used within AccordionContext.Provider"
-    );
+    throw new Error("Tabs Context should be used within TabsContext.Provider");
   }
   return context;
 };

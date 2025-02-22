@@ -10,13 +10,15 @@ import dog from "/images/dog.png";
 import { Pet } from "@/types/user.type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { petSchema } from "@/consts/zodSchema";
+import { z } from "zod";
 
 const petDefaultValues = {
   name: "",
   age: "",
   breed: "",
 };
-
+console.log(petSchema);
+type PetSchema = z.infer<typeof petSchema>;
 const CreatePetProfile = () => {
   const { userId, setUserPet, userPet } = userAuthStore();
   const navigate = useNavigate();
@@ -27,7 +29,7 @@ const CreatePetProfile = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({
+  } = useForm<PetSchema>({
     defaultValues: petDefaultValues,
     resolver: zodResolver(petSchema),
     mode: "onBlur",
