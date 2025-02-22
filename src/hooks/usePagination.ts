@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const ITEMS_PER_PAGE = 5;
+const ITEMS_PER_PAGE = 9;
 const PAGE_GROUP_SIZE = 5;
 
 const usePagination = <T>(data: T[]) => {
