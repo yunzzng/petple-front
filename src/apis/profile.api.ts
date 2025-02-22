@@ -1,3 +1,4 @@
+import { AddressType } from "@/types/user.type";
 import baseInstance from "./axios";
 
 const checkNickName = async (nickName: string) => {
@@ -29,13 +30,15 @@ const recieveUserInfo = async () => {
 const updateUserInfo = async (
   userEmail: string | null,
   userNickName: string | null,
-  profileImage: string | null
+  profileImage: string | null,
+  selectedAddress: AddressType | null
 ) => {
   try {
     const response = await baseInstance.post("/user/info/update", {
       userEmail,
       userNickName,
       profileImage,
+      selectedAddress,
     });
 
     if (response.data.success) {

@@ -31,3 +31,9 @@ export type AuthStore = {
   setUserPet: (pets: Pet[]) => void;
   petId: string | null;
 };
+
+export interface AddressType {
+  jibunAddress: string;
+  x: string;
+  y: string;
+}

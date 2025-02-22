@@ -16,6 +16,11 @@ export default defineConfig({
         secure: false,
         ws: true,
       },
+      "/vworld": {
+        target: "https://api.vworld.kr",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/vworld/, ""),
+      },
     },
   },
   resolve: {

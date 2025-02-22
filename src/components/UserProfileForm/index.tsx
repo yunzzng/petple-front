@@ -5,15 +5,19 @@ import { Button } from "@/components";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import style from "@/pages/Profile/profile.module.css";
 import { imageUpload } from "@/utils/imageUpload";
-
 import pencil from "/images/pencil.png";
 import prev from "/images/prev.png";
-
 import { checkNickName, updateUserInfo } from "@/apis/profile.api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchema } from "@/consts/zodSchema";
-
 import AddressForm from "@/components/AddressForm";
+import { AddressType } from "@/types/user.type";
+
+const addressDefaultValue = {
+  jibunAddress: "",
+  x: "",
+  y: "",
+};
 
 const UserProfileForm = () => {
   const { userNickName, userImage, userEmail } = userAuthStore();
@@ -40,6 +44,8 @@ const UserProfileForm = () => {
   const [confirmedNickName, setConfirmedNickName] = useState<string | null>(
     userNickName || ""
   );
+  const [selectedAddress, setSelectedAddress] =
+    useState<AddressType>(addressDefaultValue);
 
   useEffect(() => {
     if (userImage) {
@@ -81,9 +87,8 @@ const UserProfileForm = () => {
     }
 
     if (file) {
-      console.log("file", file);
       imageUrl = await imageUpload(file);
-      console.log("userImage", userImage);
+
       userAuthStore.setState({ userImage: imageUrl });
     }
 
@@ -93,9 +98,14 @@ const UserProfileForm = () => {
       alert("회원정보 수정 완료");
       return;
     }
+    console.log("selectedAddress", selectedAddress);
+    const success = await updateUserInfo(
+      userEmail,
+      nickName,
+      imageUrl!,
+      selectedAddress
+    );
 
-    const success = await updateUserInfo(userEmail, nickName, imageUrl!);
-    console.log("성공imageUrl", imageUrl);
     if (success) {
       userAuthStore.setState({ userNickName: nickName, userImage: imageUrl });
       alert("회원정보 수정 완료");
@@ -161,6 +171,10 @@ const UserProfileForm = () => {
     setIsOpen(true);
   };
 
+  const handleSelectAddress = (address: AddressType) => {
+    setSelectedAddress(address);
+  };
+
   return (
     <form onSubmit={handleSubmit(onSubmitUser)} className={style.form}>
       {updating ? (
@@ -200,7 +214,9 @@ const UserProfileForm = () => {
             closeModal={handleCloseModal}
             openModal={handleOpenModal}
             isOpen={isOpen}
+            onSelectAddress={handleSelectAddress}
           />
+          {selectedAddress && <p>{selectedAddress.jibunAddress}</p>}
           <Button type="submit" className={style.button}>
             회원정보 수정
           </Button>
