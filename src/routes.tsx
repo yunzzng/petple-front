@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import BaseLayout from "@/components/Layout";
 import { PetPlaceDetail, PetWalk } from "./pages";
+import AddressForm from "./components/AddressForm";
 
 const ErrorPage = lazy(() => import("@/pages/Error"));
 const HomePage = lazy(() => import("@/pages/Home"));
@@ -133,6 +134,14 @@ const router = createBrowserRouter([
           </Suspense>
         ),
       },
+      // {
+      //   path: "/address",
+      //   element: (
+      //     <Suspense fallback={<p>...loading</p>}>
+      //       <AddressForm />
+      //     </Suspense>
+      //   ),
+      // },
     ],
   },
   {

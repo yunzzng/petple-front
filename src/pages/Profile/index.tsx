@@ -18,6 +18,8 @@ import { userSchema } from "@/consts/zodSchema";
 import { PostItem } from "@/types/post.type";
 import usePagination from "@/hooks/usePagination";
 import Pagination from "@/components/Pagination";
+import Modal from "@/components/Modal";
+import AddressForm from "@/components/AddressForm";
 
 const Profile = () => {
   const { userNickName, userImage, userEmail, userPet } = userAuthStore();
@@ -191,8 +193,23 @@ const Profile = () => {
     });
   };
 
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+  };
+
+  const handleOpenModal = () => {
+    setIsOpen(true);
+  };
+
   return (
     <div className={style.profile_total_wrap}>
+      <AddressForm
+        closeModal={handleCloseModal}
+        openModal={handleOpenModal}
+        isOpen={isOpen}
+      />
       <form onSubmit={handleSubmit(onSubmitUser)} className={style.form}>
         {updating ? (
           <ul className={style.userUl}>

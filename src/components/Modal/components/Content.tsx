@@ -18,20 +18,7 @@ const Content: FC<ContentProps> = (props) => {
     <div>
       {open
         ? createPortal(
-            <div
-              className={modalContentCls}
-              // style={{
-              //   position: "fixed",
-              //   zIndex: 101,
-              //   width: "200px",
-              //   height: "200px",
-              //   backgroundColor: "rgb(255, 255, 255)",
-              //   padding: "10px",
-              //   borderRadius: "10px",
-              // }}
-            >
-              {children}
-            </div>,
+            <div className={modalContentCls}>{children}</div>,
             document.body
           )
         : null}
