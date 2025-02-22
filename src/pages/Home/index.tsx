@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./home.module.css";
 import carouselData from "@/consts/mainBannerData";
@@ -9,10 +9,7 @@ import pettalkBanner from "/images/pettalkBanner.png";
 import Menu from "@/components/Menu";
 import PopularPosts from "./components/PopularPosts";
 
-interface Post {}
-
 const Home = () => {
-  const [posts, setPosts] = useState<Post[] | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {}, []);

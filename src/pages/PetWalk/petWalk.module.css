@@ -1,0 +1,40 @@
+@font-face {
+  font-family: "HakgyoansimDunggeunmisoTTF-B";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/2408-5@1.0/HakgyoansimDunggeunmisoTTF-B.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+.container {
+  padding: 20px;
+  height: auto;
+  background-color: white;
+  flex-grow: 1;
+}
+
+.title {
+  font-size: 16px;
+  font-family: "HakgyoansimDunggeunmisoTTF-B";
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 12px;
+  line-height: 1.2rem;
+  color: #444;
+  white-space: pre-line;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-top: 10px;
+}
+
+.description_span {
+  font-size: 14px;
+  font-family: "HakgyoansimDunggeunmisoTTF-B";
+  color: #002daa;
+}
+
+.description_p_span{
+  color: red;
+}

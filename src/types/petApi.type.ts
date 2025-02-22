@@ -11,7 +11,7 @@ export interface MedicalService {
 }
 
 export interface FuneralService {
-  name: string;
+  title: string;
   lat: number;
   lng: number;
   phone?: string;
