@@ -27,6 +27,7 @@
 .img_wrap {
   display: flex;
   justify-content: center;
+  margin-bottom: 20px;
 }
 
 .basic_img {
@@ -54,6 +55,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  gap: 10px;
 }
 
 .nickName_div {
@@ -229,18 +231,16 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* 반투명 회색 */
-  opacity: 0; /* 기본 상태에서는 숨김 */
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
   transition: opacity 0.3s ease;
-  z-index: 1; /* 아이콘보다 아래에 배치 */
+  z-index: 1;
 }
 
-/* 호버 시 배경 보이기 */
 .pennel_img_div:hover::before {
   opacity: 1;
 }
 
-/* 댓글과 좋아요 아이콘을 감싸는 박스 */
 .info {
   position: absolute;
   bottom: 5px;
@@ -251,7 +251,7 @@
   color: white;
   opacity: 0;
   transition: opacity 0.3s ease;
-  z-index: 2; /* 배경보다 위에 */
+  z-index: 2;
 }
 
 /* 호버 시 아이콘 보이기 */

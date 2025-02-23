@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { Pet, AuthStore } from "@/types/user.type";
+import { Pet, AuthStore, AddressType } from "@/types/user.type";
 
 const userAuthStore = create<AuthStore>()(
   persist(
@@ -16,6 +16,8 @@ const userAuthStore = create<AuthStore>()(
       userPet: [],
       setUserPet: (pets: Pet[] | null) => set({ userPet: pets || [] }),
       petId: null,
+      userAddress: null,
+      setUserAddress: (address: AddressType) => set({ userAddress: address }),
     }),
     {
       name: "userInfoStorage",

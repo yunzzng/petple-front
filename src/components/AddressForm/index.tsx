@@ -4,6 +4,8 @@ import style from "./addressForm.module.css";
 import DaumPostcode from "react-daum-postcode";
 import { AddressType } from "@/types/user.type";
 import { Address } from "react-daum-postcode";
+import Button from "../Button";
+import Input from "../Input";
 
 interface AddressFormProps {
   closeModal: () => void;
@@ -61,13 +63,18 @@ const AddressForm: FC<AddressFormProps> = ({
         open={isOpen}
       >
         <Modal.Backdrop className={style.backdrop} />
-        <Modal.Trigger>
-          <p>open</p>
+        <Modal.Trigger className={style.address_button}>
+          <button type="button" className={style.address_button}>
+            주소검색
+          </button>
         </Modal.Trigger>
         <Modal.Content className={style.content}>
-          <Modal.Close>
-            <a href="#">x</a>
-          </Modal.Close>
+          <div>
+            <Modal.Close>
+              <a href="#">x</a>
+            </Modal.Close>
+          </div>
+
           <DaumPostcode onComplete={handleComplete} />
         </Modal.Content>
       </Modal.Root>

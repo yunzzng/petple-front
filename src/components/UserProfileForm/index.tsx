@@ -20,8 +20,8 @@ const addressDefaultValue = {
 };
 
 const UserProfileForm = () => {
-  const { userNickName, userImage, userEmail } = userAuthStore();
-
+  const { userNickName, userImage, userEmail, userAddress } = userAuthStore();
+  console.log(userAddress, " userAddress");
   const {
     handleSubmit,
     formState: { errors },
@@ -44,8 +44,9 @@ const UserProfileForm = () => {
   const [confirmedNickName, setConfirmedNickName] = useState<string | null>(
     userNickName || ""
   );
-  const [selectedAddress, setSelectedAddress] =
-    useState<AddressType>(addressDefaultValue);
+  const [selectedAddress, setSelectedAddress] = useState<AddressType>(
+    userAddress ?? addressDefaultValue
+  );
 
   useEffect(() => {
     if (userImage) {
@@ -71,6 +72,8 @@ const UserProfileForm = () => {
     setIsNickNameConfirm(false);
   };
 
+  console.log("selectedAddress", selectedAddress);
+
   // 회원정보 수정
   const onSubmitUser = async () => {
     const nickName = getValues("nickName");
@@ -88,17 +91,20 @@ const UserProfileForm = () => {
 
     if (file) {
       imageUrl = await imageUpload(file);
-
       userAuthStore.setState({ userImage: imageUrl });
     }
 
     // 수정 전 닉네임, 이미지 같으면 api요청 x
-    if (nickName === userNickName && imageUrl === userImage) {
+    if (
+      nickName === userNickName &&
+      imageUrl === userImage &&
+      selectedAddress === userAddress
+    ) {
       setUpdating(false);
       alert("회원정보 수정 완료");
       return;
     }
-    console.log("selectedAddress", selectedAddress);
+
     const success = await updateUserInfo(
       userEmail,
       nickName,
@@ -107,7 +113,12 @@ const UserProfileForm = () => {
     );
 
     if (success) {
-      userAuthStore.setState({ userNickName: nickName, userImage: imageUrl });
+      userAuthStore.setState({
+        userNickName: nickName,
+        userImage: imageUrl,
+        userAddress: selectedAddress,
+      });
+      console.log("selectedAddress", selectedAddress);
       alert("회원정보 수정 완료");
       setUpdating(false);
     } else {
@@ -194,6 +205,7 @@ const UserProfileForm = () => {
             />
           </li>
           <li className={style.nickname_wrap}>
+            <label>닉네임</label>
             <div className={style.nickName_div}>
               <input
                 className={style.input}
@@ -210,13 +222,14 @@ const UserProfileForm = () => {
               </Button>
             </div>
           </li>
+          <label>주소</label>
+          <input value={selectedAddress.jibunAddress} className={style.input} />
           <AddressForm
             closeModal={handleCloseModal}
             openModal={handleOpenModal}
             isOpen={isOpen}
             onSelectAddress={handleSelectAddress}
           />
-          {selectedAddress && <p>{selectedAddress.jibunAddress}</p>}
           <Button type="submit" className={style.button}>
             회원정보 수정
           </Button>
@@ -233,6 +246,7 @@ const UserProfileForm = () => {
                 className={style.pencil}
               />
             </div>
+            <p>{selectedAddress.jibunAddress}</p>
           </div>
         </ul>
       )}
