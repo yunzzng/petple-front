@@ -24,7 +24,6 @@ const UserProfileForm = () => {
 
   const {
     handleSubmit,
-    formState: { errors },
     getValues,
     setValue,
     watch,
