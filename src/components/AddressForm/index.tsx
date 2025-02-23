@@ -4,8 +4,6 @@ import style from "./addressForm.module.css";
 import DaumPostcode from "react-daum-postcode";
 import { AddressType } from "@/types/user.type";
 import { Address } from "react-daum-postcode";
-import Button from "../Button";
-import Input from "../Input";
 
 interface AddressFormProps {
   closeModal: () => void;
