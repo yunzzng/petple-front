@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, useMemo } from "react";
+import { FC } from "react";
 import { useAccordionContext } from "./Root";
 import { AccordionContentProps } from "../types";
 

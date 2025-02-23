@@ -168,3 +168,110 @@
   font-size: 12px;
   color: #002daa;
 }
+
+.tabs_root {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 280px;
+}
+
+.tabs_menulist {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0px;
+  border-bottom: 1px solid;
+}
+
+.tabs_button {
+  height: 28px;
+  width: 130px;
+  display: flex;
+  align-items: center;
+  /* background-color: #fff; */
+  box-shadow: 0px 2px 3px 0px #dddddd;
+}
+
+.tabs_img {
+  width: 90px;
+  height: 90px;
+}
+
+.pennel_div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 280px;
+  align-content: flex-start;
+  gap: 5px;
+}
+
+.pennel_img_div {
+  width: 90px;
+  height: 90px;
+  gap: 5px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.pennel_img {
+  width: 100%;
+  height: 100%;
+}
+
+.pennel_img_div::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 회색 */
+  opacity: 0; /* 기본 상태에서는 숨김 */
+  transition: opacity 0.3s ease;
+  z-index: 1; /* 아이콘보다 아래에 배치 */
+}
+
+/* 호버 시 배경 보이기 */
+.pennel_img_div:hover::before {
+  opacity: 1;
+}
+
+/* 댓글과 좋아요 아이콘을 감싸는 박스 */
+.info {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2; /* 배경보다 위에 */
+}
+
+/* 호버 시 아이콘 보이기 */
+.pennel_img_div:hover .info {
+  opacity: 1;
+}
+
+.comment {
+  display: flex;
+  gap: 5px;
+}
+
+.likes {
+  display: flex;
+  gap: 5px;
+}
+
+/* 아이콘 이미지 */
+.comment img,
+.likes img {
+  width: 14px;
+  height: 14px;
+}
