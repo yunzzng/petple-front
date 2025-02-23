@@ -24,7 +24,6 @@ const UserProfileForm = () => {
   console.log(userAddress, " userAddress");
   const {
     handleSubmit,
-    formState: { errors },
     getValues,
     setValue,
     watch,

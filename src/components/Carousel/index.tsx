@@ -3,7 +3,7 @@ import CarouselItemList from "./CarouselItemList";
 import CarouselItem from "./CarouselItem";
 import CarouselNavigator from "./CarouselNavigator";
 import CarouselIndicator from "./CarouselIndicator";
-import styles from "./Carousel.module.css";
+import styles from "./carousel.module.css";
 
 interface CarouselProps {
     children?: ReactNode;

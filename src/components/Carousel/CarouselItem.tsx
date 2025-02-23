@@ -1,5 +1,5 @@
 import { FC, ReactNode, useMemo } from "react";
-import styles from "./Carousel.module.css";
+import styles from "./carousel.module.css";
 import useCarouselContext from "./hooks/useCarouselContext";
 
 interface CarouselItemProps {

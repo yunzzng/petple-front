@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react";
+import { FC } from "react";
 import { AccordionButtonProps } from "../types";
 import { useAccordionContext } from "./Root";
 
