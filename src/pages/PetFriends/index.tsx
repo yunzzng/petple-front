@@ -24,7 +24,7 @@ const PetFriendsPage = () => {
   const handleClickMarker = (user: any) => {
     setSelectedUser(user);
   };
-  console.log({ selectedUser });
+
   useEffect(() => {
     if (!isSuccess || typeof window === "undefined") return;
 
