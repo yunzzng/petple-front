@@ -24,6 +24,8 @@ const addressDefaultValue: AddressType = {
 const UserProfileForm = () => {
   const { userNickName, userImage, userEmail, userAddress } = userAuthStore();
 
+  console.log(userImage, "userImage");
+
   const { handleSubmit, getValues, setValue, watch, reset } = useForm({
     defaultValues: {
       nickName: userNickName || "",
@@ -32,7 +34,7 @@ const UserProfileForm = () => {
   });
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [previewImg, setPreviewImg] = useState<string>(profileImg);
+  const [previewImg, setPreviewImg] = useState<string>(userImage || profileImg);
   const [file, setFile] = useState<File | null>(null);
   const [updating, setUpdating] = useState(false);
   const [isNickNameConfirm, setIsNickNameConfirm] = useState<boolean>(false);
