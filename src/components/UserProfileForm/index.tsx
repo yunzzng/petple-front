@@ -13,10 +13,12 @@ import { userSchema } from "@/consts/zodSchema";
 import AddressForm from "@/components/AddressForm";
 import { AddressType } from "@/types/user.type";
 
-const addressDefaultValue = {
+const addressDefaultValue: AddressType = {
   jibunAddress: "",
-  x: "",
-  y: "",
+  location: {
+    type: "Point",
+    coordinates: [null, null],
+  },
 };
 
 const UserProfileForm = () => {

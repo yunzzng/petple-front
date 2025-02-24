@@ -19,12 +19,18 @@ const AddressForm: FC<AddressFormProps> = ({
   onSelectAddress,
 }) => {
   const handleComplete = async (data: Address) => {
-    const coordinates = await fetchCoordinate(data.roadAddress);
+    const coordinate = await fetchCoordinate(data.roadAddress);
+
+    if (!coordinate) {
+      return;
+    }
 
     const address: AddressType = {
       jibunAddress: data.address,
-      x: coordinates?.x || "",
-      y: coordinates?.y || "",
+      location: {
+        type: "Point",
+        coordinates: [coordinate.x, coordinate.y],
+      },
     };
     onSelectAddress(address);
   };
@@ -45,12 +51,11 @@ const AddressForm: FC<AddressFormProps> = ({
 
         return { x, y };
       } else {
-
         alert("위경도 좌표 불러오기 실패");
         return;
       }
     } catch (err) {
-      console.log("위경도 불러오기 실패", err);
+      console.error("위경도 불러오기 실패", err);
     }
   };
   return (

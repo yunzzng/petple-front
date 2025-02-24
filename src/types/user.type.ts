@@ -36,6 +36,8 @@ export type AuthStore = {
 
 export interface AddressType {
   jibunAddress: string;
-  x: string;
-  y: string;
+  location: {
+    type: "Point";
+    coordinates: [number | null, number | null];
+  };
 }

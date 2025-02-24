@@ -93,9 +93,6 @@ const Header = () => {
               <li className={style.login}>
                 <a onClick={() => navigate("/login")}>LOGIN</a>
               </li>
-              <li className={style.login}>
-                <a onClick={() => navigate("/signup")}>SIGNUP</a>
-              </li>
             </>
           )}
         </ul>
