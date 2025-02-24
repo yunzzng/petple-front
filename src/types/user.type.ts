@@ -41,3 +41,11 @@ export interface AddressType {
     coordinates: [number | null, number | null];
   };
 }
+
+export type ChatUser = {
+  _id: string;
+  name: string;
+  email: string;
+  nickName: string;
+  profileImage: string;
+};
