@@ -120,6 +120,15 @@ const getNearUsers = async (data: { lat: string; lng: string }) => {
   }
 };
 
+const getUserByNickname = async (nickname: string) => {
+  try {
+    const response = await baseInstance.get(`/user/${nickname}`);
+    return response.data.user;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   updateUserInfo,
   checkNickName,
@@ -129,4 +138,5 @@ export {
   recieveUserInfo,
   getMyPosts,
   getNearUsers,
+  getUserByNickname,
 };
