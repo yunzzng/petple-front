@@ -43,8 +43,6 @@ const UserProfileForm = () => {
     userAddress ?? addressDefaultValue
   );
 
-  console.log("selectedAddress:", selectedAddress);
-
   useEffect(() => {
     if (userImage) {
       setPreviewImg(userImage);

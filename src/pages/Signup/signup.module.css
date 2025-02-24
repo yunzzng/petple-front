@@ -9,7 +9,9 @@
 .total_wrap {
   margin: 0 auto;
   max-width: 1440px;
-  margin-top: 80px;
+  display: flex;
+  align-items: center;
+  padding-bottom: 80px;
 }
 
 .content {
@@ -30,9 +32,10 @@
   flex-direction: column;
   justify-content: center;
   gap: 40px;
-  /* padding: 50px 100px; */
-  border-radius: 100px;
+  padding: 100px 0px;
+  border-radius: 10px;
   background-color: #fff;
+  /* box-shadow: 0px 0px 5px 5px #cdcdcd; */
 }
 
 .content ul h1 {
@@ -66,6 +69,7 @@
   display: flex;
   flex-basis: 100%;
   align-items: center;
+  width: 280px;
 }
 
 .oauth::before {
@@ -88,16 +92,22 @@
   line-height: 0px;
 }
 
+.oauth p {
+  font-size: 13px;
+  color: #3a3a3a;
+}
+
 .googleBtn {
-  cursor: pointer;
+  /* cursor: pointer;
   display: flex;
   justify-content: center;
   width: 160px;
-  margin: 0 auto;
+  margin: 0 auto; */
+  width: 45px;
 }
 
 .img {
-  width: 160px;
+  width: 50px;
   cursor: pointer;
 }
 
@@ -113,4 +123,10 @@
   font-size: 13px;
   color: rgb(0, 17, 147);
   cursor: pointer;
+}
+
+.oauth_btn {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
 }

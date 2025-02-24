@@ -33,7 +33,6 @@ const AddressForm: FC<AddressFormProps> = ({
       },
     };
     onSelectAddress(address);
-    console.log(address);
   };
 
   const fetchCoordinate = async (address: string) => {
@@ -56,7 +55,7 @@ const AddressForm: FC<AddressFormProps> = ({
         return;
       }
     } catch (err) {
-      console.log("위경도 불러오기 실패", err);
+      console.error("위경도 불러오기 실패", err);
     }
   };
   return (
