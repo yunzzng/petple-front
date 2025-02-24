@@ -109,6 +109,17 @@ const getMyPosts = async () => {
   }
 };
 
+const getNearUsers = async (data: { lat: string; lng: string }) => {
+  try {
+    const response = await baseInstance.get(
+      `/user/near?lat=${data.lat}&lng=${data.lng}`
+    );
+    return response.data.users;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   updateUserInfo,
   checkNickName,
@@ -117,4 +128,5 @@ export {
   deletePet,
   recieveUserInfo,
   getMyPosts,
+  getNearUsers,
 };
