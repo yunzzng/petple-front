@@ -21,14 +21,8 @@ const addressDefaultValue = {
 
 const UserProfileForm = () => {
   const { userNickName, userImage, userEmail, userAddress } = userAuthStore();
-  console.log(userAddress, " userAddress");
-  const {
-    handleSubmit,
-    getValues,
-    setValue,
-    watch,
-    reset,
-  } = useForm({
+
+  const { handleSubmit, getValues, setValue, watch, reset } = useForm({
     defaultValues: {
       nickName: userNickName || "",
     },
@@ -70,8 +64,6 @@ const UserProfileForm = () => {
     setValue("nickName", e.target.value);
     setIsNickNameConfirm(false);
   };
-
-  console.log("selectedAddress", selectedAddress);
 
   // 회원정보 수정
   const onSubmitUser = async () => {
@@ -117,7 +109,7 @@ const UserProfileForm = () => {
         userImage: imageUrl,
         userAddress: selectedAddress,
       });
-      console.log("selectedAddress", selectedAddress);
+
       alert("회원정보 수정 완료");
       setUpdating(false);
     } else {
@@ -139,7 +131,6 @@ const UserProfileForm = () => {
       return;
     }
 
-    console.log(nickName.length);
     if (nickName.length > 10) {
       alert("닉네임은 10글자 이하로 입력해주세요.");
       return;

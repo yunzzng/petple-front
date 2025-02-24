@@ -67,8 +67,6 @@ const PetForm: FC<petInfoProps> = (props) => {
   };
 
   const onSubmit = async (petData: Pet) => {
-    console.log("petData", petData);
-    console.log(age, name, image, breed);
     if (
       name === petData.name &&
       age === petData.age &&
