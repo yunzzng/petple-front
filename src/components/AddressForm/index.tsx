@@ -45,7 +45,7 @@ const AddressForm: FC<AddressFormProps> = ({
 
         return { x, y };
       } else {
-        console.log("위경도 api요청실패");
+
         alert("위경도 좌표 불러오기 실패");
         return;
       }

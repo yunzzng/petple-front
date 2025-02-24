@@ -17,7 +17,7 @@ const petDefaultValues = {
   age: "",
   breed: "",
 };
-console.log(petSchema);
+
 type PetSchema = z.infer<typeof petSchema>;
 const CreatePetProfile = () => {
   const { userId, setUserPet, userPet } = userAuthStore();
