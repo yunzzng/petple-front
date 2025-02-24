@@ -11,15 +11,14 @@ const PetFriendsPage = () => {
   const user: any = userAuthStore();
   const mapConatinerRef = useRef<HTMLDivElement>(null);
   const { data: nearUsers } = useQuery({
-    queryKey: ["locations", user.address.jibunCode],
+    queryKey: ["locations", user._id],
     queryFn: () =>
       getNearUsers({
-        lng: user.address.location.coordinates[0],
-        lat: user.address.location.coordinates[1],
+        lng: user.userAddress.location.coordinates[0],
+        lat: user.userAddress.location.coordinates[1],
       }),
     enabled: !!user,
   });
-
   const handleClickMarker = (user: any) => {
     setSelectedUser(user);
   };
@@ -29,12 +28,9 @@ const PetFriendsPage = () => {
 
     const { kakao } = window;
     if (!kakao?.maps) return;
-
     initializeMap(kakao, nearUsers, mapConatinerRef, handleClickMarker);
-
     return () => cleanup();
   }, [isSuccess, nearUsers]);
-  console.log(selectedUser);
   return (
     <>
       <div className={styles.wrapper}>
