@@ -42,6 +42,14 @@ const Login = () => {
     window.location.href = "/api/oauth/google";
   };
 
+  const handleKakaoLogin = () => {
+    window.location.href = "/api/oauth/kakao";
+  };
+
+  const handleNaverLogin = () => {
+    window.location.href = "/api/oauth/naver";
+  };
+
   return (
     <div className={style.total_wrap}>
       <div className={style.content}>
@@ -88,6 +96,8 @@ const Login = () => {
           <a onClick={handleGoogleLogin} className={style.googleBtn}>
             <img src={google} className={style.img} />
           </a>
+          <a onClick={handleKakaoLogin}>카톡 자동로그인</a>
+          <a onClick={handleNaverLogin}>네이버 자동로그인</a>
         </ul>
       </div>
     </div>

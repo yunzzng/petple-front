@@ -68,6 +68,7 @@
   content: url("/images/unsplash.png");
   width: 70px;
   height: 70px;
+  transition: opacity 0.3sease;
 }
 
 .petProfile_wrap_div {

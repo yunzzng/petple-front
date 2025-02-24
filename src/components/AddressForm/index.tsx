@@ -45,7 +45,7 @@ const AddressForm: FC<AddressFormProps> = ({
 
         return { x, y };
       } else {
-        console.log("위경도 api요청실패");
+
         alert("위경도 좌표 불러오기 실패");
         return;
       }
@@ -61,13 +61,18 @@ const AddressForm: FC<AddressFormProps> = ({
         open={isOpen}
       >
         <Modal.Backdrop className={style.backdrop} />
-        <Modal.Trigger>
-          <p>open</p>
+        <Modal.Trigger className={style.address_button}>
+          <button type="button" className={style.address_button}>
+            주소검색
+          </button>
         </Modal.Trigger>
         <Modal.Content className={style.content}>
-          <Modal.Close>
-            <a href="#">x</a>
-          </Modal.Close>
+          <div>
+            <Modal.Close>
+              <a href="#">x</a>
+            </Modal.Close>
+          </div>
+
           <DaumPostcode onComplete={handleComplete} />
         </Modal.Content>
       </Modal.Root>

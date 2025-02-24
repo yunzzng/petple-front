@@ -41,15 +41,10 @@ const Header = () => {
         userNickName: query.data.nickName,
         userImage: query.data.image,
         userPet: query.data.pet,
+        userAddress: query.data.address,
       });
     }
   }, [query.data]);
-
-  useEffect(() => {
-    if (!loginStatus) {
-      navigate("/login");
-    }
-  }, [loginStatus]);
 
   const handleLogout = async () => {
     try {
