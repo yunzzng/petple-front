@@ -214,14 +214,22 @@ const UserProfileForm = () => {
               </Button>
             </div>
           </li>
-          <label>주소</label>
-          <input value={selectedAddress.jibunAddress} className={style.input} />
-          <AddressForm
-            closeModal={handleCloseModal}
-            openModal={handleOpenModal}
-            isOpen={isOpen}
-            onSelectAddress={handleSelectAddress}
-          />
+          <li className={style.nickname_wrap}>
+            <label>주소</label>
+            <div className={style.nickName_div}>
+              <input
+                value={selectedAddress.jibunAddress}
+                className={style.input}
+                onClick={handleOpenModal}
+              />
+              <AddressForm
+                closeModal={handleCloseModal}
+                openModal={handleOpenModal}
+                isOpen={isOpen}
+                onSelectAddress={handleSelectAddress}
+              />
+            </div>
+          </li>
           <Button type="submit" className={style.button}>
             회원정보 수정
           </Button>
@@ -238,7 +246,7 @@ const UserProfileForm = () => {
                 className={style.pencil}
               />
             </div>
-            <p>{selectedAddress.jibunAddress}</p>
+            <p className={style.address}>{selectedAddress.jibunAddress}</p>
           </div>
         </ul>
       )}

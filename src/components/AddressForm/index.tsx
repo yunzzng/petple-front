@@ -4,6 +4,7 @@ import style from "./addressForm.module.css";
 import DaumPostcode from "react-daum-postcode";
 import { AddressType } from "@/types/user.type";
 import { Address } from "react-daum-postcode";
+import Button from "../Button";
 
 interface AddressFormProps {
   closeModal: () => void;
@@ -33,6 +34,7 @@ const AddressForm: FC<AddressFormProps> = ({
       },
     };
     onSelectAddress(address);
+    closeModal();
   };
 
   const fetchCoordinate = async (address: string) => {
@@ -59,29 +61,29 @@ const AddressForm: FC<AddressFormProps> = ({
     }
   };
   return (
-    <div>
-      <Modal.Root
-        onCloseModal={closeModal}
-        onOpenModal={openModal}
-        open={isOpen}
-      >
-        <Modal.Backdrop className={style.backdrop} />
-        <Modal.Trigger className={style.address_button}>
-          <button type="button" className={style.address_button}>
-            주소검색
-          </button>
-        </Modal.Trigger>
-        <Modal.Content className={style.content}>
-          <div>
-            <Modal.Close>
-              <a href="#">x</a>
-            </Modal.Close>
-          </div>
-
-          <DaumPostcode onComplete={handleComplete} />
-        </Modal.Content>
-      </Modal.Root>
-    </div>
+    <Modal.Root
+      onCloseModal={closeModal}
+      onOpenModal={openModal}
+      open={isOpen}
+      className={style.modal}
+    >
+      <Modal.Backdrop className={style.backdrop} />
+      <Modal.Trigger className={style.address_button}>
+        <Button
+          type="button"
+          className={style.address_button}
+          label="주소검색"
+        />
+      </Modal.Trigger>
+      <Modal.Content className={style.content}>
+        <div>
+          <Modal.Close>
+            <a href="#">x</a>
+          </Modal.Close>
+        </div>
+        <DaumPostcode onComplete={handleComplete} />
+      </Modal.Content>
+    </Modal.Root>
   );
 };
 
