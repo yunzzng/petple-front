@@ -4,12 +4,14 @@ import useKakaoLoader from "@/components/Map/MapLoader";
 import userAuthStore from "@/zustand/userAuth";
 import { useQuery } from "@tanstack/react-query";
 import { getNearUsers } from "@/apis/profile.api";
+import { useNavigate } from "react-router-dom";
 
 const PetFriendsPage = () => {
   const [selectedUser, setSelectedUser] = useState<any>();
   const { isSuccess, cleanup } = useKakaoLoader();
   const user: any = userAuthStore();
   const mapConatinerRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
   const { data: nearUsers } = useQuery({
     queryKey: ["locations", user._id],
     queryFn: () =>
@@ -22,7 +24,7 @@ const PetFriendsPage = () => {
   const handleClickMarker = (user: any) => {
     setSelectedUser(user);
   };
-
+  console.log({ selectedUser });
   useEffect(() => {
     if (!isSuccess || typeof window === "undefined") return;
 
@@ -40,7 +42,7 @@ const PetFriendsPage = () => {
           ref={mapConatinerRef}
         ></div>
         {selectedUser && (
-          <section>
+          <section onClick={() => navigate(`/chat/${selectedUser.nickName}`)}>
             <div className={styles.selected_user_image_wrapper}>
               <img
                 src={
