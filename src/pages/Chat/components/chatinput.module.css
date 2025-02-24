@@ -1,0 +1,11 @@
+.comment_input {
+  display: flex;
+  padding-bottom: 8px;
+}
+
+.comment_input > input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  font-size: medium;
+}
