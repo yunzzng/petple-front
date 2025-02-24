@@ -7,7 +7,15 @@ import mkcert from "vite-plugin-mkcert";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), removeConsole(), optimizeImagePlugin(), mkcert({ certFileName: './localhost.pem', keyFileName: './localhost-key.pem'}) ],
+  plugins: [
+    react(),
+    removeConsole(),
+    optimizeImagePlugin(),
+    mkcert({
+      certFileName: "./localhost.pem",
+      keyFileName: "./localhost-key.pem",
+    }),
+  ],
   server: {
     proxy: {
       "/api": {
