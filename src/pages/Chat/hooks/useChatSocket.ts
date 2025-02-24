@@ -15,8 +15,14 @@ const useChatSocket = (user: AuthStore, targetUser: ChatUser) => {
     socket.emit("send_message", {
       roomId,
       text,
-      from: user.userNickName,
-      to: targetUser.nickName,
+      from: {
+        id: user.userId,
+        nickname: user.userNickName,
+      },
+      to: {
+        id: targetUser._id,
+        nickname: targetUser.nickName,
+      },
     });
   };
 

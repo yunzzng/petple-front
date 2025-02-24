@@ -9,7 +9,7 @@ interface ChatMessageProps {
 
 const ChatMessage = ({ message, nickname }: ChatMessageProps) => {
   const isMyMessage = useMemo(
-    () => message.from === nickname,
+    () => message.from.nickname === nickname,
     [message.from, nickname]
   );
 
@@ -25,15 +25,16 @@ export default ChatMessage;
 const MyMessage = ({ message }: { message: ChatMessageType }) => {
   return (
     <li>
-      {message.from}:{message.text}
+      {message.from.nickname}:{message.text}
     </li>
   );
 };
 
 const OtherMessage = ({ message }: { message: ChatMessageType }) => {
+  console.log(message);
   return (
     <li>
-      {message.from}:{message.text}
+      {message.from.nickname}:{message.text}
     </li>
   );
 };
