@@ -64,8 +64,6 @@ const PetForm: FC<PetInfoProps> = (props) => {
   };
 
   const onSubmit = async (petData: Pet) => {
-    console.log("제출된 데이터:", petData);
-    console.log("현재 상태값:", { name, age, breed, image });
     if (
       name === petData.name &&
       age === petData.age &&

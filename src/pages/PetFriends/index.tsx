@@ -34,7 +34,7 @@ const PetFriendsPage = () => {
 
     return () => cleanup();
   }, [isSuccess, nearUsers]);
-  console.log(selectedUser);
+
   return (
     <>
       <div className={styles.wrapper}>

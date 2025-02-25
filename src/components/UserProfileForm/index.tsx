@@ -24,8 +24,6 @@ const addressDefaultValue: AddressType = {
 const UserProfileForm = () => {
   const { userNickName, userImage, userEmail, userAddress } = userAuthStore();
 
-  console.log(userImage, "userImage");
-
   const { handleSubmit, getValues, setValue, watch, reset } = useForm({
     defaultValues: {
       nickName: userNickName || "",
@@ -44,9 +42,6 @@ const UserProfileForm = () => {
   const [selectedAddress, setSelectedAddress] = useState<AddressType>(
     userAddress ?? addressDefaultValue
   );
-
-  console.log("userNickName:", userNickName);
-  console.log("confirmedNickName:", confirmedNickName);
 
   useEffect(() => {
     if (userImage) {
