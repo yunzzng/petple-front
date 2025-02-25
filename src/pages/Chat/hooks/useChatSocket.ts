@@ -35,9 +35,14 @@ const useChatSocket = (user: AuthStore, targetUser: ChatUser) => {
 
     socket.on("connect", () => {
       const roomId = [user.userId, targetUser._id].sort().join("-");
-      console.log("myId", user.userId);
-      console.log("other", targetUser._id);
-      socket?.emit("join_room", roomId);
+
+      socket.on("prev_message", (prevMessage) => {
+        if (prevMessage.messages.length) {
+          setMessages(prevMessage.messages);
+        }
+      });
+
+      socket.emit("join_room", roomId);
       setRoomId(roomId);
       setIsConnected(true);
     });
