@@ -1,11 +1,11 @@
 export type ChatMessageType = {
   from: {
     id: string;
-    nickname: string;
+    nickName: string;
   };
   to: {
     id: string;
-    nickname: string;
+    nickName: string;
   };
   text: string;
 };
