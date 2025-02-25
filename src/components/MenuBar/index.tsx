@@ -1,26 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./menubar.module.css";
-import community from "/images/community3.png";
-import menubar from "/images/menubar5.png";
-import menuHome from "/images/menuHome3.png";
-import petWalk from "/images/walk.png";
 
 const MenuBar = () => {
   const navigate = useNavigate();
   return (
     <footer className={styles.footer}>
-      <a onClick={() => navigate("/")}>
-        <img src={menuHome} className={styles.home} />
-      </a>
-      <a onClick={() => navigate("/community")}>
-        <img src={community} className={styles.community} />
-      </a>
-      <a onClick={() => navigate("/petwalk")}>
-        <img src={petWalk} className={styles.walk} />
-      </a>
-      <a>
-        <img src={menubar} className={styles.menu} />
-      </a>
+      <a onClick={() => navigate("/")}>홈</a>
+      <a onClick={() => navigate("/petfriends")}>펫프렌즈</a>
+      <a onClick={() => navigate("/community")}>커뮤니티</a>
+      <a onClick={() => navigate("/petwalk")}>펫산책</a>
+      <a>메뉴</a>
     </footer>
   );
 };

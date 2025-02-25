@@ -24,3 +24,12 @@ export const userSchema = z.object({
     .min(1, "닉네임을 입력해주세요.")
     .max(20, "닉네임은 10글자 이하로 입력해주세요."),
 });
+
+export const postFormSchema = z.object({
+  tags: z
+    .array(z.string())
+    .min(1, "최소 1개 이상의 태그를 입력하세요.")
+    .max(10, "최대 10개의 태그만 추가할 수 있습니다."),
+  images: z.array(z.union([z.string(), z.instanceof(File)])),
+  description: z.string().trim().min(1, "내용을 입력해주세요."),
+});

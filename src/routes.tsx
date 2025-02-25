@@ -18,6 +18,7 @@ const SignupPage = lazy(() => import("@/pages/Signup"));
 const ProfilePage = lazy(() => import("@/pages/Profile"));
 const CreatePetProfile = lazy(() => import("@/pages/CreatePetProfile"));
 const PetFriendsPage = lazy(() => import("@/pages/PetFriends"));
+const ChatPage = lazy(() => import("@/pages/Chat"));
 
 const router = createBrowserRouter([
   {
@@ -157,6 +158,14 @@ const router = createBrowserRouter([
     element: (
       <Suspense fallback={<p>...Loading</p>}>
         <PostDetailPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/chat/:nickname",
+    element: (
+      <Suspense fallback={<p>...Loading</p>}>
+        <ChatPage />
       </Suspense>
     ),
   },

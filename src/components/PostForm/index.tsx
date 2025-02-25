@@ -2,22 +2,12 @@ import styles from "./postform.module.css";
 import ChipInput from "@/components/ChipInput";
 import { ChangeEvent, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import * as z from "zod";
 import uploadIcon from "/images/icons/upload.svg";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormHeader from "./components/FormHeader";
-import { PostFormData } from "@/types/post.type";
+import { PostFormData, PostFormFields } from "@/types/post.type";
+import { postFormSchema } from "@/consts/zodSchema";
 
-const PostFormSchema = z.object({
-  tags: z
-    .array(z.string())
-    .min(1, "최소 1개 이상의 태그를 입력하세요.")
-    .max(10, "최대 10개의 태그만 추가할 수 있습니다."),
-  images: z.array(z.union([z.string(), z.instanceof(File)])),
-  description: z.string().trim().min(1, "내용을 입력해주세요."),
-});
-
-export type PostFormFields = z.infer<typeof PostFormSchema>;
 interface PostFormProps {
   post?: PostFormData;
   requestType: "create" | "update";
@@ -49,7 +39,7 @@ const PostForm = ({
       images: post?.images ?? [],
       description: post?.description ?? "",
     },
-    resolver: zodResolver(PostFormSchema),
+    resolver: zodResolver(postFormSchema),
     mode: "onSubmit",
   });
 

@@ -21,8 +21,9 @@ const Root: FC<RootProps> = ({
   onChange,
 }) => {
   const [items, setItems] = useState<Array<string>>(defaultItems);
-  const addItem = (item: string) => {
-    const updatedItems = [...items, item];
+  const addItem = (value: string) => {
+    const trimedValue = trimValue(value);
+    const updatedItems = [...items, trimedValue];
     setItems(updatedItems);
     onChange?.(updatedItems);
   };
@@ -30,6 +31,20 @@ const Root: FC<RootProps> = ({
     const filterdItems = items.filter((title) => title !== item);
     setItems(filterdItems);
     onChange?.(filterdItems);
+  };
+
+  const isValidInput = (value: string) => {
+    const trimedValue = trimValue(value);
+    if (!trimedValue) return false;
+    if (items.includes(trimedValue)) return false;
+    if (trimedValue.length > maxItemLength || items.length >= maxItemsCount)
+      return false;
+
+    return true;
+  };
+
+  const trimValue = (value: string) => {
+    return value.trim().replace(/#+/g, "#");
   };
 
   return (
@@ -40,6 +55,7 @@ const Root: FC<RootProps> = ({
         maxItemsCount,
         addItem,
         removeItem,
+        isValidInput,
       }}
     >
       {children}
