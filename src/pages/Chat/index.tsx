@@ -19,8 +19,7 @@ const ChatPage = () => {
     user,
     targetUser
   );
-  console.log({ targetUser });
-  console.log({ user });
+
   return (
     isConnected && (
       <div className={styles.wrapper}>
