@@ -60,11 +60,9 @@ const router = createBrowserRouter([
       {
         path: "/community/update/:id",
         element: (
-          <ProtectedRoute>
-            <Suspense fallback={<p>...Loading</p>}>
-              <PostUpdatePage />
-            </Suspense>
-          </ProtectedRoute>
+          <Suspense fallback={<p>...Loading</p>}>
+            <PostUpdatePage />
+          </Suspense>
         ),
       },
 

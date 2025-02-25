@@ -52,7 +52,6 @@ const PostUpdatePage = () => {
   const handleDeletePost = () => id && deletePost(id);
 
   useEffect(() => {
-    if (post === null) navigate("/404", { replace: true });
     if (post.creator._id !== userId)
       throw new Error("게시글 수정 권한이 없습니다.");
   }, [post]);
