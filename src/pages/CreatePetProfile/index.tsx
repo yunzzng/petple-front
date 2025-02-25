@@ -2,7 +2,6 @@ import { ChangeEvent, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import userAuthStore from "@/zustand/userAuth";
 import style from "./createPetProfile.module.css";
-import axios from "axios";
 import { Button } from "@/components";
 import { useNavigate } from "react-router-dom";
 import { imageUpload } from "@/utils/imageUpload";
@@ -11,6 +10,7 @@ import { Pet } from "@/types/user.type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { petSchema } from "@/consts/zodSchema";
 import { z } from "zod";
+import { createPet } from "@/apis/profile.api";
 
 const petDefaultValues = {
   name: "",
@@ -60,22 +60,18 @@ const CreatePetProfile = () => {
     imageUrl = await imageUpload(file);
 
     try {
-      const response = await axios.post("/api/user/pet/create", {
-        userId: userId,
-        formData: petData,
-        image: imageUrl,
-      });
+      const response = await createPet(userId!, petData, imageUrl);
 
-      if (response.status === 200) {
+      if (response) {
         alert("반려동물 프로필이 저장되었습니다.");
         navigate("/profile");
 
         const newPet = {
-          _id: response.data.pet.id,
-          name: response.data.pet.name,
-          age: response.data.pet.age,
-          breed: response.data.pet.breed,
-          image: response.data.pet.image,
+          _id: response.id,
+          name: response.name,
+          age: response.age,
+          breed: response.breed,
+          image: response.image,
         };
         setUserPet([...(userPet || []), newPet]);
       }

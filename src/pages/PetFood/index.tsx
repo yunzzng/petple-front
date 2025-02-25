@@ -17,7 +17,6 @@ const PetFood = () => {
 
   const {
     data = [],
-    isLoading,
     isError,
   } = useQuery<FoodService[]>({
     queryKey: ["petFoodData", selectedCategory, querySearchTerm],
@@ -90,9 +89,7 @@ const PetFood = () => {
       </div>
 
       <div className={styles.foodTableContainer}>
-        {isLoading ? (
-          <p className={styles.messageText}>데이터를 불러오는 중...</p>
-        ) : isError ? (
+        {isError ? (
           <p className={styles.messageText}>
             데이터를 불러오는 중 오류가 발생했습니다.
           </p>

@@ -39,6 +39,7 @@
 }
 
 .address_button {
+  height: 30px;
   padding: 5px;
   align-items: center;
   justify-content: center;
@@ -50,4 +51,9 @@
   cursor: pointer;
   background-color: #93c9ff;
   color: white;
+}
+
+.modal {
+  display: flex;
+  align-items: center;
 }

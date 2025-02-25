@@ -1,6 +1,19 @@
 import { AddressType } from "@/types/user.type";
 import baseInstance from "./axios";
 
+const logout = async () => {
+  try {
+    const response = await baseInstance.post("/user/logout");
+
+    if (response.data.success) {
+      return true;
+    }
+    return false;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const checkNickName = async (nickName: string) => {
   try {
     const response = await baseInstance.post("/user/nickname/check", {
@@ -71,7 +84,7 @@ const updatePetInfo = async (
   imageUrl: string
 ) => {
   try {
-    const response = await baseInstance.post("/user/pet/update", {
+    const response = await baseInstance.post(`/user/pet/${_id}`, {
       userId: userId,
       userPet: petData,
       petId: _id,
@@ -86,9 +99,11 @@ const updatePetInfo = async (
 
 const deletePet = async (userId: string, _id: string) => {
   try {
-    const response = await baseInstance.post("/user/pet/delete", {
-      userId: userId,
-      petId: _id,
+    const response = await baseInstance.delete(`/user/pet/${_id}`, {
+      data: {
+        userId: userId,
+        petId: _id,
+      },
     });
 
     if (response.data.success) {
@@ -139,4 +154,5 @@ export {
   getMyPosts,
   getNearUsers,
   getUserByNickname,
+  logout,
 };

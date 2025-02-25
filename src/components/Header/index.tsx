@@ -6,7 +6,7 @@ import axios from "axios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import Avartar from "../Avartar";
-import { recieveUserInfo } from "@/apis/profile.api";
+import { logout, recieveUserInfo } from "@/apis/profile.api";
 
 const getUserInfo = async () => {
   try {
@@ -25,7 +25,14 @@ const Header = () => {
   const { userImage } = userAuthStore();
   const queryClient = useQueryClient();
 
-  const loginStatus = Boolean(document.cookie.split("=")[1]); //예외처리 추가
+  const getCookie = (name: string) => {
+    return document.cookie
+      .split("; ")
+      .find((row) => row.startsWith(name + "="))
+      ?.split("=")[1];
+  };
+
+  const loginStatus = JSON.parse(getCookie("loginStatus") || "false");
 
   const query = useQuery<any>({
     queryKey: ["userInfo"],
@@ -48,13 +55,13 @@ const Header = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post("/api/user/logout");
+      const response = await logout();
 
-      if (response.status === 200) {
+      if (response) {
         userAuthStore.setState({
           userId: null,
           userEmail: null,
-          userNickName: null,
+          userNickName: "",
           userImage: null,
           userPet: null,
         });

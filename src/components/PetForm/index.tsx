@@ -9,15 +9,7 @@ import { deletePet, updatePetInfo } from "@/apis/profile.api";
 import { petSchema } from "@/consts/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-const defaultValuesPetForm = {
-  name: "",
-  age: "",
-  breed: "",
-  _id: "",
-  image: "",
-};
-
-interface petInfoProps {
+interface PetInfoProps {
   name?: string;
   age?: string;
   breed?: string;
@@ -25,17 +17,22 @@ interface petInfoProps {
   image?: string;
 }
 
-const PetForm: FC<petInfoProps> = (props) => {
+const PetForm: FC<PetInfoProps> = (props) => {
   const { name, age, _id, image, breed } = props;
 
   const {
     handleSubmit,
     register,
-    formState: { errors },
-    setValue,
+    formState: { errors, isDirty },
     reset,
   } = useForm<Pet>({
-    defaultValues: defaultValuesPetForm,
+    defaultValues: {
+      name: name || "",
+      age: age || "",
+      breed: breed || "",
+      _id: _id || "",
+      image: image || "",
+    },
     resolver: zodResolver(petSchema),
     mode: "onBlur",
   });
@@ -45,13 +42,13 @@ const PetForm: FC<petInfoProps> = (props) => {
   const [edit, setEdit] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    setValue("name", name || "");
-    setValue("age", age || "");
-    setValue("breed", breed || "");
-    setValue("_id", _id || "");
-    setValue("image", image || "");
-  }, [_id, name, age, breed, image]);
+  // useEffect(() => {
+  //   setValue("name", name || "");
+  //   setValue("age", age || "");
+  //   setValue("breed", breed || "");
+  //   setValue("_id", _id || "");
+  //   setValue("image", image || "");
+  // }, [_id, name, age, breed, image]);
 
   const handleClickFile = () => {
     fileInputRef?.current?.click();
@@ -70,7 +67,7 @@ const PetForm: FC<petInfoProps> = (props) => {
     if (
       name === petData.name &&
       age === petData.age &&
-      image === petData.image &&
+      image === previewImg &&
       breed === petData.breed
     ) {
       setEdit(false);
@@ -78,8 +75,13 @@ const PetForm: FC<petInfoProps> = (props) => {
     }
 
     let imageUrl = previewImg;
-    if (file) {
-      imageUrl = await imageUpload(file);
+
+    try {
+      if (file) {
+        imageUrl = await imageUpload(file);
+      }
+    } catch (error) {
+      console.error(error);
     }
 
     const updatedPet = await updatePetInfo(userId!, petData, _id!, imageUrl);

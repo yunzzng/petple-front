@@ -32,7 +32,7 @@ const UserProfileForm = () => {
   });
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [previewImg, setPreviewImg] = useState<string>(profileImg);
+  const [previewImg, setPreviewImg] = useState<string>(userImage || profileImg);
   const [file, setFile] = useState<File | null>(null);
   const [updating, setUpdating] = useState(false);
   const [isNickNameConfirm, setIsNickNameConfirm] = useState<boolean>(false);
@@ -47,7 +47,7 @@ const UserProfileForm = () => {
     if (userImage) {
       setPreviewImg(userImage);
     }
-  }, []);
+  }, [userImage]);
 
   const handleClickFile = () => {
     fileInputRef?.current?.click();
@@ -72,24 +72,25 @@ const UserProfileForm = () => {
     const nickName = getValues("nickName");
     let imageUrl = userImage;
 
-    if (nickName === userNickName) {
-      setIsNickNameConfirm(true);
-      setConfirmedNickName(nickName);
+    if (file) {
+      imageUrl = await imageUpload(file);
+      if (imageUrl) {
+        userAuthStore.setState({ userImage: imageUrl });
+      }
     }
 
-    if (!isNickNameConfirm || nickName !== confirmedNickName) {
+    const isNickNameChanged = nickName !== userNickName;
+
+    if (
+      isNickNameChanged &&
+      (!isNickNameConfirm || nickName !== confirmedNickName)
+    ) {
       alert("닉네임 중복 확인을 해주세요.");
       return;
     }
 
-    if (file) {
-      imageUrl = await imageUpload(file);
-      userAuthStore.setState({ userImage: imageUrl });
-    }
-
-    // 수정 전 닉네임, 이미지 같으면 api요청 x
     if (
-      nickName === userNickName &&
+      !isNickNameChanged &&
       imageUrl === userImage &&
       selectedAddress === userAddress
     ) {
@@ -101,7 +102,7 @@ const UserProfileForm = () => {
     const success = await updateUserInfo(
       userEmail,
       nickName,
-      imageUrl!,
+      imageUrl ?? "",
       selectedAddress
     );
 
@@ -214,14 +215,22 @@ const UserProfileForm = () => {
               </Button>
             </div>
           </li>
-          <label>주소</label>
-          <input value={selectedAddress.jibunAddress} className={style.input} />
-          <AddressForm
-            closeModal={handleCloseModal}
-            openModal={handleOpenModal}
-            isOpen={isOpen}
-            onSelectAddress={handleSelectAddress}
-          />
+          <li className={style.nickname_wrap}>
+            <label>주소</label>
+            <div className={style.nickName_div}>
+              <input
+                value={selectedAddress.jibunAddress}
+                className={style.input}
+                onClick={handleOpenModal}
+              />
+              <AddressForm
+                closeModal={handleCloseModal}
+                openModal={handleOpenModal}
+                isOpen={isOpen}
+                onSelectAddress={handleSelectAddress}
+              />
+            </div>
+          </li>
           <Button type="submit" className={style.button}>
             회원정보 수정
           </Button>
@@ -238,7 +247,7 @@ const UserProfileForm = () => {
                 className={style.pencil}
               />
             </div>
-            <p>{selectedAddress.jibunAddress}</p>
+            <p className={style.address}>{selectedAddress.jibunAddress}</p>
           </div>
         </ul>
       )}
