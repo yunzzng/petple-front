@@ -39,7 +39,7 @@ const AddressForm: FC<AddressFormProps> = ({
 
   const fetchCoordinate = async (address: string) => {
     try {
-      const apiKey = "70FE45AE-5BBB-3DB6-B189-0BD818A5B020";
+      const apiKey = import.meta.env.VITE_VWORLD_API_KEY;
       const encodedAddress = encodeURIComponent(address);
 
       const response = await fetch(

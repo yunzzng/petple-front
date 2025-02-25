@@ -45,11 +45,14 @@ const UserProfileForm = () => {
     userAddress ?? addressDefaultValue
   );
 
+  console.log("userNickName:", userNickName);
+  console.log("confirmedNickName:", confirmedNickName);
+
   useEffect(() => {
     if (userImage) {
       setPreviewImg(userImage);
     }
-  }, []);
+  }, [userImage]);
 
   const handleClickFile = () => {
     fileInputRef?.current?.click();
@@ -74,24 +77,25 @@ const UserProfileForm = () => {
     const nickName = getValues("nickName");
     let imageUrl = userImage;
 
-    if (nickName === userNickName) {
-      setIsNickNameConfirm(true);
-      setConfirmedNickName(nickName);
+    if (file) {
+      imageUrl = await imageUpload(file);
+      if (imageUrl) {
+        userAuthStore.setState({ userImage: imageUrl });
+      }
     }
 
-    if (!isNickNameConfirm || nickName !== confirmedNickName) {
+    const isNickNameChanged = nickName !== userNickName;
+
+    if (
+      isNickNameChanged &&
+      (!isNickNameConfirm || nickName !== confirmedNickName)
+    ) {
       alert("닉네임 중복 확인을 해주세요.");
       return;
     }
 
-    if (file) {
-      imageUrl = await imageUpload(file);
-      userAuthStore.setState({ userImage: imageUrl });
-    }
-
-    // 수정 전 닉네임, 이미지 같으면 api요청 x
     if (
-      nickName === userNickName &&
+      !isNickNameChanged &&
       imageUrl === userImage &&
       selectedAddress === userAddress
     ) {
@@ -103,7 +107,7 @@ const UserProfileForm = () => {
     const success = await updateUserInfo(
       userEmail,
       nickName,
-      imageUrl!,
+      imageUrl ?? "",
       selectedAddress
     );
 

@@ -25,7 +25,14 @@ const Header = () => {
   const { userImage } = userAuthStore();
   const queryClient = useQueryClient();
 
-  const loginStatus = Boolean(document.cookie.split("=")[1]); //예외처리 추가
+  const getCookie = (name: string) => {
+    return document.cookie
+      .split("; ")
+      .find((row) => row.startsWith(name + "="))
+      ?.split("=")[1];
+  };
+
+  const loginStatus = JSON.parse(getCookie("loginStatus") || "false");
 
   const query = useQuery<any>({
     queryKey: ["userInfo"],
@@ -54,7 +61,7 @@ const Header = () => {
         userAuthStore.setState({
           userId: null,
           userEmail: null,
-          userNickName: null,
+          userNickName: "",
           userImage: null,
           userPet: null,
         });

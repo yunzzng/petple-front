@@ -6,7 +6,7 @@ const userAuthStore = create<AuthStore>((set) => ({
   setUserId: (userId: string) => set({ userId: userId }),
   userEmail: null,
   setUserEmail: (userEmail: string) => set({ userEmail: userEmail }),
-  userNickName: null,
+  userNickName: "",
   setUserNickName: (nickName: string) => set({ userNickName: nickName }),
   userImage: null,
   setUserImage: (image: string) => set({ userImage: image }),
