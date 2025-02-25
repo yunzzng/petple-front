@@ -109,7 +109,7 @@ const getMyPosts = async () => {
   }
 };
 
-const getNearUsers = async (data: { lat: string; lng: string }) => {
+const getNearUsers = async (data: { lat: number; lng: number }) => {
   try {
     const response = await baseInstance.get(
       `/user/near?lat=${data.lat}&lng=${data.lng}`
