@@ -1,6 +1,19 @@
 import { AddressType } from "@/types/user.type";
 import baseInstance from "./axios";
 
+const logout = async () => {
+  try {
+    const response = await baseInstance.post("/user/logout");
+
+    if (response.data.success) {
+      return true;
+    }
+    return false;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const checkNickName = async (nickName: string) => {
   try {
     const response = await baseInstance.post("/user/nickname/check", {
@@ -131,4 +144,5 @@ export {
   recieveUserInfo,
   getMyPosts,
   getNearUsers,
+  logout,
 };
