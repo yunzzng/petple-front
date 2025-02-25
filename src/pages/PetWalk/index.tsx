@@ -21,11 +21,11 @@ const PetWalk = () => {
 
   const { userId, userNickName, userImage, userPet } = userAuthStore();
 
-  useEffect(() => {
-    if (!userId) {
-      navigate("/login");
-    }
-  }, [userId, navigate]);
+  // useEffect(() => {
+  //   if (!userId) {
+  //     navigate("/login");
+  //   }
+  // }, [userId, navigate]);
 
   const mutation = useMutation({
     mutationFn: postWalkData,
@@ -104,34 +104,6 @@ const PetWalk = () => {
     <div className={styles.container}>
       <h2 className={styles.title}>매일매일 산책 기록 🌱</h2>
 
-      <div className={styles.userInfo}>
-        {userImage && (
-          <img
-            src={userImage}
-            alt="사용자 프로필"
-            className={styles.profileImage}
-          />
-        )}
-        <p className={styles.userName}>{userNickName} 님</p>
-      </div>
-
-      <div className={styles.petSelection}>
-        <p>산책할 반려동물을 선택하세요:</p>
-        <select
-          value={selectedPet || ""}
-          onChange={(e) => setSelectedPet(e.target.value)}
-        >
-          <option value="" disabled>
-            반려동물 선택
-          </option>
-          {userPet?.map((pet) => (
-            <option key={pet._id} value={pet._id}>
-              {pet.name}
-            </option>
-          ))}
-        </select>
-      </div>
-
       <p className={styles.description}>
         반려동물과 함께 산책을 다녀오셨나요?
         <br />
@@ -153,6 +125,42 @@ const PetWalk = () => {
           </li>
           <li>3️⃣ 산책이 완료되면 종료 버튼을 눌러주세요.</li>
         </ul>
+      </div>
+      <div className={styles.description}>
+        <span className={styles.description_span}>안내사항: </span>
+        <p className={styles.description_p}>
+          정확한 거리를 측정하기 위해서는 Wi-Fi가 연결된 기기에서 사용해주세요.
+        </p>
+      </div>
+
+      <div className={styles.profileBox}>
+        <div className={styles.userInfo}>
+          {userImage && (
+            <img
+              src={userImage}
+              alt="사용자 프로필"
+              className={styles.profileImage}
+            />
+          )}
+          <p className={styles.userName}>{userNickName} 님</p>
+        </div>
+
+        <div className={styles.petSelection}>
+          <p>산책할 반려동물을 선택하세요:</p>
+          <select
+            value={selectedPet || ""}
+            onChange={(e) => setSelectedPet(e.target.value)}
+          >
+            <option value="" disabled>
+              반려동물 선택
+            </option>
+            {userPet?.map((pet) => (
+              <option key={pet._id} value={pet._id}>
+                {pet.name}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
 
       <div className={styles.tabContainer}>

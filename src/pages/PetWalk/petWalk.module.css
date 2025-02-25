@@ -64,3 +64,68 @@
 .listBtn:hover {
   background-color: #e55353;
 }
+
+.profileBox{
+  margin-top: 30px;
+  padding: 20px 10px;
+  background-color: #ddd;
+  border-radius: 10px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+}
+
+.profileImage {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.userName {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.petSelection {
+
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+}
+
+.petSelection p {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+select {
+  width: 100%;
+  padding: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: border 0.3s ease;
+}
+
+select:hover {
+  border-color: #777;
+}
+
+select:focus {
+  border-color: #007bff;
+  outline: none;
+}
