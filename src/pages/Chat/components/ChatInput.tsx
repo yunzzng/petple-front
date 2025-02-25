@@ -24,7 +24,7 @@ const ChatInput = ({ sendMessage }: ChatInputProps) => {
             setMessage(e.target.value)
           }
         />
-        <Button label="댓글" type="submit" />
+        <Button label="채팅" type="submit" />
       </form>
     </>
   );

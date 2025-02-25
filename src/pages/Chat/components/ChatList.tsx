@@ -11,7 +11,7 @@ interface ChatListProps {
 const ChatList = ({ messages, user }: ChatListProps) => {
   return (
     <main className={styles.wrapper}>
-      <ul>
+      <ul className={styles.chat_list}>
         {messages.map((message, index) => (
           <ChatMessage
             message={message}

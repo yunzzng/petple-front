@@ -1,3 +1,4 @@
-.wrapper {
-  flex-grow: 1;
+.chat_list {
+  display: flex;
+  flex-direction: column;
 }
