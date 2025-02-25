@@ -12,6 +12,7 @@ export interface ChipContextProps {
   maxItemsCount: number;
   addItem: (item: string) => void;
   removeItem: (item: string) => void;
+  isValidInput: (value: string) => boolean;
 }
 
 /* Root Component */

@@ -1,11 +1,11 @@
 import { SubmitHandler } from "react-hook-form";
 import styles from "./postcreate.module.css";
 import { PostForm } from "@/components";
-import { PostFormFields } from "@/components/PostForm";
 import { useMutation } from "@tanstack/react-query";
 import { multipleImageUpload } from "@/utils/imageUpload";
 import { addPost } from "@/apis/post.api";
 import { useNavigate } from "react-router-dom";
+import { PostFormFields } from "@/types/post.type";
 
 const PostCreatePage = () => {
   const navigate = useNavigate();
