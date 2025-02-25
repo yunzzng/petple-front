@@ -17,11 +17,11 @@ const useChatSocket = (user: AuthStore, targetUser: ChatUser) => {
       text,
       from: {
         id: user.userId,
-        nickname: user.userNickName,
+        nickName: user.userNickName,
       },
       to: {
         id: targetUser._id,
-        nickname: targetUser.nickName,
+        nickName: targetUser.nickName,
       },
     });
   };
