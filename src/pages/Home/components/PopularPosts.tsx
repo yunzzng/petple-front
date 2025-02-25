@@ -7,11 +7,10 @@ import likeIcon from "/images/icons/like.svg";
 import commentIcon from "/images/icons/comment.svg";
 import { useNavigate } from "react-router-dom";
 
+const rankEmojis = ["🥇", "🥈", "🥉"];
+
 const convertRankToEmoji = (rank: number) => {
-  if (rank === 1) return "🥇";
-  if (rank === 2) return "🥈";
-  if (rank === 3) return "🥉";
-  return rank;
+  return rankEmojis[rank - 1] ?? rank;
 };
 
 const PopularPosts = () => {
