@@ -1,38 +1,44 @@
 import styles from "./petfriends.module.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import useKakaoLoader from "@/components/Map/MapLoader";
 import userAuthStore from "@/zustand/userAuth";
-import { useQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { getNearUsers } from "@/apis/profile.api";
 import { useNavigate } from "react-router-dom";
+import { UserType } from "@/types/user.type";
 
 const PetFriendsPage = () => {
-  const [selectedUser, setSelectedUser] = useState<any>();
-  const { isSuccess, cleanup } = useKakaoLoader();
-  const user: any = userAuthStore();
   const mapConatinerRef = useRef<HTMLDivElement>(null);
+  const [selectedUser, setSelectedUser] = useState<UserType>();
   const navigate = useNavigate();
-  const { data: nearUsers } = useQuery({
-    queryKey: ["locations", user._id],
+  const { isSuccess, cleanup } = useKakaoLoader();
+  const signinedUser = userAuthStore();
+
+  const { data: nearUsers } = useSuspenseQuery<UserType[]>({
+    queryKey: ["locations", signinedUser.userId],
     queryFn: () =>
       getNearUsers({
-        lng: user.userAddress.location.coordinates[0],
-        lat: user.userAddress.location.coordinates[1],
+        lng: signinedUser.userAddress?.location.coordinates[0] || 0,
+        lat: signinedUser.userAddress?.location.coordinates[1] || 0,
       }),
-    enabled: !!user,
+    staleTime: 1000 * 60 * 60 * 5,
   });
-  const handleClickMarker = (user: any) => {
-    setSelectedUser(user);
-  };
+  const filteredUsers = useMemo(
+    () => nearUsers.filter((user) => user._id !== signinedUser.userId),
+    [nearUsers]
+  );
+
+  const handleClickMarker = (user: UserType) => setSelectedUser(user);
 
   useEffect(() => {
     if (!isSuccess || typeof window === "undefined") return;
 
     const { kakao } = window;
     if (!kakao?.maps) return;
-    initializeMap(kakao, nearUsers, mapConatinerRef, handleClickMarker);
+    initializeMap(kakao, filteredUsers, mapConatinerRef, handleClickMarker);
     return () => cleanup();
   }, [isSuccess, nearUsers]);
+
   return (
     <>
       <div className={styles.wrapper}>
@@ -63,9 +69,9 @@ export default PetFriendsPage;
 
 const initializeMap = (
   kakao: any,
-  nearUsers: any,
-  mapConatinerRef: any,
-  handleClickMarker: (user: any) => void
+  nearUsers: UserType[],
+  mapConatinerRef: React.RefObject<HTMLDivElement | null>,
+  handleClickMarker: (user: UserType) => void
 ) => {
   if (!mapConatinerRef.current) return;
 
@@ -76,7 +82,7 @@ const initializeMap = (
 
   const bounds = new kakao.maps.LatLngBounds();
 
-  nearUsers.forEach((user: any) =>
+  nearUsers.forEach((user: UserType) =>
     createMarker(kakao, map, user, bounds, handleClickMarker)
   );
 
@@ -86,9 +92,9 @@ const initializeMap = (
 const createMarker = (
   kakao: any,
   map: any,
-  user: any,
+  user: UserType,
   bounds: any,
-  handleClickMarker: (user: any) => void
+  handleClickMarker: (user: UserType) => void
 ) => {
   const position = new kakao.maps.LatLng(
     user.address.location.coordinates[1],
@@ -106,8 +112,8 @@ const createMarker = (
 };
 
 const createCustomOverlayMarker = (
-  user: any,
-  handleClickMarker: (user: any) => void
+  user: UserType,
+  handleClickMarker: (user: UserType) => void
 ) => {
   const wrapper = document.createElement("div");
   wrapper.className = "custom-marker";
@@ -120,9 +126,7 @@ const createCustomOverlayMarker = (
   label.className = "marker-label";
   label.innerText = user.userPet[0]?.name || user.name;
 
-  wrapper.onclick = () => {
-    handleClickMarker(user);
-  };
+  wrapper.onclick = () => handleClickMarker(user);
 
   wrapper.appendChild(img);
   wrapper.appendChild(label);
