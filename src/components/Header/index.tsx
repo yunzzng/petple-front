@@ -6,7 +6,7 @@ import axios from "axios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import Avartar from "../Avartar";
-import { recieveUserInfo } from "@/apis/profile.api";
+import { logout, recieveUserInfo } from "@/apis/profile.api";
 
 const getUserInfo = async () => {
   try {
@@ -55,9 +55,9 @@ const Header = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post("/api/user/logout");
+      const response = await logout();
 
-      if (response.status === 200) {
+      if (response) {
         userAuthStore.setState({
           userId: null,
           userEmail: null,
