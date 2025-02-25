@@ -56,3 +56,12 @@ export interface FoodService {
   sodium: string; // 나트륨(%)
   potassium: string; // 칼륨(%)
 }
+
+export interface WalkData {
+  userId: string;
+  petId: string;
+  startTime: string;
+  startLocation: string;
+  endTime: string;
+  endLocation: string;
+}

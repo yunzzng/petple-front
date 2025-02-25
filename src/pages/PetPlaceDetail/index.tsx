@@ -19,7 +19,7 @@ const PetPlaceDetail = () => {
   );
   const [placeData, setPlaceData] = useState(location.state ?? {});
 
-  const { data, isLoading, isError } = useQuery({
+  const { data, isError } = useQuery({
     queryKey: ["placeDetail", id],
     queryFn: () => getPlaceDetail(id!),
     enabled: !!id,
@@ -57,9 +57,7 @@ const PetPlaceDetail = () => {
       </Button>
 
       <div className={styles.placeList}>
-        {isLoading ? (
-          <p className={styles.messageText}>데이터를 불러오는 중...</p>
-        ) : isError ? (
+        {isError ? (
           <p className={styles.messageText}>
             데이터를 불러오는 중 오류가 발생했습니다.
           </p>

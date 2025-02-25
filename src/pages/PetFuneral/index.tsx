@@ -17,7 +17,6 @@ const PetFuneral = () => {
 
   const {
     data = [],
-    isLoading,
     isError,
   } = useQuery<FuneralService[]>({
     queryKey: ["funeralData", selectedRegion],
@@ -72,9 +71,7 @@ const PetFuneral = () => {
               }}
             />
 
-            {isLoading ? (
-              <p className={styles.messageText}>데이터를 불러오는 중...</p>
-            ) : isError ? (
+            {isError ? (
               <p className={styles.messageText}>
                 데이터를 불러오는 중 오류가 발생했습니다.
               </p>

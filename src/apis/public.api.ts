@@ -1,5 +1,5 @@
 import baseInstance from "./axios";
-import { PlaceInfo, FuneralService, MedicalService, FoodService } from "@/types/petApi.type";
+import { PlaceInfo, FuneralService, MedicalService, FoodService, WalkData } from "@/types/petApi.type";
 
 const getFuneralData = async (region: string): Promise<FuneralService[]> => {
   try {
@@ -59,4 +59,26 @@ const getPetFood = async (search?: string, category?: string): Promise<FoodServi
   }
 };
 
-export { getFuneralData, getMedicalData, getPlacesData, getPlaceDetail, getPetFood };
+const postWalkData = async (walkData: WalkData): Promise<boolean> => {
+  try {
+    await baseInstance.post("/public/walks", walkData, {
+      headers: { "Content-Type": "application/json" },
+    });
+    return true;
+  } catch (error) {
+    console.error("산책 기록 저장 실패:", error);
+    return false;
+  }
+};
+
+const getWalks = async (): Promise<WalkData[]> => {
+  try {
+    const response = await baseInstance.get("/public//walks");
+    return response.data || [];
+  } catch (error) {
+    console.error("산책 기록 조회 실패:", error);
+    return [];
+  }
+};
+
+export { getFuneralData, getMedicalData, getPlacesData, getPlaceDetail, getPetFood, postWalkData, getWalks };

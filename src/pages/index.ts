@@ -12,5 +12,6 @@ export { default as PetFuneral } from "@/pages/PetFuneral";
 export { default as PetMedical } from "@/pages/PetMedical";
 export { default as PetPlace } from "@/pages/PetPlace";
 export { default as PetWalk } from "@/pages/PetWalk";
+export { default as PetWalkDetail } from "@/pages/PetwalkDetail";
 export { default as PetPlaceDetail } from "@/pages/PetPlaceDetail";
 export { default as CreatePetProfile } from "@/pages/CreatePetProfile";
