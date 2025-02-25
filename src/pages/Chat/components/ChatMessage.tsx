@@ -1,7 +1,6 @@
 import { ChatMessageType } from "@/types/chat.type";
 import styles from "./chatmessage.module.css";
 import { useMemo } from "react";
-import { Avartar } from "@/components";
 
 interface ChatMessageProps {
   message: ChatMessageType;
@@ -28,7 +27,6 @@ const MyMessage = ({ message }: { message: ChatMessageType }) => {
 };
 
 const OtherMessage = ({ message }: { message: ChatMessageType }) => {
-  // console.log(message);
   return (
     <li className={styles.other_message_wrapper}>
       <div className={styles.profile_container}>
