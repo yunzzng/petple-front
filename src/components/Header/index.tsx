@@ -33,7 +33,6 @@ const Header = () => {
   };
 
   const loginStatus = JSON.parse(getCookie("loginStatus") || "false");
-  console.log("loginStatus", loginStatus);
 
   const query = useQuery<any>({
     queryKey: ["userInfo"],

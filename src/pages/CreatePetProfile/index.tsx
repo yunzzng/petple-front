@@ -67,11 +67,11 @@ const CreatePetProfile = () => {
         navigate("/profile");
 
         const newPet = {
-          _id: response.data.pet.id,
-          name: response.data.pet.name,
-          age: response.data.pet.age,
-          breed: response.data.pet.breed,
-          image: response.data.pet.image,
+          _id: response.id,
+          name: response.name,
+          age: response.age,
+          breed: response.breed,
+          image: response.image,
         };
         setUserPet([...(userPet || []), newPet]);
       }
