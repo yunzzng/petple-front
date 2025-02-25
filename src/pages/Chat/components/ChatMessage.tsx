@@ -31,7 +31,6 @@ const MyMessage = ({ message }: { message: ChatMessageType }) => {
 };
 
 const OtherMessage = ({ message }: { message: ChatMessageType }) => {
-  console.log(message);
   return (
     <li>
       {message.from.nickName}:{message.text}
