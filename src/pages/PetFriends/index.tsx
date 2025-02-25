@@ -48,16 +48,30 @@ const PetFriendsPage = () => {
           ref={mapConatinerRef}
         ></div>
         {selectedUser && (
-          <section onClick={() => navigate(`/chat/${selectedUser.nickName}`)}>
-            <div className={styles.selected_user_image_wrapper}>
+          <section
+            className={styles.selected_user_card}
+            onClick={() => navigate(`/chat/${selectedUser.nickName}`)}
+          >
+            <div className={styles.image_wrapper}>
               <img
                 src={
                   selectedUser.userPet[0]?.image ?? selectedUser.profileImage
                 }
                 alt="펫 프로필 이미지"
+                className={styles.profile_image}
               />
             </div>
-            <p>{selectedUser?.userPet[0]?.name ?? selectedUser.nickName}</p>
+            <div className={styles.user_info}>
+              <h3 className={styles.user_name}>
+                {selectedUser.userPet[0]?.name ?? selectedUser.nickName}
+              </h3>
+              {selectedUser.userPet[0] && (
+                <p className={styles.pet_details}>
+                  {selectedUser.userPet[0].breed} •{" "}
+                  {selectedUser.userPet[0].age}살
+                </p>
+              )}
+            </div>
           </section>
         )}
       </div>
