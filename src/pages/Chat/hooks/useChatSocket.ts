@@ -1,10 +1,10 @@
 import { config } from "@/consts/config";
 import { ChatMessageType } from "@/types/chat.type";
-import { AuthStore, ChatUser } from "@/types/user.type";
+import { AuthStore, UserType } from "@/types/user.type";
 import { useEffect, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
-const useChatSocket = (user: AuthStore, targetUser: ChatUser) => {
+const useChatSocket = (user: AuthStore, targetUser: UserType) => {
   const [isConnected, setIsConnected] = useState(false);
   const [roomId, setRoomId] = useState("");
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
@@ -18,10 +18,14 @@ const useChatSocket = (user: AuthStore, targetUser: ChatUser) => {
       from: {
         id: user.userId,
         nickName: user.userNickName,
+        userPet: user.userPet,
+        profileImage: user.userImage,
       },
       to: {
         id: targetUser._id,
         nickName: targetUser.nickName,
+        userPet: targetUser.userPet,
+        profileImage: targetUser.profileImage,
       },
     });
   };
