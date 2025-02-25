@@ -49,9 +49,8 @@ const useChatSocket = (user: AuthStore, targetUser: UserType) => {
       const roomId = [user.userId, targetUser._id].sort().join("-");
 
       socket.on("prev_message", (prevMessage) => {
-        if (prevMessage.messages.length) {
-          setMessages(prevMessage.messages);
-        }
+        if (!prevMessage?.messages.length) return;
+        setMessages(prevMessage.messages);
       });
 
       socket.emit("join_room", roomId);
