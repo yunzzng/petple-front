@@ -27,6 +27,7 @@ import LikeButton from "./components/LikeButton";
 import Header from "@/components/Header";
 import { AxiosError } from "axios";
 import { updateLikes } from "@/apis/like.api";
+import { useToast } from "@/components/Toast/components";
 
 const CommentSchema = z.object({
   description: z.string().trim().min(1, "내용을 입력해주세요."),
@@ -177,10 +178,14 @@ const PostDetailPage = () => {
       if (error.status === 401) window.alert("로그인인 필요합니다.");
     },
   });
+  const { toast } = useToast();
   const handleClickLike = () => {
     if (!postId) return;
     if (!user.userId) {
-      window.alert("로그인이 필요합니다.");
+      toast({
+        type: "INFO",
+        description: "로그인이 필요합니다.",
+      });
       return;
     }
     updateLikesMutate({ postId, likeStatus: !currentLikeStatus });
