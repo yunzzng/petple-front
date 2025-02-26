@@ -41,3 +41,38 @@ export interface AddressType {
     coordinates: [number | null, number | null];
   };
 }
+
+export type ChatUser = {
+  _id: string;
+  name: string;
+  email: string;
+  nickName: string;
+  profileImage: string;
+};
+
+export type UserType = {
+  _id: string;
+  email: string;
+  name: string;
+  nickName: string;
+  profileImage: string;
+  address: {
+    jibunAddress: string;
+    location: {
+      type: "Point";
+      coordinates: Array<number>;
+    };
+  };
+  userType: string;
+  userPet: Array<PetType>;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type PetType = {
+  name: string;
+  age: string;
+  image: string;
+  breed: string;
+  _id: string;
+};

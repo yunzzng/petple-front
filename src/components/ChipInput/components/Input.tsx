@@ -7,7 +7,8 @@ const Input: FC<InputProps> = ({
   placeholder = "#태그 작성후 Enter를 눌러주세요.",
 }) => {
   const [value, setValue] = useState<string>("");
-  const { items, maxItemLength, maxItemsCount, addItem } = useChipContext();
+  const { items, maxItemLength, maxItemsCount, addItem, isValidInput } =
+    useChipContext();
   const hanldeChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     if (maxItemLength < value.length || maxItemsCount === items.length) {
@@ -19,19 +20,11 @@ const Input: FC<InputProps> = ({
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      const validatedValue = value.trim().replace(/#+/g, "#");
-
-      if (!validatedValue) return;
-      if (
-        validatedValue.length > maxItemLength ||
-        items.length >= maxItemsCount
-      )
-        return;
-      if (items.includes(validatedValue)) {
+      if (!isValidInput(value)) {
         setValue("");
         return;
       }
-      addItem(validatedValue);
+      addItem(value);
       setValue("");
     }
   };

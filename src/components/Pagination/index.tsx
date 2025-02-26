@@ -1,5 +1,6 @@
 import { Button } from "..";
 import styles from "./pagination.module.css";
+import { useMemo } from "react";
 
 interface PaginationProps {
   page: number;
@@ -10,19 +11,23 @@ interface PaginationProps {
 }
 
 const Pagination = ({ page, totalPages, startPage, endPage, setPage }: PaginationProps) => {
+  const pageNumbers = useMemo(() => {
+    return [...Array(endPage - startPage + 1)].map((_, i) => startPage + i);
+  }, [startPage, endPage]);
+
   return (
     <div className={styles.pagination}>
       <Button onClick={() => setPage(Math.max(page - 1, 1))} disabled={page === 1} className={styles.pageButton}>
         이전
       </Button>
 
-      {[...Array(endPage - startPage + 1)].map((_, i) => (
+      {pageNumbers.map((pageNumber) => (
         <Button
-          key={startPage + i}
-          onClick={() => setPage(startPage + i)}
-          className={`${styles.pageNumber} ${page === startPage + i ? styles.activePage : ""}`}
+          key={pageNumber}
+          onClick={() => setPage(pageNumber)}
+          className={`${styles.pageNumber} ${page === pageNumber ? styles.activePage : ""}`}
         >
-          {startPage + i}
+          {pageNumber}
         </Button>
       ))}
 

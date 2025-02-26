@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import BaseLayout from "@/components/Layout";
-import { PetPlaceDetail, PetWalk, Roulette } from "./pages";
+import { PetPlaceDetail, PetWalk, PetWalkDetail, Roulette } from "./pages";
 
 const ErrorPage = lazy(() => import("@/pages/Error"));
 const HomePage = lazy(() => import("@/pages/Home"));
@@ -18,6 +18,7 @@ const SignupPage = lazy(() => import("@/pages/Signup"));
 const ProfilePage = lazy(() => import("@/pages/Profile"));
 const CreatePetProfile = lazy(() => import("@/pages/CreatePetProfile"));
 const PetFriendsPage = lazy(() => import("@/pages/PetFriends"));
+const ChatPage = lazy(() => import("@/pages/Chat"));
 
 const router = createBrowserRouter([
   {
@@ -119,6 +120,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/petwalk/detail",
+        element: (
+          <Suspense fallback={<p>...loading</p>}>
+            <PetWalkDetail />
+          </Suspense>
+        ),
+      },
+      {
         path: "/profile",
         element: (
           <Suspense fallback={<p>...loading</p>}>
@@ -157,6 +166,14 @@ const router = createBrowserRouter([
     element: (
       <Suspense fallback={<p>...Loading</p>}>
         <PostDetailPage />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/chat/:nickname",
+    element: (
+      <Suspense fallback={<p>...Loading</p>}>
+        <ChatPage />
       </Suspense>
     ),
   },

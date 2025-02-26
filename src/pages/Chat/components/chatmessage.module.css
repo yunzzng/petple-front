@@ -1,0 +1,58 @@
+/* my message */
+.my_message_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: fit-content;
+  padding: 8px 12px;
+  margin: 8px 0;
+  background-color: #93c9ff;
+  color: white;
+  border-radius: 16px 16px 0 16px;
+  word-break: break-word;
+  font-size: 14px;
+  align-self: flex-end;
+}
+
+/* other message */
+
+.other_message_wrapper {
+  display: flex;
+  align-items: flex-start;
+  max-width: 60%;
+  margin: 8px 0;
+  gap: 8px;
+}
+
+.profile_container {
+  flex-shrink: 0;
+}
+
+.profile_image {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.message_content {
+  display: flex;
+  flex-direction: column;
+  background-color: #e5e5ea;
+  color: black;
+  padding: 8px 12px;
+  border-radius: 16px 16px 16px 0;
+  word-break: break-word;
+}
+
+.nickname {
+  font-size: 12px;
+  font-weight: bold;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.message_text {
+  margin: 0;
+  font-size: 14px;
+}
