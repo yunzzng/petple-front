@@ -1,4 +1,4 @@
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logo from "/images/logo.png";
 import style from "./header.module.css";
 import userAuthStore from "@/zustand/userAuth";
@@ -6,6 +6,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import Avartar from "../Avartar";
 import { logout, recieveUserInfo } from "@/apis/profile.api";
+import { getCookie } from "@/hooks/getCookie";
 
 const getUserInfo = async () => {
   try {
@@ -24,13 +25,6 @@ const Header = () => {
   const navigate = useNavigate();
   const { userImage } = userAuthStore();
   const queryClient = useQueryClient();
-
-  const getCookie = (name: string) => {
-    return document.cookie
-      .split("; ")
-      .find((row) => row.startsWith(name + "="))
-      ?.split("=")[1];
-  };
 
   const loginStatus = JSON.parse(getCookie("loginStatus") || "false");
 
