@@ -15,11 +15,11 @@ const PostDetailPage = lazy(() => import("@/pages/PostDetail"));
 const PostUpdatePage = lazy(() => import("@/pages/PostUpdate"));
 const CommunityPage = lazy(() => import("@/pages/Community"));
 const LoginPage = lazy(() => import("@/pages/Login"));
-const SignupPage = lazy(() => import("@/pages/Signup"));
 const ProfilePage = lazy(() => import("@/pages/Profile"));
 const CreatePetProfile = lazy(() => import("@/pages/CreatePetProfile"));
 const PetFriendsPage = lazy(() => import("@/pages/PetFriends"));
 const ChatPage = lazy(() => import("@/pages/Chat"));
+const Menu = lazy(() => import("@/pages/Menu"));
 
 const Routes = () => {
   return <RouterProvider router={router} />;
@@ -62,15 +62,6 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<p>...Loading</p>}>
             <PostUpdatePage />
-          </Suspense>
-        ),
-      },
-
-      {
-        path: "/signup",
-        element: (
-          <Suspense fallback={<p>...loading</p>}>
-            <SignupPage />
           </Suspense>
         ),
       },
@@ -163,6 +154,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<p>...loading</p>}>
             <Roulette />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/menu",
+        element: (
+          <Suspense fallback={<p>...loading</p>}>
+            <Menu />
           </Suspense>
         ),
       },
