@@ -15,3 +15,5 @@ export { default as PetWalk } from "@/pages/PetWalk";
 export { default as PetWalkDetail } from "@/pages/PetwalkDetail";
 export { default as PetPlaceDetail } from "@/pages/PetPlaceDetail";
 export { default as CreatePetProfile } from "@/pages/CreatePetProfile";
+export { default as Chat } from "@/pages/Chat";
+export { default as Roulette } from "@/pages/Roulette";

@@ -3,10 +3,11 @@ import styles from "./postupdate.module.css";
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
 import { multipleImageUpload } from "@/utils/imageUpload";
 import { deletePostById, getPostById, updatePostById } from "@/apis/post.api";
-import PostForm, { PostFormFields } from "@/components/PostForm";
+import PostForm from "@/components/PostForm";
 import { SubmitHandler } from "react-hook-form";
 import { useEffect } from "react";
 import userAuthStore from "@/zustand/userAuth";
+import { PostFormFields } from "@/types/post.type";
 
 const PostUpdatePage = () => {
   const navigate = useNavigate();
@@ -51,7 +52,6 @@ const PostUpdatePage = () => {
   const handleDeletePost = () => id && deletePost(id);
 
   useEffect(() => {
-    if (post === null) navigate("/404", { replace: true });
     if (post.creator._id !== userId)
       throw new Error("게시글 수정 권한이 없습니다.");
   }, [post]);

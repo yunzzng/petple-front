@@ -1,7 +1,8 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import BaseLayout from "@/components/Layout";
-import { PetPlaceDetail, PetWalk, PetWalkDetail } from "./pages";
+import { PetPlaceDetail, PetWalk, PetWalkDetail, Roulette } from "@/pages";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const ErrorPage = lazy(() => import("@/pages/Error"));
 const HomePage = lazy(() => import("@/pages/Home"));
@@ -18,6 +19,13 @@ const SignupPage = lazy(() => import("@/pages/Signup"));
 const ProfilePage = lazy(() => import("@/pages/Profile"));
 const CreatePetProfile = lazy(() => import("@/pages/CreatePetProfile"));
 const PetFriendsPage = lazy(() => import("@/pages/PetFriends"));
+const ChatPage = lazy(() => import("@/pages/Chat"));
+
+const Routes = () => {
+  return <RouterProvider router={router} />;
+};
+
+export default Routes;
 
 const router = createBrowserRouter([
   {
@@ -150,6 +158,14 @@ const router = createBrowserRouter([
           </Suspense>
         ),
       },
+      {
+        path: "/roulette",
+        element: (
+          <Suspense fallback={<p>...loading</p>}>
+            <Roulette />
+          </Suspense>
+        ),
+      },
     ],
   },
   {
@@ -161,9 +177,15 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "/chat/:nickname",
+    element: (
+      <Suspense fallback={<p>...Loading</p>}>
+        <ChatPage />
+      </Suspense>
+    ),
+  },
+  {
     path: "*",
     element: <ErrorPage />,
   },
 ]);
-
-export default router;

@@ -124,12 +124,21 @@ const getMyPosts = async () => {
   }
 };
 
-const getNearUsers = async (data: { lat: string; lng: string }) => {
+const getNearUsers = async (data: { lat: number; lng: number }) => {
   try {
     const response = await baseInstance.get(
       `/user/near?lat=${data.lat}&lng=${data.lng}`
     );
     return response.data.users;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getUserByNickname = async (nickname: string) => {
+  try {
+    const response = await baseInstance.get(`/user/${nickname}`);
+    return response.data.user;
   } catch (error) {
     throw error;
   }
@@ -144,5 +153,6 @@ export {
   recieveUserInfo,
   getMyPosts,
   getNearUsers,
+  getUserByNickname,
   logout,
 };

@@ -1,0 +1,17 @@
+.comment_input {
+  display: flex;
+  width: 100%;
+  max-width: 360px;
+  position: fixed;
+  bottom: 0;
+  background-color: #ffffff;
+  padding: 8px 0;
+  border-top: 1px solid rgb(231, 232, 235);
+}
+
+.comment_input > input {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  font-size: medium;
+}

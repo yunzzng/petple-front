@@ -12,3 +12,4 @@ export { default as Header } from "./Header";
 export { default as MenuBar } from "./MenuBar";
 export { default as PetForm } from "./PetForm";
 export { default as UserProfileForm } from "./UserProfileForm";
+export { default as Routes } from "./Router";

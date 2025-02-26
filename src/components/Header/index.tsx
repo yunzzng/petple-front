@@ -1,8 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import logo from "/images/logo.png";
 import style from "./header.module.css";
 import userAuthStore from "@/zustand/userAuth";
-import axios from "axios";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import Avartar from "../Avartar";
@@ -13,6 +12,7 @@ const getUserInfo = async () => {
     const response = await recieveUserInfo();
     if (response) {
       const user = response;
+
       return user;
     }
   } catch (error) {
