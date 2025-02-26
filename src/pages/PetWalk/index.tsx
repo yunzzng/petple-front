@@ -32,7 +32,7 @@ const PetWalk = () => {
     lat: 33.450701,
     lng: 126.570667,
     name: "시작 위치",
-    buildingName: "카카오",
+    buildingName: "카카오 기본 위치",
     address: "" 
   };
 
