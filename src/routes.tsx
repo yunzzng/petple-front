@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import BaseLayout from "@/components/Layout";
-import { PetPlaceDetail, PetWalk } from "./pages";
+import { PetPlaceDetail, PetWalk, Roulette } from "./pages";
 
 const ErrorPage = lazy(() => import("@/pages/Error"));
 const HomePage = lazy(() => import("@/pages/Home"));
@@ -139,6 +139,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<p>...loading</p>}>
             <PetFriendsPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/roulette",
+        element: (
+          <Suspense fallback={<p>...loading</p>}>
+            <Roulette />
           </Suspense>
         ),
       },
