@@ -57,8 +57,6 @@ const Profile = () => {
     }
   };
 
-  console.log(userPet);
-
   return (
     <div className={style.profile_total_wrap}>
       <UserProfileForm />
