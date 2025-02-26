@@ -9,7 +9,7 @@
 .footer {
   width: 100%;
   max-width: 360px;
-  height: 52px;
+  height: 64px;
 
   display: flex;
   align-items: center;
@@ -24,24 +24,25 @@
   z-index: 100;
 }
 
+.footer div {
+  cursor: pointer;
+}
+
 .footer a {
   cursor: pointer;
   font-family: "HakgyoansimDunggeunmisoTTF-B";
+  font-size: 12px;
 }
 
-.home {
-  width: 30px;
+.menu_wrap {
+  display: flex;
+  align-items: center;
+  justify-self: center;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.community {
-  width: 57px;
-}
-
-.menu {
-  width: 30px;
-  padding-bottom: 4px;
-}
-
-.walk {
-  width: 40px;
+.img {
+  width: 25px;
+  height: 25px;
 }

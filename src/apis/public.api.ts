@@ -61,22 +61,21 @@ const getPetFood = async (search?: string, category?: string): Promise<FoodServi
 
 const postWalkData = async (walkData: WalkData): Promise<boolean> => {
   try {
-    await baseInstance.post("/public/walks", walkData, {
-      headers: { "Content-Type": "application/json" },
-    });
+    await baseInstance.post("/public/walk", walkData);
     return true;
   } catch (error) {
-    console.error("산책 기록 저장 실패:", error);
     return false;
   }
 };
 
-const getWalks = async (): Promise<WalkData[]> => {
+const getWalks = async (userId: string): Promise<WalkData[]> => {
   try {
-    const response = await baseInstance.get("/public//walks");
-    return response.data || [];
+    console.log("📡 API 요청 URL:", `/public/walks/${userId}`);
+    const response = await baseInstance.get(`/public/walks/${userId}`);
+    console.log("✅ API 응답 데이터:", response.data);
+    return response.data?.walks || [];
   } catch (error) {
-    console.error("산책 기록 조회 실패:", error);
+    console.error("❌ API 호출 실패:", error);
     return [];
   }
 };

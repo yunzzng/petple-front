@@ -23,9 +23,8 @@
   font-size: 12px;
   line-height: 1.4rem;
   color: #444;
-  border-bottom: 1px solid #ddd;
   padding-bottom: 10px;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .description_span {
@@ -66,10 +65,11 @@
 }
 
 .petSelection{
-  margin-top: 30px;
-  padding: 20px 10px;
-  background-color: #ddd;
+  margin-top: 20px;
+  padding: 10px;
   border-radius: 10px;
+  font-family: "HakgyoansimDunggeunmisoTTF-B";
+  color: #002daa;
 }
 
 .userInfo {

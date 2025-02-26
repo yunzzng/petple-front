@@ -12,12 +12,12 @@ interface MenuItem {
 }
 
 const menuList: MenuItem[] = [
-  { id: 1, label: "펫네임", image: menu1, link: "/" },
+  { id: 1, label: "펫네임", image: menu1, link: "/roulette" },
   { id: 2, label: "펫메디", image: menu2, link: "/petmedi" },
   { id: 3, label: "펫플레이스", image: menu3, link: "/petplace" },
   { id: 4, label: "펫퓨너럴", image: menu4, link: "/petfuneral" },
-  { id: 5, label: "펫푸드", image: menu5, link: "/petfood" }
+  { id: 5, label: "펫푸드", image: menu5, link: "/petfood" },
 ];
 
 export default menuList;
-export type { MenuItem }; 
+export type { MenuItem };

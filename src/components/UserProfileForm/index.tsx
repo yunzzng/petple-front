@@ -90,12 +90,11 @@ const UserProfileForm = () => {
     }
 
     if (
-      !isNickNameChanged &&
+      nickName === userNickName &&
       imageUrl === userImage &&
-      selectedAddress === userAddress
+      JSON.stringify(selectedAddress) === JSON.stringify(userAddress)
     ) {
       setUpdating(false);
-      alert("회원정보 수정 완료");
       return;
     }
 
