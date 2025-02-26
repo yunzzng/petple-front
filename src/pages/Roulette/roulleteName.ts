@@ -1,4 +1,4 @@
-const roulleteName = {
+export const RoulleteName = {
   black: [
     "까미",
     "콩이",
@@ -46,6 +46,7 @@ const roulleteName = {
     "태양이",
     "골디",
     "감자",
+    "달래",
   ],
   gray: [
     "먼지",
@@ -58,7 +59,7 @@ const roulleteName = {
     "순대",
     "후추",
   ],
-  tricolor: [
+  triColor: [
     "호박이",
     "쿠키",
     "단풍이",
@@ -81,7 +82,6 @@ const roulleteName = {
     "뚱이",
     "순이",
     "니모",
-    "달래",
     "또또",
     "루미",
     "태풍이",
@@ -90,7 +90,15 @@ const roulleteName = {
     "홍이",
     "뭉치",
     "콩이",
-    "쿠키",
-    "딸기",
+    "토리",
+    "몽구",
+    "몽이",
   ],
+};
+
+export const getRandomName = (color: keyof typeof RoulleteName) => {
+  const array = [...RoulleteName[color], ...RoulleteName.common];
+
+  const randomIndex = Math.floor(Math.random() * array.length);
+  return array[randomIndex];
 };
