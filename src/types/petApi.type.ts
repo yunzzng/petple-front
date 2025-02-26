@@ -60,18 +60,22 @@ export interface FoodService {
 export interface WalkData {
   user: string;
   pet: string;
+  petName?: string; 
+  userProfileImage?: string;
+  petImage?: string;
   startTime: string | Date; 
   startLocation: {
     address: string;
-    buildingName: string; // 건물명
+    buildingName: string;
     lat: number;
     lng: number;
   };
   endTime: string | Date; 
   endLocation: {
     address: string;
-    buildingName: string; // 건물명
+    buildingName: string;
     lat: number;
     lng: number;
   };
+  duration?: string;
 }

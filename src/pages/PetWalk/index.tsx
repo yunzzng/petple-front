@@ -28,19 +28,11 @@ const PetWalk = () => {
     onError: (error) => console.error("산책 기록 저장 중 오류 발생:", error),
   });
 
-  const startLocation = {
-    lat: 33.450701,
-    lng: 126.570667,
-    name: "시작 위치",
-    buildingName: "카카오 기본 위치",
-    address: "" 
-  };
-
   const updateLocation = (position: GeolocationPosition) => {
     setUserLocation({
       lat: position.coords.latitude,
       lng: position.coords.longitude,
-      name: "현재 위치",
+      name: "현재 위치", 
     });
   };
 
@@ -65,11 +57,19 @@ const PetWalk = () => {
       return;
     }
 
+    alert("산책이 시작되었습니다!");
     setStartTime(new Date().toISOString());
 
     if (navigator.geolocation) {
       const id = navigator.geolocation.watchPosition(
-        updateLocation,
+        (position) => {
+          setUserLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            name: "",
+          });
+          console.log("start Location: ", position.coords.latitude, position.coords.longitude);
+        },
         (error) => console.error("Geolocation error:", error),
         {
           enableHighAccuracy: true,
@@ -93,15 +93,22 @@ const PetWalk = () => {
     }
     setTracking(false);
 
+    alert("산책이 종료되었습니다! \n 기록보기에서 확인해주세요.");
+
     const selectedPetId =
       userPet?.find((pet) => pet._id === selectedPet)?._id || "";
 
     const walkData: WalkData = {
       user: userId,
       pet: selectedPetId,
-      startTime: startTime ?? new Date(),
-      startLocation: startLocation,
-      endTime: new Date(),
+      startTime: startTime ?? new Date().toISOString(),
+      startLocation: {
+        address: "",
+        buildingName: "",
+        lat: userLocation?.lat ?? 0,
+        lng: userLocation?.lng ?? 0,
+      },
+      endTime: new Date().toISOString(),
       endLocation: {
         address: "",
         buildingName: "",
@@ -109,7 +116,7 @@ const PetWalk = () => {
         lng: userLocation?.lng ?? 0,
       },
     };
-
+    console.log("End Location: ", userLocation)
     mutation.mutate(walkData);
   };
 
