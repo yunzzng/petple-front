@@ -14,8 +14,8 @@ const Roulette = () => {
     setSpinning(true);
 
     let angle = rotation; // 현재 각도에서 시작
-    let speed = 8; // 초기 속도 (클수록 빠름)
-    let deceleration = 0.992; // 감속 비율 (1에 가까울수록 더 오래 회전)
+    let speed = 10; // 초기 속도 (클수록 빠름)
+    let deceleration = 0.99; // 감속 비율 (1에 가까울수록 더 오래 회전)
     let minSpeed = 0.2; // 최소 속도 (너무 빨리 멈추지 않도록 설정)
     let finalAngle = 360 * 15 + Math.floor(Math.random() * 360); // 10바퀴 + 랜덤 각도
 
