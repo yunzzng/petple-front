@@ -1,7 +1,7 @@
 import { useState, ChangeEvent } from "react";
 import { useQuery } from "@tanstack/react-query";
 import styles from "./food.module.css";
-import petFoodBanner from "/images/foodBanner.png";
+// import petFoodBanner from "/images/foodBanner.png";
 import Search from "@/components/Search";
 import { getPetFood } from "@/apis/public.api";
 import { FoodService } from "@/types/petApi.type";
@@ -40,7 +40,7 @@ const PetFood = () => {
     <div className={styles.container}>
       <div className={styles.banner}>
         <img
-          src={petFoodBanner}
+          src={"/images/foodBanner.png"}
           alt="펫푸드 배너"
           className={styles.bannerImage}
         />

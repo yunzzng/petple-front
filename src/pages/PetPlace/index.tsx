@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./place.module.css";
 import { PlaceInfo } from "@/types/petApi.type";
 import { Search } from "@/components";
-import defaultImg from "/images/titleLogo.png";
+// import defaultImg from "/images/titleLogo.png";
 import usePagination from "@/hooks/usePagination";
 import Pagination from "@/components/Pagination";
 import { getPlacesData } from "@/apis/public.api";
@@ -80,7 +80,7 @@ const Place = () => {
                 }
               >
                 <img
-                  src={place.imageUrl || defaultImg}
+                  src={place.imageUrl ||"/images/titleLogo.png"}
                   alt={place.title}
                   className={styles.placeImage}
                 />

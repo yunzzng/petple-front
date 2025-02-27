@@ -3,7 +3,7 @@ import style from "./menu.module.css";
 import { useNavigate } from "react-router-dom";
 import { getCookie } from "@/hooks/getCookie";
 import { useEffect, useState } from "react";
-import profileImg from "/images/profile.png";
+// import profileImg from "/images/profile.png";
 import { Button } from "@/components";
 import { logout } from "@/apis/profile.api";
 
@@ -41,7 +41,7 @@ const Menu = () => {
       <div className={style.profile}>
         <div className={style.profile_user}>
           <img
-            src={userImage || profileImg}
+            src={userImage || "/images/profile.png"}
             onClick={() => navigate("/profile")}
           />
           <p>{userNickName || "로그인이 필요합니다."}</p>

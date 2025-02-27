@@ -43,14 +43,14 @@ const recieveUserInfo = async () => {
 const updateUserInfo = async (
   userEmail: string | null,
   userNickName: string | null,
-  profileImage: string | null,
+  imageUrl: string | null,
   selectedAddress: AddressType | null
 ) => {
   try {
     const response = await baseInstance.post("/user/info/update", {
       userEmail,
       userNickName,
-      profileImage,
+      profileImage: imageUrl,
       selectedAddress,
     });
 

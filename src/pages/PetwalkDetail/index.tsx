@@ -6,10 +6,20 @@ import { Button } from "@/components";
 import { useNavigate } from "react-router-dom";
 import usePagination from "@/hooks/usePagination";
 import Pagination from "@/components/Pagination";
+import { useEffect } from "react";
 
 const PetWalkDetail = () => {
   const { userId } = userAuthStore();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!userId) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+    }
+  }, [userId, navigate]);
+
+  if (!userId) return null;
 
   const { data: walks = [] } = useQuery({
     queryKey: ["walks", userId],
@@ -33,12 +43,13 @@ const PetWalkDetail = () => {
             <li key={walk.startTime.toString()} className={styles.list}>
               <div className={styles.userPetImages}>
                 <img
-                  src={walk.userProfileImage || "/default-user.png"}
+                  src={walk.userProfileImage || "/images/profile.png"}
                   alt="사용자 프로필"
                   className={styles.userImage}
-                /> 🩷
+                />{" "}
+                🩷
                 <img
-                  src={walk.petImage || "/default-pet.png"}
+                  src={walk.petImage || "/images/pet.png"}
                   alt="반려동물"
                   className={styles.petImage}
                 />
@@ -69,7 +80,12 @@ const PetWalkDetail = () => {
                   {walk.endLocation.address} ({walk.endLocation.buildingName})
                 </p>
                 <p className={styles.text}>
-                  <strong className={styles.listTitle} style={{color: "#002daa"}}>총 시간:</strong>
+                  <strong
+                    className={styles.listTitle}
+                    style={{ color: "#002daa" }}
+                  >
+                    총 시간:
+                  </strong>
                   {walk.duration}
                 </p>
               </div>

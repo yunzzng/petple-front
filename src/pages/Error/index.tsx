@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./error.module.css";
-import logo from "/images/logo.png";
+// import logo from "/images/logo.png";
 import { Button } from "@/components";
 import { useRouteError } from "react-router-dom";
 import { AxiosError } from "axios";
@@ -25,7 +25,7 @@ const ErrorPage = () => {
   return (
     <div className={styles.errorWrapper}>
       <div className={styles.errorContainer}>
-        <img src={logo} alt="PETPLE Logo" className={styles.logo} />
+        <img src={"/images/logo.png"} alt="PETPLE Logo" className={styles.logo} />
         {errorStatus && (
           <h1 className={styles.errorTitle}>{errorStatus} ERROR</h1>
         )}

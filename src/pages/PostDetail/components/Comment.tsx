@@ -1,6 +1,6 @@
 import styles from "./comment.module.css";
-import arrowDown from "/images/icons/arrow_drop_down.svg";
-import arrowUp from "/images/icons/arrow_drop_up.svg";
+// import arrowDown from "/images/icons/arrow_drop_down.svg";
+// import arrowUp from "/images/icons/arrow_drop_up.svg";
 import { CommentType, ReplyType } from "@/types/post.type";
 import Avartar from "@/components/Avartar";
 import Accordion from "@/components/Accordion";
@@ -127,13 +127,13 @@ function Replies({
           <div className={styles.replies_title}>
             {isOpen ? (
               <img
-                src={arrowUp}
+                src={"/images/icons/arrow_drop_up.svg"}
                 alt="위쪽 화살표 이미지"
                 className={styles.arrow_up_img}
               />
             ) : (
               <img
-                src={arrowDown}
+                src={"/images/icons/arrow_drop_down.svg"}
                 alt="아래쪽 화살표 이미지"
                 className={styles.arrow_down_img}
               />
