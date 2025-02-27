@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./home.module.css";
 import carouselData from "@/consts/mainBannerData";
@@ -8,11 +8,10 @@ import menuList from "@/consts/menuList";
 import pettalkBanner from "/images/pettalkBanner.png";
 import Menu from "@/components/Menu";
 import PopularPosts from "./components/PopularPosts";
+import { Loading } from "@/components";
 
 const Home = () => {
   const navigate = useNavigate();
-
-  useEffect(() => {}, []);
 
   return (
     <div className={styles.homewrapper}>
@@ -63,7 +62,7 @@ const Home = () => {
           ></div>
           <div className={styles.postsWrapper}>
             <div className={styles.postsContainer}>
-              <Suspense fallback={<p>Loading...</p>}>
+              <Suspense fallback={<Loading />}>
                 <PopularPosts />
               </Suspense>
             </div>
