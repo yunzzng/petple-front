@@ -16,7 +16,6 @@ const PetWalkDetail = () => {
 
   useEffect(() => {
     if (!userId) {
-      // alert("로그인이 필요합니다.");
       toast({ type: "ERROR", description: "로그인이 필요합니다." });
       navigate("/login");
     }
