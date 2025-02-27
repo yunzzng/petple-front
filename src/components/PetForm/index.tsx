@@ -42,14 +42,6 @@ const PetForm: FC<PetInfoProps> = (props) => {
   const [edit, setEdit] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // useEffect(() => {
-  //   setValue("name", name || "");
-  //   setValue("age", age || "");
-  //   setValue("breed", breed || "");
-  //   setValue("_id", _id || "");
-  //   setValue("image", image || "");
-  // }, [_id, name, age, breed, image]);
-
   const handleClickFile = () => {
     fileInputRef?.current?.click();
   };
@@ -151,7 +143,7 @@ const PetForm: FC<PetInfoProps> = (props) => {
                   <img
                     onClick={handleClickFile}
                     src={previewImg}
-                    className={style.img}
+                    className={style.edit_img}
                     alt="반려동물 사진"
                   />
                   <input
@@ -207,19 +199,6 @@ const PetForm: FC<PetInfoProps> = (props) => {
                   </div>
                 </li>
               </div>
-
-              {/* <li>
-              <label>성별</label>
-              <input {...register("gender", { required: true })} />
-              <div>
-                <Button type="button" onClick={() => setValue("gender", "남")}>
-                  남아
-                </Button>
-                <Button type="button" onClick={() => setValue("gender", "여")}>
-                  여아
-                </Button>
-              </div>
-            </li> */}
             </ul>
           </div>
         ) : (
