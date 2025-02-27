@@ -10,6 +10,7 @@ export const petSchema = z.object({
     .string()
     .min(1, "나이를 입력해주세요")
     .max(3, "나이는 3글자 이하로 입력해주세요.")
+    .regex(/^\d+$/, "숫자만 입력해주세요.")
     .default(""),
   breed: z
     .string()
