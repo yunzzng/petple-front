@@ -1,5 +1,5 @@
 import { recieveUserInfo } from "@/apis/profile.api";
-import { getCookie } from "@/hooks/getCookie";
+import { getCookie } from "@/utils/getCookie";
 import userAuthStore from "@/zustand/userAuth";
 import { QueryClient } from "@tanstack/react-query";
 

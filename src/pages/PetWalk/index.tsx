@@ -7,6 +7,7 @@ import Map from "@/components/Map";
 import { WalkData } from "@/types/petApi.type";
 import { postWalkData } from "@/apis/public.api";
 import userAuthStore from "@/zustand/userAuth";
+import useToast from "@/components/Toast/hooks/useToast";
 
 const PetWalk = () => {
   const [tracking, setTracking] = useState(false);
@@ -22,6 +23,8 @@ const PetWalk = () => {
 
   const { userId, userPet } = userAuthStore();
 
+  const { toast } = useToast();
+
   const mutation = useMutation({
     mutationFn: postWalkData,
     onSuccess: () => {
@@ -36,32 +39,37 @@ const PetWalk = () => {
     setUserLocation({
       lat: position.coords.latitude,
       lng: position.coords.longitude,
-      name: "현재 위치", 
+      name: "현재 위치",
     });
   };
 
   useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        updateLocation,
-        (error) => console.error("Geolocation error:", error)
+      navigator.geolocation.getCurrentPosition(updateLocation, (error) =>
+        console.error("Geolocation error:", error)
       );
     }
   }, []);
 
   const startTracking = () => {
     if (!userId) {
-      alert("로그인이 필요합니다.");
+      // alert("로그인이 필요합니다.");
+      toast({ type: "ERROR", description: "로그인이 필요합니다." });
       navigate("/login");
       return;
     }
 
     if (!selectedPet) {
-      alert("산책을 시작할 반려동물을 선택해주세요!");
+      // alert("산책을 시작할 반려동물을 선택해주세요!");
+      toast({
+        type: "ERROR",
+        description: "산책을 시작할 반려동물을 선택해주세요!",
+      });
       return;
     }
 
-    alert("산책이 시작되었습니다!");
+    // alert("산책이 시작되었습니다!");
+    toast({ type: "INFO", description: "산책이 시작되었습니다!" });
     setStartTime(new Date().toISOString());
 
     if (navigator.geolocation) {
@@ -72,7 +80,11 @@ const PetWalk = () => {
             lng: position.coords.longitude,
             name: "",
           });
-          console.log("start Location: ", position.coords.latitude, position.coords.longitude);
+          console.log(
+            "start Location: ",
+            position.coords.latitude,
+            position.coords.longitude
+          );
         },
         (error) => console.error("Geolocation error:", error),
         {
@@ -87,7 +99,8 @@ const PetWalk = () => {
 
   const stopTracking = () => {
     if (!userId) {
-      alert("로그인이 필요합니다.");
+      // alert("로그인이 필요합니다.");
+      toast({ type: "ERROR", description: "로그인이 필요합니다." });
       return;
     }
 
@@ -97,7 +110,11 @@ const PetWalk = () => {
     }
     setTracking(false);
 
-    alert("산책이 종료되었습니다! \n 기록보기에서 확인해주세요.");
+    // alert("산책이 종료되었습니다! \n 기록보기에서 확인해주세요.");
+    toast({
+      type: "SUCCESS",
+      description: "산책이 종료되었습니다! 기록보기에서 확인해주세요.",
+    });
 
     const selectedPetId =
       userPet?.find((pet) => pet._id === selectedPet)?._id || "";
@@ -120,13 +137,14 @@ const PetWalk = () => {
         lng: userLocation?.lng ?? 0,
       },
     };
-    console.log("End Location: ", userLocation)
+    console.log("End Location: ", userLocation);
     mutation.mutate(walkData);
   };
 
   const handleClickList = () => {
     if (!userId) {
-      alert("로그인이 필요합니다.");
+      // alert("로그인이 필요합니다.");
+      toast({ type: "ERROR", description: "로그인이 필요합니다." });
       navigate("/login");
       return;
     }

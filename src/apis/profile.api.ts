@@ -3,7 +3,7 @@ import baseInstance from "./axios";
 
 const logout = async () => {
   try {
-    const response = await baseInstance.post("/user/logout");
+    const response = await baseInstance.post("/oauth/logout");
 
     if (response.data.success) {
       return true;
@@ -16,7 +16,7 @@ const logout = async () => {
 
 const checkNickName = async (nickName: string) => {
   try {
-    const response = await baseInstance.post("/user/nickname/check", {
+    const response = await baseInstance.post("/my/nickname/check", {
       nickName,
     });
 
@@ -31,7 +31,7 @@ const checkNickName = async (nickName: string) => {
 
 const recieveUserInfo = async () => {
   try {
-    const response = await baseInstance.get("/user/info");
+    const response = await baseInstance.get("/my/info");
 
     const user = response.data.user;
     return user;
@@ -47,7 +47,7 @@ const updateUserInfo = async (
   selectedAddress: AddressType | null
 ) => {
   try {
-    const response = await baseInstance.post("/user/info/update", {
+    const response = await baseInstance.post("/my/info/update", {
       userEmail,
       userNickName,
       profileImage: imageUrl,
@@ -65,7 +65,7 @@ const updateUserInfo = async (
 
 const createPet = async (userId: string, petData: any, imageUrl: string) => {
   try {
-    const response = await baseInstance.post("/user/pet/create", {
+    const response = await baseInstance.post("/my/pet/create", {
       userId,
       formData: petData,
       image: imageUrl,
@@ -84,7 +84,7 @@ const updatePetInfo = async (
   imageUrl: string
 ) => {
   try {
-    const response = await baseInstance.post(`/user/pet/${_id}`, {
+    const response = await baseInstance.post(`/my/pet/${_id}`, {
       userId: userId,
       userPet: petData,
       petId: _id,
@@ -99,7 +99,7 @@ const updatePetInfo = async (
 
 const deletePet = async (userId: string, _id: string) => {
   try {
-    const response = await baseInstance.delete(`/user/pet/${_id}`, {
+    const response = await baseInstance.delete(`/my/pet/${_id}`, {
       data: {
         userId: userId,
         petId: _id,
@@ -117,7 +117,7 @@ const deletePet = async (userId: string, _id: string) => {
 
 const getMyPosts = async () => {
   try {
-    const response = await baseInstance.get("/user/posts/get");
+    const response = await baseInstance.get("/my/posts/get");
     return response.data;
   } catch (error) {
     throw error;
@@ -127,7 +127,7 @@ const getMyPosts = async () => {
 const getNearUsers = async (data: { lat: number; lng: number }) => {
   try {
     const response = await baseInstance.get(
-      `/user/near?lat=${data.lat}&lng=${data.lng}`
+      `/my/near?lat=${data.lat}&lng=${data.lng}`
     );
     return response.data.users;
   } catch (error) {
@@ -137,7 +137,7 @@ const getNearUsers = async (data: { lat: number; lng: number }) => {
 
 const getUserByNickname = async (nickname: string) => {
   try {
-    const response = await baseInstance.get(`/user/${nickname}`);
+    const response = await baseInstance.get(`/my/${nickname}`);
     return response.data.user;
   } catch (error) {
     throw error;

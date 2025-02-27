@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import regions from "@/consts/regionData";
 import styles from "./regionSelector.module.css";
 import { Button } from "..";
+import useToast from "../Toast/hooks/useToast";
 
 interface RegionSelectorProps {
   selectedRegion: string | null;
@@ -12,10 +13,12 @@ interface RegionSelectorProps {
 
 const RegionSelector = ({ selectedRegion, onRegionChange, className, selectedTab  }: RegionSelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { toast } = useToast();
 
   const handleClickSelect = (region: { id: string; name: string }) => {
     if (region.name !== "경기" && region.name !== "서울") {
-      alert("준비중입니다.");
+      // alert("준비중입니다.");
+      toast({ type: "ERROR", description: "준비중입니다." });
       setIsOpen(false);
       return;
     }
