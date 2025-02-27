@@ -4,7 +4,7 @@ import style from "./header.module.css";
 import userAuthStore from "@/zustand/userAuth";
 import { useQueryClient } from "@tanstack/react-query";
 import Avartar from "../Avartar";
-import { logout, recieveUserInfo } from "@/apis/profile.api";
+import { logout } from "@/apis/profile.api";
 import { getCookie } from "@/utils/getCookie";
 
 const Header = () => {
