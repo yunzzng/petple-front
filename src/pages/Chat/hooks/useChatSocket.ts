@@ -1,18 +1,18 @@
 import { config } from "@/consts/config";
 import { ChatMessageType } from "@/types/chat.type";
 import { AuthStore, UserType } from "@/types/user.type";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
 const useChatSocket = (user: AuthStore, targetUser: UserType) => {
   const [isConnected, setIsConnected] = useState(false);
   const [roomId, setRoomId] = useState("");
   const [messages, setMessages] = useState<ChatMessageType[]>([]);
-  const [socket, setSocket] = useState<Socket>();
+  const socketRef = useRef<Socket>(null);
 
   const sendMessage = (text: string) => {
-    if (!text || !roomId || !socket) return;
-    socket.emit("send_message", {
+    if (!text || !roomId || !socketRef.current) return;
+    socketRef.current.emit("send_message", {
       roomId,
       text,
       from: {
@@ -43,7 +43,7 @@ const useChatSocket = (user: AuthStore, targetUser: UserType) => {
       transports: ["websocket"],
       reconnectionDelayMax: 10000,
     });
-    setSocket(socket);
+    socketRef.current = socket;
 
     socket.on("connect", () => {
       socket.on("prev_message", (prevMessage) => {
@@ -65,12 +65,12 @@ const useChatSocket = (user: AuthStore, targetUser: UserType) => {
   }, []);
 
   useEffect(() => {
-    if (socket && user && user.userId) {
+    if (socketRef.current && user && user.userId) {
       const roomId = [user.userId, targetUser._id].sort().join("-");
       setRoomId(roomId);
-      socket.emit("join_room", roomId);
+      socketRef.current.emit("join_room", roomId);
     }
-  }, [user, socket]);
+  }, [user, socketRef]);
 
   return { messages, isConnected, sendMessage };
 };
