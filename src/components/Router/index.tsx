@@ -187,6 +187,7 @@ const router = createBrowserRouter([
         </Suspense>
       </ProtectedRoute>
     ),
+    errorElement: <ErrorPage />,
   },
   {
     path: "*",
