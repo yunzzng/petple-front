@@ -13,3 +13,4 @@ export { default as MenuBar } from "./MenuBar";
 export { default as PetForm } from "./PetForm";
 export { default as UserProfileForm } from "./UserProfileForm";
 export { default as Routes } from "./Router";
+export { default as Loading } from "./Loading";
