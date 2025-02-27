@@ -69,6 +69,7 @@ const Profile = () => {
             src={"/images/plus.png"}
             className={style.plus}
             onClick={handleAddPetProfile}
+            alt="반려동물 프로필 추가하기"
           />
         </div>
         {userPet?.map((pet, index) => (
@@ -102,14 +103,21 @@ const Profile = () => {
                   className={style.pennel_img_div}
                   onClick={() => navigate(`/community/post/${post._id}`)}
                 >
-                  <img src={post.images[0]} className={style.tabs_img} />
+                  <img
+                    src={post.images[0]}
+                    className={style.tabs_img}
+                    alt="내 게시물 이미지"
+                  />
                   <div className={style.info}>
                     <div className={style.comment}>
-                      <img src={"/images/icons/comment.svg"} />
+                      <img
+                        src={"/images/icons/comment.svg"}
+                        alt="게시물 댓글"
+                      />
                       {post.comments.length}
                     </div>
                     <div className={style.likes}>
-                      <img src={"/images/icons/like.svg"} />
+                      <img src={"/images/icons/like.svg"} alt="게시물 좋아요" />
                       {post.likes.length}
                     </div>
                   </div>

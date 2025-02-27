@@ -32,7 +32,9 @@ const UserProfileForm = () => {
   });
 
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [previewImg, setPreviewImg] = useState<string>(userImage || "/images/profile.png");
+  const [previewImg, setPreviewImg] = useState<string>(
+    userImage || "/images/profile.png"
+  );
   const [file, setFile] = useState<File | null>(null);
   const [updating, setUpdating] = useState(false);
   const [isNickNameConfirm, setIsNickNameConfirm] = useState<boolean>(false);
@@ -182,12 +184,18 @@ const UserProfileForm = () => {
     <form onSubmit={handleSubmit(onSubmitUser)} className={style.form}>
       {updating ? (
         <ul className={style.userUl}>
-          <img onClick={handlePrevProfile} src={"/images/prev.png"} className={style.prev} />
+          <img
+            onClick={handlePrevProfile}
+            src={"/images/prev.png"}
+            className={style.prev}
+            alt="뒤로가기"
+          />
           <li className={style.img_wrap}>
             <img
               onClick={handleClickFile}
               src={previewImg}
               className={style.img}
+              alt="프로필 이미지 선택"
             />
             <input
               type="file"
@@ -237,13 +245,18 @@ const UserProfileForm = () => {
       ) : (
         <ul className={style.userUl}>
           <div className={style.userUl_div}>
-            <img src={userImage || ""} className={style.basic_img} />
+            <img
+              src={userImage || ""}
+              className={style.basic_img}
+              alt="프로필 이미지"
+            />
             <div className={style.userName_box}>
               <p>{userNickName}</p>
               <img
                 onClick={() => setUpdating(true)}
                 src={"/images/pencil.png"}
                 className={style.pencil}
+                alt="프로필 수정"
               />
             </div>
             <p className={style.address}>{selectedAddress.jibunAddress}</p>

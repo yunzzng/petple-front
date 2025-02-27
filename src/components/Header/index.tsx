@@ -72,7 +72,11 @@ const Header = () => {
       <div className={style.content}>
         <div>
           <a onClick={() => navigate("/")}>
-            <img src={"/images/logo.png"} className={style.img} />
+            <img
+              src={"/images/logo.png"}
+              className={style.img}
+              alt="펫플 로고 이미지"
+            />
           </a>
         </div>
         <ul>

@@ -152,6 +152,7 @@ const PetForm: FC<PetInfoProps> = (props) => {
                     onClick={handleClickFile}
                     src={previewImg}
                     className={style.img}
+                    alt="반려동물 사진"
                   />
                   <input
                     type="file"
@@ -244,7 +245,11 @@ const PetForm: FC<PetInfoProps> = (props) => {
             </div>
             <ul className={style.pet_ul}>
               <li>
-                <img src={image} className={style.img} />
+                <img
+                  src={image}
+                  className={style.img}
+                  alt="반려동물 사진 선택"
+                />
               </li>
               <li>
                 <p>

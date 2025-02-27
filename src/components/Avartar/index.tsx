@@ -14,7 +14,11 @@ const Avartar: FC<AvartarProps> = (props) => {
   return (
     <>
       <a onClick={onClick} className={style.a}>
-        <img src={image || "/images/profile.png"} className={className || style.image} />
+        <img
+          src={image || "/images/profile.png"}
+          className={className || style.image}
+          alt="프로필 이미지"
+        />
       </a>
     </>
   );

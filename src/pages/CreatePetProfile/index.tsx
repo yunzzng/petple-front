@@ -92,6 +92,7 @@ const CreatePetProfile = () => {
               onClick={handleClickFile}
               src={previewImg}
               className={style.img}
+              alt="반려동물 이미지 선택"
             />
             <input
               type="file"
@@ -99,6 +100,7 @@ const CreatePetProfile = () => {
               onChange={handleChangeImg}
               className={style.file}
             />
+            <p>이미지 선택은 필수입니다.</p>
           </li>
           <div className={style.list_box}>
             <li className={style.list}>
