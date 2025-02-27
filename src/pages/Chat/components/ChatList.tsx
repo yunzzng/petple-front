@@ -1,5 +1,5 @@
 import { ChatMessageType } from "@/types/chat.type";
-import styles from "./chatList.module.css";
+import styles from "./chatlist.module.css";
 import { AuthStore } from "@/types/user.type";
 import ChatMessage from "./ChatMessage";
 
