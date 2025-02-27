@@ -1,5 +1,9 @@
 import { useNavigate } from "react-router-dom";
+<<<<<<< Updated upstream
 import logo from "/images/logo.png";
+=======
+// import logo from "/images/logo.png";
+>>>>>>> Stashed changes
 import style from "./header.module.css";
 import userAuthStore from "@/zustand/userAuth";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -72,7 +76,7 @@ const Header = () => {
       <div className={style.content}>
         <div>
           <a onClick={() => navigate("/")}>
-            <img src={logo} className={style.img} />
+            <img src={"/images/logo.png"} className={style.img} />
           </a>
         </div>
         <ul>

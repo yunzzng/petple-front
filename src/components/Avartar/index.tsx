@@ -1,4 +1,4 @@
-import profile from "/images/profile.png";
+// import profile from "/images/profile.png";
 import style from "./avartar.module.css";
 import { FC } from "react";
 
@@ -14,7 +14,7 @@ const Avartar: FC<AvartarProps> = (props) => {
   return (
     <>
       <a onClick={onClick} className={style.a}>
-        <img src={image || profile} className={className || style.image} />
+        <img src={image || "/images/profile.png"} className={className || style.image} />
       </a>
     </>
   );

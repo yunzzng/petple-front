@@ -1,5 +1,5 @@
 import { FC, useEffect, useRef } from "react";
-import markerImg from "/images/marker.png";
+// import markerImg from "/images/marker.png";
 import styles from "./map.module.css";
 import useKakaoLoader from "./MapLoader";
 
@@ -20,7 +20,7 @@ const Map: FC<MapProps> = ({ locations = [] }) => {
   ) => {
     const markerPosition = new kakao.maps.LatLng(location.lat, location.lng);
     const markerImage = new kakao.maps.MarkerImage(
-      markerImg,
+      "/images/marker.png",
       new kakao.maps.Size(24, 35)
     );
 

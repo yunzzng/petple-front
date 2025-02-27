@@ -2,11 +2,11 @@ import userAuthStore from "@/zustand/userAuth";
 import { Button, Tabs } from "@/components";
 import { useEffect, useState } from "react";
 import style from "./profile.module.css";
-import plus from "/images/plus.png";
+// import plus from "/images/plus.png";
 import { useNavigate } from "react-router-dom";
 import PetForm from "@/components/PetForm";
-import commentIcon from "/images/icons/comment.svg";
-import like from "/images/icons/like.svg";
+// import commentIcon from "/images/icons/comment.svg";
+// import like from "/images/icons/like.svg";
 import { getMyPosts } from "@/apis/profile.api";
 import { PostItem } from "@/types/post.type";
 import usePagination from "@/hooks/usePagination";
@@ -66,7 +66,7 @@ const Profile = () => {
             <p>나의 반려동물 🐾</p>
           </div>
           <img
-            src={plus}
+            src={"/images/plus.png"}
             className={style.plus}
             onClick={handleAddPetProfile}
           />
@@ -105,11 +105,11 @@ const Profile = () => {
                   <img src={post.images[0]} className={style.tabs_img} />
                   <div className={style.info}>
                     <div className={style.comment}>
-                      <img src={commentIcon} />
+                      <img src={"/images/icons/comment.svg"} />
                       {post.comments.length}
                     </div>
                     <div className={style.likes}>
-                      <img src={like} />
+                      <img src={"/images/icons/like.svg"} />
                       {post.likes.length}
                     </div>
                   </div>
@@ -138,11 +138,11 @@ const Profile = () => {
                   <img src={post.images[0]} className={style.tabs_img} />
                   <div className={style.info}>
                     <div className={style.comment}>
-                      <img src={commentIcon} />
+                      <img src={"/images/icons/comment.svg"} />
                       {post.comments.length}
                     </div>
                     <div className={style.likes}>
-                      <img src={like} />
+                      <img src={"/images/icons/like.svg"} />
                       {post.likes.length}
                     </div>
                   </div>

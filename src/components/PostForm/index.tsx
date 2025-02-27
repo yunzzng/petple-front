@@ -2,7 +2,7 @@ import styles from "./postform.module.css";
 import ChipInput from "@/components/ChipInput";
 import { ChangeEvent, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import uploadIcon from "/images/icons/upload.svg";
+// import uploadIcon from "/images/icons/upload.svg";
 import { zodResolver } from "@hookform/resolvers/zod";
 import FormHeader from "./components/FormHeader";
 import { PostFormData, PostFormFields } from "@/types/post.type";
@@ -118,7 +118,7 @@ const PostForm = ({
             onClick={() => fileInputRef.current?.click()}
           >
             <img
-              src={uploadIcon}
+              src={"/images/icons/upload.svg"}
               alt="업로드 버튼"
               className={styles.default_image}
             />
