@@ -46,15 +46,11 @@ const useChatSocket = (user: AuthStore, targetUser: UserType) => {
     setSocket(socket);
 
     socket.on("connect", () => {
-      const roomId = [user.userId, targetUser._id].sort().join("-");
-
       socket.on("prev_message", (prevMessage) => {
         if (!prevMessage?.messages.length) return;
         setMessages(prevMessage.messages);
       });
 
-      socket.emit("join_room", roomId);
-      setRoomId(roomId);
       setIsConnected(true);
     });
 
@@ -67,6 +63,14 @@ const useChatSocket = (user: AuthStore, targetUser: UserType) => {
       socket.disconnect();
     };
   }, []);
+
+  useEffect(() => {
+    if (socket && user && user.userId) {
+      const roomId = [user.userId, targetUser._id].sort().join("-");
+      setRoomId(roomId);
+      socket.emit("join_room", roomId);
+    }
+  }, [user, socket]);
 
   return { messages, isConnected, sendMessage };
 };
