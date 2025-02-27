@@ -2,8 +2,7 @@ import { useNavigate } from "react-router-dom";
 // import logo from "/images/logo.png";
 import style from "./header.module.css";
 import userAuthStore from "@/zustand/userAuth";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import Avartar from "../Avartar";
 import { logout, recieveUserInfo } from "@/apis/profile.api";
 import { getCookie } from "@/hooks/getCookie";
@@ -27,25 +26,6 @@ const Header = () => {
   const queryClient = useQueryClient();
 
   const loginStatus = JSON.parse(getCookie("loginStatus") || "false");
-
-  const query = useQuery<any>({
-    queryKey: ["userInfo"],
-    queryFn: getUserInfo,
-    enabled: loginStatus,
-  });
-
-  useEffect(() => {
-    if (query.data) {
-      userAuthStore.setState({
-        userId: query.data.id,
-        userEmail: query.data.email,
-        userNickName: query.data.nickName,
-        userImage: query.data.image,
-        userPet: query.data.pet,
-        userAddress: query.data.address,
-      });
-    }
-  }, [query.data]);
 
   const handleLogout = async () => {
     try {

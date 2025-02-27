@@ -4,6 +4,8 @@ import BaseLayout from "@/components/Layout";
 import { PetPlaceDetail, PetWalk, PetWalkDetail, Roulette } from "@/pages";
 import ProtectedRoute from "@/components/Router/components/ProtectedRoute";
 import Loading from "@/components/Loading";
+import getUserInfoLoader from "./loader/getUserInfo.loader";
+import { QueryClient } from "@tanstack/react-query";
 
 const ErrorPage = lazy(() => import("@/pages/Error"));
 const HomePage = lazy(() => import("@/pages/Home"));
@@ -22,6 +24,8 @@ const PetFriendsPage = lazy(() => import("@/pages/PetFriends"));
 const ChatPage = lazy(() => import("@/pages/Chat"));
 const Menu = lazy(() => import("@/pages/Menu"));
 
+const qc = new QueryClient();
+
 const Routes = () => {
   return <RouterProvider router={router} />;
 };
@@ -33,6 +37,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <BaseLayout />,
     errorElement: <ErrorPage />,
+    loader: () => getUserInfoLoader(qc),
     children: [
       {
         path: "/",
@@ -187,6 +192,7 @@ const router = createBrowserRouter([
         </Suspense>
       </ProtectedRoute>
     ),
+    loader: () => getUserInfoLoader(qc),
     errorElement: <ErrorPage />,
   },
   {
