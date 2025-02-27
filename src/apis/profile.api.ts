@@ -144,6 +144,15 @@ const getUserByNickname = async (nickname: string) => {
   }
 };
 
+const getCoordinate = async (address: string) => {
+  try {
+    const response = await baseInstance.get(`/my/coordinate/${address}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   updateUserInfo,
   checkNickName,
@@ -155,4 +164,5 @@ export {
   getNearUsers,
   getUserByNickname,
   logout,
+  getCoordinate,
 };
