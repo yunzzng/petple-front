@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import style from "./petForm.module.css";
 import Button from "../Button";
 import userAuthStore from "@/zustand/userAuth";
-import { ChangeEvent, FC, useEffect, useRef, useState } from "react";
+import { ChangeEvent, FC, useRef, useState } from "react";
 import { imageUpload } from "@/utils/imageUpload";
 import { Pet } from "@/types/user.type";
 import { deletePet, updatePetInfo } from "@/apis/profile.api";
@@ -23,7 +23,7 @@ const PetForm: FC<PetInfoProps> = (props) => {
   const {
     handleSubmit,
     register,
-    formState: { errors, isDirty },
+    formState: { errors },
     reset,
   } = useForm<Pet>({
     defaultValues: {
@@ -152,6 +152,7 @@ const PetForm: FC<PetInfoProps> = (props) => {
                     onClick={handleClickFile}
                     src={previewImg}
                     className={style.img}
+                    alt="반려동물 사진"
                   />
                   <input
                     type="file"
@@ -244,7 +245,11 @@ const PetForm: FC<PetInfoProps> = (props) => {
             </div>
             <ul className={style.pet_ul}>
               <li>
-                <img src={image} className={style.img} />
+                <img
+                  src={image}
+                  className={style.img}
+                  alt="반려동물 사진 선택"
+                />
               </li>
               <li>
                 <p>

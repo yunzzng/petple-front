@@ -76,11 +76,12 @@ const AddressForm: FC<AddressFormProps> = ({
         />
       </Modal.Trigger>
       <Modal.Content className={style.content}>
-        <div>
-          <Modal.Close>
+        <Modal.Close>
+          <div>
             <a href="#">x</a>
-          </Modal.Close>
-        </div>
+          </div>
+        </Modal.Close>
+
         <DaumPostcode onComplete={handleComplete} />
       </Modal.Content>
     </Modal.Root>

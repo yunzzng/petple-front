@@ -5,7 +5,7 @@ import style from "./createPetProfile.module.css";
 import { Button } from "@/components";
 import { useNavigate } from "react-router-dom";
 import { imageUpload } from "@/utils/imageUpload";
-import dog from "/images/dog.png";
+// import dog from "/images/dog.png";
 import { Pet } from "@/types/user.type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { petSchema } from "@/consts/zodSchema";
@@ -22,7 +22,7 @@ type PetSchema = z.infer<typeof petSchema>;
 const CreatePetProfile = () => {
   const { userId, setUserPet, userPet } = userAuthStore();
   const navigate = useNavigate();
-  const [previewImg, setPreviewImg] = useState<string>(dog);
+  const [previewImg, setPreviewImg] = useState<string>("/images/dog.png");
   const [file, setFile] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const {
@@ -92,6 +92,7 @@ const CreatePetProfile = () => {
               onClick={handleClickFile}
               src={previewImg}
               className={style.img}
+              alt="반려동물 이미지 선택"
             />
             <input
               type="file"
@@ -99,6 +100,7 @@ const CreatePetProfile = () => {
               onChange={handleChangeImg}
               className={style.file}
             />
+            <p>이미지 선택은 필수입니다.</p>
           </li>
           <div className={style.list_box}>
             <li className={style.list}>
