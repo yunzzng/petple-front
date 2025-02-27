@@ -1,16 +1,27 @@
+.profile_total_wrap {
+  margin: 50px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
 .form {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 280px;
 }
 
 .userUl {
   padding: 20px;
-  /* border-top: 1px solid; */
   display: flex;
   flex-direction: column;
   gap: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 2px 2px 2px rgb(201 201 201 / 37%);
   width: 100%;
 }
 
@@ -20,14 +31,11 @@
   justify-content: center;
   align-items: center;
   gap: 15px;
-  padding-top: 36px;
-  /* padding-bottom: 58.5px; */
 }
 
 .img_wrap {
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
 }
 
 .basic_img {
@@ -76,7 +84,7 @@
 
 .address {
   color: #555555;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .input {
@@ -110,8 +118,7 @@
   display: flex;
   flex-direction: column;
   padding: 40px 0px;
-  gap: 20px;
-  width: 280px;
+  width: 320px;
 }
 
 .pet_div {
@@ -136,7 +143,6 @@
 }
 
 .pet_ul {
-  background-color: #f5f5f5;
   padding: 20px 10px;
   border-radius: 20px;
   display: flex;
@@ -179,8 +185,10 @@
 .tabs_root {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 10px;
-  max-width: 280px;
+  width: 320px;
 }
 
 .tabs_menulist {
@@ -190,34 +198,38 @@
   gap: 10px;
   padding: 10px 0px;
   border-bottom: 1px solid;
+  width: 100%;
 }
 
 .tabs_button {
   height: 28px;
-  width: 130px;
+  width: 150px;
   display: flex;
   align-items: center;
-  /* background-color: #fff; */
+  background-color: #fff;
+  color: #000;
   box-shadow: 0px 2px 3px 0px #dddddd;
 }
 
+.tabs_button:hover {
+  color: #fff;
+}
+
 .tabs_img {
-  width: 90px;
-  height: 90px;
+  width: 100%;
+  height: 100%;
 }
 
 .pennel_div {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  max-width: 280px;
-  align-content: flex-start;
-  gap: 5px;
+  justify-content: flex-start;
+  width: 320px;
 }
 
 .pennel_img_div {
-  width: 90px;
-  height: 90px;
+  width: 106.5px;
+  height: 106.5px;
   gap: 5px;
   cursor: pointer;
   position: relative;
@@ -248,7 +260,7 @@
 
 .info {
   position: absolute;
-  bottom: 5px;
+  top: 50%;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -259,7 +271,6 @@
   z-index: 2;
 }
 
-/* 호버 시 아이콘 보이기 */
 .pennel_img_div:hover .info {
   opacity: 1;
 }
@@ -271,12 +282,13 @@
 
 .likes {
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
 }
 
-/* 아이콘 이미지 */
 .comment img,
 .likes img {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
 }

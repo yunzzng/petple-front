@@ -94,7 +94,6 @@ const Profile = () => {
           </Tabs.Menu>
         </Tabs.MenuList>
         <Tabs.MenuList>
-          {/* <div className={style.pennel_div}> */}
           <Tabs.Pannel index={1} className={style.pennel_div}>
             {paginatedPosts.length > 0 ? (
               paginatedPosts.map((post) => (
@@ -111,13 +110,13 @@ const Profile = () => {
                   <div className={style.info}>
                     <div className={style.comment}>
                       <img
-                        src={"/images/icons/comment.svg"}
+                        src={"/images/comment_white.png"}
                         alt="게시물 댓글"
                       />
                       {post.comments.length}
                     </div>
                     <div className={style.likes}>
-                      <img src={"/images/icons/like.svg"} alt="게시물 좋아요" />
+                      <img src={"/images/like_white.png"} alt="게시물 좋아요" />
                       {post.likes.length}
                     </div>
                   </div>
@@ -143,14 +142,21 @@ const Profile = () => {
                   className={style.pennel_img_div}
                   onClick={() => navigate(`/community/post/${post._id}`)}
                 >
-                  <img src={post.images[0]} className={style.tabs_img} />
+                  <img
+                    src={post.images[0]}
+                    className={style.tabs_img}
+                    alt="좋아요 누른 게시물 이미지"
+                  />
                   <div className={style.info}>
                     <div className={style.comment}>
-                      <img src={"/images/icons/comment.svg"} />
+                      <img
+                        src={"/images/icons/comment.svg"}
+                        alt="게시물 이미지"
+                      />
                       {post.comments.length}
                     </div>
                     <div className={style.likes}>
-                      <img src={"/images/icons/like.svg"} />
+                      <img src={"/images/icons/like.svg"} alt="게시물 댓글" />
                       {post.likes.length}
                     </div>
                   </div>
