@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import style from "./petForm.module.css";
 import Button from "../Button";
 import userAuthStore from "@/zustand/userAuth";
-import { ChangeEvent, FC, useEffect, useRef, useState } from "react";
+import { ChangeEvent, FC, useRef, useState } from "react";
 import { imageUpload } from "@/utils/imageUpload";
 import { Pet } from "@/types/user.type";
 import { deletePet, updatePetInfo } from "@/apis/profile.api";
@@ -23,7 +23,7 @@ const PetForm: FC<PetInfoProps> = (props) => {
   const {
     handleSubmit,
     register,
-    formState: { errors, isDirty },
+    formState: { errors },
     reset,
   } = useForm<Pet>({
     defaultValues: {

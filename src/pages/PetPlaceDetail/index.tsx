@@ -4,7 +4,7 @@ import Map from "@/components/Map";
 import styles from "./placeDetail.module.css";
 import categories from "@/consts/placeCategories";
 import { Button } from "@/components";
-import defaultImg from "/images/titleLogo.png";
+// import defaultImg from "/images/titleLogo.png";
 import { getPlaceDetail } from "@/apis/public.api";
 import CategoryButtons from "@/components/PlaceCategoryButtons";
 import { useEffect, useState } from "react";
@@ -83,7 +83,7 @@ const PetPlaceDetail = () => {
 
             <div className={styles.placeItem}>
               <img
-                src={placeData.imageUrl || defaultImg}
+                src={placeData.imageUrl || "/images/titleLogo.png"}
                 alt={placeData.name ?? "정보 없음"}
                 className={styles.placeImage}
               />

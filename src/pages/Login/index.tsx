@@ -1,7 +1,7 @@
 import style from "./signup.module.css";
-import google from "/images/googleCircle.png";
-import kakao from "/images/icons/btn_kakao.svg";
-import naver from "/images/btn_naver.png";
+// import google from "/images/googleCircle.png";
+// import kakao from "/images/icons/btn_kakao.svg";
+// import naver from "/images/btn_naver.png";
 
 const Login = () => {
   const handleGoogleLogin = () => {
@@ -22,13 +22,13 @@ const Login = () => {
         <ul>
           <div className={style.oauth_btn}>
             <a onClick={handleGoogleLogin} className={style.googleBtn}>
-              <img src={google} className={style.img} />
+              <img src={"/images/googleCircle.png"} className={style.img} />
             </a>
             <a onClick={handleKakaoLogin}>
-              <img src={kakao} className={style.img} />
+              <img src={"/images/icons/btn_kakao.svg"} className={style.img} />
             </a>
             <a onClick={handleNaverLogin}>
-              <img src={naver} className={style.img} />
+              <img src={"/images/btn_naver.png"} className={style.img} />
             </a>
           </div>
           <div className={style.oauth}>

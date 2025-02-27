@@ -1,9 +1,9 @@
 import styles from "./communitypost.module.css";
 import { Carousel } from "@/components";
-import ClockIcon from "/images/icons/clock.svg";
-import profileIcon from "/images/profile.png";
-import commentIcon from "/images/icons/comment.svg";
-import likeIcon from "/images/icons/like.svg";
+// import ClockIcon from "/images/icons/clock.svg";
+// import profileIcon from "/images/profile.png";
+// import commentIcon from "/images/icons/comment.svg";
+// import likeIcon from "/images/icons/like.svg";
 import { PostItem } from "@/types/post.type";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useMemo } from "react";
@@ -79,7 +79,7 @@ const PostHeader = (
     <div className={styles.post_header}>
       <div className={styles.post_header_top}>
         <img
-          src={creator.image || profileIcon}
+          src={creator.image || "/images/profile.png"}
           alt="유저 아바타 이미지"
           className={styles.creator_image}
         />
@@ -90,15 +90,15 @@ const PostHeader = (
           </p>
           <div className={styles.icons_list}>
             <div className={styles.createdAt}>
-              <img src={ClockIcon} alt="시계 이미지" />
+              <img src={"/images/icons/clock.svg"} alt="시계 이미지" />
               {new Date(createdAt).toLocaleDateString()}
             </div>
             <div className={styles.createdAt}>
-              <img src={commentIcon} alt="댓글 이미지" />
+              <img src={"/images/icons/comment.svg"} alt="댓글 이미지" />
               <span>{commentsCount}</span>
             </div>
             <div className={styles.createdAt}>
-              <img src={likeIcon} alt="따봉 이미지" />
+              <img src={"/images/icons/like.svg"} alt="따봉 이미지" />
               <span>{likesCount}</span>
             </div>
           </div>
