@@ -2,8 +2,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import BaseLayout from "@/components/Layout";
 import { PetPlaceDetail, PetWalk, PetWalkDetail, Roulette } from "@/pages";
-import ProtectedRoute from "./components/ProtectedRoute";
-import Loading from "../Loading";
+import ProtectedRoute from "@/components/Router/components/ProtectedRoute";
+import Loading from "@/components/Loading";
 
 const ErrorPage = lazy(() => import("@/pages/Error"));
 const HomePage = lazy(() => import("@/pages/Home"));
