@@ -1,14 +1,7 @@
-<<<<<<< Updated upstream
-import style from "./signup.module.css";
-import google from "/images/googleCircle.png";
-import kakao from "/images/icons/btn_kakao.svg";
-import naver from "/images/btn_naver.png";
-=======
 import style from "../Signup/signup.module.css";
 // import google from "/images/googleCircle.png";
 // import kakao from "/images/icons/btn_kakao.svg";
 // import naver from "/images/btn_naver.png";
->>>>>>> Stashed changes
 
 const Login = () => {
   const handleGoogleLogin = () => {

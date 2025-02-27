@@ -5,11 +5,7 @@ import { getRandomName } from "./roulleteName";
 import { RoulleteName } from "./roulleteName";
 
 const Roulette = () => {
-<<<<<<< Updated upstream
   const [color, setColor] = useState<keyof typeof RoulleteName>("black");
-=======
-  const [color] = useState<string>("");
->>>>>>> Stashed changes
   const [rotation, setRotation] = useState(0);
   const [spinning, setSpinning] = useState(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -27,10 +23,6 @@ const Roulette = () => {
     let speed = 20; // 초기 속도 (클수록 빠름)
     let deceleration = 0.98; // 감속 비율 (1에 가까울수록 더 오래 회전)
     let minSpeed = 0.2; // 최소 속도 (너무 빨리 멈추지 않도록 설정)
-<<<<<<< Updated upstream
-=======
-    // let finalAngle = 360 * 15 + Math.floor(Math.random() * 360); // 10바퀴 + 랜덤 각도
->>>>>>> Stashed changes
 
     const spin = () => {
       if (speed <= minSpeed) {
