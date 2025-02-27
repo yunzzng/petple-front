@@ -70,12 +70,9 @@ const postWalkData = async (walkData: WalkData): Promise<boolean> => {
 
 const getWalks = async (userId: string): Promise<WalkData[]> => {
   try {
-    console.log("📡 API 요청 URL:", `/public/walks/${userId}`);
     const response = await baseInstance.get(`/public/walks/${userId}`);
-    console.log("✅ API 응답 데이터:", response.data);
     return response.data?.walks || [];
   } catch (error) {
-    console.error("❌ API 호출 실패:", error);
     return [];
   }
 };
