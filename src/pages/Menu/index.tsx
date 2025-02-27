@@ -1,7 +1,7 @@
 import userAuthStore from "@/zustand/userAuth";
 import style from "./menu.module.css";
 import { useNavigate } from "react-router-dom";
-import { getCookie } from "@/hooks/getCookie";
+import { getCookie } from "@/utils/getCookie";
 import { useEffect, useState } from "react";
 // import profileImg from "/images/profile.png";
 import { Button } from "@/components";
