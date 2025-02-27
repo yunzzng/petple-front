@@ -6,10 +6,12 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { getNearUsers } from "@/apis/profile.api";
 import { useNavigate } from "react-router-dom";
 import { UserType } from "@/types/user.type";
+import { Button, Modal } from "@/components";
 
 const PetFriendsPage = () => {
   const mapConatinerRef = useRef<HTMLDivElement>(null);
   const [selectedUser, setSelectedUser] = useState<UserType>();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const { isSuccess, cleanup } = useKakaoLoader();
   const signinedUser = userAuthStore();
@@ -29,16 +31,24 @@ const PetFriendsPage = () => {
   );
 
   const handleClickMarker = (user: UserType) => setSelectedUser(user);
+  const closeModal = () => setIsModalOpen(false);
+  const openModal = () => setIsModalOpen(true);
 
   useEffect(() => {
     if (!isSuccess || typeof window === "undefined") return;
 
     const { kakao } = window;
     if (!kakao?.maps) return;
+    if (!signinedUser.userAddress?.jibunAddress) return;
     initializeMap(kakao, filteredUsers, mapConatinerRef, handleClickMarker);
     return () => cleanup();
   }, [isSuccess, nearUsers]);
 
+  useEffect(() => {
+    if (!signinedUser.userAddress?.jibunAddress) {
+      setIsModalOpen(true);
+    }
+  }, [signinedUser.userAddress, isModalOpen]);
   return (
     <>
       <div className={styles.wrapper}>
@@ -75,6 +85,28 @@ const PetFriendsPage = () => {
           </section>
         )}
       </div>
+      <Modal.Root
+        onCloseModal={closeModal}
+        onOpenModal={openModal}
+        open={isModalOpen}
+        className={styles.modal}
+      >
+        <Modal.Backdrop className={styles.backdrop} />
+        <Modal.Content className={styles.content}>
+          <div>
+            <img src="/images/loadingImage.svg" alt="로고 대표 이미지" />
+          </div>
+          <h1 className={styles.description}>
+            서비스 이용을 위해 주소 입력이 필요합니다.
+          </h1>
+          <Button
+            className={styles.modal_button}
+            onClick={() => navigate("/profile")}
+          >
+            주소 입력 하러 가기
+          </Button>
+        </Modal.Content>
+      </Modal.Root>
     </>
   );
 };

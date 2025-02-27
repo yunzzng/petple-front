@@ -10,7 +10,9 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <Routes />
       <ToastContainer />
-      <ReactQueryDevtools initialIsOpen={false} />
+      {import.meta.env.MODE === "development" && (
+        <ReactQueryDevtools initialIsOpen={false} />
+      )}
     </QueryClientProvider>
   );
 };
