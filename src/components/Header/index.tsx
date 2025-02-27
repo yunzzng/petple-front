@@ -4,6 +4,7 @@ import style from "./header.module.css";
 import userAuthStore from "@/zustand/userAuth";
 import { useQueryClient } from "@tanstack/react-query";
 import Avartar from "../Avartar";
+<<<<<<< Updated upstream
 import { logout, recieveUserInfo } from "@/apis/profile.api";
 import { getCookie } from "@/hooks/getCookie";
 
@@ -19,6 +20,10 @@ const getUserInfo = async () => {
     console.error("유저 정보 가져오기 실패", error);
   }
 };
+=======
+import { logout  } from "@/apis/profile.api";
+import { getCookie } from "@/utils/getCookie";
+>>>>>>> Stashed changes
 
 const Header = () => {
   const navigate = useNavigate();

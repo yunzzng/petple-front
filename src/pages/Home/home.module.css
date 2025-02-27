@@ -65,10 +65,13 @@
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  aspect-ratio: 16 / 9;
-  max-height: 100px;
-  margin: 10px;
+  width: 95%;
   cursor: pointer;
+}
+
+.bannerBox{
+  width: 100%;
+  margin: 10px;
 }
 
 .title {
