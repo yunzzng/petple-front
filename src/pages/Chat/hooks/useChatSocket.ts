@@ -30,14 +30,14 @@ const useChatSocket = (user: AuthStore, targetUser: UserType) => {
     });
   };
 
-  const scorllToBottom = () => {
+  const scrollToBottom = () => {
     window.scrollTo({
       top: document.documentElement.scrollHeight,
       behavior: "smooth",
     });
   };
 
-  useEffect(() => scorllToBottom(), [messages]);
+  useEffect(() => scrollToBottom(), [messages]);
   useEffect(() => {
     const socket = io(`${config.app.backendUrl}/chat`, {
       transports: ["websocket"],
