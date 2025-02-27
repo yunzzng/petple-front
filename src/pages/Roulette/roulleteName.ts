@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
 export const RoulleteName = {
-=======
-export const roulleteName = {
->>>>>>> Stashed changes
   black: [
     "까미",
     "콩이",
