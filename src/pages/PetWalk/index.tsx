@@ -213,7 +213,7 @@ const PetWalk = () => {
       <div className={styles.description}>
         <span className={styles.description_span}>사용방법: </span>
         <ul className={styles.description_list}>
-          <li>1️⃣ 현재 위치에서 위치가져오기 버튼을 클릭하여 위치 정보를 확인해주세요.</li>
+          <li>1️⃣ 현재 위치에서 위치가져오기 버튼을 클릭해주세요.</li>
           <li>2️⃣ 위치 확인이 완료되면 시작 버튼을 눌러주세요.</li>
           <li>3️⃣ 반려동물과 함께 산책을 다니시면 돼요.</li>
           <li>
