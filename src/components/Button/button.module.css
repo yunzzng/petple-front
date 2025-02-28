@@ -8,17 +8,16 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  background-color: #93C9FF;
+  background-color: #93c9ff;
   color: white;
 }
 
-
 .button:hover {
-  background-color: #002DAA;
+  background-color: #002daa;
 }
 
 .button:disabled {
-  background-color: #ccc;
+  /* background-color: #ccc; */
   color: #777;
   cursor: not-allowed;
 }
