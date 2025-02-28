@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { Button } from "@/components";
@@ -22,7 +22,6 @@ const PetWalk = () => {
   const navigate = useNavigate();
 
   const { userId, userPet } = userAuthStore();
-
   const { toast } = useToast();
 
   const mutation = useMutation({
@@ -35,22 +34,30 @@ const PetWalk = () => {
     },
   });
 
-  const updateLocation = (position: GeolocationPosition) => {
-    setUserLocation({
-      lat: position.coords.latitude,
-      lng: position.coords.longitude,
-      name: "현재 위치",
-    });
-  };
-
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(updateLocation, (error) =>
-        console.error("Geolocation error:", error)
-      );
+  const requestLocation = () => {
+    if (!navigator.geolocation) {
+      toast({ type: "ERROR", description: "이 브라우저에서는 위치 정보를 지원하지 않습니다." });
+      return;
     }
-  }, []);
 
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setUserLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+          name: "현재 위치",
+        });
+      },
+      (error) => {
+        toast({ type: "ERROR", description: `위치 가져오기 실패: ${error.message}` });
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0,
+      }
+    );
+  };
   const startTracking = () => {
     if (!userId) {
       // alert("로그인이 필요합니다.");
@@ -165,6 +172,8 @@ const PetWalk = () => {
         거리를 계산해줍니다.
       </p>
 
+      <Button label="위치 가져오기" onClick={requestLocation} />
+
       <div className={styles.petSelection}>
         <p>산책할 반려동물을 선택하세요:</p>
         <select
@@ -204,8 +213,9 @@ const PetWalk = () => {
       <div className={styles.description}>
         <span className={styles.description_span}>사용방법: </span>
         <ul className={styles.description_list}>
-          <li>1️⃣ 현재 위치에서 시작 버튼을 눌러주세요.</li>
-          <li>2️⃣ 반려동물과 함께 산책을 다니시면 돼요.</li>
+          <li>1️⃣ 현재 위치에서 위치가져오기 버튼을 클릭하여 위치 정보를 확인해주세요.</li>
+          <li>2️⃣ 위치 확인이 완료되면 시작 버튼을 눌러주세요.</li>
+          <li>3️⃣ 반려동물과 함께 산책을 다니시면 돼요.</li>
           <li>
             <span className={styles.description_p_span}>
               🌱 종료되지 않게 주의해주세요.
