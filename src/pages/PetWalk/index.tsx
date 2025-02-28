@@ -32,8 +32,12 @@ const PetWalk = () => {
 
   const mutation = useMutation({
     mutationFn: postWalkData,
-    onSuccess: () => console.log("산책 기록이 성공적으로 저장되었습니다."),
-    onError: (error) => console.error("산책 기록 저장 중 오류 발생:", error),
+    onSuccess: () => {
+      console.log("산책 기록이 성공적으로 저장되었습니다.");
+    },
+    onError: (error) => {
+      console.error("산책 기록 저장 중 오류 발생:", error);
+    },
   });
 
   const requestLocation = () => {
