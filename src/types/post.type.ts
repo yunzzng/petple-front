@@ -43,7 +43,7 @@ export type PostItem = PostFormData & {
     name: string;
     email: string;
     nickName: string;
-    image: string;
+    profileImage: string;
   };
   comments: string[];
   likes: string[];
