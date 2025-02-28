@@ -5,7 +5,7 @@ import userAuthStore from "@/zustand/userAuth";
 import { useQuery } from "@tanstack/react-query";
 import { getNearUsers } from "@/apis/profile.api";
 import { useNavigate } from "react-router-dom";
-import { UserType } from "@/types/user.type";
+import { AuthStore, UserType } from "@/types/user.type";
 import { Button } from "@/components";
 import profileImage from "/images/profile.png";
 
@@ -25,7 +25,13 @@ const PetFriendsPage = () => {
     enabled: !!signinedUser.userAddress?.jibunAddress,
   });
 
-  const handleClickMarker = (user: UserType) => setSelectedUser(user);
+  const handleClickMarker = (user: UserType) => {
+    if (user._id === signinedUser.userId) {
+      return;
+    }
+    setSelectedUser(user);
+  };
+
   useEffect(() => {
     if (!isSuccess || typeof window === "undefined") return;
 
@@ -33,7 +39,13 @@ const PetFriendsPage = () => {
     if (!kakao?.maps) return;
     if (!signinedUser.userAddress?.jibunAddress || !nearUsers) return;
 
-    initializeMap(kakao, nearUsers, mapConatinerRef, handleClickMarker);
+    initializeMap(
+      kakao,
+      nearUsers,
+      signinedUser,
+      mapConatinerRef,
+      handleClickMarker
+    );
     return () => cleanup();
   }, [isSuccess, nearUsers]);
 
@@ -75,7 +87,9 @@ const PetFriendsPage = () => {
             <div className={styles.image_wrapper}>
               <img
                 src={
-                  selectedUser.userPet[0]?.image ?? selectedUser.profileImage
+                  selectedUser.userPet[0]?.image ||
+                  selectedUser.profileImage ||
+                  profileImage
                 }
                 alt="펫 프로필 이미지"
                 className={styles.profile_image}
@@ -104,6 +118,7 @@ export default PetFriendsPage;
 const initializeMap = (
   kakao: any,
   nearUsers: UserType[],
+  signinedUser: AuthStore,
   mapConatinerRef: React.RefObject<HTMLDivElement | null>,
   handleClickMarker: (user: UserType) => void
 ) => {
@@ -116,9 +131,10 @@ const initializeMap = (
 
   const bounds = new kakao.maps.LatLngBounds();
 
-  nearUsers.forEach((user: UserType) =>
-    createMarker(kakao, map, user, bounds, handleClickMarker)
-  );
+  nearUsers.forEach((user: UserType) => {
+    const isMe = user._id === signinedUser.userId;
+    createMarker(kakao, map, user, bounds, isMe, handleClickMarker);
+  });
 
   if (nearUsers.length > 0) map.setBounds(bounds);
 };
@@ -128,13 +144,14 @@ const createMarker = (
   map: any,
   user: UserType,
   bounds: any,
+  isMe: boolean,
   handleClickMarker: (user: UserType) => void
 ) => {
   const position = new kakao.maps.LatLng(
     user.address.location.coordinates[1],
     user.address.location.coordinates[0]
   );
-  const content = createCustomOverlayMarker(user, handleClickMarker);
+  const content = createCustomOverlayMarker(user, isMe, handleClickMarker);
   const customOverlay = new kakao.maps.CustomOverlay({
     position,
     content,
@@ -147,10 +164,11 @@ const createMarker = (
 
 const createCustomOverlayMarker = (
   user: UserType,
+  isMe: boolean,
   handleClickMarker: (user: UserType) => void
 ) => {
   const wrapper = document.createElement("div");
-  wrapper.className = "custom-marker";
+  wrapper.className = isMe ? "my-marker" : "custom-marker";
 
   const img = document.createElement("img");
   img.src = user.userPet[0]?.image || user.profileImage || profileImage;
