@@ -239,13 +239,6 @@ const PetWalk = () => {
           <li>3️⃣ 산책이 완료되면 종료 버튼을 눌러주세요.</li>
         </ul>
       </div>
-
-      <div className={styles.description}>
-        <span className={styles.description_span}>안내사항: </span>
-        <p className={styles.description_p}>
-          정확한 거리를 측정하기 위해서는 Wi-Fi가 연결된 기기에서 사용해주세요.
-        </p>
-      </div>
     </div>
   );
 };
