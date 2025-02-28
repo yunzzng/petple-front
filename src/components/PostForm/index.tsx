@@ -11,6 +11,7 @@ import { postFormSchema } from "@/consts/zodSchema";
 interface PostFormProps {
   post?: PostFormData;
   requestType: "create" | "update";
+  isButtonDisabled: boolean;
   onSubmit: (data: PostFormFields) => void;
   onClickDelete?: () => void;
 }
@@ -18,6 +19,7 @@ interface PostFormProps {
 const PostForm = ({
   requestType,
   post,
+  isButtonDisabled,
   onSubmit,
   onClickDelete,
 }: PostFormProps) => {
@@ -52,12 +54,11 @@ const PostForm = ({
       setError("images", { message: "최대 10장까지 등록할 수 있습니다." });
       return;
     }
-
     setValue("images", totalImages);
     const filterdFileImages = totalImages
       .filter((image) => image instanceof File)
       .map((file) => URL.createObjectURL(file));
-    setPreviewImages((prev) => [...prev, ...filterdFileImages]);
+    setPreviewImages(filterdFileImages);
   };
 
   const handleClickDeleteImage = (index: number) => {
@@ -82,6 +83,7 @@ const PostForm = ({
         })}
         onClickDelete={onClickDelete}
         reqeustType={requestType}
+        isButtonDisabled={isButtonDisabled}
       />
       <form className={styles.form}>
         <Controller

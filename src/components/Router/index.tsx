@@ -58,9 +58,11 @@ const router = createBrowserRouter([
       {
         path: "/community/create",
         element: (
-          <Suspense fallback={<Loading />}>
-            <PostCreatePage />
-          </Suspense>
+          <ProtectedRoute>
+            <Suspense fallback={<Loading />}>
+              <PostCreatePage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {

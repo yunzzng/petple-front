@@ -6,12 +6,14 @@ interface FormHeaderProps {
   onClickSubmit: () => void;
   onClickDelete?: () => void;
   reqeustType: "create" | "update";
+  isButtonDisabled: boolean;
 }
 
 const FormHeader = ({
   onClickSubmit,
   onClickDelete,
   reqeustType,
+  isButtonDisabled,
 }: FormHeaderProps) => {
   const navigate = useNavigate();
   return (
@@ -31,6 +33,7 @@ const FormHeader = ({
         label={reqeustType === "create" ? "등록 하기" : "수정 하기"}
         onClick={onClickSubmit}
         className={styles.post_button}
+        disabled={isButtonDisabled}
       />
     </header>
   );

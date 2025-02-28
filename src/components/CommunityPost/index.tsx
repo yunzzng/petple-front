@@ -1,9 +1,5 @@
 import styles from "./communitypost.module.css";
 import { Carousel } from "@/components";
-// import ClockIcon from "/images/icons/clock.svg";
-// import profileIcon from "/images/profile.png";
-// import commentIcon from "/images/icons/comment.svg";
-// import likeIcon from "/images/icons/like.svg";
 import { PostItem } from "@/types/post.type";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useMemo } from "react";
@@ -78,11 +74,13 @@ const PostHeader = (
   return (
     <div className={styles.post_header}>
       <div className={styles.post_header_top}>
-        <img
-          src={creator.image || "/images/profile.png"}
-          alt="유저 아바타 이미지"
-          className={styles.creator_image}
-        />
+        <div className={styles.profileImage_wrapper}>
+          <img
+            src={creator.profileImage || "/images/profile.png"}
+            alt="유저 아바타 이미지"
+            className={styles.creator_image}
+          />
+        </div>
         <div className={styles.post_header_userinfo_right}>
           <p className={styles.username}>
             {creator.name}
