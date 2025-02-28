@@ -52,6 +52,19 @@ const PetFriendsPage = () => {
   return (
     <>
       <div className={styles.wrapper}>
+        <h2 className={styles.intro_title}>
+          반려동물에게 친구를 만들어 주세요! 🐶🐱🐾
+        </h2>
+        <p className={styles.intro_description}>
+          주변에 있는 반려동물과 교류하고 싶으신가요?
+          <br />
+          PetFriend를 통해 가까운 유저들과 채팅하고 반려동물 친구를
+          만들어보세요!
+          <br />
+          위치 기반으로 주변 유저를 찾고, 채팅을 통해 만나볼 수 있어요.
+          <br />
+          지금 시작 버튼을 눌러 반려동물의 새로운 친구를 만들어주세요!
+        </p>
         <div
           id="map"
           className={styles.map_container}

@@ -43,6 +43,7 @@ const PostDetailPage = () => {
   const [targetComment, setTargetComment] = useState<CommentType | null>(null);
   const [targetReply, setTargetReply] = useState<ReplyType | null>(null);
   const [submitType, setSubmitType] = useState<SubmitType>("ADD_COMMENT");
+  const { toast } = useToast();
   const qc = useQueryClient();
   const user = userAuthStore();
   const { id: postId } = useParams();
@@ -71,42 +72,72 @@ const PostDetailPage = () => {
     mutationFn: addComment,
     onSuccess: () => inValidateQuery(),
     onError: (error: AxiosError) => {
-      if (error.status === 401) window.alert("로그인인 필요합니다.");
+      if (error.status === 401) {
+        toast({
+          type: "INFO",
+          description: "로그인이 필요합니다.",
+        });
+      }
     },
   });
   const { mutate: deleteCommentMutate } = useMutation({
     mutationFn: deleteComment,
     onSuccess: () => inValidateQuery(),
     onError: (error: AxiosError) => {
-      if (error.status === 401) window.alert("로그인인 필요합니다.");
+      if (error.status === 401) {
+        toast({
+          type: "INFO",
+          description: "로그인이 필요합니다.",
+        });
+      }
     },
   });
   const { mutate: updateCommentMutate } = useMutation({
     mutationFn: updateComment,
     onSuccess: () => inValidateQuery(),
     onError: (error: AxiosError) => {
-      if (error.status === 401) window.alert("로그인인 필요합니다.");
+      if (error.status === 401) {
+        toast({
+          type: "INFO",
+          description: "로그인이 필요합니다.",
+        });
+      }
     },
   });
   const { mutate: addReplyMutate } = useMutation({
     mutationFn: addReply,
     onSuccess: () => inValidateQuery(),
     onError: (error: AxiosError) => {
-      if (error.status === 401) window.alert("로그인인 필요합니다.");
+      if (error.status === 401) {
+        toast({
+          type: "INFO",
+          description: "로그인이 필요합니다.",
+        });
+      }
     },
   });
   const { mutate: deleteReplyMutate } = useMutation({
     mutationFn: deleteReply,
     onSuccess: () => inValidateQuery(),
     onError: (error: AxiosError) => {
-      if (error.status === 401) window.alert("로그인인 필요합니다.");
+      if (error.status === 401) {
+        toast({
+          type: "INFO",
+          description: "로그인이 필요합니다.",
+        });
+      }
     },
   });
   const { mutate: updateReplyMutate } = useMutation({
     mutationFn: updateReply,
     onSuccess: () => inValidateQuery(),
     onError: (error: AxiosError) => {
-      if (error.status === 401) window.alert("로그인인 필요합니다.");
+      if (error.status === 401) {
+        toast({
+          type: "INFO",
+          description: "로그인이 필요합니다.",
+        });
+      }
     },
   });
 
@@ -175,10 +206,15 @@ const PostDetailPage = () => {
       inValidateQuery();
     },
     onError: (error: AxiosError) => {
-      if (error.status === 401) window.alert("로그인인 필요합니다.");
+      if (error.status === 401) {
+        toast({
+          type: "INFO",
+          description: "로그인이 필요합니다.",
+        });
+      }
     },
   });
-  const { toast } = useToast();
+
   const handleClickLike = () => {
     if (!postId) return;
     if (!user.userId) {

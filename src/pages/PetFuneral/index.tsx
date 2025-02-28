@@ -15,10 +15,7 @@ const PetFuneral = () => {
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const {
-    data = [],
-    isError,
-  } = useQuery<FuneralService[]>({
+  const { data = [], isError } = useQuery<FuneralService[]>({
     queryKey: ["funeralData", selectedRegion],
     queryFn: async () => {
       if (!selectedRegion) return [];
@@ -69,6 +66,8 @@ const PetFuneral = () => {
                 setSearchTerm(e.target.value);
                 setPage(1);
               }}
+              labelText="장소 검색"
+              placeholderText="장묘 업체를 검색하세요."
             />
 
             {isError ? (
@@ -85,7 +84,9 @@ const PetFuneral = () => {
                   {paginatedData.map((item, index) => (
                     <li key={index} className={styles.listItem}>
                       <div className={styles.dataItem}>
-                        <strong className={styles.dataName}>{item.title}</strong>
+                        <strong className={styles.dataName}>
+                          {item.title}
+                        </strong>
                         <br />
                         {item.phone && (
                           <p className={styles.dataPhone}>

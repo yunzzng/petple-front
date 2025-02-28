@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { Button } from "@/components";
@@ -19,48 +19,58 @@ const PetWalk = () => {
   } | null>(null);
   const [startTime, setStartTime] = useState<string | null>(null);
   const [selectedPet, setSelectedPet] = useState<string | null>(null);
+  const [startLocation, setStartLocation] = useState<{
+    lat: number;
+    lng: number;
+    address: string;
+    buildingName: string;
+  } | null>(null);
   const navigate = useNavigate();
 
   const { userId, userPet } = userAuthStore();
-
   const { toast } = useToast();
 
   const mutation = useMutation({
     mutationFn: postWalkData,
-    onSuccess: () => {
-      console.log("산책 기록이 성공적으로 저장되었습니다.");
-    },
-    onError: (error) => {
-      console.error("산책 기록 저장 중 오류 발생:", error);
-    },
+    onSuccess: () => console.log("산책 기록이 성공적으로 저장되었습니다."),
+    onError: (error) => console.error("산책 기록 저장 중 오류 발생:", error),
   });
 
-  const updateLocation = (position: GeolocationPosition) => {
-    setUserLocation({
-      lat: position.coords.latitude,
-      lng: position.coords.longitude,
-      name: "현재 위치",
-    });
-  };
-
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(updateLocation, (error) =>
-        console.error("Geolocation error:", error)
-      );
+  const requestLocation = () => {
+    if (!navigator.geolocation) {
+      toast({
+        type: "ERROR",
+        description: "이 브라우저에서는 위치 정보를 지원하지 않습니다.",
+      });
+      return;
     }
-  }, []);
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setUserLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+          name: "현재 위치",
+        });
+      },
+      (error) => {
+        toast({
+          type: "ERROR",
+          description: `위치 가져오기 실패: ${error.message}`,
+        });
+      },
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
+  };
 
   const startTracking = () => {
     if (!userId) {
-      // alert("로그인이 필요합니다.");
       toast({ type: "ERROR", description: "로그인이 필요합니다." });
       navigate("/login");
       return;
     }
 
     if (!selectedPet) {
-      // alert("산책을 시작할 반려동물을 선택해주세요!");
       toast({
         type: "ERROR",
         description: "산책을 시작할 반려동물을 선택해주세요!",
@@ -68,38 +78,46 @@ const PetWalk = () => {
       return;
     }
 
-    // alert("산책이 시작되었습니다!");
     toast({ type: "INFO", description: "산책이 시작되었습니다!" });
     setStartTime(new Date().toISOString());
 
     if (navigator.geolocation) {
-      const id = navigator.geolocation.watchPosition(
+      navigator.geolocation.getCurrentPosition(
         (position) => {
           setUserLocation({
             lat: position.coords.latitude,
             lng: position.coords.longitude,
             name: "",
           });
-          console.log(
-            "start Location: ",
-            position.coords.latitude,
-            position.coords.longitude
+          setStartLocation({
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+            address: "",
+            buildingName: "",
+          });
+
+          const id = navigator.geolocation.watchPosition(
+            (position) => {
+              setUserLocation({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
+                name: "",
+              });
+            },
+            (error) => console.error("Geolocation error:", error),
+            { enableHighAccuracy: true, maximumAge: 1000 }
           );
+          setWatchId(id);
+          setTracking(true);
         },
         (error) => console.error("Geolocation error:", error),
-        {
-          enableHighAccuracy: true,
-          maximumAge: 1000,
-        }
+        { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
       );
-      setWatchId(id);
-      setTracking(true);
     }
   };
 
   const stopTracking = () => {
     if (!userId) {
-      // alert("로그인이 필요합니다.");
       toast({ type: "ERROR", description: "로그인이 필요합니다." });
       return;
     }
@@ -110,35 +128,38 @@ const PetWalk = () => {
     }
     setTracking(false);
 
-    // alert("산책이 종료되었습니다! \n 기록보기에서 확인해주세요.");
     toast({
       type: "SUCCESS",
       description: "산책이 종료되었습니다! 기록보기에서 확인해주세요.",
     });
 
-    const selectedPetId =
-      userPet?.find((pet) => pet._id === selectedPet)?._id || "";
-
-    const walkData: WalkData = {
-      user: userId,
-      pet: selectedPetId,
-      startTime: startTime ?? new Date().toISOString(),
-      startLocation: {
-        address: "",
-        buildingName: "",
-        lat: userLocation?.lat ?? 0,
-        lng: userLocation?.lng ?? 0,
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const selectedPetId =
+          userPet?.find((pet) => pet._id === selectedPet)?._id || "";
+        const walkData: WalkData = {
+          user: userId,
+          pet: selectedPetId,
+          startTime: startTime ?? new Date().toISOString(),
+          startLocation: startLocation ?? {
+            lat: 0,
+            lng: 0,
+            address: "",
+            buildingName: "",
+          },
+          endTime: new Date().toISOString(),
+          endLocation: {
+            address: "",
+            buildingName: "",
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          },
+        };
+        mutation.mutate(walkData);
       },
-      endTime: new Date().toISOString(),
-      endLocation: {
-        address: "",
-        buildingName: "",
-        lat: userLocation?.lat ?? 0,
-        lng: userLocation?.lng ?? 0,
-      },
-    };
-    console.log("End Location: ", userLocation);
-    mutation.mutate(walkData);
+      (error) => console.error("Geolocation error:", error),
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+    );
   };
 
   const handleClickList = () => {
@@ -150,7 +171,6 @@ const PetWalk = () => {
     }
     navigate("/petwalk/detail");
   };
-
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>매일매일 산책 기록 🌱</h2>
@@ -165,6 +185,7 @@ const PetWalk = () => {
         거리를 계산해줍니다.
       </p>
 
+      <Button label="위치 가져오기" onClick={requestLocation} />
       <div className={styles.petSelection}>
         <p>산책할 반려동물을 선택하세요:</p>
         <select

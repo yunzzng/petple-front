@@ -20,10 +20,7 @@ const PetMedical = () => {
     setSearchTerm("");
   };
 
-  const {
-    data = [],
-    isError,
-  } = useQuery<MedicalService[]>({
+  const { data = [], isError } = useQuery<MedicalService[]>({
     queryKey: ["medicalData", selectedTab, selectedRegion],
     queryFn: async () => {
       if (!selectedRegion) return [];
@@ -94,6 +91,12 @@ const PetMedical = () => {
                 setSearchTerm(e.target.value);
                 setPage(1);
               }}
+              labelText="장소 검색"
+              placeholderText={
+                selectedTab === "hospital"
+                  ? "동물병원을 검색하세요"
+                  : "동물약국을 검색하세요"
+              }
             />
 
             {isError ? (

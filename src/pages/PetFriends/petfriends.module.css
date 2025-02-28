@@ -107,3 +107,18 @@
   width: 100%;
   padding: 6px 14px;
 }
+
+.intro_title {
+  align-self: flex-start;
+  font-size: 16px;
+  font-family: "HakgyoansimDunggeunmisoTTF-B";
+  padding: 10px 0px;
+}
+
+.intro_description {
+  font-size: 12px;
+  line-height: 1.4rem;
+  color: #444;
+  text-align: start;
+  padding-bottom: 10px;
+}

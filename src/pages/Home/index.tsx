@@ -56,10 +56,14 @@ const Home = () => {
 
         <div className={styles.postSection}>
           <div
-            className={styles.postText}
-            style={{ backgroundImage: `url(${"/images/pettalkBanner.png"})` }}
+            className={styles.bannerBox}
             onClick={() => navigate("/community")}
-          ></div>
+          >
+            <img
+              className={styles.postText}
+              src={"/images/pettalkBanner.png"}
+            ></img>
+          </div>
           <div className={styles.postsWrapper}>
             <div className={styles.postsContainer}>
               <Suspense fallback={<Loading />}>
