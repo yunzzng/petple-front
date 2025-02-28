@@ -52,12 +52,11 @@ const PostForm = ({
       setError("images", { message: "최대 10장까지 등록할 수 있습니다." });
       return;
     }
-
     setValue("images", totalImages);
     const filterdFileImages = totalImages
       .filter((image) => image instanceof File)
       .map((file) => URL.createObjectURL(file));
-    setPreviewImages((prev) => [...prev, ...filterdFileImages]);
+    setPreviewImages(filterdFileImages);
   };
 
   const handleClickDeleteImage = (index: number) => {
