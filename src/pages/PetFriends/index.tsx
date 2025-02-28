@@ -7,7 +7,6 @@ import { getNearUsers } from "@/apis/profile.api";
 import { useNavigate } from "react-router-dom";
 import { AuthStore, UserType } from "@/types/user.type";
 import { Button } from "@/components";
-import profileImage from "/images/profile.png";
 
 const PetFriendsPage = () => {
   const mapConatinerRef = useRef<HTMLDivElement>(null);
@@ -89,7 +88,7 @@ const PetFriendsPage = () => {
                 src={
                   selectedUser.userPet[0]?.image ||
                   selectedUser.profileImage ||
-                  profileImage
+                  "/images/profile.png"
                 }
                 alt="펫 프로필 이미지"
                 className={styles.profile_image}
@@ -171,7 +170,8 @@ const createCustomOverlayMarker = (
   wrapper.className = isMe ? "my-marker" : "custom-marker";
 
   const img = document.createElement("img");
-  img.src = user.userPet[0]?.image || user.profileImage || profileImage;
+  img.src =
+    user.userPet[0]?.image || user.profileImage || "/images/profile.png";
   img.alt = "유저이미지";
 
   const label = document.createElement("div");
