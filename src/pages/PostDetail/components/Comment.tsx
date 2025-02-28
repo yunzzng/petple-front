@@ -2,8 +2,8 @@ import styles from "./comment.module.css";
 // import arrowDown from "/images/icons/arrow_drop_down.svg";
 // import arrowUp from "/images/icons/arrow_drop_up.svg";
 import { CommentType, ReplyType } from "@/types/post.type";
-import Avartar from "@/components/Avartar";
-import Accordion from "@/components/Accordion";
+import Avartar from "@/components/UI/Avartar";
+import Accordion from "@/components/UI/Accordion";
 import { useState } from "react";
 
 interface CommentProps {

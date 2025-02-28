@@ -1,10 +1,18 @@
 .pagination {
   display: flex;
   justify-content: center;
-  align-items: center;
-  gap: 5px;
+  gap: 8px;
   margin-top: 15px;
   width: 100%;
+}
+
+.paginationContainer{
+  text-align: center;
+}
+
+.paginationNavigator {
+  display: inline-block;
+  gap: 8px;
 }
 
 .pageButton {
@@ -19,11 +27,16 @@
 
 .pageButton:disabled {
   background-color: transparent;
+  cursor: default;
 }
 
 .pageButton:hover {
-  background-color: #fff;
-  border-radius: 0px;
+  background-color: #f0f0f0;
+}
+
+.pageButtons {
+  display: inline-block;
+  gap: 5px;
 }
 
 .pageNumber {
@@ -36,20 +49,17 @@
 }
 
 .pageNumber:hover {
-  background-color: #fff;
-  border-radius: 0px;
+  background-color: #ededed;
 }
 
 .activePage {
   background-color: #fff;
-  border-bottom: solid 1px #cdcdcd;
+  border-bottom: solid 2px #cdcdcd;
   color: #000;
   font-weight: bold;
-  border-radius: 0px;
 }
 
 .activePage:hover {
   border-color: #ffffff;
-  border-bottom: solid 1px #cdcdcd;
-  border-radius: 0px;
+  border-bottom: solid 2px #cdcdcd;
 }

@@ -7,7 +7,7 @@ import Map from "@/components/Map";
 import { WalkData } from "@/types/petApi.type";
 import { postWalkData } from "@/apis/public.api";
 import userAuthStore from "@/zustand/userAuth";
-import useToast from "@/components/Toast/hooks/useToast";
+import useToast from "@/components/UI/Toast/hooks/useToast";
 
 const PetWalk = () => {
   const [tracking, setTracking] = useState(false);

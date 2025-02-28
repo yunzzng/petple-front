@@ -4,10 +4,10 @@ import RegionSelector from "@/components/RegionSelector";
 import styles from "./petMedical.module.css";
 import Map from "@/components/Map";
 import { Button, Search } from "@/components";
-import usePagination from "@/hooks/usePagination";
-import Pagination from "@/components/Pagination";
+import usePagination from "@/components/UI/Pagination/hooks/usePaginationData";
 import { MedicalService, MedicalType } from "@/types/petApi.type";
 import { getMedicalData } from "@/apis/public.api";
+import Pagination from "@/components/UI/Pagination";
 
 const PetMedical = () => {
   const [selectedTab, setSelectedTab] = useState<MedicalType>("hospital");
@@ -159,7 +159,11 @@ const PetMedical = () => {
                     startPage={startPage}
                     endPage={endPage}
                     setPage={setPage}
-                  />
+                  >
+                    <Pagination.Navigator type="prev" />
+                    <Pagination.PageButtons />
+                    <Pagination.Navigator type="next" />
+                  </Pagination>
                 )}
               </>
             )}

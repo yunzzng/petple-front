@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Routes } from "./components";
-import { ToastContainer } from "./components/Toast/components";
+import { ToastContainer } from "./components/UI/Toast/components";
 
 export const queryClient = new QueryClient();
 
