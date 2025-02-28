@@ -38,24 +38,33 @@ const Menu = () => {
 
   return (
     <div className={style.menu_total_wrap}>
-      <div className={style.profile}>
-        <div className={style.profile_user}>
-          <img
-            src={userImage || "/images/profile.png"}
+      {isLoggined ? (
+        <div className={style.profile}>
+          <div
+            className={style.profile_user}
             onClick={() => navigate("/profile")}
-          />
-          <p>{userNickName || "로그인이 필요합니다."}</p>
-        </div>
-        {isLoggined ? (
+          >
+            <img src={userImage || "/images/profile.png"} />
+            <p>{userNickName}</p>
+          </div>
           <div>
             <Button onClick={() => handleLogout()}>logout</Button>
           </div>
-        ) : (
+        </div>
+      ) : (
+        <div className={style.profile}>
+          <div
+            className={style.profile_user}
+            onClick={() => navigate("/login")}
+          >
+            <img src={"/images/profile.png"} />
+            <p>{"로그인이 필요합니다."}</p>
+          </div>
           <div>
             <Button onClick={() => navigate("/login")}>login</Button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       <div className={style.menuList}>
         <div className={style.subject}>
