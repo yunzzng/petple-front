@@ -31,6 +31,16 @@ const PostCreatePage = () => {
       mutationFn: addPost,
       onSuccess: () => {
         navigate("/community");
+        toast({
+          type: "SUCCESS",
+          description: "게시물 작성에 성공하였습니다.😀",
+        });
+      },
+      onError: () => {
+        toast({
+          type: "ERROR",
+          description: "게시물 작성에 실패하였습니다.😥",
+        });
       },
     });
 

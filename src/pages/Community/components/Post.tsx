@@ -8,6 +8,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
+import useToast from "@/components/Toast/hooks/useToast";
 
 interface PostProps {
   post: PostItem;
@@ -17,6 +18,7 @@ const Post = ({ post }: PostProps) => {
   const navigate = useNavigate();
   const { userId } = userAuthStore();
   const { pathname } = useLocation();
+  const { toast } = useToast();
   const qc = useQueryClient();
   const currentLikeStatus = useMemo(
     () => !!userId && post.likes.includes(userId),
@@ -26,7 +28,6 @@ const Post = ({ post }: PostProps) => {
   const { mutate: updateLikesMutate } = useMutation({
     mutationFn: updateLikes,
     onMutate: ({ likeStatus, postId }) => {
-      if (!userId) return;
       const prevPosts = qc.getQueryData(["posts"]);
 
       qc.setQueryData(["posts"], (prevPostsData: any) => {
@@ -54,13 +55,17 @@ const Post = ({ post }: PostProps) => {
     },
     onError: (error: AxiosError, _variables, context) => {
       if (error.status === 401) {
-        window.alert("로그인인 필요합니다.");
+        toast({ type: "ERROR", description: "로그인이 필요합니다.😥" });
       }
       qc.setQueryData(["posts"], context?.prevPosts);
     },
   });
 
   const handleClickLike = () => {
+    if (!userId) {
+      toast({ type: "ERROR", description: "로그인이 필요합니다.😥" });
+      return;
+    }
     updateLikesMutate({ postId: post._id, likeStatus: !currentLikeStatus });
   };
 
