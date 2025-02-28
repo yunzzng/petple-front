@@ -12,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchema } from "@/consts/zodSchema";
 import AddressForm from "@/components/AddressForm";
 import { AddressType } from "@/types/user.type";
-import useToast from "../Toast/hooks/useToast";
+import useToast from "../UI/Toast/hooks/useToast";
 
 const addressDefaultValue: AddressType = {
   jibunAddress: "",

@@ -1,12 +1,12 @@
 import { FC } from "react";
-import Modal from "../Modal";
+import Modal from "../UI/Modal";
 import style from "./addressForm.module.css";
 import DaumPostcode from "react-daum-postcode";
 import { AddressType } from "@/types/user.type";
 import { Address } from "react-daum-postcode";
-import Button from "../Button";
+import Button from "../UI/Button";
 import { getCoordinate } from "@/apis/profile.api";
-import useToast from "../Toast/hooks/useToast";
+import useToast from "../UI/Toast/hooks/useToast";
 
 interface AddressFormProps {
   closeModal: () => void;

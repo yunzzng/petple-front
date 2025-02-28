@@ -9,9 +9,9 @@ import PetForm from "@/components/PetForm";
 // import like from "/images/icons/like.svg";
 import { getMyPosts } from "@/apis/profile.api";
 import { PostItem } from "@/types/post.type";
-import usePagination from "@/hooks/usePagination";
-import Pagination from "@/components/Pagination";
+import usePagination from "@/components/UI/Pagination/hooks/usePaginationData";
 import UserProfileForm from "@/components/UserProfileForm";
+import Pagination from "@/components/UI/Pagination";
 
 const Profile = () => {
   const { userPet } = userAuthStore();
@@ -180,7 +180,11 @@ const Profile = () => {
               startPage={1}
               endPage={likeTotalPages}
               setPage={setLikePage}
-            />
+            >
+              <Pagination.Navigator type="prev" />
+              <Pagination.PageButtons />
+              <Pagination.Navigator type="next" />
+            </Pagination>
           </Tabs.Pannel>
         </Tabs.MenuList>
       </Tabs.Root>

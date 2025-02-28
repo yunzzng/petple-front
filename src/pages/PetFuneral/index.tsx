@@ -5,11 +5,11 @@ import Map from "@/components/Map";
 import RegionSelector from "@/components/RegionSelector";
 import styles from "../PetMedical/petMedical.module.css";
 import stylesFuneral from "./funeral.module.css";
-import usePagination from "@/hooks/usePagination";
+import usePagination from "@/components/UI/Pagination/hooks/usePaginationData";
 
 import { FuneralService } from "@/types/petApi.type";
-import Pagination from "@/components/Pagination";
 import { getFuneralData } from "@/apis/public.api";
+import Pagination from "@/components/UI/Pagination";
 
 const PetFuneral = () => {
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
@@ -132,7 +132,11 @@ const PetFuneral = () => {
                     startPage={startPage}
                     endPage={endPage}
                     setPage={setPage}
-                  />
+                  >
+                    <Pagination.Navigator type="prev" />
+                    <Pagination.PageButtons />
+                    <Pagination.Navigator type="next" />
+                  </Pagination>
                 )}
               </>
             )}
