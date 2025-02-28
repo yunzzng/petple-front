@@ -48,7 +48,7 @@ const Menu = () => {
             <p>{userNickName}</p>
           </div>
           <div>
-            <Button onClick={() => handleLogout()}>logout</Button>
+            <Button onClick={() => handleLogout()}>LOGOUT</Button>
           </div>
         </div>
       ) : (
@@ -61,7 +61,7 @@ const Menu = () => {
             <p>{"로그인이 필요합니다."}</p>
           </div>
           <div>
-            <Button onClick={() => navigate("/login")}>login</Button>
+            <Button onClick={() => navigate("/login")}>LOGIN</Button>
           </div>
         </div>
       )}
