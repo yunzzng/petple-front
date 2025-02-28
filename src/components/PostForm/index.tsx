@@ -11,6 +11,7 @@ import { postFormSchema } from "@/consts/zodSchema";
 interface PostFormProps {
   post?: PostFormData;
   requestType: "create" | "update";
+  isButtonDisabled: boolean;
   onSubmit: (data: PostFormFields) => void;
   onClickDelete?: () => void;
 }
@@ -18,6 +19,7 @@ interface PostFormProps {
 const PostForm = ({
   requestType,
   post,
+  isButtonDisabled,
   onSubmit,
   onClickDelete,
 }: PostFormProps) => {
@@ -81,6 +83,7 @@ const PostForm = ({
         })}
         onClickDelete={onClickDelete}
         reqeustType={requestType}
+        isButtonDisabled={isButtonDisabled}
       />
       <form className={styles.form}>
         <Controller
