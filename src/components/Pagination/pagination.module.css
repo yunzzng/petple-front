@@ -17,6 +17,10 @@
   border-radius: 0px;
 }
 
+.pageButton:disabled {
+  background-color: transparent;
+}
+
 .pageButton:hover {
   background-color: #fff;
   border-radius: 0px;
