@@ -6,6 +6,7 @@ import { AddressType } from "@/types/user.type";
 import { Address } from "react-daum-postcode";
 import Button from "../Button";
 import { getCoordinate } from "@/apis/profile.api";
+import useToast from "../Toast/hooks/useToast";
 
 interface AddressFormProps {
   closeModal: () => void;
@@ -24,7 +25,8 @@ const AddressForm: FC<AddressFormProps> = ({
     const coordinate = await getCoordinate(data.address);
 
     if (!coordinate) {
-      alert("좌표를 가져오지 못했습니다.");
+      const { toast } = useToast();
+      toast({ type: "ERROR", description: "좌표를 가져오지 못했습니다." });
       return;
     }
 
@@ -56,12 +58,6 @@ const AddressForm: FC<AddressFormProps> = ({
         />
       </Modal.Trigger>
       <Modal.Content className={style.content}>
-        <Modal.Close>
-          <div>
-            <a href="#">x</a>
-          </div>
-        </Modal.Close>
-
         <DaumPostcode onComplete={handleComplete} />
       </Modal.Content>
     </Modal.Root>
