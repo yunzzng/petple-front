@@ -6,7 +6,7 @@ interface FormHeaderProps {
   onClickSubmit: () => void;
   onClickDelete?: () => void;
   reqeustType: "create" | "update";
-  isButtonDisabled: boolean;
+  isButtonDisabled?: boolean;
 }
 
 const FormHeader = ({

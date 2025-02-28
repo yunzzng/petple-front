@@ -11,7 +11,7 @@ import { postFormSchema } from "@/consts/zodSchema";
 interface PostFormProps {
   post?: PostFormData;
   requestType: "create" | "update";
-  isButtonDisabled: boolean;
+  isButtonDisabled?: boolean;
   onSubmit: (data: PostFormFields) => void;
   onClickDelete?: () => void;
 }
