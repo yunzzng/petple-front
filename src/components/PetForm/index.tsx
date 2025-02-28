@@ -112,7 +112,7 @@ const PetForm: FC<PetInfoProps> = (props) => {
         const updateList = userPet?.filter((pet) => pet._id !== _id);
         if (updateList) {
           setUserPet(updateList);
-          return;
+          window.location.reload();
         }
       }
     } catch (error) {

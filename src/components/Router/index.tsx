@@ -134,17 +134,21 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: (
-          <Suspense fallback={<Loading />}>
-            <ProfilePage />
-          </Suspense>
+          <ProtectedRoute>
+            <Suspense fallback={<Loading />}>
+              <ProfilePage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: "/createpet",
         element: (
-          <Suspense fallback={<Loading />}>
-            <CreatePetProfile />
-          </Suspense>
+          <ProtectedRoute>
+            <Suspense fallback={<Loading />}>
+              <CreatePetProfile />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {

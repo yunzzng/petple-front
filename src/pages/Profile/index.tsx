@@ -1,5 +1,5 @@
 import userAuthStore from "@/zustand/userAuth";
-import { Button, Tabs } from "@/components";
+import { Button, Carousel, Tabs } from "@/components";
 import { useEffect, useState } from "react";
 import style from "./profile.module.css";
 // import plus from "/images/plus.png";
@@ -72,17 +72,24 @@ const Profile = () => {
             alt="반려동물 프로필 추가하기"
           />
         </div>
-        {userPet?.map((pet, index) => (
-          <div key={index}>
-            <PetForm
-              _id={pet._id}
-              name={pet.name}
-              age={pet.age}
-              image={pet.image}
-              breed={pet.breed}
-            />
-          </div>
-        ))}
+        <Carousel className={style.carousel}>
+          <Carousel.ItemList>
+            {userPet?.map((pet, index) => (
+              <Carousel.Item key={index} index={index}>
+                <PetForm
+                  _id={pet._id}
+                  name={pet.name}
+                  age={pet.age}
+                  image={pet.image}
+                  breed={pet.breed}
+                />
+              </Carousel.Item>
+            ))}
+          </Carousel.ItemList>
+          {(userPet?.length ?? 0) >= 2 && (
+            <Carousel.Indicator className={style.indicator} />
+          )}
+        </Carousel>
       </div>
       <Tabs.Root className={style.tabs_root}>
         <Tabs.MenuList className={style.tabs_menulist}>
@@ -125,13 +132,15 @@ const Profile = () => {
             ) : (
               <p>작성한 게시글이 없습니다.</p>
             )}
-            <Pagination
-              page={page}
-              totalPages={totalPages}
-              startPage={1}
-              endPage={totalPages}
-              setPage={setPage}
-            />
+            <div className={style.pagination_container}>
+              <Pagination
+                page={page}
+                totalPages={totalPages}
+                startPage={1}
+                endPage={totalPages}
+                setPage={setPage}
+              />
+            </div>
           </Tabs.Pannel>
 
           <Tabs.Pannel index={2} className={style.pennel_div}>
@@ -165,7 +174,6 @@ const Profile = () => {
             ) : (
               <p>게시글이 없습니다.</p>
             )}
-
             <Pagination
               page={likePage}
               totalPages={likeTotalPages}

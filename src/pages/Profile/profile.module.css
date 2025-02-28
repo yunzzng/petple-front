@@ -224,13 +224,14 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
+  align-items: flex-start;
   width: 320px;
+  place-items: start;
 }
 
 .pennel_img_div {
   width: 106.5px;
   height: 106.5px;
-  gap: 5px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -291,4 +292,33 @@
 .likes img {
   width: 16px;
   height: 16px;
+}
+
+.pagination_container {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.carousel {
+  height: 100%;
+}
+
+.indicator {
+  bottom: 0px;
+}
+
+.carouselIndicator button {
+  padding: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #93c9ff;
+  border: none;
+  cursor: pointer;
+}
+
+.carouselIndicator button.active {
+  background-color: #002daa;
 }
