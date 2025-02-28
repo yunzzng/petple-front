@@ -1,54 +1,42 @@
 import styles from "./petfriends.module.css";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useKakaoLoader from "@/components/Map/MapLoader";
 import userAuthStore from "@/zustand/userAuth";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getNearUsers } from "@/apis/profile.api";
 import { useNavigate } from "react-router-dom";
 import { UserType } from "@/types/user.type";
-import { Button, Modal } from "@/components";
+import { Button } from "@/components";
+import profileImage from "/images/profile.png";
 
 const PetFriendsPage = () => {
   const mapConatinerRef = useRef<HTMLDivElement>(null);
   const [selectedUser, setSelectedUser] = useState<UserType>();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const { isSuccess, cleanup } = useKakaoLoader();
   const signinedUser = userAuthStore();
-
-  const { data: nearUsers } = useSuspenseQuery<UserType[]>({
+  const { data: nearUsers } = useQuery({
     queryKey: ["locations", signinedUser.userId],
     queryFn: () =>
       getNearUsers({
         lng: signinedUser.userAddress?.location.coordinates[0] || 0,
         lat: signinedUser.userAddress?.location.coordinates[1] || 0,
       }),
-    staleTime: 1000 * 60 * 60 * 5,
+    enabled: !!signinedUser.userAddress?.jibunAddress,
   });
-  const filteredUsers = useMemo(
-    () => nearUsers.filter((user) => user._id !== signinedUser.userId),
-    [nearUsers]
-  );
 
   const handleClickMarker = (user: UserType) => setSelectedUser(user);
-  const closeModal = () => setIsModalOpen(false);
-  const openModal = () => setIsModalOpen(true);
-
   useEffect(() => {
     if (!isSuccess || typeof window === "undefined") return;
 
     const { kakao } = window;
     if (!kakao?.maps) return;
-    if (!signinedUser.userAddress?.jibunAddress) return;
-    initializeMap(kakao, filteredUsers, mapConatinerRef, handleClickMarker);
+    if (!signinedUser.userAddress?.jibunAddress || !nearUsers) return;
+
+    initializeMap(kakao, nearUsers, mapConatinerRef, handleClickMarker);
     return () => cleanup();
   }, [isSuccess, nearUsers]);
 
-  useEffect(() => {
-    if (!signinedUser.userAddress?.jibunAddress) {
-      setIsModalOpen(true);
-    }
-  }, [signinedUser.userAddress, isModalOpen]);
   return (
     <>
       <div className={styles.wrapper}>
@@ -65,6 +53,15 @@ const PetFriendsPage = () => {
           <br />
           지금 시작 버튼을 눌러 반려동물의 새로운 친구를 만들어주세요!
         </p>
+        {!signinedUser.userAddress?.jibunAddress && (
+          <section className={styles.address_warning}>
+            <h2>📍 주소 입력이 필요합니다.</h2>
+            <p>서비스를 이용하려면 먼저 주소를 설정해주세요.</p>
+            <Button onClick={() => navigate("/profile")}>
+              주소 설정 하러가기
+            </Button>
+          </section>
+        )}
         <div
           id="map"
           className={styles.map_container}
@@ -98,28 +95,6 @@ const PetFriendsPage = () => {
           </section>
         )}
       </div>
-      <Modal.Root
-        onCloseModal={closeModal}
-        onOpenModal={openModal}
-        open={isModalOpen}
-        className={styles.modal}
-      >
-        <Modal.Backdrop className={styles.backdrop} />
-        <Modal.Content className={styles.content}>
-          <div>
-            <img src="/images/loadingImage.svg" alt="로고 대표 이미지" />
-          </div>
-          <h1 className={styles.description}>
-            서비스 이용을 위해 주소 입력이 필요합니다.
-          </h1>
-          <Button
-            className={styles.modal_button}
-            onClick={() => navigate("/profile")}
-          >
-            주소 입력 하러 가기
-          </Button>
-        </Modal.Content>
-      </Modal.Root>
     </>
   );
 };
@@ -178,7 +153,7 @@ const createCustomOverlayMarker = (
   wrapper.className = "custom-marker";
 
   const img = document.createElement("img");
-  img.src = user.userPet[0]?.image ?? user.profileImage;
+  img.src = user.userPet[0]?.image || user.profileImage || profileImage;
   img.alt = "유저이미지";
 
   const label = document.createElement("div");
