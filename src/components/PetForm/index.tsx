@@ -8,6 +8,7 @@ import { Pet } from "@/types/user.type";
 import { deletePet, updatePetInfo } from "@/apis/profile.api";
 import { petSchema } from "@/consts/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import useToast from "../Toast/hooks/useToast";
 
 interface PetInfoProps {
   name?: string;
@@ -41,6 +42,7 @@ const PetForm: FC<PetInfoProps> = (props) => {
   const [file, setFile] = useState<File | null>(null);
   const [edit, setEdit] = useState<boolean>(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { toast } = useToast();
 
   const handleClickFile = () => {
     fileInputRef?.current?.click();
@@ -88,7 +90,10 @@ const PetForm: FC<PetInfoProps> = (props) => {
           userPet: updatePetList,
         });
 
-        alert("반려동물 프로필이 업데이트되었습니다.");
+        toast({
+          type: "INFO",
+          description: "반려동물 프로필이 업데이트되었습니다.",
+        });
         setEdit(false);
       }
     }
@@ -99,7 +104,10 @@ const PetForm: FC<PetInfoProps> = (props) => {
       const deletedPet = await deletePet(userId!, _id!);
 
       if (deletedPet) {
-        alert("반려동물 프로필이 삭제되었습니다.");
+        toast({
+          type: "INFO",
+          description: "반려동물 프로필이 삭제되었습니다.",
+        });
 
         const updateList = userPet?.filter((pet) => pet._id !== _id);
         if (updateList) {
