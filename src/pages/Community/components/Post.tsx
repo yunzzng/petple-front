@@ -71,7 +71,7 @@ const Post = ({ post }: PostProps) => {
 
   return (
     <>
-      <li>
+      <li className={styles.post_wrapper}>
         <CommunityPost post={post} />
         <div
           className={styles.description}
