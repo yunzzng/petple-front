@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import style from "./profile.module.css";
 // import plus from "/images/plus.png";
 import { useNavigate } from "react-router-dom";
-import PetForm from "@/components/PetForm";
+import PetForm from "@/pages/Profile/components/PetForm";
 // import commentIcon from "/images/icons/comment.svg";
 // import like from "/images/icons/like.svg";
 import { getMyPosts } from "@/apis/profile.api";
 import { PostItem } from "@/types/post.type";
 import usePagination from "@/components/UI/Pagination/hooks/usePaginationData";
-import UserProfileForm from "@/components/UserProfileForm";
+import UserProfileForm from "@/pages/Profile/components/UserProfileForm";
 import Pagination from "@/components/UI/Pagination";
 
 const Profile = () => {

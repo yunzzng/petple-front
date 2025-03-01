@@ -10,9 +10,9 @@ import { imageUpload } from "@/utils/imageUpload";
 import { checkNickName, updateUserInfo } from "@/apis/profile.api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchema } from "@/consts/zodSchema";
-import AddressForm from "@/components/AddressForm";
+import AddressForm from "@/pages/Profile/components/AddressForm";
 import { AddressType } from "@/types/user.type";
-import useToast from "../UI/Toast/hooks/useToast";
+import useToast from "../../../components/UI/Toast/hooks/useToast";
 
 const addressDefaultValue: AddressType = {
   jibunAddress: "",
