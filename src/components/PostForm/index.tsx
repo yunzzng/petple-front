@@ -1,5 +1,5 @@
 import styles from "./postform.module.css";
-import ChipInput from "@/components/ChipInput";
+import ChipInput from "@/components/UI/ChipInput";
 import { ChangeEvent, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import uploadIcon from "/images/icons/upload.svg";

@@ -8,7 +8,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useMemo } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
-import useToast from "@/components/Toast/hooks/useToast";
+import useToast from "@/components/UI/Toast/hooks/useToast";
 
 interface PostProps {
   post: PostItem;

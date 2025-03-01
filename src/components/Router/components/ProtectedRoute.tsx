@@ -1,4 +1,4 @@
-import useToast from "@/components/Toast/hooks/useToast";
+import useToast from "@/components/UI/Toast/hooks/useToast";
 import userAuthStore from "@/zustand/userAuth";
 import { FC, PropsWithChildren, useEffect } from "react";
 import { Navigate } from "react-router-dom";

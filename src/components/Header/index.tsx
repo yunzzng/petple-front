@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import style from "./header.module.css";
 import userAuthStore from "@/zustand/userAuth";
 import { useQueryClient } from "@tanstack/react-query";
-import Avartar from "../Avartar";
+import Avartar from "../UI/Avartar";
 import { logout } from "@/apis/profile.api";
 import { getCookie } from "@/utils/getCookie";
 

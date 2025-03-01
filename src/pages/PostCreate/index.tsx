@@ -7,7 +7,7 @@ import { addPost } from "@/apis/post.api";
 import { useNavigate } from "react-router-dom";
 import { PostFormFields } from "@/types/post.type";
 import { AxiosError } from "axios";
-import useToast from "@/components/Toast/hooks/useToast";
+import useToast from "@/components/UI/Toast/hooks/useToast";
 import { useMemo } from "react";
 
 const PostCreatePage = () => {

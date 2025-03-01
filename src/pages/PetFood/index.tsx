@@ -5,9 +5,9 @@ import styles from "./food.module.css";
 import Search from "@/components/Search";
 import { getPetFood } from "@/apis/public.api";
 import { FoodService } from "@/types/petApi.type";
-import usePagination from "@/hooks/usePagination";
-import Pagination from "@/components/Pagination";
+import usePagination from "@/components/UI/Pagination/hooks/usePaginationData";
 import foodCategories, { FoodCategory } from "@/consts/foodCategories";
+import Pagination from "@/components/UI/Pagination";
 
 const PetFood = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,10 +15,7 @@ const PetFood = () => {
   const [selectedCategory, setSelectedCategory] =
     useState<FoodCategory["id"]>("all");
 
-  const {
-    data = [],
-    isError,
-  } = useQuery<FoodService[]>({
+  const { data = [], isError } = useQuery<FoodService[]>({
     queryKey: ["petFoodData", selectedCategory, querySearchTerm],
     queryFn: () =>
       getPetFood(
@@ -52,8 +49,8 @@ const PetFood = () => {
         </h2>
         <p className={styles.description}>
           반려동물도 건강한 식사가 중요합니다! <br />
-          다양한 원재료의 영양 성분과 특성을 확인하고, <br /> 우리 아이에게 꼭 맞는
-          식단을 구성해보세요. <br />
+          다양한 원재료의 영양 성분과 특성을 확인하고, <br /> 우리 아이에게 꼭
+          맞는 식단을 구성해보세요. <br />
           강아지와 고양이를 위한 올바른 식재료 선택이 어렵다면?
           <br />
           이곳에서 영양 정보와 추천 급여법을 한눈에 확인하세요!
@@ -142,7 +139,11 @@ const PetFood = () => {
           startPage={startPage}
           endPage={endPage}
           setPage={setPage}
-        />
+        >
+          <Pagination.Navigator type="prev" />
+          <Pagination.PageButtons />
+          <Pagination.Navigator type="next" />
+        </Pagination>
       )}
     </div>
   );

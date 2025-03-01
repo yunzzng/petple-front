@@ -6,10 +6,11 @@ import styles from "./place.module.css";
 import { PlaceInfo } from "@/types/petApi.type";
 import { Search } from "@/components";
 // import defaultImg from "/images/titleLogo.png";
-import usePagination from "@/hooks/usePagination";
-import Pagination from "@/components/Pagination";
+import usePagination from "@/components/UI/Pagination/hooks/usePaginationData";
+
 import { getPlacesData } from "@/apis/public.api";
 import CategoryButtons from "@/components/PlaceCategoryButtons";
+import Pagination from "@/components/UI/Pagination";
 
 const Place = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>(() => {
@@ -19,10 +20,7 @@ const Place = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
-  const {
-    data = [],
-    isError,
-  } = useQuery<PlaceInfo[]>({
+  const { data = [], isError } = useQuery<PlaceInfo[]>({
     queryKey: ["placesData", selectedCategory],
     queryFn: () => getPlacesData(selectedCategory),
     staleTime: 7 * 24 * 60 * 60 * 1000,
@@ -80,7 +78,7 @@ const Place = () => {
                 }
               >
                 <img
-                  src={place.imageUrl ||"/images/titleLogo.png"}
+                  src={place.imageUrl || "/images/titleLogo.png"}
                   alt={place.title}
                   className={styles.placeImage}
                 />
@@ -105,7 +103,11 @@ const Place = () => {
                 startPage={startPage}
                 endPage={endPage}
                 setPage={setPage}
-              />
+              >
+                <Pagination.Navigator type="prev" />
+                <Pagination.PageButtons />
+                <Pagination.Navigator type="next" />
+              </Pagination>
             )}
           </>
         )}
