@@ -1,4 +1,3 @@
-// import profile from "/images/profile.png";
 import style from "./avartar.module.css";
 import { FC } from "react";
 
@@ -6,10 +5,11 @@ interface AvartarProps {
   onClick?: () => void;
   image?: string | null;
   className?: string | null;
+  alt?: string;
 }
 
 const Avartar: FC<AvartarProps> = (props) => {
-  const { onClick, image, className } = props;
+  const { onClick, image, className, alt } = props;
 
   return (
     <>
@@ -17,7 +17,7 @@ const Avartar: FC<AvartarProps> = (props) => {
         <img
           src={image || "/images/profile.png"}
           className={className || style.image}
-          alt="프로필 이미지"
+          alt={alt || "프로필 이미지"}
         />
       </a>
     </>
