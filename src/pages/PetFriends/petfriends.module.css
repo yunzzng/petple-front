@@ -122,3 +122,25 @@
   text-align: start;
   padding-bottom: 10px;
 }
+
+.address_warning {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  color: #d9534f;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.address_warning h2 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.address_warning p {
+  font-size: 14px;
+  color: #a94442;
+}

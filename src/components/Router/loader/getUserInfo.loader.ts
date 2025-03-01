@@ -10,7 +10,7 @@ const getUserInfoLoader = async (QueryClient: QueryClient) => {
   }
 
   try {
-    const user = await QueryClient.ensureQueryData({
+    const user = await QueryClient.fetchQuery({
       queryKey: ["userInfo"],
       queryFn: recieveUserInfo,
     });

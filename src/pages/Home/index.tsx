@@ -5,7 +5,6 @@ import carouselData from "@/consts/mainBannerData";
 import Button from "@/components/Button";
 import Carousel from "@/components/Carousel";
 import menuList from "@/consts/menuList";
-// import pettalkBanner from "/images/pettalkBanner.png";
 import Menu from "@/components/Menu";
 import PopularPosts from "./components/PopularPosts";
 import { Loading } from "@/components";
