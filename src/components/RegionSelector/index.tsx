@@ -2,16 +2,21 @@ import { useEffect, useMemo, useState } from "react";
 import regions from "@/consts/regionData";
 import styles from "./regionSelector.module.css";
 import { Button } from "..";
-import useToast from "../Toast/hooks/useToast";
+import useToast from "../UI/Toast/hooks/useToast";
 
 interface RegionSelectorProps {
   selectedRegion: string | null;
   onRegionChange: (region: string | null) => void;
   className?: string;
-  selectedTab?: string; 
+  selectedTab?: string;
 }
 
-const RegionSelector = ({ selectedRegion, onRegionChange, className, selectedTab  }: RegionSelectorProps) => {
+const RegionSelector = ({
+  selectedRegion,
+  onRegionChange,
+  className,
+  selectedTab,
+}: RegionSelectorProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const { toast } = useToast();
 
@@ -36,10 +41,10 @@ const RegionSelector = ({ selectedRegion, onRegionChange, className, selectedTab
 
   return (
     <div className={styles.regionContainer}>
-      <Button 
-        label={`${selectedRegion || "지역선택"} 🔻`} 
-        onClick={() => setIsOpen(!isOpen)} 
-        className={styles.regionButton} 
+      <Button
+        label={`${selectedRegion || "지역선택"} 🔻`}
+        onClick={() => setIsOpen(!isOpen)}
+        className={styles.regionButton}
       />
 
       {isOpen && (

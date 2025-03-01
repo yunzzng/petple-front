@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import style from "./petForm.module.css";
-import Button from "../Button";
+import Button from "../UI/Button";
 import userAuthStore from "@/zustand/userAuth";
 import { ChangeEvent, FC, useRef, useState } from "react";
 import { imageUpload } from "@/utils/imageUpload";
@@ -8,7 +8,7 @@ import { Pet } from "@/types/user.type";
 import { deletePet, updatePetInfo } from "@/apis/profile.api";
 import { petSchema } from "@/consts/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import useToast from "../Toast/hooks/useToast";
+import useToast from "../UI/Toast/hooks/useToast";
 
 interface PetInfoProps {
   name?: string;

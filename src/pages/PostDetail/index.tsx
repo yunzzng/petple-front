@@ -27,7 +27,7 @@ import LikeButton from "./components/LikeButton";
 import Header from "@/components/Header";
 import { AxiosError } from "axios";
 import { updateLikes } from "@/apis/like.api";
-import useToast from "@/components/Toast/hooks/useToast";
+import useToast from "@/components/UI/Toast/hooks/useToast";
 
 const CommentSchema = z.object({
   description: z.string().trim().min(1, "내용을 입력해주세요."),

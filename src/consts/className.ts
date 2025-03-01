@@ -39,3 +39,8 @@ export const ModalBackdropBaseCls = getBaseCls("modal-backdrop");
 export const ModalContentBaseCls = getBaseCls("modal-content");
 export const ModalTriggerBaseCls = getBaseCls("modal-trigger");
 export const ModalCloseBaseCls = getBaseCls("modal-close");
+
+// Pagination Commponent
+export const paginationBaseCls= getBaseCls("pagination");
+export const paginationPageButtonsBaseCls = getBaseCls("pagination-page-buttons");
+export const paginationNavigatorBaseCls = getBaseCls("bpagination-navigator");

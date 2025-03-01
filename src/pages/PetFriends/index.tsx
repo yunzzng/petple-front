@@ -1,54 +1,53 @@
 import styles from "./petfriends.module.css";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useKakaoLoader from "@/components/Map/MapLoader";
 import userAuthStore from "@/zustand/userAuth";
-import { useSuspenseQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getNearUsers } from "@/apis/profile.api";
 import { useNavigate } from "react-router-dom";
-import { UserType } from "@/types/user.type";
-import { Button, Modal } from "@/components";
+import { AuthStore, UserType } from "@/types/user.type";
+import { Button } from "@/components";
 
 const PetFriendsPage = () => {
   const mapConatinerRef = useRef<HTMLDivElement>(null);
   const [selectedUser, setSelectedUser] = useState<UserType>();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const { isSuccess, cleanup } = useKakaoLoader();
   const signinedUser = userAuthStore();
-
-  const { data: nearUsers } = useSuspenseQuery<UserType[]>({
+  const { data: nearUsers } = useQuery({
     queryKey: ["locations", signinedUser.userId],
     queryFn: () =>
       getNearUsers({
         lng: signinedUser.userAddress?.location.coordinates[0] || 0,
         lat: signinedUser.userAddress?.location.coordinates[1] || 0,
       }),
-    staleTime: 1000 * 60 * 60 * 5,
+    enabled: !!signinedUser.userAddress?.jibunAddress,
   });
-  const filteredUsers = useMemo(
-    () => nearUsers.filter((user) => user._id !== signinedUser.userId),
-    [nearUsers]
-  );
 
-  const handleClickMarker = (user: UserType) => setSelectedUser(user);
-  const closeModal = () => setIsModalOpen(false);
-  const openModal = () => setIsModalOpen(true);
+  const handleClickMarker = (user: UserType) => {
+    if (user._id === signinedUser.userId) {
+      return;
+    }
+    setSelectedUser(user);
+  };
 
   useEffect(() => {
     if (!isSuccess || typeof window === "undefined") return;
 
     const { kakao } = window;
     if (!kakao?.maps) return;
-    if (!signinedUser.userAddress?.jibunAddress) return;
-    initializeMap(kakao, filteredUsers, mapConatinerRef, handleClickMarker);
+    if (!signinedUser.userAddress?.jibunAddress || !nearUsers) return;
+
+    initializeMap(
+      kakao,
+      nearUsers,
+      signinedUser,
+      mapConatinerRef,
+      handleClickMarker
+    );
     return () => cleanup();
   }, [isSuccess, nearUsers]);
 
-  useEffect(() => {
-    if (!signinedUser.userAddress?.jibunAddress) {
-      setIsModalOpen(true);
-    }
-  }, [signinedUser.userAddress, isModalOpen]);
   return (
     <>
       <div className={styles.wrapper}>
@@ -65,6 +64,15 @@ const PetFriendsPage = () => {
           <br />
           지금 시작 버튼을 눌러 반려동물의 새로운 친구를 만들어주세요!
         </p>
+        {!signinedUser.userAddress?.jibunAddress && (
+          <section className={styles.address_warning}>
+            <h2>📍 주소 입력이 필요합니다.</h2>
+            <p>서비스를 이용하려면 먼저 주소를 설정해주세요.</p>
+            <Button onClick={() => navigate("/profile")}>
+              주소 설정 하러가기
+            </Button>
+          </section>
+        )}
         <div
           id="map"
           className={styles.map_container}
@@ -78,7 +86,9 @@ const PetFriendsPage = () => {
             <div className={styles.image_wrapper}>
               <img
                 src={
-                  selectedUser.userPet[0]?.image ?? selectedUser.profileImage
+                  selectedUser.userPet[0]?.image ||
+                  selectedUser.profileImage ||
+                  "/images/profile.png"
                 }
                 alt="펫 프로필 이미지"
                 className={styles.profile_image}
@@ -98,28 +108,6 @@ const PetFriendsPage = () => {
           </section>
         )}
       </div>
-      <Modal.Root
-        onCloseModal={closeModal}
-        onOpenModal={openModal}
-        open={isModalOpen}
-        className={styles.modal}
-      >
-        <Modal.Backdrop className={styles.backdrop} />
-        <Modal.Content className={styles.content}>
-          <div>
-            <img src="/images/loadingImage.svg" alt="로고 대표 이미지" />
-          </div>
-          <h1 className={styles.description}>
-            서비스 이용을 위해 주소 입력이 필요합니다.
-          </h1>
-          <Button
-            className={styles.modal_button}
-            onClick={() => navigate("/profile")}
-          >
-            주소 입력 하러 가기
-          </Button>
-        </Modal.Content>
-      </Modal.Root>
     </>
   );
 };
@@ -129,6 +117,7 @@ export default PetFriendsPage;
 const initializeMap = (
   kakao: any,
   nearUsers: UserType[],
+  signinedUser: AuthStore,
   mapConatinerRef: React.RefObject<HTMLDivElement | null>,
   handleClickMarker: (user: UserType) => void
 ) => {
@@ -141,9 +130,10 @@ const initializeMap = (
 
   const bounds = new kakao.maps.LatLngBounds();
 
-  nearUsers.forEach((user: UserType) =>
-    createMarker(kakao, map, user, bounds, handleClickMarker)
-  );
+  nearUsers.forEach((user: UserType) => {
+    const isMe = user._id === signinedUser.userId;
+    createMarker(kakao, map, user, bounds, isMe, handleClickMarker);
+  });
 
   if (nearUsers.length > 0) map.setBounds(bounds);
 };
@@ -153,13 +143,14 @@ const createMarker = (
   map: any,
   user: UserType,
   bounds: any,
+  isMe: boolean,
   handleClickMarker: (user: UserType) => void
 ) => {
   const position = new kakao.maps.LatLng(
     user.address.location.coordinates[1],
     user.address.location.coordinates[0]
   );
-  const content = createCustomOverlayMarker(user, handleClickMarker);
+  const content = createCustomOverlayMarker(user, isMe, handleClickMarker);
   const customOverlay = new kakao.maps.CustomOverlay({
     position,
     content,
@@ -172,13 +163,15 @@ const createMarker = (
 
 const createCustomOverlayMarker = (
   user: UserType,
+  isMe: boolean,
   handleClickMarker: (user: UserType) => void
 ) => {
   const wrapper = document.createElement("div");
-  wrapper.className = "custom-marker";
+  wrapper.className = isMe ? "my-marker" : "custom-marker";
 
   const img = document.createElement("img");
-  img.src = user.userPet[0]?.image ?? user.profileImage;
+  img.src =
+    user.userPet[0]?.image || user.profileImage || "/images/profile.png";
   img.alt = "유저이미지";
 
   const label = document.createElement("div");

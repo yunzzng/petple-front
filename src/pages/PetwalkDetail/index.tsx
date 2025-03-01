@@ -4,10 +4,10 @@ import { getWalks } from "@/apis/public.api";
 import styles from "./petWalkDetail.module.css";
 import { Button } from "@/components";
 import { useNavigate } from "react-router-dom";
-import usePagination from "@/hooks/usePagination";
-import Pagination from "@/components/Pagination";
+import usePagination from "@/components/UI/Pagination/hooks/usePaginationData";
 import { useEffect } from "react";
-import useToast from "@/components/Toast/hooks/useToast";
+import useToast from "@/components/UI/Toast/hooks/useToast";
+import Pagination from "@/components/UI/Pagination";
 
 const PetWalkDetail = () => {
   const { userId } = userAuthStore();
@@ -104,7 +104,11 @@ const PetWalkDetail = () => {
           startPage={startPage}
           endPage={endPage}
           setPage={setPage}
-        />
+        >
+          <Pagination.Navigator type="prev" />
+          <Pagination.PageButtons />
+          <Pagination.Navigator type="next" />
+        </Pagination>
       )}
     </div>
   );
