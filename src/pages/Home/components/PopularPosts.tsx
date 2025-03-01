@@ -56,7 +56,7 @@ const PopularPosts = () => {
                 </span>
                 <span className={styles.likes_count}>
                   <img src={likeIcon} alt="좋아요 아이콘 이미지" />
-                  {post.likes.length}
+                  {post.likesCount}
                 </span>
               </div>
             </div>

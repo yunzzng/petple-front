@@ -47,6 +47,7 @@ export type PostItem = PostFormData & {
   };
   comments: string[];
   likes: string[];
+  likesCount: number;
   createdAt: Date;
 };
 
