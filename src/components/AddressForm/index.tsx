@@ -5,6 +5,8 @@ import DaumPostcode from "react-daum-postcode";
 import { AddressType } from "@/types/user.type";
 import { Address } from "react-daum-postcode";
 import Button from "../Button";
+import { getCoordinate } from "@/apis/profile.api";
+import useToast from "../Toast/hooks/useToast";
 
 interface AddressFormProps {
   closeModal: () => void;
@@ -20,9 +22,11 @@ const AddressForm: FC<AddressFormProps> = ({
   onSelectAddress,
 }) => {
   const handleComplete = async (data: Address) => {
-    const coordinate = await fetchCoordinate(data.roadAddress);
+    const coordinate = await getCoordinate(data.address);
 
     if (!coordinate) {
+      const { toast } = useToast();
+      toast({ type: "ERROR", description: "좌표를 가져오지 못했습니다." });
       return;
     }
 
@@ -33,33 +37,11 @@ const AddressForm: FC<AddressFormProps> = ({
         coordinates: [coordinate.x, coordinate.y],
       },
     };
+
     onSelectAddress(address);
     closeModal();
   };
 
-  const fetchCoordinate = async (address: string) => {
-    try {
-      const apiKey = import.meta.env.VITE_VWORLD_API_KEY;
-      const encodedAddress = encodeURIComponent(address);
-
-      const response = await fetch(
-        `/vworld/req/address?service=address&request=getcoord&version=2.0&crs=epsg:4326&address=${encodedAddress}&refine=true&simple=false&format=json&type=road&key=${apiKey}`
-      );
-      if (response.ok) {
-        const data = await response.json();
-
-        const x = data.response.result.point.x;
-        const y = data.response.result.point.y;
-
-        return { x, y };
-      } else {
-        alert("위경도 좌표 불러오기 실패");
-        return;
-      }
-    } catch (err) {
-      console.error("위경도 불러오기 실패", err);
-    }
-  };
   return (
     <Modal.Root
       onCloseModal={closeModal}
@@ -76,12 +58,6 @@ const AddressForm: FC<AddressFormProps> = ({
         />
       </Modal.Trigger>
       <Modal.Content className={style.content}>
-        <Modal.Close>
-          <div>
-            <a href="#">x</a>
-          </div>
-        </Modal.Close>
-
         <DaumPostcode onComplete={handleComplete} />
       </Modal.Content>
     </Modal.Root>

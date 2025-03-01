@@ -7,14 +7,16 @@ import { useNavigate } from "react-router-dom";
 import usePagination from "@/hooks/usePagination";
 import Pagination from "@/components/Pagination";
 import { useEffect } from "react";
+import useToast from "@/components/Toast/hooks/useToast";
 
 const PetWalkDetail = () => {
   const { userId } = userAuthStore();
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   useEffect(() => {
     if (!userId) {
-      alert("로그인이 필요합니다.");
+      toast({ type: "ERROR", description: "로그인이 필요합니다." });
       navigate("/login");
     }
   }, [userId, navigate]);

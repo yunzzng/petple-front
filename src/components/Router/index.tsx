@@ -2,6 +2,10 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import BaseLayout from "@/components/Layout";
 import { PetPlaceDetail, PetWalk, PetWalkDetail, Roulette } from "@/pages";
+import ProtectedRoute from "@/components/Router/components/ProtectedRoute";
+import Loading from "@/components/Loading";
+import getUserInfoLoader from "./loader/getUserInfo.loader";
+import { QueryClient } from "@tanstack/react-query";
 
 const ErrorPage = lazy(() => import("@/pages/Error"));
 const HomePage = lazy(() => import("@/pages/Home"));
@@ -20,6 +24,8 @@ const PetFriendsPage = lazy(() => import("@/pages/PetFriends"));
 const ChatPage = lazy(() => import("@/pages/Chat"));
 const Menu = lazy(() => import("@/pages/Menu"));
 
+const qc = new QueryClient();
+
 const Routes = () => {
   return <RouterProvider router={router} />;
 };
@@ -31,11 +37,12 @@ const router = createBrowserRouter([
     path: "/",
     element: <BaseLayout />,
     errorElement: <ErrorPage />,
+    loader: () => getUserInfoLoader(qc),
     children: [
       {
         path: "/",
         element: (
-          <Suspense fallback={<p>...loading</p>}>
+          <Suspense fallback={<Loading />}>
             <HomePage />
           </Suspense>
         ),
@@ -43,7 +50,7 @@ const router = createBrowserRouter([
       {
         path: "/community",
         element: (
-          <Suspense fallback={<p>...loading</p>}>
+          <Suspense fallback={<Loading />}>
             <CommunityPage />
           </Suspense>
         ),
@@ -51,15 +58,17 @@ const router = createBrowserRouter([
       {
         path: "/community/create",
         element: (
-          <Suspense fallback={<p>...loading</p>}>
-            <PostCreatePage />
-          </Suspense>
+          <ProtectedRoute>
+            <Suspense fallback={<Loading />}>
+              <PostCreatePage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: "/community/update/:id",
         element: (
-          <Suspense fallback={<p>...Loading</p>}>
+          <Suspense fallback={<Loading />}>
             <PostUpdatePage />
           </Suspense>
         ),
@@ -67,7 +76,7 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: (
-          <Suspense fallback={<p>...loading</p>}>
+          <Suspense fallback={<Loading />}>
             <LoginPage />
           </Suspense>
         ),
@@ -75,7 +84,7 @@ const router = createBrowserRouter([
       {
         path: "/petmedi",
         element: (
-          <Suspense fallback={<p>...loading</p>}>
+          <Suspense fallback={<Loading />}>
             <PetMedicalPage />
           </Suspense>
         ),
@@ -83,7 +92,7 @@ const router = createBrowserRouter([
       {
         path: "/petplace",
         element: (
-          <Suspense fallback={<p>...loading</p>}>
+          <Suspense fallback={<Loading />}>
             <PetPlacePage />
           </Suspense>
         ),
@@ -95,7 +104,7 @@ const router = createBrowserRouter([
       {
         path: "/petfuneral",
         element: (
-          <Suspense fallback={<p>...loading</p>}>
+          <Suspense fallback={<Loading />}>
             <PetFuneralPage />
           </Suspense>
         ),
@@ -103,7 +112,7 @@ const router = createBrowserRouter([
       {
         path: "/petfood",
         element: (
-          <Suspense fallback={<p>...loading</p>}>
+          <Suspense fallback={<Loading />}>
             <PetFoodPage />
           </Suspense>
         ),
@@ -111,7 +120,7 @@ const router = createBrowserRouter([
       {
         path: "/petwalk",
         element: (
-          <Suspense fallback={<p>...loading</p>}>
+          <Suspense fallback={<Loading />}>
             <PetWalk />
           </Suspense>
         ),
@@ -119,7 +128,7 @@ const router = createBrowserRouter([
       {
         path: "/petwalk/detail",
         element: (
-          <Suspense fallback={<p>...loading</p>}>
+          <Suspense fallback={<Loading />}>
             <PetWalkDetail />
           </Suspense>
         ),
@@ -127,31 +136,37 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: (
-          <Suspense fallback={<p>...loading</p>}>
-            <ProfilePage />
-          </Suspense>
+          <ProtectedRoute>
+            <Suspense fallback={<Loading />}>
+              <ProfilePage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: "/createpet",
         element: (
-          <Suspense fallback={<p>...loading</p>}>
-            <CreatePetProfile />
-          </Suspense>
+          <ProtectedRoute>
+            <Suspense fallback={<Loading />}>
+              <CreatePetProfile />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: "/petfriends",
         element: (
-          <Suspense fallback={<p>...loading</p>}>
-            <PetFriendsPage />
-          </Suspense>
+          <ProtectedRoute>
+            <Suspense fallback={<Loading />}>
+              <PetFriendsPage />
+            </Suspense>
+          </ProtectedRoute>
         ),
       },
       {
         path: "/roulette",
         element: (
-          <Suspense fallback={<p>...loading</p>}>
+          <Suspense fallback={<Loading />}>
             <Roulette />
           </Suspense>
         ),
@@ -159,7 +174,7 @@ const router = createBrowserRouter([
       {
         path: "/menu",
         element: (
-          <Suspense fallback={<p>...loading</p>}>
+          <Suspense fallback={<Loading />}>
             <Menu />
           </Suspense>
         ),
@@ -169,7 +184,7 @@ const router = createBrowserRouter([
   {
     path: "/community/post/:id",
     element: (
-      <Suspense fallback={<p>...Loading</p>}>
+      <Suspense fallback={<Loading />}>
         <PostDetailPage />
       </Suspense>
     ),
@@ -177,10 +192,14 @@ const router = createBrowserRouter([
   {
     path: "/chat/:nickname",
     element: (
-      <Suspense fallback={<p>...Loading</p>}>
-        <ChatPage />
-      </Suspense>
+      <ProtectedRoute>
+        <Suspense fallback={<Loading />}>
+          <ChatPage />
+        </Suspense>
+      </ProtectedRoute>
     ),
+    loader: () => getUserInfoLoader(qc),
+    errorElement: <ErrorPage />,
   },
   {
     path: "*",

@@ -1,7 +1,7 @@
 import userAuthStore from "@/zustand/userAuth";
 import style from "./menu.module.css";
 import { useNavigate } from "react-router-dom";
-import { getCookie } from "@/hooks/getCookie";
+import { getCookie } from "@/utils/getCookie";
 import { useEffect, useState } from "react";
 // import profileImg from "/images/profile.png";
 import { Button } from "@/components";
@@ -38,24 +38,33 @@ const Menu = () => {
 
   return (
     <div className={style.menu_total_wrap}>
-      <div className={style.profile}>
-        <div className={style.profile_user}>
-          <img
-            src={userImage || "/images/profile.png"}
+      {isLoggined ? (
+        <div className={style.profile}>
+          <div
+            className={style.profile_user}
             onClick={() => navigate("/profile")}
-          />
-          <p>{userNickName || "로그인이 필요합니다."}</p>
+          >
+            <img src={userImage || "/images/profile.png"} />
+            <p>{userNickName}</p>
+          </div>
+          <div>
+            <Button onClick={() => handleLogout()}>LOGOUT</Button>
+          </div>
         </div>
-        {isLoggined ? (
-          <div>
-            <Button onClick={() => handleLogout()}>logout</Button>
+      ) : (
+        <div className={style.profile}>
+          <div
+            className={style.profile_user}
+            onClick={() => navigate("/login")}
+          >
+            <img src={"/images/profile.png"} />
+            <p>{"로그인이 필요합니다."}</p>
           </div>
-        ) : (
           <div>
-            <Button onClick={() => navigate("/login")}>login</Button>
+            <Button onClick={() => navigate("/login")}>LOGIN</Button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
       <div className={style.menuList}>
         <div className={style.subject}>

@@ -2,47 +2,54 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 5px;
   margin-top: 15px;
   width: 100%;
-
 }
 
 .pageButton {
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: none;
   padding: 8px 8px;
   font-size: 11px;
   cursor: pointer;
   color: black;
+  background-color: #fff;
+  border-radius: 0px;
+}
+
+.pageButton:disabled {
+  background-color: transparent;
 }
 
 .pageButton:hover {
-  background-color: #f0f0f0;
+  background-color: #fff;
+  border-radius: 0px;
 }
 
 .pageNumber {
   background-color: #ffffff;
-  border: 1px solid #ccc;
-  padding: 8px 12px;
+  padding: 8px 10px;
   font-size: 11px;
   transition: all 0.3s ease;
   color: black;
+  border-radius: 0px;
 }
 
 .pageNumber:hover {
-  background-color: #f0f0f0;
+  background-color: #fff;
+  border-radius: 0px;
 }
 
 .activePage {
-  background-color: #93c9ff;
-  border-color: #93c9ff;
-  color: white;
+  background-color: #fff;
+  border-bottom: solid 1px #cdcdcd;
+  color: #000;
   font-weight: bold;
+  border-radius: 0px;
 }
 
 .activePage:hover {
-  background-color: #002daa;
   border-color: #ffffff;
+  border-bottom: solid 1px #cdcdcd;
+  border-radius: 0px;
 }

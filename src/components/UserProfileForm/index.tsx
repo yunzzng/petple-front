@@ -12,6 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchema } from "@/consts/zodSchema";
 import AddressForm from "@/components/AddressForm";
 import { AddressType } from "@/types/user.type";
+import useToast from "../Toast/hooks/useToast";
 
 const addressDefaultValue: AddressType = {
   jibunAddress: "",
@@ -23,6 +24,7 @@ const addressDefaultValue: AddressType = {
 
 const UserProfileForm = () => {
   const { userNickName, userImage, userEmail, userAddress } = userAuthStore();
+  const { toast } = useToast();
 
   const { handleSubmit, getValues, setValue, watch, reset } = useForm({
     defaultValues: {
@@ -87,7 +89,7 @@ const UserProfileForm = () => {
       isNickNameChanged &&
       (!isNickNameConfirm || nickName !== confirmedNickName)
     ) {
-      alert("닉네임 중복 확인을 해주세요.");
+      toast({ type: "ERROR", description: "닉네임 중복 확인을 해주세요." });
       return;
     }
 
@@ -114,10 +116,10 @@ const UserProfileForm = () => {
         userAddress: selectedAddress,
       });
 
-      alert("회원정보 수정 완료");
+      toast({ type: "SUCCESS", description: "회원정보 수정 완료" });
       setUpdating(false);
     } else {
-      alert("회원정보 수정에 실패했습니다.");
+      toast({ type: "ERROR", description: "회원정보 수정에 실패했습니다." });
     }
   };
 
@@ -130,19 +132,9 @@ const UserProfileForm = () => {
       setConfirmedNickName(nickName);
     }
 
-    if (!nickName) {
-      alert("닉네임을 입력해주세요.");
-      return;
-    }
-
-    if (nickName.length > 10) {
-      alert("닉네임은 10글자 이하로 입력해주세요.");
-      return;
-    }
-
     if (nickName === userNickName) {
       setIsNickNameConfirm(true);
-      alert("사용가능한 닉네임 입니다.");
+      toast({ type: "SUCCESS", description: "사용가능한 닉네임 입니다." });
       return;
     }
 
@@ -150,11 +142,11 @@ const UserProfileForm = () => {
     if (isAvailable) {
       setIsNickNameConfirm(true);
       setConfirmedNickName(nickName);
-      alert("사용가능한 닉네임 입니다.");
+      toast({ type: "SUCCESS", description: "사용가능한 닉네임 입니다." });
     } else {
       setIsNickNameConfirm(false);
       setConfirmedNickName(null);
-      alert("이미 사용 중인 닉네임입니다.");
+      toast({ type: "ERROR", description: "이미 사용 중인 닉네임입니다." });
     }
   };
 

@@ -63,3 +63,84 @@
   color: #666;
   margin-top: 4px;
 }
+
+.backdrop {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.content {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 10000;
+  background-color: #fff;
+  transform: translate(-50%, -50%);
+  padding: 16px 8px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.description {
+  font-size: 20px;
+  line-height: 31px;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+  color: rgb(17, 18, 32);
+  width: 100%;
+  padding: 0px 20px;
+  text-align: center;
+  white-space: pre-wrap;
+}
+
+.modal_button {
+  width: 100%;
+  padding: 6px 14px;
+}
+
+.intro_title {
+  align-self: flex-start;
+  font-size: 16px;
+  font-family: "HakgyoansimDunggeunmisoTTF-B";
+  padding: 10px 0px;
+}
+
+.intro_description {
+  font-size: 12px;
+  line-height: 1.4rem;
+  color: #444;
+  text-align: start;
+  padding-bottom: 10px;
+}
+
+.address_warning {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  border-radius: 8px;
+  text-align: center;
+  color: #d9534f;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.address_warning h2 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.address_warning p {
+  font-size: 14px;
+  color: #a94442;
+}

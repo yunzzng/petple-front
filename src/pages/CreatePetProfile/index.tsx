@@ -137,12 +137,12 @@ const CreatePetProfile = () => {
               </div>
             </li>
           </div>
-          <div className={style.button_wrap}>
-            <Button type="submit" className={style.button}>
-              저장
-            </Button>
-          </div>
         </ul>
+        <div className={style.button_wrap}>
+          <Button type="submit" className={style.button}>
+            프로필 생성하기
+          </Button>
+        </div>
       </form>
     </div>
   );
