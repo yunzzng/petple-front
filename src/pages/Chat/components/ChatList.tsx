@@ -5,17 +5,17 @@ import ChatMessage from "./ChatMessage";
 
 interface ChatListProps {
   messages: ChatMessageType[];
-  user: AuthStore;
+  signinedUser: AuthStore;
 }
 
-const ChatList = ({ messages, user }: ChatListProps) => {
+const ChatList = ({ messages, signinedUser }: ChatListProps) => {
   return (
     <main className={styles.wrapper}>
       <ul className={styles.chat_list}>
         {messages.map((message, index) => (
           <ChatMessage
             message={message}
-            nickname={user.userNickName}
+            nickname={signinedUser.userNickName}
             key={index}
           />
         ))}

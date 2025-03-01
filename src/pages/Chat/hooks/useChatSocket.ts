@@ -4,10 +4,22 @@ import { AuthStore, UserType } from "@/types/user.type";
 import { useEffect, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
 
-const useChatSocket = (user: AuthStore, targetUser: UserType) => {
+interface UseChatSocketProps {
+  signinedUser: AuthStore;
+  preMessages: ChatMessageType[];
+  targetUser: UserType;
+}
+
+const useChatSocket = ({
+  signinedUser,
+  preMessages,
+  targetUser,
+}: UseChatSocketProps) => {
   const [isConnected, setIsConnected] = useState(false);
   const [roomId, setRoomId] = useState("");
-  const [messages, setMessages] = useState<ChatMessageType[]>([]);
+  const [messages, setMessages] = useState<ChatMessageType[]>(
+    preMessages ?? []
+  );
   const socketRef = useRef<Socket>(null);
 
   const sendMessage = (text: string) => {
@@ -16,10 +28,10 @@ const useChatSocket = (user: AuthStore, targetUser: UserType) => {
       roomId,
       text,
       from: {
-        id: user.userId,
-        nickName: user.userNickName,
-        userPet: user.userPet,
-        profileImage: user.userImage,
+        id: signinedUser.userId,
+        nickName: signinedUser.userNickName,
+        userPet: signinedUser.userPet,
+        profileImage: signinedUser.userImage,
       },
       to: {
         id: targetUser._id,
@@ -46,11 +58,6 @@ const useChatSocket = (user: AuthStore, targetUser: UserType) => {
     socketRef.current = socket;
 
     socket.on("connect", () => {
-      socket.on("prev_message", (prevMessage) => {
-        if (!prevMessage?.messages.length) return;
-        setMessages(prevMessage.messages);
-      });
-
       setIsConnected(true);
     });
 
@@ -65,12 +72,12 @@ const useChatSocket = (user: AuthStore, targetUser: UserType) => {
   }, []);
 
   useEffect(() => {
-    if (socketRef.current && user && user.userId) {
-      const roomId = [user.userId, targetUser._id].sort().join("-");
+    if (socketRef.current && signinedUser && signinedUser.userId) {
+      const roomId = [signinedUser.userId, targetUser._id].sort().join("-");
       setRoomId(roomId);
       socketRef.current.emit("join_room", roomId);
     }
-  }, [user, socketRef]);
+  }, [signinedUser, socketRef]);
 
   return { messages, isConnected, sendMessage };
 };
