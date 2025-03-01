@@ -1,4 +1,4 @@
-import { ToastType } from "@/components/Toast/types";
+import { ToastType } from "@/components/UI/Toast/types";
 import { create } from "zustand";
 
 interface ToastStore {
