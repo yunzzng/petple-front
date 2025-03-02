@@ -70,15 +70,6 @@
   align-items: center;
 }
 
-.arrow_up_img {
-  filter: invert(17%) sepia(90%) saturate(400%) hue-rotate(180deg)
-    brightness(90%) contrast(90%);
-}
-.arrow_down_img {
-  filter: invert(17%) sepia(90%) saturate(400%) hue-rotate(180deg)
-    brightness(90%) contrast(90%);
-}
-
 .replies_list {
   display: flex;
   flex-direction: column;

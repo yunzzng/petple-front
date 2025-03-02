@@ -1,20 +1,21 @@
 import { DescriptionProps } from "../types";
 import styles from "./default.module.css";
-import successIcon from "/images/icons/success.svg";
-import errorIcon from "/images/icons/error.svg";
-import infoIcon from "/images/icons/info.svg";
+import SuccessIcon from "@/assets/icons/success.svg?react";
+import ErrorIcon from "@/assets/icons/error.svg?react";
+import InfoIcon from "@/assets/icons/info.svg?react";
 
 const mapTypeToIcon = {
-  INFO: infoIcon,
-  SUCCESS: successIcon,
-  ERROR: errorIcon,
+  INFO: InfoIcon,
+  SUCCESS: SuccessIcon,
+  ERROR: ErrorIcon,
 };
 
 const Description = ({ children, type = "INFO" }: DescriptionProps) => {
+  const IconComponent = mapTypeToIcon[type];
   return (
     <div className={styles.toast_description}>
       <div className={styles.toast_icon}>
-        <img src={mapTypeToIcon[type]} alt="토스트 아이콘" />
+        <IconComponent />
       </div>
       <div>{children}</div>
     </div>

@@ -1,4 +1,14 @@
-import { createContext, FC, useState, Dispatch, SetStateAction, ReactNode, useRef, useMemo, TouchEvent } from "react";
+import {
+  createContext,
+  FC,
+  useState,
+  Dispatch,
+  SetStateAction,
+  ReactNode,
+  useRef,
+  useMemo,
+  TouchEvent,
+} from "react";
 import CarouselItemList from "./CarouselItemList";
 import CarouselItem from "./CarouselItem";
 import CarouselNavigator from "./CarouselNavigator";
@@ -26,7 +36,10 @@ interface CarouselContextProps {
 
 const CarouselContext = createContext<CarouselContextProps | null>(null);
 
-const Carousel: FC<CarouselProps> & CarouselCompoundProps = ({ children, className }) => {
+const Carousel: FC<CarouselProps> & CarouselCompoundProps = ({
+  children,
+  className,
+}) => {
   const [carouselIndex, setCarouselIndex] = useState<number>(0);
   const [itemLength, setItemLength] = useState<number>(0);
 
@@ -53,12 +66,16 @@ const Carousel: FC<CarouselProps> & CarouselCompoundProps = ({ children, classNa
 
     if (swipeDistance > SWIPE_THRESHOLD) {
       // 왼쪽 → 오른쪽 스와이프 (다음 슬라이드)
-      setCarouselIndex((prevIndex) => (prevIndex === itemLength - 1 ? 0 : prevIndex + 1));
+      setCarouselIndex((prevIndex) =>
+        prevIndex === itemLength - 1 ? 0 : prevIndex + 1
+      );
     } else if (swipeDistance < -SWIPE_THRESHOLD) {
       // 오른쪽 → 왼쪽 스와이프 (이전 슬라이드)
-      setCarouselIndex((prevIndex) => (prevIndex === 0 ? itemLength - 1 : prevIndex - 1));
+      setCarouselIndex((prevIndex) =>
+        prevIndex === 0 ? itemLength - 1 : prevIndex - 1
+      );
     }
-    
+
     // 터치 값 초기화
     touchStartX.current = null;
     touchEndX.current = null;

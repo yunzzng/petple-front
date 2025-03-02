@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./floatingbutton.module.css";
-// import pencilIcon from "/images/icons/pencil.svg";
+import PencilIcon from "@/assets/icons/pencil.svg?react";
 const FloatingButton = () => {
   const navigate = useNavigate();
   return (
@@ -8,7 +8,7 @@ const FloatingButton = () => {
       onClick={() => navigate("/community/create")}
       className={styles.floating_button}
     >
-      <img src={"/images/icons/pencil.svg"} alt="게시글 추가 버튼이미지" />
+      <PencilIcon />
     </button>
   );
 };

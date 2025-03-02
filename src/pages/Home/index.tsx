@@ -20,9 +20,7 @@ const Home = () => {
             {carouselData.map((banner, index) => (
               <Carousel.Item key={banner.id} index={index}>
                 <div
-                  className={`${styles.banner} ${
-                    index % 2 === 0 ? styles.bannerLeft : styles.bannerRight
-                  }`}
+                  className={`${styles.banner}`}
                   style={{ backgroundColor: banner.backgroundColor }}
                 >
                   <img

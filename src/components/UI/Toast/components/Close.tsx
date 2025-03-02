@@ -1,6 +1,6 @@
 import { useToastStore } from "@/zustand/toastStore";
 import styles from "./default.module.css";
-import closeIcon from "/images/icons/close.svg";
+import CloseIcon from "@/assets/icons/close.svg?react";
 
 const Close = () => {
   const { removeToast } = useToastStore();
@@ -11,7 +11,7 @@ const Close = () => {
         onClick={removeToast}
         aria-label="닫기"
       >
-        <img src={closeIcon} alt="닫기 아이콘" />
+        <CloseIcon />
       </div>
     </>
   );
