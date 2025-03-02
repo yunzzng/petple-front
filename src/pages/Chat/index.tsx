@@ -6,20 +6,23 @@ import useChatSocket from "./hooks/useChatSocket";
 import userAuthStore from "@/zustand/userAuth";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import { getUserByNickname } from "@/apis/profile.api";
+import { getPrevMessages } from "@/apis/messages.api";
 
 const ChatPage = () => {
-  const { nickname } = useParams();
+  const { nickname: targetUserNickname } = useParams();
   const navigate = useNavigate();
-  const user = userAuthStore();
-  const { data: targetUser } = useSuspenseQuery({
-    queryKey: ["user", nickname],
-    queryFn: () => nickname && getUserByNickname(nickname),
+  const signinedUser = userAuthStore();
+  const {
+    data: { targetUser, chat },
+  } = useSuspenseQuery({
+    queryKey: ["prevMessage", targetUserNickname],
+    queryFn: () => targetUserNickname && getPrevMessages(targetUserNickname),
   });
-  const { messages, isConnected, sendMessage } = useChatSocket(
-    user,
-    targetUser
-  );
+  const { messages, isConnected, sendMessage } = useChatSocket({
+    signinedUser,
+    preMessages: chat?.messages,
+    targetUser,
+  });
   return (
     isConnected && (
       <div className={styles.wrapper}>
@@ -35,7 +38,7 @@ const ChatPage = () => {
             {targetUser.userPet[0]?.name ?? targetUser.nickName}님 과의 대화방
           </h1>
         </div>
-        <ChatList messages={messages} user={user} />
+        <ChatList messages={messages} signinedUser={signinedUser} />
         <ChatInput sendMessage={sendMessage} />
       </div>
     )

@@ -2,10 +2,10 @@ import styles from "./popularposts.module.css";
 import { getPopularPost } from "@/apis/post.api";
 import { PostItem } from "@/types/post.type";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import clockIcon from "/images/icons/clock.svg";
-import likeIcon from "/images/icons/like.svg";
-import commentIcon from "/images/icons/comment.svg";
 import { useNavigate } from "react-router-dom";
+import ClockIcon from "@/assets/icons/clock.svg?react";
+import LikeIcon from "@/assets/icons/like.svg?react";
+import CommentIcon from "@/assets/icons/comment.svg?react";
 
 const rankEmojis = ["🥇", "🥈", "🥉"];
 
@@ -47,16 +47,16 @@ const PopularPosts = () => {
               <div className={styles.post_item_bottom}>
                 <span className={styles.nickname}>{post.creator.nickName}</span>
                 <span className={styles.createdAt}>
-                  <img src={clockIcon} alt="시계 아이콘 이미지" />
+                  <ClockIcon className={styles.icon} />
                   {new Date(post.createdAt).toLocaleDateString()}
                 </span>
                 <span className={styles.comment_count}>
-                  <img src={commentIcon} alt="댓글 아이콘 이미지" />
+                  <CommentIcon className={styles.icon} />
                   {post.comments.length}
                 </span>
                 <span className={styles.likes_count}>
-                  <img src={likeIcon} alt="좋아요 아이콘 이미지" />
-                  {post.likes.length}
+                  <LikeIcon className={styles.icon} />
+                  {post.likesCount}
                 </span>
               </div>
             </div>

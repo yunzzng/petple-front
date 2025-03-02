@@ -1,7 +1,7 @@
 import styles from "./default.module.css";
 import { FC } from "react";
 import { ItemProps } from "../types";
-import closeIcon from "../assets/CloseIcon.svg";
+import CloseIcon from "@/assets/icons/close.svg?react";
 import { useChipContext } from "./Root";
 
 const Item: FC<ItemProps> = ({ children, title }) => {
@@ -9,8 +9,7 @@ const Item: FC<ItemProps> = ({ children, title }) => {
   return (
     <li className={styles.chip}>
       <span>{children}</span>
-      <img
-        src={closeIcon}
+      <CloseIcon
         className={styles.closeIcon}
         onClick={() => removeItem(title)}
       />

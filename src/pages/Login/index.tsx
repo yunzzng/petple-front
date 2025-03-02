@@ -1,7 +1,4 @@
 import style from "./signup.module.css";
-// import google from "/images/googleCircle.png";
-// import kakao from "/images/icons/btn_kakao.svg";
-// import naver from "/images/btn_naver.png";
 
 const Login = () => {
   const handleGoogleLogin = () => {
