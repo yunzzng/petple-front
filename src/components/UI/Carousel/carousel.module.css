@@ -1,8 +1,21 @@
 .carouselContainer {
-  position: relative; 
+  position: relative;
   width: 360px;
-  max-width: 100%; 
+  max-width: 100%;
   left: 0;
+}
+
+.carouselItemList {
+  display: flex;
+  overflow: hidden;
+  width: 100%;
+}
+
+.carouselItem {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .carouselNavigator {
@@ -14,7 +27,7 @@
 }
 
 .navButton {
-  color: #93C9FF;
+  color: #93c9ff;
   background-color: transparent;
   border: none;
   font-size: 24px;
@@ -24,7 +37,7 @@
 }
 
 .navButton:hover {
-  color: #002DAA;
+  color: #002daa;
 }
 
 .carouselIndicator {
@@ -40,11 +53,11 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: #93C9FF;
+  background-color: #93c9ff;
   border: none;
   cursor: pointer;
 }
 
 .carouselIndicator button.active {
-  background-color: #002DAA;
+  background-color: #002daa;
 }
