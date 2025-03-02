@@ -4,7 +4,7 @@ import path from "path";
 import removeConsole from "vite-plugin-remove-console";
 import optimizeImagePlugin from "vite-plugin-optimize-image";
 import mkcert from "vite-plugin-mkcert";
-
+import svgr from "vite-plugin-svgr";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
@@ -15,6 +15,7 @@ export default defineConfig({
       certFileName: "./localhost.pem",
       keyFileName: "./localhost-key.pem",
     }),
+    svgr(),
   ],
   server: {
     proxy: {
@@ -49,6 +50,10 @@ export default defineConfig({
       {
         find: "@consts",
         replacement: path.resolve(__dirname, "./src/consts"),
+      },
+      {
+        find: "@assets",
+        replacement: path.resolve(__dirname, "./src/assets"),
       },
     ],
   },
