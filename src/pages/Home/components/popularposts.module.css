@@ -56,6 +56,11 @@
   object-fit: cover;
 }
 
+.icon {
+  width: 14px;
+  height: 14px;
+}
+
 .post_item_info {
   flex: 1;
   display: flex;

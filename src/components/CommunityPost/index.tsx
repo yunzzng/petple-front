@@ -6,6 +6,9 @@ import { useMemo } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { deletePostById } from "@/apis/post.api";
 import userAuthStore from "@/zustand/userAuth";
+import ClockIcon from "@/assets/icons/clock.svg?react";
+import LikeIcon from "@/assets/icons/like.svg?react";
+import CommentIcon from "@/assets/icons/comment.svg?react";
 
 interface PostProps {
   post: PostItem;
@@ -88,15 +91,15 @@ const PostHeader = (
           </p>
           <div className={styles.icons_list}>
             <div className={styles.createdAt}>
-              <img src={"/images/icons/clock.svg"} alt="시계 이미지" />
+              <ClockIcon className={styles.icon} />
               {new Date(createdAt).toLocaleDateString()}
             </div>
             <div className={styles.createdAt}>
-              <img src={"/images/icons/comment.svg"} alt="댓글 이미지" />
+              <CommentIcon className={styles.icon} />
               <span>{commentsCount}</span>
             </div>
             <div className={styles.createdAt}>
-              <img src={"/images/icons/like.svg"} alt="따봉 이미지" />
+              <LikeIcon className={styles.icon} />
               <span>{likesCount}</span>
             </div>
           </div>

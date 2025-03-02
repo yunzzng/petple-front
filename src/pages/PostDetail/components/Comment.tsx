@@ -1,10 +1,10 @@
 import styles from "./comment.module.css";
-// import arrowDown from "/images/icons/arrow_drop_down.svg";
-// import arrowUp from "/images/icons/arrow_drop_up.svg";
 import { CommentType, ReplyType } from "@/types/post.type";
 import Avartar from "@/components/UI/Avartar";
 import Accordion from "@/components/UI/Accordion";
 import { useState } from "react";
+import ArrowDownIcon from "@/assets/icons/arrow_drop_down.svg?react";
+import ArrowUpIcon from "@/assets/icons/arrow_drop_up.svg?react";
 
 interface CommentProps {
   comments: CommentType[];
@@ -125,19 +125,7 @@ function Replies({
       <Accordion.Title>
         <Accordion.Button className={styles.replies_button}>
           <div className={styles.replies_title}>
-            {isOpen ? (
-              <img
-                src={"/images/icons/arrow_drop_up.svg"}
-                alt="위쪽 화살표 이미지"
-                className={styles.arrow_up_img}
-              />
-            ) : (
-              <img
-                src={"/images/icons/arrow_drop_down.svg"}
-                alt="아래쪽 화살표 이미지"
-                className={styles.arrow_down_img}
-              />
-            )}
+            {isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
             {comment.replies.length}개의 답글 보기
           </div>
         </Accordion.Button>
