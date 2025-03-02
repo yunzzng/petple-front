@@ -20,7 +20,7 @@ const ChatPage = () => {
   });
   const { messages, isConnected, sendMessage } = useChatSocket({
     signinedUser,
-    preMessages: chat.messages,
+    preMessages: chat?.messages,
     targetUser,
   });
   return (
