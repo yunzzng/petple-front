@@ -5,11 +5,10 @@ import { getPosts } from "@/apis/post.api";
 import { PostItem } from "@/types/post.type";
 import Post from "./components/Post";
 import FloatingButton from "./components/FloatingButton";
+import useInfinityScroll from "@/hooks/useInfinityScroll";
 
 const CommunityPage = () => {
   const postContainerRef = useRef<HTMLUListElement>(null);
-  const targetRef = useRef<HTMLDivElement>(null);
-
   const { data: posts, fetchNextPage } = useInfiniteQuery({
     queryKey: ["posts"],
     queryFn: ({ pageParam }) => getPosts(pageParam),
@@ -22,20 +21,7 @@ const CommunityPage = () => {
     getNextPageParam: ({ pageInfo }) => pageInfo.nextPage,
   });
 
-  const observerCallback: IntersectionObserverCallback = (entries) => {
-    const { isIntersecting } = entries[0];
-    if (isIntersecting) {
-      fetchNextPage();
-    }
-  };
-
-  const observer = new IntersectionObserver(observerCallback);
-  useEffect(() => {
-    if (!targetRef.current) return;
-    observer.observe(targetRef.current);
-
-    return () => observer.disconnect();
-  }, []);
+  const { targetRef } = useInfinityScroll({ cb: fetchNextPage });
 
   return (
     <section className={styles.wrapper}>
