@@ -1,7 +1,7 @@
 import { updateLikes } from "@/apis/like.api";
 import styles from "./post.module.css";
 import CommunityPost from "@/components/CommunityPost";
-import LikeButton from "@/pages/PostDetail/components/LikeButton";
+import LikeButton from "@/components/LikeButton/LikeButton";
 import { PostItem } from "@/types/post.type";
 import userAuthStore from "@/zustand/userAuth";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
