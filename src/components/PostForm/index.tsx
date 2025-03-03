@@ -119,11 +119,6 @@ const PostForm = ({
             className={styles.uploaded_file}
             onClick={() => fileInputRef.current?.click()}
           >
-            {/* <img
-              src={uploadIcon}
-              alt="업로드 버튼"
-              className={styles.default_image}
-            /> */}
             <UploadIcon />
           </li>
           {previewImages.map((image, index) => (

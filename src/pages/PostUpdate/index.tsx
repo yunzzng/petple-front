@@ -8,9 +8,11 @@ import { SubmitHandler } from "react-hook-form";
 import { useEffect } from "react";
 import userAuthStore from "@/zustand/userAuth";
 import { PostFormFields } from "@/types/post.type";
+import useToast from "@/components/UI/Toast/hooks/useToast";
 
 const PostUpdatePage = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const { userId } = userAuthStore();
   const { id } = useParams();
   const { data: post } = useSuspenseQuery({
@@ -20,16 +22,25 @@ const PostUpdatePage = () => {
 
   const { mutateAsync: uploadImages } = useMutation({
     mutationFn: multipleImageUpload,
+    onError: () => {
+      toast({ type: "ERROR", description: "이미지 업로드에 실패하였습니다." });
+    },
   });
 
   const { mutateAsync: submitForm } = useMutation({
     mutationFn: updatePostById,
-    onSuccess: () => navigate(`/community/post/${id}`, { replace: true }),
+    onSuccess: () => {
+      toast({ type: "SUCCESS", description: "게시물을 수정 하였습니다." });
+      navigate(`/community/post/${id}`, { replace: true });
+    },
   });
 
   const { mutateAsync: deletePost } = useMutation({
     mutationFn: deletePostById,
-    onSuccess: () => navigate("/community"),
+    onSuccess: () => {
+      toast({ type: "INFO", description: "게시물을 삭제 하였습니다." });
+      navigate("/community");
+    },
   });
 
   const handleUpdatePost: SubmitHandler<PostFormFields> = async ({
@@ -40,20 +51,17 @@ const PostUpdatePage = () => {
     if (!id) return;
     const convertedImage = images.filter((image) => typeof image === "string");
     const filterdFile = images.filter((image) => image instanceof File);
-    try {
-      const uploadedImages = await uploadImages(filterdFile);
-      const updatedImages = [...convertedImage, ...uploadedImages];
-      await submitForm({ _id: id, tags, images: updatedImages, description });
-    } catch (error) {
-      console.log(error);
-    }
+    const uploadedImages = await uploadImages(filterdFile);
+    const updatedImages = [...convertedImage, ...uploadedImages];
+    await submitForm({ _id: id, tags, images: updatedImages, description });
   };
 
   const handleDeletePost = () => id && deletePost(id);
 
   useEffect(() => {
-    if (post.creator._id !== userId)
+    if (post?.creator._id !== userId) {
       throw new Error("게시글 수정 권한이 없습니다.");
+    }
   }, [post]);
 
   return (
