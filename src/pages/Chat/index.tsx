@@ -7,6 +7,7 @@ import userAuthStore from "@/zustand/userAuth";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { getPrevMessages } from "@/apis/messages.api";
+import { Helmet } from "react-helmet-async";
 
 const ChatPage = () => {
   const { nickname: targetUserNickname } = useParams();
@@ -26,6 +27,13 @@ const ChatPage = () => {
   return (
     isConnected && (
       <div className={styles.wrapper}>
+        <Helmet>
+          <title>{`${targetUser?.nickName}님과의 채팅 | PetPle`}</title>
+          <meta
+            name="description"
+            content={`${targetUser?.nickname}님과 실시간 채팅을 즐겨보세요.!`}
+          />
+        </Helmet>
         <Header />
         <div className={styles.chat_header}>
           <div

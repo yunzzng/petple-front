@@ -28,6 +28,7 @@ import Header from "@/components/Header";
 import { AxiosError } from "axios";
 import { updateLikes } from "@/apis/like.api";
 import useToast from "@/components/UI/Toast/hooks/useToast";
+import { Helmet } from "react-helmet-async";
 
 const CommentSchema = z.object({
   description: z.string().trim().min(1, "내용을 입력해주세요."),
@@ -229,6 +230,13 @@ const PostDetailPage = () => {
 
   return (
     <div className={styles.wrraper}>
+      <Helmet>
+        <title>{`${post.creator?.nickName}의 게시글 | PetPle`}</title>
+        <meta
+          name="description"
+          content={`${post.tags.join("")}에 대한 게시글`}
+        />
+      </Helmet>
       <Header />
       <CommunityPost post={post} />
       <div className={styles.description}>{post.description}</div>
