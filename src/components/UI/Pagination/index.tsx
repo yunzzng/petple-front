@@ -52,9 +52,7 @@ const Pagination: FC<PaginationProps> & PaginationCompoundProps = ({
       value={{ page, totalPages, startPage, endPage, setPage }}
     >
       <div className={paginationCls}>
-        <div className={styles.paginationContainer}>
           <div className={styles.paginationContainer}>{children}</div>
-        </div>
       </div>
     </PaginationContext.Provider>
   );

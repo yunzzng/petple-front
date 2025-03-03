@@ -63,7 +63,7 @@ const PetWalk = () => {
           description: `위치 가져오기 실패: ${error.message}`,
         });
       },
-      { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+      { enableHighAccuracy: true, timeout: 10000, maximumAge: 3000 }
     );
   };
 

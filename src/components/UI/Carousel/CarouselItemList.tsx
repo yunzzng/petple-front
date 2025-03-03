@@ -7,7 +7,10 @@ interface CarouselItemListProps {
   className?: string;
 }
 
-const CarouselItemList: FC<CarouselItemListProps> = ({ children, className }) => {
+const CarouselItemList: FC<CarouselItemListProps> = ({
+  children,
+  className,
+}) => {
   const { setItemLength } = useCarouselContext();
 
   const carouselItemListCls = useMemo(() => {
@@ -15,7 +18,10 @@ const CarouselItemList: FC<CarouselItemListProps> = ({ children, className }) =>
   }, [className]);
 
   useEffect(() => {
-    setItemLength(Children.count(children));
+    const itemCount = Children.count(children);
+    if (itemCount !== 0) {
+      setItemLength(itemCount);
+    }
   }, [children, setItemLength]);
 
   return <div className={carouselItemListCls}>{children}</div>;
