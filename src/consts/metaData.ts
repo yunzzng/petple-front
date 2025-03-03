@@ -71,6 +71,7 @@ export const mapCurrentPathToMetaTagInfo: Record<
 
 export const dynamicPaths = [
   "/community/post/:id",
+  "/community/update/:id",
   "/chat/:nickname",
   "profile/:nickname",
 ];
