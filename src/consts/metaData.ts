@@ -15,10 +15,6 @@ export const mapCurrentPathToMetaTagInfo: Record<
     title: "PetPle | 글 작성",
     description: "커뮤니티에 새로운 글을 작성하고 반려인들과 소통해보세요.",
   },
-  "/community/update/:id": {
-    title: "PetPle | 글 수정",
-    description: "커뮤니티에 작성한 글을 수정할 수 있습니다.",
-  },
   "/login": {
     title: "PetPle | 로그인",
     description: "PetPle 계정으로 로그인하고 더 많은 기능을 이용하세요.",
@@ -30,10 +26,6 @@ export const mapCurrentPathToMetaTagInfo: Record<
   "/petplace": {
     title: "PetPle | 반려동물 장소",
     description: "반려동물과 함께 방문할 수 있는 장소를 찾아보세요.",
-  },
-  "/petplace/:id": {
-    title: "PetPle | 장소 상세 정보",
-    description: "반려동물 친화적인 장소의 상세 정보를 확인하세요.",
   },
   "/petfuneral": {
     title: "PetPle | 반려동물 장례",
@@ -49,7 +41,7 @@ export const mapCurrentPathToMetaTagInfo: Record<
   },
   "/petwalk/detail": {
     title: "PetPle | 산책 상세",
-    description: "반려동물 산책 코스에 대한 상세 정보를 확인하세요.",
+    description: "반려동물 산책 기록에 대한 상세 정보를 확인하세요.",
   },
   "/profile": {
     title: "PetPle | 프로필",
@@ -71,16 +63,14 @@ export const mapCurrentPathToMetaTagInfo: Record<
     title: "PetPle | 메뉴",
     description: "PetPle의 다양한 기능을 확인할 수 있는 메뉴 페이지입니다.",
   },
-  "/community/post/:id": {
-    title: "PetPle | 게시글 보기",
-    description: "커뮤니티에서 게시된 글을 확인하고 소통하세요.",
-  },
-  "/chat/:nickname": {
-    title: "PetPle | 채팅",
-    description: "반려인들과 함께 실시간으로 대화하세요.",
-  },
   "*": {
     title: "PetPle | 페이지를 찾을 수 없습니다",
     description: "요청하신 페이지를 찾을 수 없습니다.",
   },
 };
+
+export const dynamicPaths = [
+  "/community/post/:id",
+  "/chat/:nickname",
+  "profile/:nickname",
+];
