@@ -81,7 +81,11 @@ const PostHeader = (
   return (
     <div className={styles.post_header}>
       <div className={styles.post_header_top}>
-        <Avartar image={creator.profileImage} className={styles.avartar} />
+        <Avartar
+          image={creator.profileImage}
+          className={styles.avartar}
+          creator={creator}
+        />
         <div className={styles.post_header_userinfo_right}>
           <p className={styles.username}>
             {creator.name}
