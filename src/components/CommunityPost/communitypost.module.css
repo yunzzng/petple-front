@@ -43,14 +43,9 @@
   color: #4a4a4a;
 }
 
-.profileImage_wrapper {
+.avartar {
   width: 36px;
   height: 36px;
-}
-
-.creator_image {
-  width: 100%;
-  height: 100%;
   border-radius: 100%;
 }
 

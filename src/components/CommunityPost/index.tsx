@@ -1,5 +1,5 @@
 import styles from "./communitypost.module.css";
-import { Carousel } from "@/components";
+import { Avartar, Carousel } from "@/components";
 import { PostItem } from "@/types/post.type";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useMemo } from "react";
@@ -79,13 +79,7 @@ const PostHeader = (
   return (
     <div className={styles.post_header}>
       <div className={styles.post_header_top}>
-        <div className={styles.profileImage_wrapper}>
-          <img
-            src={creator.profileImage || "/images/profile.png"}
-            alt="유저 아바타 이미지"
-            className={styles.creator_image}
-          />
-        </div>
+        <Avartar image={creator.profileImage} className={styles.avartar} />
         <div className={styles.post_header_userinfo_right}>
           <p className={styles.username}>
             {creator.name}
