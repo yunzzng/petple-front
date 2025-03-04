@@ -1,6 +1,6 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import styles from "./community.module.css";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { getPosts } from "@/apis/post.api";
 import { PostItem } from "@/types/post.type";
 import Post from "./components/Post";
