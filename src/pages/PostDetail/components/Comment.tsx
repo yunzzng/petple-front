@@ -30,7 +30,11 @@ const Comment = ({
       {comments.map((comment) => (
         <li key={`post-comment-${comment._id}`}>
           <div className={styles.comment_body}>
-            <Avartar image={comment.creator.image} className={styles.avatar} />
+            <Avartar
+              image={comment.creator.profileImage}
+              className={styles.avatar}
+              creator={comment.creator}
+            />
             <Main comment={comment} handleReply={handleReply} />
             {signinedUserId === comment.creator._id && (
               <ActionMenu
@@ -135,7 +139,11 @@ function Replies({
           {comment.replies.map((reply) => (
             <li key={`post-comment-${reply._id}`}>
               <div className={styles.comment_body}>
-                <Avartar image={reply.profileImage} className={styles.avatar} />
+                <Avartar
+                  image={reply.profileImage}
+                  className={styles.avatar}
+                  creator={comment.creator}
+                />
                 <div className={styles.main_wrapper}>
                   <p>
                     {reply.name}{" "}
