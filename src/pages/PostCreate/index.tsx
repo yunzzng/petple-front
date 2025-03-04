@@ -1,7 +1,7 @@
 import { SubmitHandler } from "react-hook-form";
 import styles from "./postcreate.module.css";
 import { PostForm } from "@/components";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { multipleImageUpload } from "@/utils/imageUpload";
 import { addPost } from "@/apis/post.api";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ import { useMemo } from "react";
 
 const PostCreatePage = () => {
   const navigate = useNavigate();
+  const qc = useQueryClient();
   const { toast } = useToast();
   const { mutateAsync: uploadImages, isPending: isimageUploadPending } =
     useMutation({
@@ -35,6 +36,7 @@ const PostCreatePage = () => {
           type: "SUCCESS",
           description: "게시물 작성에 성공하였습니다.😀",
         });
+        qc.invalidateQueries({ queryKey: ["posts"] });
       },
       onError: () => {
         toast({
