@@ -1,5 +1,8 @@
 export const config = {
   app: {
-    backendUrl: "http://localhost:3000",
+    backendUrl:
+      import.meta.env.MODE === "development"
+        ? "https://localhost:3000"
+        : "https://kdt-react-2-team01.elicecoding.com",
   },
 };
