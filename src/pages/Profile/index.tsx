@@ -4,7 +4,7 @@ import style from "./profile.module.css";
 import { useNavigate } from "react-router-dom";
 import PetForm from "@/pages/Profile/components/PetForm";
 import UserProfileForm from "@/pages/Profile/components/UserProfileForm";
-import UserPosts from "./components/userPosts";
+import UserPosts from "./components/UserPosts";
 
 const Profile = () => {
   const { userPet } = userAuthStore();
