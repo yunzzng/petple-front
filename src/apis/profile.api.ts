@@ -115,14 +115,14 @@ const deletePet = async (userId: string, _id: string) => {
   }
 };
 
-const getMyPosts = async () => {
-  try {
-    const response = await baseInstance.get("/my/posts/get");
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
+// const getMyPosts = async () => {
+//   try {
+//     const response = await baseInstance.get("/my/posts/get");
+//     return response.data;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
 
 const getNearUsers = async (data: { lat: number; lng: number }) => {
   try {
@@ -160,7 +160,7 @@ export {
   updatePetInfo,
   deletePet,
   recieveUserInfo,
-  getMyPosts,
+  // getMyPosts,
   getNearUsers,
   getUserByNickname,
   logout,
