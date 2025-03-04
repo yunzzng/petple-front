@@ -1,38 +1,27 @@
 import { Tabs } from "@/components";
 import style from "../selectedProfile.module.css";
 import Pagination from "@/components/UI/Pagination";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { PostItem } from "@/types/post.type";
 import { useNavigate } from "react-router-dom";
 import { getUserPosts } from "@/apis/post.api";
+import { useQuery } from "@tanstack/react-query";
 
 interface SelectedUserPostsProp {
   userNickName: string;
 }
 
 const SelectedUserPosts: FC<SelectedUserPostsProp> = ({ userNickName }) => {
-  const [posts, setPosts] = useState<PostItem[]>([]);
-  const [totalPage, setTotalPage] = useState<number>(1);
   const [currentPage, setCurrentPage] = useState<number>(1);
-
   const navigate = useNavigate();
 
-  useEffect(() => {
-    userPosts();
-  }, [currentPage]);
+  const { data } = useQuery({
+    queryKey: ["userPosts", userNickName, currentPage],
+    queryFn: () => getUserPosts(userNickName!, currentPage),
+  });
 
-  const userPosts = async () => {
-    try {
-      const response = await getUserPosts(userNickName, currentPage);
-
-      if (response) {
-        setPosts(response.userPosts.posts || []);
-        setTotalPage(response.userPosts.totalPages);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const posts: PostItem[] = data?.userPosts.posts || [];
+  const totalPage: number = data?.userPosts.totalPages || 1;
 
   return (
     <Tabs.Root className={style.tabs_root}>

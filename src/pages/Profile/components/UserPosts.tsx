@@ -1,96 +1,37 @@
 import { Button, Tabs } from "@/components";
 import style from "../profile.module.css";
 import Pagination from "@/components/UI/Pagination";
-import { useEffect, useState } from "react";
-import { PostItem } from "@/types/post.type";
+import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 import { getLikePosts, getUserPosts } from "@/apis/post.api";
 import userAuthStore from "@/zustand/userAuth";
+import { useQuery } from "@tanstack/react-query";
+import { PostItem } from "@/types/post.type";
 
 const UserPosts = () => {
-  const [posts, setPosts] = useState<PostItem[]>([]);
-  const [totalPage, setTotalPage] = useState<number>(1);
-  const [likePosts, setLikePosts] = useState<PostItem[]>([]);
-  const [totalLikePage, setTotalLikePage] = useState<number>(1);
+  const { userNickName } = userAuthStore();
   const [currentPostsPage, setCurrentPostsPage] = useState<number>(1);
   const [currentLikePage, setCurrentLikePage] = useState<number>(1);
+  const { data } = useQuery({
+    queryKey: ["userPosts", currentPostsPage],
+    queryFn: () => getUserPosts(userNickName!, currentPostsPage),
+    staleTime: 1000 * 60 * 1,
+  });
+
+  const { data: likePostsData } = useQuery({
+    queryKey: ["userLikePosts", currentLikePage],
+    queryFn: () => getLikePosts(userNickName!, currentLikePage),
+    staleTime: 1000 * 60 * 1,
+  });
+
+  const posts: PostItem[] = data?.userPosts.posts || [];
+  const totalPage: number = data?.userPosts.totalPages || 1;
+  const likePosts: PostItem[] = likePostsData?.likePosts.posts || [];
+  const totalLikePage: number = likePostsData?.likePosts.totalPages || 1;
+
   const [activeIndex, setActiveIndex] = useState(1);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    userPosts();
-  }, []);
-
-  useEffect(() => {
-    userLikePosts();
-  }, []);
-
-  const { userNickName } = userAuthStore();
-
-  const userPosts = async () => {
-    try {
-      const response = await getUserPosts(userNickName!, currentPostsPage);
-
-      if (response) {
-        const resPosts = response.userPosts.posts || [];
-        setPosts(resPosts);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const userLikePosts = async () => {
-    try {
-      const response = await getLikePosts(userNickName!, currentLikePage);
-
-      if (response) {
-        const resPosts = response.likePosts.posts || [];
-        setLikePosts(resPosts);
-        setTotalLikePage(response.likePosts?.totalPages);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const userPostByPage = async (page: number) => {
-    try {
-      const response = await getLikePosts(userNickName!, page);
-
-      if (response) {
-        setPosts(response.userPosts?.posts || []);
-        setTotalPage(response.userPosts?.totalPages);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    if (currentPostsPage > 0) {
-      userPostByPage(currentPostsPage);
-    }
-  }, [currentPostsPage]);
-
-  const userLikePostByPage = async (page: number) => {
-    try {
-      const response = await getLikePosts(userNickName!, page);
-
-      if (response) {
-        setLikePosts(response.likePosts.posts || []);
-        setTotalLikePage(response.likePosts?.totalPages || 1);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useEffect(() => {
-    if (currentLikePage > 0) {
-      userLikePostByPage(currentLikePage);
-    }
-  }, [currentLikePage]);
 
   return (
     <Tabs.Root className={style.tabs_root}>
