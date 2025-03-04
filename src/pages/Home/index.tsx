@@ -49,7 +49,7 @@ const Home = () => {
           <Carousel.Indicator />
         </Carousel>
 
-        <Menu menuList={menuList} className={styles.homeMenu} />
+        <Menu menuList={menuList}/>
 
         <div className={styles.postSection}>
           <div

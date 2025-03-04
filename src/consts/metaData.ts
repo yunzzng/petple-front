@@ -39,10 +39,6 @@ export const mapCurrentPathToMetaTagInfo: Record<
     title: "PetPle | 반려동물 산책",
     description: "반려동물과 함께 산책할 수 있는 장소와 팁을 확인하세요.",
   },
-  "/petwalk/detail": {
-    title: "PetPle | 산책 상세",
-    description: "반려동물 산책 기록에 대한 상세 정보를 확인하세요.",
-  },
   "/profile": {
     title: "PetPle | 프로필",
     description: "내 프로필을 확인하고 수정하세요.",
@@ -74,4 +70,6 @@ export const dynamicPaths = [
   "/community/update/:id",
   "/chat/:nickname",
   "profile/:nickname",
+  "/petwalk/detail",
+  "/petplace/:id",
 ];

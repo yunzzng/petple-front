@@ -9,6 +9,7 @@ import { getPlaceDetail } from "@/apis/public.api";
 import CategoryButtons from "@/components/PlaceCategoryButtons";
 import { useEffect, useState } from "react";
 import { PlaceInfo } from "@/types/petApi.type";
+import { Helmet } from "react-helmet-async";
 
 const PetPlaceDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -39,6 +40,15 @@ const PetPlaceDetail = () => {
 
   return (
     <div className={styles.container}>
+      <Helmet>
+        <title>{`펫 플레이스: ${placeData.title ?? "장소"} | PetPle`}</title>
+        <meta
+          name="description"
+          content={`${
+            placeData.title ?? "장소"
+          }의 상세 정보를 확인할 수 있습니다.`}
+        />
+      </Helmet>
       <h2 className={styles.title}>전국 반려동물 동반 장소 찾기</h2>
 
       <CategoryButtons

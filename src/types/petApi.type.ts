@@ -29,6 +29,8 @@ export interface PlaceInfo {
   lng?: number;
   imageUrl?: string;
   tel?: string;
+  name?: string;
+  subImageUrl?: string;
 }
 
 export interface FoodService {
