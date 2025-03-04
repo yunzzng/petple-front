@@ -5,6 +5,7 @@ import { z } from "zod";
 export type ReplyType = {
   creatorId: string;
   name: string;
+  nickName: string;
   profileImage: string;
   email: string;
   description: string;
@@ -21,7 +22,7 @@ export type CommentType = {
     name: string;
     email: string;
     nickName: string;
-    image: string;
+    profileImage: string;
   };
   post: PostItem;
   description: string;
