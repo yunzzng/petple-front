@@ -1,12 +1,9 @@
-// import profileImg from "/images/profile.png";
 import { useForm } from "react-hook-form";
 import userAuthStore from "@/zustand/userAuth";
 import { Button } from "@/components";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import style from "@/pages/Profile/profile.module.css";
 import { imageUpload } from "@/utils/imageUpload";
-// import pencil from "/images/pencil.png";
-// import prev from "/images/prev.png";
 import { checkNickName, updateUserInfo } from "@/apis/profile.api";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { userSchema } from "@/consts/zodSchema";
@@ -26,11 +23,18 @@ const UserProfileForm = () => {
   const { userNickName, userImage, userEmail, userAddress } = userAuthStore();
   const { toast } = useToast();
 
-  const { handleSubmit, getValues, setValue, watch, reset } = useForm({
+  const {
+    handleSubmit,
+    getValues,
+    reset,
+    register,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       nickName: userNickName || "",
     },
     resolver: zodResolver(userSchema),
+    mode: "onBlur",
   });
 
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -66,10 +70,10 @@ const UserProfileForm = () => {
     }
   };
 
-  const handleChangeNickName = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue("nickName", e.target.value);
-    setIsNickNameConfirm(false);
-  };
+  // const handleChangeNickName = (e: ChangeEvent<HTMLInputElement>) => {
+  //   setValue("nickName", e.target.value);
+  //   setIsNickNameConfirm(false);
+  // };
 
   // 회원정보 수정
   const onSubmitUser = async () => {
@@ -126,6 +130,15 @@ const UserProfileForm = () => {
   // 닉네임 중복 확인
   const nickNameConfirm = async () => {
     const nickName = getValues("nickName");
+    if (nickName.length > 10) {
+      setIsNickNameConfirm(false);
+      setConfirmedNickName(null);
+      toast({
+        type: "ERROR",
+        description: "닉네임은 10글자 이하로 입력해주세요.",
+      });
+      return;
+    }
 
     if (nickName === userNickName) {
       setIsNickNameConfirm(true);
@@ -200,10 +213,9 @@ const UserProfileForm = () => {
             <label>닉네임</label>
             <div className={style.nickName_div}>
               <input
+                {...register("nickName")}
                 className={style.input}
-                value={watch("nickName")}
                 placeholder="닉네임은 1글자 이상, 10글자 이하"
-                onChange={handleChangeNickName}
               />
               <Button
                 type="button"
@@ -213,6 +225,9 @@ const UserProfileForm = () => {
                 중복확인
               </Button>
             </div>
+            {errors.nickName && (
+              <p className={style.error}>{errors.nickName.message}</p>
+            )}
           </li>
           <li className={style.nickname_wrap}>
             <label>주소</label>
@@ -221,6 +236,7 @@ const UserProfileForm = () => {
                 value={selectedAddress.jibunAddress}
                 className={style.input}
                 onClick={handleOpenModal}
+                readOnly
               />
               <AddressForm
                 closeModal={handleCloseModal}
