@@ -21,7 +21,7 @@ const Menu = ({ menuList, className }: MenuProps) => {
   }, [className]);
 
   return (
-    <div className={`${styles.petMenuSection} ${className || ""}`}>
+    <>
       <ul className={menuCls}>
         {menuList.map((item: MenuItem) => (
           <li key={item.id} className={styles.menuItem}>
@@ -29,7 +29,7 @@ const Menu = ({ menuList, className }: MenuProps) => {
           </li>
         ))}
       </ul>
-    </div>
+    </>
   );
 };
 
