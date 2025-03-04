@@ -21,7 +21,7 @@ export type CommentType = {
     name: string;
     email: string;
     nickName: string;
-    image: string;
+    profileImage: string;
   };
   post: PostItem;
   description: string;
