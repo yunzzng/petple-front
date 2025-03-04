@@ -47,7 +47,7 @@ const UserPosts = () => {
       if (response) {
         const resPosts = response.likePosts.posts || [];
         setLikePosts(resPosts);
-        setTotalLikePage(response.likePosts.totalPages);
+        setTotalLikePage(response.likePosts?.totalPages);
       }
     } catch (error) {
       console.error(error);
@@ -60,7 +60,7 @@ const UserPosts = () => {
 
       if (response) {
         setPosts(response.userPosts?.posts || []);
-        setTotalPage(response.userPosts.totalPages);
+        setTotalPage(response.userPosts?.totalPages);
       }
     } catch (error) {
       console.error(error);
@@ -79,7 +79,7 @@ const UserPosts = () => {
 
       if (response) {
         setLikePosts(response.likePosts.posts || []);
-        setTotalLikePage(response.likePosts.totalPages || 1);
+        setTotalLikePage(response.likePosts?.totalPages || 1);
       }
     } catch (error) {
       console.error(error);
