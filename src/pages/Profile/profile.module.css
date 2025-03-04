@@ -50,6 +50,15 @@
   border-radius: 100px;
 }
 
+.img:hover {
+  opacity: 0.5;
+  content: url("/images/unsplash.png");
+  width: 70px;
+  height: 70px;
+  transition: opacity 5sease;
+  cursor: pointer;
+}
+
 .prev {
   width: 15px;
 }
