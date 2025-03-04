@@ -36,6 +36,8 @@ const PopularPosts = () => {
               <img src={post.images[0]} alt="게시물 대표 이미지" />
             </div>
             <div className={styles.post_item_info}>
+              <span className={styles.nickname}>{post.creator.nickName}</span>
+
               <ul className={styles.tag_wrapper}>
                 {post.tags.map((tag, index) => (
                   <li className={styles.tag} key={`tag-item-${index}`}>
@@ -44,8 +46,8 @@ const PopularPosts = () => {
                 ))}
               </ul>
               <p className={styles.description}>{post.description}</p>
+
               <div className={styles.post_item_bottom}>
-                <span className={styles.nickname}>{post.creator.nickName}</span>
                 <span className={styles.createdAt}>
                   <ClockIcon className={styles.icon} />
                   {new Date(post.createdAt).toLocaleDateString()}
