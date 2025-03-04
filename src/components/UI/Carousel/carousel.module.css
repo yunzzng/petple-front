@@ -43,8 +43,9 @@
 .carouselIndicator {
   position: absolute;
   bottom: 20px;
-  left: 43%;
+  width: 100%;
   display: flex;
+  justify-content: center;
   gap: 8px;
 }
 

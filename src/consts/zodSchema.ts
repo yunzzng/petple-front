@@ -23,7 +23,7 @@ export const userSchema = z.object({
   nickName: z
     .string()
     .min(1, "닉네임을 입력해주세요.")
-    .max(20, "닉네임은 10글자 이하로 입력해주세요."),
+    .max(10, "닉네임은 10글자 이하로 입력해주세요."),
 });
 
 export const postFormSchema = z.object({

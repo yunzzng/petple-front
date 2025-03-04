@@ -66,6 +66,7 @@ const PostHeader = (
   const navigate = useNavigate();
   const { userId } = userAuthStore();
   const { creator, tags, createdAt, commentsCount, likesCount, postId } = data;
+
   const isEditablePost = useMemo(
     () => location.pathname.includes("post") && creator._id === userId,
     [location]
@@ -76,6 +77,7 @@ const PostHeader = (
       navigate("/community");
     },
   });
+
   return (
     <div className={styles.post_header}>
       <div className={styles.post_header_top}>

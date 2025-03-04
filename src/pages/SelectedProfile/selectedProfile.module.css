@@ -1,0 +1,172 @@
+.img {
+  width: 60px;
+  height: 60px;
+  border-radius: 100px;
+}
+
+.pet_ul {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+  gap: 20px;
+}
+
+.tabs_root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 320px;
+}
+
+.tabs_menulist {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0px;
+  border-bottom: 1px solid;
+  width: 100%;
+}
+
+.tabs_menulist p {
+  font-weight: bold;
+}
+
+.tabs_button {
+  height: 28px;
+  width: 150px;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+  color: #000;
+  box-shadow: 0px 2px 3px 0px #dddddd;
+}
+
+.tabs_button:hover {
+  color: #fff;
+}
+
+.tabs_img {
+  width: 100%;
+  height: 100%;
+}
+
+.pennel_div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 320px;
+  place-items: start;
+}
+
+.pennel_div p {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+  color: #7c7c7c;
+}
+
+.pennel_img_div {
+  width: 106.5px;
+  height: 106.5px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.pennel_img {
+  width: 100%;
+  height: 100%;
+}
+
+.pennel_img_div::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.pennel_img_div:hover::before {
+  opacity: 1;
+}
+
+.info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+
+.pennel_img_div:hover .info {
+  opacity: 1;
+}
+
+.comment {
+  display: flex;
+  gap: 5px;
+}
+
+.likes {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.comment img,
+.likes img {
+  width: 16px;
+  height: 16px;
+}
+
+.pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.pagination_container {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.carousel {
+  height: 100%;
+}
+
+.indicator {
+  bottom: 0px;
+}
+
+.carouselIndicator button {
+  padding: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #93c9ff;
+  border: none;
+  cursor: pointer;
+}
+
+.carouselIndicator button.active {
+  background-color: #002daa;
+}

@@ -34,6 +34,15 @@ export type AuthStore = {
   setUserAddress: (address: AddressType) => void;
 };
 
+export type SelectedUser = {
+  userNickName?: string | null;
+  setUserNickName?: (nickName: string) => void;
+  profileImage?: string | null;
+  setProfileImage?: (image: string) => void;
+  userPet?: Pet[] | null;
+  setUserPet: (pets: Pet[]) => void;
+};
+
 export interface AddressType {
   jibunAddress: string;
   location: {

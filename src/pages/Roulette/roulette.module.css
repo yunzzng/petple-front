@@ -216,7 +216,8 @@
   left: 50%;
   bottom: 50%;
   width: 2px;
-
+  display: flex;
+  justify-content: center;
   background-color: #000;
   transform-origin: bottom;
   transform: rotate(60deg);
@@ -328,4 +329,11 @@
   justify-content: right;
   padding: 10px 20px;
   margin-right: 20px;
+}
+
+.description {
+  font-size: 12px;
+  line-height: 1.4rem;
+  color: #444;
+  padding: 0px 20px;
 }

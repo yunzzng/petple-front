@@ -56,6 +56,26 @@ const deletePostById = async (id: string) => {
   }
 };
 
+const getUserPosts = async (nickName: string, page: number) => {
+  try {
+    const response = await baseInstance.get(`/posts/${nickName}?page=${page}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const getLikePosts = async (nickName: string, page: number) => {
+  try {
+    const response = await baseInstance.get(
+      `/posts/like/${nickName}?page=${page}`
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export {
   addPost,
   getPostById,
@@ -63,4 +83,6 @@ export {
   deletePostById,
   getPosts,
   getPopularPost,
+  getUserPosts,
+  getLikePosts,
 };

@@ -23,6 +23,7 @@ const CreatePetProfile = lazy(() => import("@/pages/CreatePetProfile"));
 const PetFriendsPage = lazy(() => import("@/pages/PetFriends"));
 const ChatPage = lazy(() => import("@/pages/Chat"));
 const Menu = lazy(() => import("@/pages/Menu"));
+const SelectedProfile = lazy(() => import("@/pages/SelectedProfile"));
 
 const qc = new QueryClient();
 
@@ -141,6 +142,14 @@ const router = createBrowserRouter([
               <ProfilePage />
             </Suspense>
           </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/profile/:nickname",
+        element: (
+          <Suspense fallback={<Loading />}>
+            <SelectedProfile />
+          </Suspense>
         ),
       },
       {

@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import style from "./petForm.module.css";
-import Button from "../UI/Button";
+import Button from "../../../components/UI/Button";
 import userAuthStore from "@/zustand/userAuth";
 import { ChangeEvent, FC, useRef, useState } from "react";
 import { imageUpload } from "@/utils/imageUpload";
@@ -8,7 +8,7 @@ import { Pet } from "@/types/user.type";
 import { deletePet, updatePetInfo } from "@/apis/profile.api";
 import { petSchema } from "@/consts/zodSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import useToast from "../UI/Toast/hooks/useToast";
+import useToast from "../../../components/UI/Toast/hooks/useToast";
 
 interface PetInfoProps {
   name?: string;
@@ -104,16 +104,16 @@ const PetForm: FC<PetInfoProps> = (props) => {
       const deletedPet = await deletePet(userId!, _id!);
 
       if (deletedPet) {
-        toast({
-          type: "INFO",
-          description: "반려동물 프로필이 삭제되었습니다.",
-        });
-
         const updateList = userPet?.filter((pet) => pet._id !== _id);
         if (updateList) {
           setUserPet(updateList);
           window.location.reload();
         }
+
+        // toast({
+        //   type: "INFO",
+        //   description: "반려동물 프로필이 삭제되었습니다.",
+        // });
       }
     } catch (error) {
       console.error("반려동물 정보 삭제 실패", error);

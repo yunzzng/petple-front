@@ -56,9 +56,19 @@ const Roulette = () => {
     <div className={style.roulette_total_wrap}>
       <div className={style.roulette_content}>
         <h1 className={style.h1}>🫧 펫네임 랜덤룰렛 🫧</h1>
+        <div>
+          <p className={style.description}>
+            나의 반려동물은 어떤 이름이 어울릴까? 🤔
+            <br />
+            펫플이 추천하는 이름을 확인해보세요!
+            <br />
+            선택한 색상에 어울리는 이름 or 펫플이 엄선한 랜덤이름을 추천해드려요
+            🌈
+          </p>
+        </div>
         <div className={style.color_wrap}>
           <div className={style.colorPick}>
-            <p>나의 반려동물 색상은 👉</p>
+            <p>나의 반려동물 색상 선택하기 👉</p>
             <p>{color}</p>
           </div>
           <div className={style.button_wrap}>
