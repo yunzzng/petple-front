@@ -27,6 +27,9 @@ const Post = ({ post }: PostProps) => {
 
   const { mutate: updateLikesMutate } = useMutation({
     mutationFn: updateLikes,
+    onSuccess: () => {
+      qc.invalidateQueries({ queryKey: ["userLikePosts"] });
+    },
     onMutate: ({ likeStatus, postId }) => {
       const prevPosts = qc.getQueryData(["posts"]);
 

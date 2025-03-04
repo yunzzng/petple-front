@@ -72,8 +72,6 @@ export const RoulleteName = {
   ],
   common: [
     "모찌",
-    "봄이",
-    "여름이",
     "우주",
     "달이",
     "별이",

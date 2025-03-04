@@ -1,8 +1,8 @@
 import { useState } from "react";
 import style from "./roulette.module.css";
 import { Button, Modal } from "@/components";
-import { getRandomName } from "./roulleteName";
-import { RoulleteName } from "./roulleteName";
+import { getRandomName } from "../../consts/roulleteName";
+import { RoulleteName } from "../../consts/roulleteName";
 
 const Roulette = () => {
   const [color, setColor] = useState<keyof typeof RoulleteName>("black");
