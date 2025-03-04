@@ -28,24 +28,26 @@ const CommunityPost = ({ post }: PostProps) => {
           likesCount={likes.length}
           postId={_id}
         />
-        <Carousel>
-          <Carousel.ItemList>
-            {images.map((src, index) => (
-              <Carousel.Item key={index} index={index}>
-                <div className={styles.post_image_container}>
-                  <img
-                    src={src}
-                    alt="게시글 이미지"
-                    key={index}
-                    className={styles.post_image}
-                  />
-                </div>
-              </Carousel.Item>
-            ))}
-          </Carousel.ItemList>
-          <Carousel.Indicator />
-          <Carousel.Navigator />
-        </Carousel>
+        {images.length > 0 && (
+          <Carousel>
+            <Carousel.ItemList>
+              {images.map((src, index) => (
+                <Carousel.Item key={index} index={index}>
+                  <div className={styles.post_image_container}>
+                    <img
+                      src={src}
+                      alt="게시글 이미지"
+                      key={index}
+                      className={styles.post_image}
+                    />
+                  </div>
+                </Carousel.Item>
+              ))}
+            </Carousel.ItemList>
+            <Carousel.Indicator />
+            <Carousel.Navigator />
+          </Carousel>
+        )}
       </div>
     </>
   );
