@@ -41,6 +41,7 @@ const CommentItem = ({ comment }: CommentItemProps) => {
           <Avartar
             image={comment.creator.profileImage}
             className={styles.avatar}
+            creator={creator}
           />
           <div className={styles.main_wrapper}>
             <p>
