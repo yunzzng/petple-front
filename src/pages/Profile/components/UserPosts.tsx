@@ -3,59 +3,123 @@ import style from "../profile.module.css";
 import Pagination from "@/components/UI/Pagination";
 import { useEffect, useState } from "react";
 import { PostItem } from "@/types/post.type";
-import usePagination from "@/components/UI/Pagination/hooks/usePaginationData";
-import { getMyPosts } from "@/apis/profile.api";
 import { useNavigate } from "react-router-dom";
+import { getLikePosts, getUserPosts } from "@/apis/post.api";
+import userAuthStore from "@/zustand/userAuth";
 
 const UserPosts = () => {
   const [posts, setPosts] = useState<PostItem[]>([]);
+  const [totalPage, setTotalPage] = useState<number>(1);
   const [likePosts, setLikePosts] = useState<PostItem[]>([]);
-  const {
-    page,
-    setPage,
-    paginatedData: paginatedPosts,
-    totalPages,
-  } = usePagination(posts);
-  const {
-    page: likePage,
-    setPage: setLikePage,
-    paginatedData: paginatedLikePosts,
-    totalPages: likeTotalPages,
-  } = usePagination(likePosts);
+  const [totalLikePage, setTotalLikePage] = useState<number>(1);
+  const [currentPostsPage, setCurrentPostsPage] = useState<number>(1);
+  const [currentLikePage, setCurrentLikePage] = useState<number>(1);
+  const [activeIndex, setActiveIndex] = useState(1);
   const navigate = useNavigate();
 
   useEffect(() => {
-    getPosts();
+    userPosts();
   }, []);
 
-  //게시물 가져오기
-  const getPosts = async () => {
+  useEffect(() => {
+    userLikePosts();
+  }, []);
+
+  const { userNickName } = userAuthStore();
+
+  const userPosts = async () => {
     try {
-      const response = await getMyPosts();
+      const response = await getUserPosts(userNickName!, currentPostsPage);
+
       if (response) {
-        const likePosts = response.likePosts || [];
-        const myPosts = response.posts || [];
-        setPosts(myPosts);
-        setLikePosts(likePosts);
+        const resPosts = response.userPosts.posts || [];
+        setPosts(resPosts);
       }
     } catch (error) {
       console.error(error);
     }
   };
+
+  const userLikePosts = async () => {
+    try {
+      const response = await getLikePosts(userNickName!, currentLikePage);
+
+      if (response) {
+        const resPosts = response.likePosts.posts || [];
+        setLikePosts(resPosts);
+        setTotalLikePage(response.likePosts.totalPages);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const userPostByPage = async (page: number) => {
+    try {
+      const response = await getLikePosts(userNickName!, page);
+
+      if (response) {
+        setPosts(response.userPosts.posts || []);
+        setTotalPage(response.userPosts.totalPages || 1);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (currentPostsPage > 0) {
+      userPostByPage(currentPostsPage);
+    }
+  }, [currentPostsPage]);
+
+  const userLikePostByPage = async (page: number) => {
+    try {
+      const response = await getLikePosts(userNickName!, page);
+
+      if (response) {
+        setLikePosts(response.likePosts.posts || []);
+        setTotalLikePage(response.likePosts.totalPages || 1);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (currentLikePage > 0) {
+      userLikePostByPage(currentLikePage);
+    }
+  }, [currentLikePage]);
+
   return (
     <Tabs.Root className={style.tabs_root}>
       <Tabs.MenuList className={style.tabs_menulist}>
         <Tabs.Menu index={1}>
-          <Button className={style.tabs_button}>작성한 게시글</Button>
+          <Button
+            className={`${style.tabs_button} ${
+              activeIndex === 1 ? style.active : ""
+            }`}
+            onClick={() => setActiveIndex(1)}
+          >
+            작성한 게시글
+          </Button>
         </Tabs.Menu>
         <Tabs.Menu index={2}>
-          <Button className={style.tabs_button}>좋아요 게시글</Button>
+          <Button
+            className={`${style.tabs_button} ${
+              activeIndex === 2 ? style.active : ""
+            }`}
+            onClick={() => setActiveIndex(2)}
+          >
+            좋아요 게시글
+          </Button>
         </Tabs.Menu>
       </Tabs.MenuList>
       <Tabs.MenuList>
         <Tabs.Pannel index={1} className={style.pennel_div}>
-          {paginatedPosts.length > 0 ? (
-            paginatedPosts.map((post) => (
+          {posts.length > 0 ? (
+            posts.map((post) => (
               <div
                 key={post._id}
                 className={style.pennel_img_div}
@@ -81,13 +145,13 @@ const UserPosts = () => {
           ) : (
             <p>작성한 게시글이 없습니다.</p>
           )}
-          {paginatedPosts.length > 0 && (
+          {posts.length > 0 && (
             <Pagination
-              page={page}
-              totalPages={totalPages}
+              page={currentPostsPage}
+              totalPages={totalPage}
               startPage={1}
-              endPage={totalPages}
-              setPage={setPage}
+              endPage={totalPage}
+              setPage={setCurrentPostsPage}
               className={style.pagination}
             >
               <Pagination.Navigator type="prev" />
@@ -98,8 +162,8 @@ const UserPosts = () => {
         </Tabs.Pannel>
 
         <Tabs.Pannel index={2} className={style.pennel_div}>
-          {paginatedLikePosts.length > 0 ? (
-            paginatedLikePosts.map((post) => (
+          {likePosts.length > 0 ? (
+            likePosts.map((post) => (
               <div
                 key={post._id}
                 className={style.pennel_img_div}
@@ -128,13 +192,14 @@ const UserPosts = () => {
           ) : (
             <p>게시글이 없습니다.</p>
           )}
-          {paginatedLikePosts.length > 0 && (
+          {likePosts.length > 0 && (
             <Pagination
-              page={likePage}
-              totalPages={likeTotalPages}
+              page={currentLikePage}
+              totalPages={totalLikePage}
               startPage={1}
-              endPage={likeTotalPages}
-              setPage={setLikePage}
+              endPage={totalLikePage}
+              setPage={setCurrentLikePage}
+              className={style.pagination}
             >
               <Pagination.Navigator type="prev" />
               <Pagination.PageButtons />
