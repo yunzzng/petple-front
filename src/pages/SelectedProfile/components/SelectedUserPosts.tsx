@@ -18,6 +18,7 @@ const SelectedUserPosts: FC<SelectedUserPostsProp> = ({ userNickName }) => {
   const { data } = useQuery({
     queryKey: ["userPosts", userNickName, currentPage],
     queryFn: () => getUserPosts(userNickName!, currentPage),
+    staleTime: 1000 * 60 * 1,
   });
 
   const posts: PostItem[] = data?.userPosts.posts || [];
