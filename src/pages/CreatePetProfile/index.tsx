@@ -11,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { petSchema } from "@/consts/zodSchema";
 import { z } from "zod";
 import { createPet } from "@/apis/profile.api";
+import useToast from "@/components/UI/Toast/hooks/useToast";
 
 const petDefaultValues = {
   name: "",
@@ -35,6 +36,8 @@ const CreatePetProfile = () => {
     mode: "onBlur",
   });
 
+  const { toast } = useToast();
+
   const handleClickFile = () => {
     fileInputRef?.current?.click();
   };
@@ -53,7 +56,10 @@ const CreatePetProfile = () => {
     let imageUrl = "";
 
     if (!file) {
-      alert("이미지를 선택해주세요.");
+      toast({
+        type: "ERROR",
+        description: "이미지를 선택해주세요.",
+      });
       return;
     }
 
@@ -63,7 +69,11 @@ const CreatePetProfile = () => {
       const response = await createPet(userId!, petData, imageUrl);
 
       if (response) {
-        alert("반려동물 프로필이 저장되었습니다.");
+        toast({
+          type: "SUCCESS",
+          description: "반려동물 프로필이 저장되었습니다.",
+        });
+
         navigate("/profile");
 
         const newPet = {
