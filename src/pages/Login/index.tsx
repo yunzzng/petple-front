@@ -1,4 +1,5 @@
 import style from "./signup.module.css";
+import Kakao from "@/assets/icons/btn_kakao.svg?react";
 
 const Login = () => {
   const handleGoogleLogin = () => {
@@ -26,11 +27,7 @@ const Login = () => {
               />
             </a>
             <a onClick={handleKakaoLogin}>
-              <img
-                src={"/images/icons/btn_kakao.svg"}
-                className={style.img}
-                alt="카카오톡 로그인"
-              />
+              <Kakao className={style.img} />
             </a>
             <a onClick={handleNaverLogin}>
               <img
