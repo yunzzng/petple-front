@@ -34,3 +34,7 @@ export const postFormSchema = z.object({
   images: z.array(z.union([z.string(), z.instanceof(File)])),
   description: z.string().trim().min(1, "내용을 입력해주세요."),
 });
+
+export const CommentSchema = z.object({
+  description: z.string().trim().min(1, "내용을 입력해주세요."),
+});

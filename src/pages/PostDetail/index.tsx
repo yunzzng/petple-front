@@ -10,7 +10,6 @@ import { useParams } from "react-router-dom";
 import Comment from "./components/Comment";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components";
-import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   addComment,
@@ -21,7 +20,12 @@ import {
   updateReply,
 } from "@/apis/comment.api";
 import { useMemo, useState } from "react";
-import { CommentType, ReplyType } from "@/types/post.type";
+import {
+  CommentFormFields,
+  CommentSubmitType,
+  CommentType,
+  ReplyType,
+} from "@/types/post.type";
 import userAuthStore from "@/zustand/userAuth";
 import LikeButton from "../../components/LikeButton/LikeButton";
 import Header from "@/components/Header";
@@ -29,21 +33,13 @@ import { AxiosError } from "axios";
 import { updateLikes } from "@/apis/like.api";
 import useToast from "@/components/UI/Toast/hooks/useToast";
 import { Helmet } from "react-helmet-async";
+import { CommentSchema } from "@/consts/zodSchema";
 
-const CommentSchema = z.object({
-  description: z.string().trim().min(1, "내용을 입력해주세요."),
-});
-
-type CommentFormFields = z.infer<typeof CommentSchema>;
-type SubmitType =
-  | "ADD_COMMENT"
-  | "UPDATE_COMMENT"
-  | "ADD_REPLY"
-  | "UPDATE_REPLY";
 const PostDetailPage = () => {
   const [targetComment, setTargetComment] = useState<CommentType | null>(null);
   const [targetReply, setTargetReply] = useState<ReplyType | null>(null);
-  const [submitType, setSubmitType] = useState<SubmitType>("ADD_COMMENT");
+  const [submitType, setSubmitType] =
+    useState<CommentSubmitType>("ADD_COMMENT");
   const { toast } = useToast();
   const qc = useQueryClient();
   const user = userAuthStore();
