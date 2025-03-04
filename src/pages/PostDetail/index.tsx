@@ -37,7 +37,7 @@ const PostDetailPage = () => {
   const { mutate: updateLikesMutate } = useMutation({
     mutationFn: updateLikes,
     onSuccess: () => {
-      inValidateQuery();
+      qc.invalidateQueries({ queryKey: ["userLikePosts"] });
     },
     onError: (error: AxiosError) => {
       if (error.status === 401) {
