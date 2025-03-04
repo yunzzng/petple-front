@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-// import logo from "/images/logo.png";
 import style from "./header.module.css";
 import userAuthStore from "@/zustand/userAuth";
 import { useQueryClient } from "@tanstack/react-query";
@@ -55,7 +54,7 @@ const Header = () => {
               <li>
                 <Avartar
                   onClick={() => navigate("/profile")}
-                  image={userImage}
+                  image={userImage!}
                   className={style.avartar}
                 />
               </li>
