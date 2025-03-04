@@ -3,6 +3,6 @@ export const config = {
     backendUrl:
       import.meta.env.MODE === "development"
         ? "http://localhost:3000"
-        : "https://34.47.125.88/socket-chat",
+        : "https://kdt-react-2-team01.elicecoding.com/socket-chat",
   },
 };
