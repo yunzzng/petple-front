@@ -8,9 +8,10 @@ import usePagination from "@/components/UI/Pagination/hooks/usePaginationData";
 import { useEffect } from "react";
 import useToast from "@/components/UI/Toast/hooks/useToast";
 import Pagination from "@/components/UI/Pagination";
+import { Helmet } from "react-helmet-async";
 
 const PetWalkDetail = () => {
-  const { userId } = userAuthStore();
+  const { userId, userNickName } = userAuthStore();
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -35,7 +36,19 @@ const PetWalkDetail = () => {
 
   return (
     <div className={styles.cardContainer}>
+      <Helmet>
+        <title>{`${
+          userNickName ?? "사용자"
+        }님의 펫워크 | PetPle`}</title>
+        <meta
+          name="description"
+          content={`${
+            userNickName ?? "사용자"
+          }님의 반려동물 산책 기록을 확인할 수 있습니다.`}
+        />
+      </Helmet>
       <h2 className={styles.title}>펫워크 기록 🐾</h2>
+
       <Button onClick={() => navigate(-1)} className={styles.backButton}>
         ◀ 산책 하러가기
       </Button>
@@ -48,7 +61,7 @@ const PetWalkDetail = () => {
                   src={walk.userProfileImage || "/images/profile.png"}
                   alt="사용자 프로필"
                   className={styles.userImage}
-                />{" "}
+                />
                 🩷
                 <img
                   src={walk.petImage || "/images/pet.png"}
