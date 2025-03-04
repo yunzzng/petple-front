@@ -23,7 +23,7 @@ import {
 import { useMemo, useState } from "react";
 import { CommentType, ReplyType } from "@/types/post.type";
 import userAuthStore from "@/zustand/userAuth";
-import LikeButton from "./components/LikeButton";
+import LikeButton from "../../components/LikeButton/LikeButton";
 import Header from "@/components/Header";
 import { AxiosError } from "axios";
 import { updateLikes } from "@/apis/like.api";
