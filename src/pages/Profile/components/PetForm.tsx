@@ -91,7 +91,7 @@ const PetForm: FC<PetInfoProps> = (props) => {
         });
 
         toast({
-          type: "INFO",
+          type: "SUCCESS",
           description: "반려동물 프로필이 업데이트되었습니다.",
         });
         setEdit(false);

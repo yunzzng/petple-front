@@ -254,7 +254,7 @@ const UserProfileForm = () => {
         <ul className={style.userUl}>
           <div className={style.userUl_div}>
             <img
-              src={userImage || ""}
+              src={previewImg}
               className={style.basic_img}
               alt="프로필 이미지"
             />
