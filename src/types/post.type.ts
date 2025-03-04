@@ -1,10 +1,11 @@
-import { postFormSchema } from "@/consts/zodSchema";
+import { CommentSchema, postFormSchema } from "@/consts/zodSchema";
 import { z } from "zod";
 
 /* Post comment type */
 export type ReplyType = {
   creatorId: string;
   name: string;
+  nickName: string;
   profileImage: string;
   email: string;
   description: string;
@@ -51,4 +52,11 @@ export type PostItem = PostFormData & {
   createdAt: Date;
 };
 
+export type CommentSubmitType =
+  | "ADD_COMMENT"
+  | "UPDATE_COMMENT"
+  | "ADD_REPLY"
+  | "UPDATE_REPLY";
+
 export type PostFormFields = z.infer<typeof postFormSchema>;
+export type CommentFormFields = z.infer<typeof CommentSchema>;

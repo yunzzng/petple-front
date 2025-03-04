@@ -197,6 +197,7 @@ const router = createBrowserRouter([
         <PostDetailPage />
       </Suspense>
     ),
+    loader: () => getUserInfoLoader(qc),
   },
   {
     path: "/chat/:nickname",

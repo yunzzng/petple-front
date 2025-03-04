@@ -33,7 +33,10 @@ const PopularPosts = () => {
           >
             <div className={styles.rank}>{convertRankToEmoji(key + 1)}</div>
             <div className={styles.post_item_img_container}>
-              <img src={post.images[0]} alt="게시물 대표 이미지" />
+              <img
+                src={post.images[0] || "/images/loadingImage.svg"}
+                alt="게시물 대표 이미지"
+              />
             </div>
             <div className={styles.post_item_info}>
               <span className={styles.nickname}>{post.creator.nickName}</span>
