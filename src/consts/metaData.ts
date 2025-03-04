@@ -47,6 +47,10 @@ export const mapCurrentPathToMetaTagInfo: Record<
     title: "PetPle | 프로필",
     description: "내 프로필을 확인하고 수정하세요.",
   },
+  "/profile/:nickname": {
+    title: "PetPle | 선택한 유저 프로필",
+    description: "다른 유저의 프로필을 확인해보세요.",
+  },
   "/createpet": {
     title: "PetPle | 반려동물 프로필 생성",
     description: "반려동물의 프로필을 생성하고 관리하세요.",
