@@ -1,7 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import BaseLayout from "@/components/Layout";
-import { PetPlaceDetail, PetWalk, PetWalkDetail, Roulette } from "@/pages";
 import ProtectedRoute from "@/components/Router/components/ProtectedRoute";
 import Loading from "@/components/Loading";
 import getUserInfoLoader from "./loader/getUserInfo.loader";
@@ -11,8 +10,11 @@ const ErrorPage = lazy(() => import("@/pages/Error"));
 const HomePage = lazy(() => import("@/pages/Home"));
 const PetMedicalPage = lazy(() => import("@/pages/PetMedical"));
 const PetPlacePage = lazy(() => import("@/pages/PetPlace"));
+const PetPlaceDetailPage = lazy(() => import("@/pages/PetPlaceDetail"));
 const PetFoodPage = lazy(() => import("@/pages/PetFood"));
 const PetFuneralPage = lazy(() => import("@/pages/PetFuneral"));
+const PetPetWalkPage = lazy(() => import("@/pages/PetWalk"));
+const PetPetWalkDetailPage = lazy(() => import("@/pages/PetwalkDetail"));
 const PostCreatePage = lazy(() => import("@/pages/PostCreate"));
 const PostDetailPage = lazy(() => import("@/pages/PostDetail"));
 const PostUpdatePage = lazy(() => import("@/pages/PostUpdate"));
@@ -24,6 +26,7 @@ const PetFriendsPage = lazy(() => import("@/pages/PetFriends"));
 const ChatPage = lazy(() => import("@/pages/Chat"));
 const Menu = lazy(() => import("@/pages/Menu"));
 const SelectedProfile = lazy(() => import("@/pages/SelectedProfile"));
+const RoulettePage = lazy(() => import("@/pages/Roulette"));
 
 const qc = new QueryClient();
 
@@ -100,7 +103,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/petplace/:id",
-        element: <PetPlaceDetail />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <PetPlaceDetailPage />
+          </Suspense>
+        ),
       },
       {
         path: "/petfuneral",
@@ -122,7 +129,7 @@ const router = createBrowserRouter([
         path: "/petwalk",
         element: (
           <Suspense fallback={<Loading />}>
-            <PetWalk />
+            <PetPetWalkPage />
           </Suspense>
         ),
       },
@@ -130,7 +137,7 @@ const router = createBrowserRouter([
         path: "/petwalk/detail",
         element: (
           <Suspense fallback={<Loading />}>
-            <PetWalkDetail />
+            <PetPetWalkDetailPage />
           </Suspense>
         ),
       },
@@ -176,7 +183,7 @@ const router = createBrowserRouter([
         path: "/roulette",
         element: (
           <Suspense fallback={<Loading />}>
-            <Roulette />
+            <RoulettePage />
           </Suspense>
         ),
       },

@@ -118,13 +118,13 @@ const UserPosts = () => {
                 <div className={style.info}>
                   <div className={style.comment}>
                     <img
-                      src={"/images/icons/comment.svg"}
+                      src={"/images/comment_white.png"}
                       alt="게시물 이미지"
                     />
                     {post.comments.length}
                   </div>
                   <div className={style.likes}>
-                    <img src={"/images/icons/like.svg"} alt="게시물 댓글" />
+                    <img src={"/images/like_white.png"} alt="게시물 댓글" />
                     {post.likes.length}
                   </div>
                 </div>
