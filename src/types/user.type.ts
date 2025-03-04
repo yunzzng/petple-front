@@ -1,3 +1,5 @@
+import { PostItem } from "./post.type";
+
 export type Pet = {
   _id?: string;
   age: string;
@@ -84,4 +86,18 @@ export type PetType = {
   image: string;
   breed: string;
   _id: string;
+};
+
+export type userPostsResponse = {
+  userPosts: {
+    posts: PostItem[];
+    totalPages: number;
+  };
+};
+
+export type LikePostsResponse = {
+  likePosts: {
+    posts: PostItem[];
+    totalPages: number;
+  };
 };
