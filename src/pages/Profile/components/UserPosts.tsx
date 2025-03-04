@@ -59,8 +59,8 @@ const UserPosts = () => {
       const response = await getLikePosts(userNickName!, page);
 
       if (response) {
-        setPosts(response.userPosts.posts || []);
-        setTotalPage(response.userPosts.totalPages || 1);
+        setPosts(response.userPosts?.posts || []);
+        setTotalPage(response.userPosts.totalPages);
       }
     } catch (error) {
       console.error(error);
