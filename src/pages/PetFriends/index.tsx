@@ -176,7 +176,7 @@ const createCustomOverlayMarker = (
 
   const label = document.createElement("div");
   label.className = "marker-label";
-  label.innerText = user.userPet[0]?.name || user.name;
+  label.innerText = user.userPet[0]?.name || user.nickName;
 
   wrapper.onclick = () => handleClickMarker(user);
 
