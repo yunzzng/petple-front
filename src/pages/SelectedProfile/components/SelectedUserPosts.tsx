@@ -40,11 +40,15 @@ const SelectedUserPosts: FC<SelectedUserPostsProp> = ({ userNickName }) => {
                 className={style.pennel_img_div}
                 onClick={() => navigate(`/community/post/${post._id}`)}
               >
-                <img
-                  src={post.images[0]}
-                  className={style.tabs_img}
-                  alt="내 게시물 이미지"
-                />
+                {post.images.length > 0 ? (
+                  <img
+                    src={post.images[0]}
+                    className={style.tabs_img}
+                    alt="내 게시물 이미지"
+                  />
+                ) : (
+                  <div className={style.tabs_img}>{post.description}</div>
+                )}
                 <div className={style.info}>
                   <div className={style.comment}>
                     <img src={"/images/comment_white.png"} alt="게시물 댓글" />
