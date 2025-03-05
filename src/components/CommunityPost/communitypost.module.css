@@ -106,3 +106,29 @@
   font-size: 14px;
   cursor: pointer;
 }
+
+.back_button {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.back_button img {
+  width: 18px;
+  height: 18px;
+  opacity: 0.8;
+}
+
+.back_button:hover img {
+  opacity: 1;
+}
+
+.back_button:active {
+  transform: scale(0.95);
+}

@@ -18,6 +18,7 @@ const ChatPage = () => {
   } = useSuspenseQuery({
     queryKey: ["prevMessage", targetUserNickname],
     queryFn: () => targetUserNickname && getPrevMessages(targetUserNickname),
+    gcTime: 0,
   });
   const { messages, isConnected, sendMessage } = useChatSocket({
     signinedUser,
