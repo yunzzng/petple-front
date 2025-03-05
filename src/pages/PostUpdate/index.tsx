@@ -1,6 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./postupdate.module.css";
-import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 import { multipleImageUpload } from "@/utils/imageUpload";
 import { deletePostById, getPostById, updatePostById } from "@/apis/post.api";
 import PostForm from "@/components/PostForm";
@@ -15,6 +19,7 @@ const PostUpdatePage = () => {
   const { toast } = useToast();
   const { userId } = userAuthStore();
   const { id } = useParams();
+  const qc = useQueryClient();
   const { data: post } = useSuspenseQuery({
     queryKey: ["post", id],
     queryFn: () => id && getPostById(id),
@@ -32,6 +37,7 @@ const PostUpdatePage = () => {
     mutationFn: updatePostById,
     onSuccess: () => {
       toast({ type: "SUCCESS", description: "게시물을 수정 하였습니다." });
+      qc.invalidateQueries({ queryKey: ["userPosts"] });
       navigate(`/community/post/${id}`, { replace: true });
     },
   });
@@ -40,6 +46,7 @@ const PostUpdatePage = () => {
     mutationFn: deletePostById,
     onSuccess: () => {
       toast({ type: "INFO", description: "게시물을 삭제 하였습니다." });
+      qc.invalidateQueries({ queryKey: ["userPosts"] });
       navigate("/community");
     },
   });

@@ -37,6 +37,7 @@ const PostCreatePage = () => {
           description: "게시물 작성에 성공하였습니다.😀",
         });
         qc.invalidateQueries({ queryKey: ["posts"] });
+        qc.invalidateQueries({ queryKey: ["userPosts"] });
       },
       onError: () => {
         toast({

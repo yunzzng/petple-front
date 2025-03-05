@@ -3,7 +3,7 @@ import { Avartar, Carousel } from "@/components";
 import { PostItem } from "@/types/post.type";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useMemo } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deletePostById } from "@/apis/post.api";
 import userAuthStore from "@/zustand/userAuth";
 import ClockIcon from "@/assets/icons/clock.svg?react";
@@ -66,6 +66,7 @@ const PostHeader = (
   const navigate = useNavigate();
   const { userId } = userAuthStore();
   const { creator, tags, createdAt, commentsCount, likesCount, postId } = data;
+  const qc = useQueryClient();
 
   const isEditablePost = useMemo(
     () => location.pathname.includes("post") && creator._id === userId,
@@ -75,6 +76,7 @@ const PostHeader = (
     mutationFn: deletePostById,
     onSuccess: () => {
       navigate("/community");
+      qc.invalidateQueries({ queryKey: ["userPosts"] });
     },
   });
 
