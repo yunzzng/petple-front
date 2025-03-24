@@ -3,7 +3,7 @@
   "rewrites": [
     {
       "source": "/api/:path",
-      "destination": "https://port-0-petple-back-m7dtni5f7fa20cf2.sel4.cloudtype.app/api/:path"
+      "destination": "https://port-0-petple-back-m7dtni5f7fa20cf2.sel4.cloudtype.app/api/:path*"
     },
     {
       "source": "/(.*)",
