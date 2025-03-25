@@ -2,6 +2,10 @@
   "version": 2,
   "rewrites": [
     {
+      "source": "/api/:match*",
+      "destination": "https://port-0-petple-back-m7dtni5f7fa20cf2.sel4.cloudtype.app/api/:match*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
