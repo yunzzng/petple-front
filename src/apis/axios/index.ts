@@ -10,6 +10,7 @@ const baseInstance = axios.create({
   headers: {
     "Content-Type": "application/json",
   },
+  withCredentials: true,
 });
 
 baseInstance.interceptors.response.use(
@@ -33,6 +34,7 @@ baseInstance.interceptors.response.use(
             userImage: null,
             userPet: null,
           });
+          localStorage.clear();
 
           window.location.href = "/login";
           break;

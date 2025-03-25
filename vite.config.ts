@@ -5,9 +5,6 @@ import removeConsole from "vite-plugin-remove-console";
 import optimizeImagePlugin from "vite-plugin-optimize-image";
 import mkcert from "vite-plugin-mkcert";
 import svgr from "vite-plugin-svgr";
-import dotenv from 'dotenv';
-dotenv.config();
-
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
@@ -20,13 +17,10 @@ export default defineConfig({
     }),
     svgr(),
   ],
-  define: {
-    'import.meta.env.VITE_API_BASE_URL': JSON.stringify(process.env.VITE_API_BASE_URL),
-  },
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:3000/",
+        target: process.env.VITE_API_BASE_URL || "http://localhost:3000",
         changeOrigin: true,
         secure: false,
         ws: true,
